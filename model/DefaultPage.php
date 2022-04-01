@@ -102,6 +102,7 @@ class DefaultPage extends AbstractPage {
             case'adminaccount':
             $this->head->setTitle('page admin');
             $this->head->setDescription('admin');
+            $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
             $this->constructPage();
             break;    
             

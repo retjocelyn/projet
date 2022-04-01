@@ -42,5 +42,25 @@ class ProductController {
         echo("oui on ajoute article");
         
     }
+    
+    public function createProduct(){
+        
+         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_POST['image']))
+        {
+            $newProductCategory = $_POST['category'];
+            $newProductName= $_POST['name'];
+            $newProductDescription = $_POST['description'];
+            $newProductPrice = (int)$_POST['price'];
+            $newProductQuantity = (int)$_POST['quantity'];
+            $newProductImage = $_POST['image'];
+            
+            $this->repository->createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
+            
+            
+            header('location: ./index.php?url=registeraccepted&message="article créer"');
+            exit();
+        }
+    }
+    
      
 }

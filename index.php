@@ -83,6 +83,11 @@ switch($url){
         $adminController = new AdminController();
         $adminController->adminAccount();
         break; 
+        
+    case "createproduct":
+        $productController = new ProductController();
+        $productController->createProduct();
+        break;    
           
 }
 

@@ -11,7 +11,7 @@ require_once './Repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
-  public function findByCategory($category)
+    public function findByCategory($category)
     {
         $data = null;
         try {
@@ -28,5 +28,12 @@ require_once './Repository/AbstractRepository.php';
         
         return $data;
     }
-
+    
+    public function createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage)
+    {    
+        $sql = "INSERT INTO products (name,description,quantity,price,category_id,url_picture,created_at) VALUES ('$newProductName','$newProductDescription','$newProductQuantity','$newProductPrice','$newProductCategory','$newProductImage', NOW())";
+        $stmt = $this->connexion->query($sql);
+       
+    }
+    
 }
