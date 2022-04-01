@@ -1,0 +1,22 @@
+                <main>
+                <section class="showregisterform">    
+                     <form class="register" action="index.php?url=registerSecurity" method="post">
+                                <h3>Inscription</h3>
+                                <label for="lastName">Nom : </label> 
+                                <input type="text" id="lastName" name="lastName" value="" required>
+                                <label for="firstName">Prénom : </label> 
+                                <input type="text" id="firstName" name="firstName" value="" required>
+                                <label for="email">Email : </label> 
+                                <input type="email" id="email" name="email" value="" required>
+                                <label for="adress">Adresse du domicile : </label> 
+                                <input type="text" id="adress" name="adress" value="" required>
+                                <label for="password">Mot de Passe : </label> 
+                                <input type="password" id="password" name="password" value="" required>
+                                <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                <div class="champbutton">
+                                    <button type="submit">Inscription</button>
+                                </div>    
+                    </form> 
+                </section>
+                </main>
+               

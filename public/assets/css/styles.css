@@ -1,0 +1,519 @@
+body{
+    margin:0px;
+}
+.container{
+    text-align:center;
+}
+
+.mobile {
+    display: none;
+}
+.shopinstrumentsmobile{
+    display:none;
+}
+
+/*header*/
+header{
+      background-color:#cfb1b1;
+      display:flex;
+      justify-content:space-around;
+}
+.laboutiquedesktop{
+    display:flex;
+    align-items:center;
+   
+}
+.socity{
+    display:flex;
+    align-items:center;
+    padding:10px;
+}
+.socity>img{
+    width: 121px;
+    height: 110px;
+    border-radius: 71%;
+    margin-right: 19px;
+
+}
+.socity>h1{
+    font-size:46px;
+    font-family: 'League Gothic', sans-serif;
+}    
+.menuheader{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.menuheader>li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    background-color: white;
+    width: 79px;
+    height: 29px;
+    margin: 0px 20px;
+    padding: 15px;
+    transition: 1s;
+    border-radius: 50% 91%;
+}
+.menuheader>li:hover{
+    transform: scale(1.2);
+    border-radius:0%;
+}
+
+.menuheader>li>a{
+    text-decoration:none;
+    color:black;
+    font-family: 'Fredoka', sans-serif;
+
+}
+
+                 /*main de home*/
+                 
+main{
+    margin:0 10%;
+}
+
+.presentation{
+    margin:37px 0;
+    display:flex;
+    justify-content:space-evenly;
+    border:1px solid black;
+    background-color:#559557;
+}
+
+.presentation>article{
+    padding:18px;
+}
+
+.notremagasin>p{
+    text-align:justify;
+}
+
+.vendeur{
+    display:flex;
+    justify-content:space-evenly;
+    border:1px solid black;
+    margin:37px 0;
+    background-color:#559557;
+}
+
+.vendeur>article{
+    padding:18px;
+}
+
+.vendeur>article>p{
+    text-align:justify;
+}
+
+.bernard{
+    border-radius:29%;
+}
+
+
+      /*main de login*/
+      
+.showlogin{
+    display:flex;
+    justify-content:center;
+}      
+      
+      
+      
+.login{                                   
+    text-align:left;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    width:300px;
+    height:286px;
+    border:1px solid black;
+    margin:40px 0;
+    border-radius:20%;
+}
+
+.login>h3,
+.login>label{
+    font-family: 'Fredoka', sans-serif;
+}
+
+.login>input{
+    margin-bottom: 37px;
+}
+
+
+/* magasin*/
+.shopinstrumentsdesktop{
+    display:flex;
+    justify-content:center;
+}
+.categories{
+    width: 717px;
+    height: 574px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0;
+}
+.categories>article{
+    width: 35%;
+    height:240px;
+    border:1px solid black;
+    background-color:grey;
+    border-radius:9%;
+    transition: 1.5s;
+}
+
+.categories>article:hover{
+    transform: scale(1.2);
+}
+
+.categories>article>a>img{
+    width: 78%;
+    height: 62%;
+}
+.search{
+    width:50%;
+    height:30px;
+    margin-bottom:50px;
+}
+.search::before{
+    content:"ppppppp";
+}
+
+
+ /*main de categories*/
+ 
+.ensembleinstruments{
+    text-align: -webkit-center;
+    width:100%;
+} 
+.instrument{
+    display:flex;
+    text-align: justify;
+    margin:31px 0;
+    border:1px solid black;
+    width: 80%;
+}
+.instrument>ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.instrument>ul>li{
+    width:90%;
+}
+.instrument>img{
+    width:35%;
+}
+/*main de account*/
+.menuaccount>ul>li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    background-color: white;
+    width: 56px;
+    height: 47px;
+    margin: 0px 20px;
+    border-radius: 52%;
+    padding:12px;
+    transition: border-radius 2S;/* a revoir */
+}
+.menuaccount>ul>li:hover{
+    border-radius:0%;
+}
+
+.menuaccount>ul{
+    display: flex;
+    justify-content: space-evenly;
+    background-color:orange;
+    padding: 3px;
+}
+.showandhide{
+    display:flex;
+    justify-content:center;
+}
+.showprofil{
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+    width: 270px;
+}
+.showprofil>ul{
+    border:1px solid black;
+    background-color:#ddbcbc;
+    border-radius:20%;
+    width:100%;
+}
+
+.showprofil>ul>li{
+    margin:36px 0;
+}
+
+.showwallet{
+    display:flex;
+    justify-content:center;
+}
+
+.showwallet>article{
+    border:1px solid black;
+    width:285px;
+    margin:15px 0;
+}
+
+.argent>input,
+.argent>button{
+   margin-bottom:15px;
+}
+
+.argent{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.showOrders{
+    display:flex;
+    justify-content:center;
+    margin:15px 0;
+}
+
+.showOrders>article{
+    border:1px solid black;
+    width:285px;
+}
+
+
+
+/* register*/
+
+      
+
+
+
+.showregisterform{
+    display:flex;
+    justify-content:center;
+    
+}
+
+
+.register>h3,
+.register>label{
+    font-family: 'Fredoka', sans-serif;
+}
+
+.register>input{
+    margin-bottom: 37px;
+}
+
+.register{
+   text-align:left;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    width:300px;
+    height:auto;
+    border:1px solid black;
+    margin:40px 0;
+    border-radius:9%;
+}
+
+.champ{
+    display:flex;
+}
+
+/*register accepted*/
+
+
+.confirmed{
+    display:flex;
+    justify-content:center;
+}
+
+.showaccepted{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    border-radius: 21%;
+    width: 35%;
+    height: 262px;
+    margin: 61px 0;
+}
+
+/*footer*/
+
+footer{
+    background-color:#252530;
+    display:flex;
+    justify-content:space-evenly;
+}
+
+footer>section{
+    text-align:center;
+    color:white;
+}
+    
+.infos{
+    text-align:justify;
+}    
+    
+.infos> p:nth-child(2)::before{
+    content: "🏠";
+    margin-right:11px;
+}
+
+.infos> p:nth-child(3){
+    margin-left: 52px;
+}
+
+.infos> p:nth-child(4)::before{
+    content: "📧";
+    margin-right:11px;
+}
+
+.infos> p:nth-child(5)::before{
+    content: "☎️";
+    margin-right:11px;
+}
+
+.reseaux>a{
+    color:#8a93ff;
+    font-size:35px;
+    text-decoration:none;
+    margin:0 21px;
+}
+
+footer>section>ul>li{
+    margin:0;
+    list-style-type: none;
+}
+
+
+.panier{
+    display:flex;
+    justify-content:center;
+}
+.commande{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.commande>h2{
+    margin-top: 54px;
+}
+
+/*** queryyyyyy time*****/
+@media screen and (max-width: 768px) {
+    
+body{
+    background-color:red;
+}    
+.container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    margin:0;
+}
+header{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+.laboutiquedesktop{
+    display: none !important;
+}
+.mobile {
+    display: block;
+    width:100%;
+}
+.mobilemenu{
+    display: block;
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+.mobilemenu>li>a{
+    text-decoration:none;
+    color:black;
+}
+main{
+    width:80%;
+}
+
+
+
+/*@media shop*/
+
+.shopinstrumentsdesktop{
+    display:none;
+}
+
+.shopinstrumentsmobile{
+    display:block;
+   
+}
+.categoriesmobile{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.search{
+    margin:none;
+}
+.categoriesmobile>article{
+    width: 63%;
+    border:1px solid black;
+    background-color:grey;
+    border-radius:9%;
+}
+
+.categoriesmobile>article>a>img{
+    width:5px;
+}
+
+categoriesmobile>article{
+    border:1px solid black;
+}
+
+.instrument{
+    flex-direction:column;
+}
+
+.instrument>img{
+    width:100%;
+}
+
+/**@media footer**/
+footer{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:99%;
+}
+.infos,
+.reseaux,
+.fournisseurs{
+    margin:15px 0;
+}
+.presentation,
+.vendeur{
+    flex-direction:column;
+}
+
+}
+
+
+
+
+
+

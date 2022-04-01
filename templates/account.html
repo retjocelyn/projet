@@ -1,0 +1,36 @@
+                <main>
+                    <nav class="menuaccount"><!--dhizdhizhdiz-->
+                        <ul >
+                            <li id="profil">profil</li>
+                            <li id="wallet">portefeuille</li>
+                            <li id="orders">commandes</li>
+                        </ul>
+                    </nav>
+                    <div class="showandhide">
+                        <section class="showprofil">
+                            <ul>
+                                <li>NOM : {%nom%}</li>
+                                <li>Prénom: {%prenom%}</li>
+                                <li>Email : {%email%}</li>
+                                <li>Domicile : {%adresse%}</li>
+                                <li><input type="button" value="modifier infos"></li><!-- retravailler pour php-->
+                                <li><a href="index.php?url=logout">Se déconnecter.</a></li>
+                            </ul>
+                        </section>
+                         <section class="showwallet">
+                            <article>
+                                <h3>Votre solde</h3>
+                                <p>{%solde%}</p>   
+                                <form class="argent" action="index.php?url=addargent" method="post">
+                                <input type="text" placeholder="Enter amount" name="montant" required>  <!-- retravailler pour php-->  
+                                <button type="submit">ajouter argent</button>
+                            </article>
+                        </section>
+                         <section class="showOrders">
+                            <article>
+                                <h3>Votre commande</h3>
+                            </article>
+                        </section>
+                    </div>
+                </main>
+               
