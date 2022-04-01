@@ -55,7 +55,6 @@ class UserController {
             $user->setAdresse($data['adress']);
             $user->setWallet($data['wallet']);
             
-            
             $_SESSION['user'] = serialize($user);
             
             $_SESSION['userid'] = serialize($user->getId()); /*(droit de le faire en non serialize)*/
@@ -101,11 +100,12 @@ class UserController {
         
         if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress']))
         {
-            $newlastName = $_POST['lastName'];
-            $newfirstName = $_POST['firstName'];
-            $newEmail = $_POST['email'];
-            $newAdress = $_POST['adress'];
-            $newPass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $newlastName = htmlspecialchars($_POST['lastName']);
+            $newfirstName = htmlspecialchars($_POST['firstName']);
+            $newEmail = htmlspecialchars($_POST['email']);
+            $newAdress = htmlspecialchars($_POST['adress']);
+            $Pass = htmlspecialchars($_POST['password']);
+            $newPass = password_hash($Pass, PASSWORD_DEFAULT);
             $date;
             $wallet = 0;
            
