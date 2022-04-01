@@ -97,7 +97,14 @@ class DefaultPage extends AbstractPage {
             $this->head->setTitle('symphony: page panier');
             $this->head->setDescription('panier');
             $this->constructPage();
-            break;     
+            break;    
+            
+            case'adminaccount':
+            $this->head->setTitle('page admin');
+            $this->head->setDescription('admin');
+            $this->constructPage();
+            break;    
+            
         }
         
     }

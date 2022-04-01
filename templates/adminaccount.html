@@ -1,21 +1,39 @@
                 <main>
                     <nav class="menuaccount"><!--dhizdhizhdiz-->
                         <ul >
-                            <li id="profil">profil</li>
-                            <li id="wallet">portefeuille</li>
+                            <li id="profil">ajouter article</li>
+                            <li id="wallet">modfier articles</li>
+                            <li id="modifier">modfier articles</li>
                             <li id="orders">commandes</li>
                         </ul>
                     </nav>
                     <div class="showandhide">
                         <section class="showprofil">
-                            <ul>
-                                <li>NOM : {%nom%}</li>
-                                <li>Prénom: {%prenom%}</li>
-                                <li>Email : {%email%}</li>
-                                <li>Domicile : {%adresse%}</li>
-                                <li><input type="button" value="modifier infos"></li><!-- retravailler pour php-->
-                                <li><a href="index.php?url=logout">Se déconnecter.</a></li>
-                            </ul>
+                             <form class="register" action="index.php?url=createProduct" method="post">
+                                <h3>Créer un article</h3>
+                                <label for="category-select">Catégorie de l'intrument:</label>
+                                <select name="category" id="category-select">
+                                    <option value="">Veuillez choisir</option>
+                                    <option value="vent">Vent</option>
+                                    <option value="cordes">Cordes</option>
+                                    <option value="piano">Piano</option>
+                                    <option value="percussion">Percussion</option>
+                                </select>
+                                <label for="productName">Nom</label> 
+                                <input type="text" id="productName" name="name" value="" required>
+                                <label for="description">description</label> 
+                                <input type="text" id="description" name="description" value="" required maxlength="250">
+                                <label for="price">Prix </label> 
+                                <input type="text" id="price" name="price" value="" required>
+                                <label for="quantity">Quantité </label> 
+                                <input type="number" id="price" name="price" value="" required>
+                                <label for="image">image </label> 
+                                <input type="text" id="image" name="image" value="" required>
+                                <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                <div class="champbutton">
+                                    <button type="submit">Créer article</button>
+                                </div>    
+                            </form> 
                         </section>
                          <section class="showwallet">
                             <article>
