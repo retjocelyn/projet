@@ -71,9 +71,10 @@ require_once './Repository/AbstractRepository.php';
         $stmt = $this->connexion->query($sql);
     }
     
-    public function modifyProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage)
+    public function modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage)
     {    
-        $sql = "UPDATE products (name,description,quantity,price,category_id,url_picture,created_at) VALUES ('$newProductName','$newProductDescription','$newProductQuantity','$newProductPrice','$newProductCategory','$newProductImage', NOW())"; WHERE id =
+        
+        $sql = "UPDATE products (name,description,quantity,price,category_id,url_picture,created_at) VALUES ('$newProductName','$newProductDescription','$newProductQuantity','$newProductPrice','$newProductCategory','$newProductImage', NOW()) WHERE id = $id";
         $stmt = $this->connexion->query($sql);
     }
     
