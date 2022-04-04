@@ -126,12 +126,10 @@ class ProductController {
             $this->repository->modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
             
-           /* header('location: ./index.php?url=registeraccepted&message="article modifié"');
-            exit();*/
-            var_dump("article modifié");
-            die();
+            header('location: ./index.php?url=registeraccepted&message="article modifié"');
+            exit();
+            
         }
-        var_dump("pas de produit modifié");
-        die();
+        header('location: ./index.php?url=registeraccepted&message="article non modifié"');
     }
 }
