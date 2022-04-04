@@ -26,9 +26,10 @@ class ProductView {
         return $page->getPage();
     }
     
-    public function displayFormModifyProduct($product)
+    public function displayFormModifyProduct($product,$categories)
     {
         $page = new ProductPage();
+        $page->setCategories($categories);
         $page-> CreateFormModifyProduct($product);
         return $page->getPage();   
     }

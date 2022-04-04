@@ -53,11 +53,6 @@ class AdminController {
          echo $this->productView->displayadminAccount($products);
     }
     
-    public function formModifyProduct()
-    {
-         echo $this->view->displayFormModifyProduct();
-    }
-    
 }
 
 

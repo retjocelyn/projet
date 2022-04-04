@@ -8,6 +8,8 @@ class ProductPage extends AbstractPage {
     
     private array $products;
     
+    private array $categories;
+    
     public function __construct()
     {
         parent::__construct();
@@ -15,6 +17,7 @@ class ProductPage extends AbstractPage {
         $this->body = $this->utils->searchHtml('articles');
         $this->article = '';
         $this->products = [];
+        $this->categories = [];
     }
     
     
@@ -48,6 +51,19 @@ class ProductPage extends AbstractPage {
     public function setProducts(array $products)
     {
         $this->products = $products;
+    }
+    
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+    
+    /**
+     * @param array $categories
+     */
+    public function setCategories(array $categories)
+    {
+        $this->categories = $categories;
     }
     
     
@@ -99,6 +115,16 @@ class ProductPage extends AbstractPage {
             $this->head->setTitle('symphony: page modifer produit');
             $this->head->setDescription('modifier produit');
             $this->body = $this->utils->searchHtml('formmodifyproduct');
+            
+            foreach($this->categories as $category){
+                 $content = $this->utils->searchInc('category');
+                 $content = str_replace('{%name%}', $category->getName(), $content);
+                 $content = str_replace('{%id%}', $category->getId(), $content);
+                 
+                 $this->article .= $content;
+            }
+            
+            $this->body = str_replace('{%option%}', $this->article, $this->body);
             $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
             $this->body = str_replace('{%name%}',$product->getName(), $this->body);
             $this->body = str_replace('{%description%}',$product->getDescription(), $this->body);

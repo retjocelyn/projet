@@ -46,6 +46,7 @@ require_once './Repository/AbstractRepository.php';
         return $data;
     }
     
+    
     public function findByID($produit)
     {
          $data = null;
@@ -70,6 +71,10 @@ require_once './Repository/AbstractRepository.php';
         $stmt = $this->connexion->query($sql);
     }
     
-    
+    public function modifyProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage)
+    {    
+        $sql = "UPDATE products (name,description,quantity,price,category_id,url_picture,created_at) VALUES ('$newProductName','$newProductDescription','$newProductQuantity','$newProductPrice','$newProductCategory','$newProductImage', NOW())"; WHERE id =
+        $stmt = $this->connexion->query($sql);
+    }
     
 }

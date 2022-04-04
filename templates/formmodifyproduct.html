@@ -1,16 +1,12 @@
                 <main>
                 <section class="showregisterform">    
-                     <form class="register" action="index.php?url=registerSecurity" method="post">
+                     <form class="register" action="index.php?url=modifyproduct&id={%id%}" method="post">
                                 <h3>Modifier  un article</h3>
-                                <label for="productId">ID product</label> 
-                                <input type="text" id="productName" name="id" value="{%id%}" required>
+                                <input type="hidden" id="productId" name="id" value="{%id%}" required>
                                 <label for="category-select">Catégorie de l'intrument:</label>
                                 <select name="category" id="category-select" required>
                                     <option value="">Veuillez choisir</option>
-                                    <option value="2">Instruments à vent</option>
-                                    <option value="4">Instruments à cordes</option>
-                                    <option value="1">Piano</option>
-                                    <option value="3">Percussion</option>
+                                    {%option%}
                                 </select>
                                 <label for="productName">Nom</label> 
                                 <input type="text" id="productName" name="name" value="{%name%}" required>
@@ -21,10 +17,10 @@
                                 <label for="quantity">Quantité </label> 
                                 <input type="number" id="price" name="quantity" value="{%quantity%}" required>
                                 <label for="file">Image</label>
-                                <input type="file" name="file">
+                                <input type="file" name="file" required>
                                 <input name="CSRFtoken" type="hidden" value="{%$token%}">
                                 <div class="champbutton">
-                                    <button type="submit">Créer article</button>
+                                    <button type="submit">Modifer article</button>
                                 </div>    
                             </form> 
                     </form> 
