@@ -2,9 +2,7 @@
                     <nav class="menuaccount"><!--dhizdhizhdiz-->
                         <ul >
                             <li id="profil">ajouter article</li>
-                            <li id="wallet">modfier articles</li>
-                            <li id="modifier">modfier articles</li>
-                            <li id="orders">commandes</li>
+                            <li id="wallet">tous les articles</li>
                         </ul>
                     </nav>
                     <div class="showandhide">
@@ -36,13 +34,7 @@
                             </form> 
                         </section>
                          <section class="showwallet">
-                            <article>
-                                <h3>Votre solde</h3>
-                                <p>{%solde%}</p>   
-                                <form class="argent" action="index.php?url=addargent" method="post">
-                                <input type="text" placeholder="Enter amount" name="montant" required>  <!-- retravailler pour php-->  
-                                <button type="submit">ajouter argent</button>
-                            </article>
+                            {%article%}
                         </section>
                          <section class="showOrders">
                             <article>

@@ -17,5 +17,20 @@ class ProductView {
         $page->constructProducts();
         return $page->getPage();
     }
-   
+    
+    public function displayadminAccount($products)
+    {
+        $page = new ProductPage();
+        $page->setProducts($products);
+        $page->adminAccountPage();
+        return $page->getPage();
+    }
+    
+    public function displayFormModifyProduct($product)
+    {
+        $page = new ProductPage();
+        $page-> CreateFormModifyProduct($product);
+        return $page->getPage();   
+    }
+    
 }

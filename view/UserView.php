@@ -48,12 +48,5 @@ class UserView {
        
     }
     
-    public function  displayAdminAccount(): string
-    {
-        $page = new DefaultPage('adminaccount');
-        $page->assemblerPage();
-        return $page->getPage();
-    }
-   
     
 }

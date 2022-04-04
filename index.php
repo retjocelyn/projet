@@ -88,6 +88,11 @@ switch($url){
         $productController = new ProductController();
         $productController->createProduct();
         break;    
+    
+     case "formmodifyproduct":
+        $productController = new ProductController();
+        $productController->formModifyProduct();
+        break;     
           
 }
 

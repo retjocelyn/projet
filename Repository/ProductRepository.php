@@ -11,6 +11,23 @@ require_once './Repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
+    public function findAll()
+    {
+         $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM products ');
+            if ($query) {
+                $query->execute();
+                
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
+    
     public function findByCategory($category)
     {
         $data = null;
@@ -21,6 +38,24 @@ require_once './Repository/AbstractRepository.php';
                 $query->execute();
                 
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
+    
+    public function findByID($produit)
+    {
+         $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM products WHERE id = :id');
+            if ($query) {
+                $query->bindParam(':id', $produit);
+                $query->execute();
+                
+                $data = $query->fetch(PDO::FETCH_ASSOC);
             }
         } catch (Exception $e) {
             die($e);
