@@ -9,7 +9,7 @@
                     </nav>
                     <div class="showandhide">
                         <section class="showprofil">
-                             <form class="register" action="index.php?url=createproduct" method="post">
+                             <form class="register" action="index.php?url=createproduct" method="POST" enctype="multipart/form-data">
                                 <h3>Créer un article</h3>
                                 <label for="category-select">Catégorie de l'intrument:</label>
                                 <select name="category" id="category-select" required>
@@ -27,8 +27,8 @@
                                 <input type="number" id="price" name="price" value="" required>
                                 <label for="quantity">Quantité </label> 
                                 <input type="number" id="price" name="quantity" value="" required>
-                                <label for="image">image </label> 
-                                <input type="text" id="image" name="image" value="" required>
+                                <label for="file">Image</label>
+                                <input type="file" name="file">
                                 <input name="CSRFtoken" type="hidden" value="{%$token%}">
                                 <div class="champbutton">
                                     <button type="submit">Créer article</button>

@@ -33,7 +33,8 @@ require_once './Repository/AbstractRepository.php';
     {    
         $sql = "INSERT INTO products (name,description,quantity,price,category_id,url_picture,created_at) VALUES ('$newProductName','$newProductDescription','$newProductQuantity','$newProductPrice','$newProductCategory','$newProductImage', NOW())";
         $stmt = $this->connexion->query($sql);
-       
     }
+    
+    
     
 }

@@ -45,14 +45,22 @@ class ProductController {
     
     public function createProduct(){
         
-         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_POST['image']))
+         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES))
         {
+            
+            $tmpName = $_FILES['file']['tmp_name'];
+            $name = basename($_FILES['file']['name']);
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
+            
+            move_uploaded_file($tmpName,'./public/assets/img/'.$name);
+            
             $newProductCategory = $_POST['category'];
             $newProductName= $_POST['name'];
             $newProductDescription = $_POST['description'];
             $newProductPrice = (int)$_POST['price'];
             $newProductQuantity = (int)$_POST['quantity'];
-            $newProductImage = $_POST['image'];
+            $newProductImage = "./public/assets/img/$name";
             
             $this->repository->createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
@@ -60,6 +68,8 @@ class ProductController {
             header('location: ./index.php?url=registeraccepted&message="article créer"');
             exit();
         }
+        var_dump("pas de produit creer");
+        die();
     }
     
      

@@ -18,7 +18,8 @@ class AdminController {
     
     public function  adminAccount()
     {
-        if(!isset($_SESSION['user'])){
+        
+        if(!isset($_SESSION['user']) or $_SESSION['role'] !== "admin"){
             header('location: ./index.php?url=login');
             exit();
         }

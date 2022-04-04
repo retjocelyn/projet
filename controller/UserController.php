@@ -59,6 +59,9 @@ class UserController {
             
             $_SESSION['userid'] = serialize($user->getId()); /*(droit de le faire en non serialize)*/
            
+            $_SESSION['role'] = $user->getRole();
+            
+            
                 if($user->getRole() === "admin"){
                     header('location: ./index.php?url=adminaccount');
                     exit();
@@ -75,7 +78,6 @@ class UserController {
             header('location: ./index.php?url=login');
             exit();
         }
-        
         
          echo $this->view->displayAccount();
     }
