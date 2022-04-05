@@ -1,0 +1,18 @@
+                <main>
+                <section class="showregisterform">    
+                     <form class="register" action="index.php?url=modifycategory&id={%id%}" method="post" enctype="multipart/form-data">
+                                <h3>Modifier  une catégorie</h3>
+                                <input type="hidden" id="productId" name="id" value="{%id%}" required>
+                                <label for="categoryName">Nom</label> 
+                                <input type="text" id="categoryName" name="name" value="{%name%}" required>
+                                <label for="file">Image</label>
+                                <input type="file" name="file" required>
+                                <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                <div class="champbutton">
+                                    <button type="submit">Modifer article</button>
+                                </div>    
+                            </form> 
+                    </form> 
+                </section>
+                </main>
+               

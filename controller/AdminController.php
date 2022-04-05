@@ -3,7 +3,9 @@ require_once './view/UserView.php';
 require_once './view/ProductView.php';
 require_once './Repository/UserRepository.php';
 require_once './model/class/Product.php';
+require_once './model/class/Product.php';
 require_once './Repository/ProductRepository.php';
+require_once './Repository/CategoryRepository.php';
 require_once './model/class/User.php';
 
 class AdminController {
@@ -18,7 +20,7 @@ class AdminController {
         $this->repository = new UserRepository();
         $this->basket = new BasketRepository();
         $this->productRepository = new ProductRepository();
-
+        $this->categoryRepository = new CategoryRepository();
     }
     
     public function  adminAccount()
@@ -31,7 +33,7 @@ class AdminController {
         
         /*$_SESSION['csrf'] = bin2hex(random_bytes(32));*/
         
-           $datas = $this->productRepository->findAll();
+        $datas = $this->productRepository->findAll();
         
         $products = [];
         
@@ -49,8 +51,22 @@ class AdminController {
             $products[] = $product;
            
         }
-       
-         echo $this->productView->displayadminAccount($products);
+        
+        $datas = $this->categoryRepository-> findAll();
+        
+        $categories = [];
+        
+        foreach($datas as $data){
+            $category = new Category();
+            $category->setId($data['id']);
+            $category->setName($data['name']);
+            $category->setUrlImage($data['url_picture']);
+            
+            $categories[] = $category;
+           
+        }
+        
+         echo $this->productView->displayadminAccount($products,$categories);
     }
     
 }

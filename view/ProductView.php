@@ -18,10 +18,11 @@ class ProductView {
         return $page->getPage();
     }
     
-    public function displayadminAccount($products)
+    public function displayadminAccount($products,$categories)
     {
         $page = new ProductPage();
         $page->setProducts($products);
+        $page->setCategories($categories);
         $page->adminAccountPage();
         return $page->getPage();
     }
@@ -31,6 +32,13 @@ class ProductView {
         $page = new ProductPage();
         $page->setCategories($categories);
         $page-> CreateFormModifyProduct($product);
+        return $page->getPage();   
+    }
+    
+     public function displayFormModifyCategory($category)
+    {
+        $page = new ProductPage();
+        $page->CreateFormModifyCategory($category);
         return $page->getPage();   
     }
     

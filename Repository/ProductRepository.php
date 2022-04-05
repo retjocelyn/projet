@@ -47,7 +47,7 @@ require_once './Repository/AbstractRepository.php';
     }
     
     
-    public function findByID($produit)
+    public function findById($produit)
     {
          $data = null;
         try {

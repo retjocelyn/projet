@@ -91,6 +91,7 @@ class ProductPage extends AbstractPage {
             $this->head->setTitle('page admin');
             $this->head->setDescription('admin');
             $this->body = $this->utils->searchHtml('adminaccount');
+            $categoryarticle = '';
             foreach($this->products as $product){
                 $content = $this->utils->searchInc('adminProduct');
                 $content = str_replace('{%name%}', $product->getName(), $content);
@@ -100,11 +101,23 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%urlImage%}',$product->getImage(), $content);
               
                 $this->article .= $content;
-        }
+            }
+            
+            foreach($this->categories as $category){
+                $content = $this->utils->searchInc('admincategory');
+                $content = str_replace('{%name%}', $category->getName(), $content);
+                $content = str_replace('{%id%}',$category->getId(), $content);
+                $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
+              
+                $categoryarticle .= $content;
+            }
            
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
         
         $this->body = str_replace('{%article%}', $this->article, $this->body);
+        
+        $this->body = str_replace('{%categories%}',$categoryarticle, $this->body);
+        
         
         $this->constructPage();
      }
@@ -135,5 +148,17 @@ class ProductPage extends AbstractPage {
             $this->constructPage();
             
     }
+    
+     public function CreateFormModifyCategory($category)
+     {
+        $this->head->setTitle('symphony: page modifer category');
+        $this->head->setDescription('modifier produit');
+        $this->body = $this->utils->searchHtml('formmodifycategory');
+        $this->body = str_replace('{%name%}',$category->getName(), $this->body);
+        $this->body = str_replace('{%id%}',$category->getId(), $this->body);
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+         
+          $this->constructPage();
+     }
     
 }

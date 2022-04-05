@@ -4,7 +4,7 @@ require_once './Repository/ProductRepository.php';
 require_once './Repository/CategoryRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Category.php';
-require './view/ProductView.php';
+require_once './view/ProductView.php';
 
 class ProductController {
     
@@ -91,7 +91,7 @@ class ProductController {
         }
         
         $produit = $_GET['id'];
-        $data = $this->repository->findByID($produit);
+        $data = $this->repository->findById($produit);
         $product = new Product();
         $product->setId($data['id']);
         $product->setName($data['name']);
@@ -176,5 +176,54 @@ class ProductController {
         
             header('location: ./index.php?url=registeraccepted&message=categorie non créée');
             exit();
+    }
+     public function formModifyCategory()
+    {
+        $category = $_GET['id'];
+        $data = $this->categoryRepository->findById($category);
+        $category = new Category();
+        $category->setId($data['id']);
+        $category->setName($data['name']);
+        $category->setUrlImage($data['url_picture']);
+        
+        echo $this->view->displayFormModifyCategory($category);
+    }
+    
+    public function modifyCategory()
+    {
+        if(isset($_POST['id'],$_POST['name'],$_FILES))
+        {
+            
+            $tmpName = $_FILES['file']['tmp_name'];
+            $name = basename($_FILES['file']['name']);
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
+            
+          
+            move_uploaded_file($tmpName,'./public/assets/img/'.$name);
+            $id = $_POST['id'];
+            $newCategoryName = $_POST['name'];
+            $newProductImage = "./public/assets/img/$name";
+            
+            $this->categoryRepository->modifyCategory($id,$newCategoryName,$newProductImage);
+            
+            header('location: ./index.php?url=registeraccepted&message=categorie modifiée');
+            exit();
+        }
+        header('location: ./index.php?url=registeraccepted&message=categorie non modifiée');
+    }
+    
+    public function deleteCategory()
+    {
+        if(isset($_GET['id']))
+        {
+            $id = $_GET['id'];
+            $this->categoryRepository->deleteCategory($id);
+        
+            header('location: ./index.php?url=registeraccepted&message=catégorie supprimée');
+            exit();
+        }
+        header('location: ./index.php?url=registeraccepted&message=catégorie non supprimée');
+        exit();
     }
 }
