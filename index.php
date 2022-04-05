@@ -97,7 +97,17 @@ switch($url){
     case "modifyproduct":
         $productController = new ProductController();
         $productController->modifyProduct();
-        break;     
+        break;    
+        
+    case "deleteproduct":
+        $productController = new ProductController();
+        $productController->deleteProduct();
+        break;  
+        
+    case "createcategory":
+        $productController = new ProductController();
+        $productController->createCategory();
+        break;
       
 }
 

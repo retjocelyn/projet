@@ -35,6 +35,8 @@ class UserView {
     public function displayRegisterAccepted(): string
     {
         $page = new DefaultPage('registeraccepted');
+        $message = $_SESSION['message'];
+        $page->setErrors($message);
         $page->assemblerPage();
         return $page->getPage();
        

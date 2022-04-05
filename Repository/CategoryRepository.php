@@ -27,5 +27,11 @@ require_once './Repository/AbstractRepository.php';
         
         return $data;
     }
+    
+     public function createCategory($newCategoryName,$newCategoryImage){
+        $sql = "INSERT INTO category (name,url_picture) VALUES ('$newCategoryName','$newCategoryImage')";
+        $stmt = $this->connexion->query($sql);
+     }
+    
 
 }

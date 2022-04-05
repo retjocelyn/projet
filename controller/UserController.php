@@ -123,6 +123,14 @@ class UserController {
      
     public function registerAccepted() : void
     {
+        if(isset($_GET['message']))
+        {
+            $_SESSION['message'] = $_GET['message'];
+        }else{
+            $_SESSION['message'] = '';
+        }
+        
+        
         echo $this->view->displayRegisterAccepted();
     }
     

@@ -68,11 +68,12 @@ class ProductController {
             $this->repository->createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
             
-            header('location: ./index.php?url=registeraccepted&message="article créer"');
+            header('location: ./index.php?url=registeraccepted&message=article créer');
             exit();
         }
-        var_dump("pas de produit creer");
-        die();
+       
+            header('location: ./index.php?url=registeraccepted&message=article non crée');
+            exit();
     }
     
     
@@ -104,7 +105,8 @@ class ProductController {
         echo $this->view->displayFormModifyProduct($product,$categories);
     }
     
-     public function modifyProduct(){
+     public function modifyProduct()
+     {
           
          if(isset($_POST['id'],$_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
             
@@ -126,10 +128,53 @@ class ProductController {
             $this->repository->modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
             
-            header('location: ./index.php?url=registeraccepted&message="article modifié"');
+            header('location: ./index.php?url=registeraccepted&message=article modifié');
             exit();
             
         }
-        header('location: ./index.php?url=registeraccepted&message="article non modifié"');
+        header('location: ./index.php?url=registeraccepted&message=article non modifié');
+    }
+    
+     public function deleteProduct()
+     {
+           if(isset($_GET['id']))
+           {
+                $id = $_GET['id'];
+                $this->repository->deleteProduct($id); 
+                header('location: ./index.php?url=registeraccepted&message=article effacé');
+                exit();
+            }
+            
+            header('location: ./index.php?url=registeraccepted&message=article non effacé');
+            exit();
+    }
+    
+    public function createCategory()
+    {
+        if($_POST['CSRFtoken'] !== $_SESSION['csrf']){
+            
+            header('location: ./index.php?url=registeraccepted&message=categorie non créée');
+            exit();
+        }
+        
+        if(isset($_POST['name'],$_FILES)){
+            
+            $tmpName = $_FILES['file']['tmp_name'];
+            $name = basename($_FILES['file']['name']);
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
+            
+          
+            move_uploaded_file($tmpName,'./public/assets/img/'.$name);
+            $newCategoryName = $_POST['name'];
+            $newCategoryImage = "./public/assets/img/$name";
+            $this->categoryRepository->createCategory($newCategoryName,$newCategoryImage);
+            
+            header('location: ./index.php?url=registeraccepted&message=categorie créée');
+            exit();
+        }
+        
+            header('location: ./index.php?url=registeraccepted&message=categorie non créée');
+            exit();
     }
 }

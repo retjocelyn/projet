@@ -80,4 +80,10 @@ require_once './Repository/AbstractRepository.php';
         
     }
     
+     public function deleteProduct($id)
+     {
+         $sql = "DELETE FROM products WHERE id = '$id' ";
+         $stmt = $this->connexion->query($sql);
+     }
+    
 }

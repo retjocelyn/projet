@@ -6,7 +6,7 @@ class DefaultPage extends AbstractPage {
     
     private string $html;
     
-    private array $errors;
+    private string $errors;
     
     private array $data;
     
@@ -22,12 +22,12 @@ class DefaultPage extends AbstractPage {
     }
     
     
-    public function getErrors(): array
+    public function getErrors(): string
     {
         return $this->errors;
     }
     
-    public function setErrors($errors): void
+    public function setErrors($errors):void
     {
         $this->errors = $errors;
     }
@@ -83,6 +83,7 @@ class DefaultPage extends AbstractPage {
             case'registeraccepted':
             $this->head->setTitle('symphony: page inscription');
             $this->head->setDescription('inscription');
+            $this->body = str_replace('{%message%}',$this->getErrors(),$this->body);
             $this->constructPage();
             break;
                 
