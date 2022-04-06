@@ -226,4 +226,19 @@ class ProductController {
         header('location: ./index.php?url=registeraccepted&message=catégorie non supprimée');
         exit();
     }
+    
+    public function basket() : void
+    {
+       if(isset($_SESSION['user']))
+       {
+           $userid =unserialize($_SESSION['userid']);
+           $datas = $this->basket->findById($userid);
+           var_dump($datas);
+           die();
+           
+       }
+        header('location: ./index.php?url=login');
+        exit();
+    }
+    
 }

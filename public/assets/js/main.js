@@ -74,6 +74,5 @@ categories.addEventListener('click', function(e) {
         sectionCategories.style.display = "none";
         categories.style.backgroundColor = "white";
     }
-    
 })
 

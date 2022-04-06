@@ -42,6 +42,7 @@ switch($url){
         $userController = new UserController();
         $userController-> registeraccepted();
         break;
+        
     case "account":
         $userController = new UserController();
         $userController->account();
@@ -68,9 +69,10 @@ switch($url){
         break;  
         
     case "basket":
-        $userController = new UserController();
-        $userController->basket();
+        $productController = new ProductController();
+        $productController->basket();
         break;
+        
         
     case "adminaccount":
         $adminController = new AdminController();
@@ -117,8 +119,19 @@ switch($url){
         $productController = new ProductController();
         $productController->deleteCategory();
         break;      
+
+
+    case "addarticletobasket":
+        $userController = new UserController();
+        $userController->addArticleToBasket();
+        break;
         
-      
+    case "deleteuser":
+        $userController = new UserController();
+        $userController->deleteUser();
+        break;
+        
+
 }
 
 

@@ -32,11 +32,17 @@ require_once './Repository/AbstractRepository.php';
     }
     
     
-        public function createUser(string $newlastName,string $newfirstName, string $newEmail, string $newPass,string $newAdress,int $wallet):void
+    public function createUser(string $newlastName,string $newfirstName, string $newEmail, string $newPass,string $newAdress,int $wallet):void
     {
         $sql = "INSERT INTO users (first_name, last_name, email, password,adress,wallet,role, created_at) VALUES ('$newfirstName','$newlastName','$newEmail','$newPass','$newAdress','$wallet','client', NOW())";
         $stmt = $this->connexion->query($sql);
        
+    }
+    
+    public function deleteUser($id)
+    {
+        $sql = "DELETE FROM `users` WHERE id = '$id'";
+         $stmt = $this->connexion->query($sql);
     }
     
     

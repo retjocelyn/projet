@@ -12,13 +12,29 @@ require_once './Repository/AbstractRepository.php';
     }
     
    
-        public function addArticle($article,$user): void
+    public function addArticleToBasket($userid,$productid): void
     {
-        $sql = "INSERT INTO panier () VALUES ('$newfirstName', NOW())";
+        $sql = "INSERT INTO `panier`( `user_id`, `product_id`, `created_at`) VALUES ('$userid','$productid',NOW())";
+        
         $stmt = $this->connexion->query($sql);
        
     }
     
-    
-    
+    public function findById($userid)
+    {
+         $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM products as p INNER JOIN panier as pa ON p.id = pa.product_id WHERE pa.user_id = :id');
+            if ($query) {
+                $query->bindParam(':id', $userid);
+                $query->execute();
+                
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
 }

@@ -69,6 +69,7 @@ class DefaultPage extends AbstractPage {
             $this->body = str_replace('{%email%}', $user->getEmail(), $this->body);
             $this->body = str_replace('{%adresse%}', $user->getAdresse(), $this->body);
             $this->body = str_replace('{%solde%}', $user->getWallet(), $this->body);
+            $this->body = str_replace('{%id%}', $user->getId(), $this->body);
             $this->constructPage();
             
             break;

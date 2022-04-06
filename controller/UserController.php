@@ -79,7 +79,13 @@ class UserController {
             exit();
         }
         
-         echo $this->view->displayAccount();
+        if($_SESSION['role'] === "admin")
+        {   
+            header('location: ./index.php?url=adminaccount');
+            exit();
+        }
+        
+        echo $this->view->displayAccount();
     }
     
     public function register()
@@ -100,8 +106,8 @@ class UserController {
             echo 'Mot de passe incorrect';
         }
         
-        if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress']))
-        {
+        if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
+        
             $newlastName = htmlspecialchars($_POST['lastName']);
             $newfirstName = htmlspecialchars($_POST['firstName']);
             $newEmail = htmlspecialchars($_POST['email']);
@@ -119,12 +125,10 @@ class UserController {
         }
     }
     
-    
-     
-    public function registerAccepted() : void
+    public function registerAccepted() : string
     {
-        if(isset($_GET['message']))
-        {
+        if(isset($_GET['message'])){
+        
             $_SESSION['message'] = $_GET['message'];
         }else{
             $_SESSION['message'] = '';
@@ -142,9 +146,34 @@ class UserController {
         exit();
     }
     
-    public function basket() : void
+     public function deleteUser() : void
     {
-        echo $this->view->displayBasket();
+       
+        if(isset($_SESSION['userid'])){
+        
+            $id = unserialize($_SESSION['userid']);
+            $this->repository->deleteUser($id);
+            
+            session_destroy();
+            header('location: ./index.php?url=registeraccepted&message=votre compte a été effacé');
+            exit();
+        }
+        header('location: ./index.php?url=login&error=veuillez vous connecter');
+        exit();
+    }
+    
+    public function addArticleToBasket()
+    {
+        if(isset($_GET['id'])){
+            
+            $productid = $_GET['id'];
+            $userid = unserialize($_SESSION['userid']);
+            $this->basket->addArticleToBasket($userid,$productid);
+        
+            header('location: ./index.php?url=registeraccepted&message=article ajouté au panier');
+            exit();
+        }
+        header('location: ./index.php?url=registeraccepted&message=article non ajouté au panier');
         exit();
     }
     
