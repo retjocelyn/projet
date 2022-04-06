@@ -2,6 +2,7 @@
 
 require_once './Repository/ProductRepository.php';
 require_once './Repository/CategoryRepository.php';
+require_once './Repository/BasketRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Category.php';
 require_once './view/ProductView.php';
@@ -14,10 +15,12 @@ class ProductController {
         $this->view = new ProductView();
         $this->repository = new ProductRepository();
         $this->categoryRepository = new CategoryRepository();
+        $this->basketRepository = new BasketRepository();
     }
     
     
-    public function instruments(){
+    public function instruments(): void
+    {
         $category = $_GET['id'];
         $datas = $this->repository->findByCategory($category);
         
@@ -48,8 +51,7 @@ class ProductController {
     
     public function createProduct(){
         
-         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES))
-        {
+         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
            
             $tmpName = $_FILES['file']['tmp_name'];
             $name = basename($_FILES['file']['name']);
@@ -229,16 +231,36 @@ class ProductController {
     
     public function basket() : void
     {
-       if(isset($_SESSION['user']))
-       {
-           $userid =unserialize($_SESSION['userid']);
-           $datas = $this->basket->findById($userid);
-           var_dump($datas);
-           die();
+       if(!isset($_SESSION['user'])){
            
-       }
-        header('location: ./index.php?url=login');
+        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
         exit();
-    }
+        
+       }
+       
+        $userid =unserialize($_SESSION['userid']);
+        $datas = $this->basketRepository->findById($userid);
+        $prices = [];
+        $products = [];
+            
+        foreach($datas as $data){
+            $product = new Product();
+            $product->setId($data['product_id']);
+            $product->setName($data['name']);
+            $product->setQuantity($data['quantity']);
+            $product->setPrice($data['price']);
+            $product->setImage($data['url_picture']);
+            $product->setDescription($data['description']);
+            $product->setCategory($data['category_id']);
+            
+            $products[] = $product;
+            $prices[] = $product->getPrice();
+        }
+        
+        $totalprice = array_sum($prices);
+        
+        echo $this->view->displayBasket($products,$totalprice);
+   }
+       
     
 }

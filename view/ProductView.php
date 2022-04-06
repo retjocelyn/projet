@@ -42,4 +42,13 @@ class ProductView {
         return $page->getPage();   
     }
     
+    public function displayBasket($products,$totalprice)
+    {
+        $page = new ProductPage();
+        $page->setProducts($products);
+        $page->setTotalPrice($totalprice);
+        $page->basketPage();
+        return $page->getPage();   
+    }
+    
 }

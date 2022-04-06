@@ -10,6 +10,8 @@ class ProductPage extends AbstractPage {
     
     private array $categories;
     
+    private int  $totalprice;
+    
     public function __construct()
     {
         parent::__construct();
@@ -18,6 +20,7 @@ class ProductPage extends AbstractPage {
         $this->article = '';
         $this->products = [];
         $this->categories = [];
+        $this->totalprice = 0;
     }
     
     
@@ -64,6 +67,19 @@ class ProductPage extends AbstractPage {
     public function setCategories(array $categories)
     {
         $this->categories = $categories;
+    }
+    
+     public function getTotalPrice(): int
+    {
+        return $this->totalprice;
+    }
+    
+    /**
+     * @param array $categories
+     */
+    public function setTotalPrice( int $totalprice)
+    {
+        $this->totalprice = $totalprice;
     }
     
     
@@ -149,16 +165,55 @@ class ProductPage extends AbstractPage {
             
     }
     
-     public function CreateFormModifyCategory($category)
-     {
-        $this->head->setTitle('symphony: page modifer category');
-        $this->head->setDescription('modifier produit');
-        $this->body = $this->utils->searchHtml('formmodifycategory');
-        $this->body = str_replace('{%name%}',$category->getName(), $this->body);
-        $this->body = str_replace('{%id%}',$category->getId(), $this->body);
-        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+    public function CreateFormModifyCategory($category)
+    {
+            $this->head->setTitle('symphony: page modifer category');
+            $this->head->setDescription('modifier produit');
+            $this->body = $this->utils->searchHtml('formmodifycategory');
+            $this->body = str_replace('{%name%}',$category->getName(), $this->body);
+            $this->body = str_replace('{%id%}',$category->getId(), $this->body);
+            $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+             
+            $this->constructPage();
+     }
+     
+    public function basketPage()
+    {
+        $this->head->setTitle('symphony: panier');
+        $this->head->setDescription('votre panier');
+        $this->body = $this->utils->searchHtml('basket');
+       
+        if(empty( $this->products)){
+            $content = $this->utils->searchInc('message');
+            $message = "votre panier est vide";
+            $content = str_replace('{%message%}',$message, $content);
+            $this->body = str_replace('{%message%}',$content, $this->body);
+            $this->body = str_replace('{%article%}','', $this->body);
+            $this->body = str_replace('{%prixtotal%}','', $this->body);
+            
+            $this->constructPage();
+        } 
+       
+        foreach($this->products as $product){
+                $content = $this->utils->searchInc('produitbasket');
+                $content = str_replace('{%name%}', $product->getName(), $content);
+                $content = str_replace('{%id%}',$product->getId(), $content);
+                $content = str_replace('{%price%}',$product->getPrice(), $content);
+                $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
+                $content = str_replace('{%description%}',$product->getDescription(), $content);
+                $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+                
+                $this->article .= $content;
+            }
+        
+        $content = $this->utils->searchInc('prix');
+        $content = str_replace('{%prixtotal%}',$this->getTotalPrice(), $content);
+        $this->body = str_replace('{%prixtotal%}',$content, $this->body);
+        $this->body = str_replace('{%message%}','', $this->body);
+        $this->body = str_replace('{%article%}',$this->article, $this->body);
          
-          $this->constructPage();
+        
+        $this->constructPage();
      }
     
 }

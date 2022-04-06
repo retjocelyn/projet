@@ -37,4 +37,10 @@ require_once './Repository/AbstractRepository.php';
         
         return $data;
     }
+    
+    public function deleteArticleFromBasket($productid)
+    {
+        $sql = "DELETE FROM `panier` WHERE product_id = '$productid' ";
+        $stmt = $this->connexion->query($sql);
+    }
 }

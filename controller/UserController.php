@@ -177,6 +177,25 @@ class UserController {
         exit();
     }
     
+    
+    public function deleteArticleFromBasket()
+    {
+        if(!isset($_GET['id'])){
+            
+            header('location: ./index.php?url=login&error=veuillez vous connecter');
+            exit();
+            
+        }
+        
+        $productid = $_GET['id'];
+       
+        $this->basket->deleteArticleFromBasket($productid);
+        
+        header('location: ./index.php?url=registeraccepted&message=article supprimé du panier');
+        exit();
+        
+    
+    }
 }
 
 
