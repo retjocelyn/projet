@@ -11,6 +11,40 @@ require_once './Repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
+    
+    public function findAll() /*doute si utile???*/
+    {
+        $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM orders ');
+            if ($query) {
+                $query->execute();
+                
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
+    
+    public function findAllOrders()
+    {  
+        $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM orders as o INNER JOIN users as u ON o.user_id = u.id INNER JOIN products as p ON o.product_id = p.id');
+            if ($query) {
+                $query->execute();
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
+    
     public function createOrder($userid,$productsid)
     {  
         foreach($productsid as $productid){

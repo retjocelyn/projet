@@ -10,6 +10,8 @@ class ProductPage extends AbstractPage {
     
     private array $categories;
     
+    private array $orders;
+    
     private int  $totalprice;
     
     public function __construct()
@@ -69,6 +71,29 @@ class ProductPage extends AbstractPage {
         $this->categories = $categories;
     }
     
+    
+     /**
+     * @return array
+     */
+     public function getOrders(): array
+    {
+        return $this->orders;
+    }
+    
+    
+    /**
+     * @param array $orders
+     */
+     public function setOrders(array $orders)
+    {
+        $this->orders = $orders;
+    }
+    
+   
+    
+     /**
+     * @return int
+     */
      public function getTotalPrice(): int
     {
         return $this->totalprice;
@@ -127,12 +152,29 @@ class ProductPage extends AbstractPage {
               
                 $categoryarticle .= $content;
             }
+            
+             foreach($this->orders as $order){
+                $content = $this->utils->searchInc('admincommandes');
+                $content = str_replace('{%numerodelacommande%}',$order->getId(),$content);
+                $content = str_replace('{%id%}',$order->getId(),$content);
+                $content = str_replace('{%datedelacommande%}',$order->getDate(),$content);
+                $content = str_replace('{%clientfamilyname%}',$order->getCommandUserFamilyName(),$content);
+                $content = str_replace('{%clientadresse%}',$order->getCommandUserAdress(),$content);
+                $content = str_replace('{%nameproduit%}',$order->getCommandProductName(),$content);
+                $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(),$content);
+                $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
+            
+                $commandArticle .=  $content;
+            }
+            
            
-        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'],$this->body);
         
-        $this->body = str_replace('{%article%}', $this->article, $this->body);
+        $this->body = str_replace('{%article%}', $this->article,$this->body);
         
-        $this->body = str_replace('{%categories%}',$categoryarticle, $this->body);
+        $this->body = str_replace('{%commandes%}', $commandArticle,$this->body);
+        
+        $this->body = str_replace('{%categories%}',$categoryarticle,$this->body);
         
         
         $this->constructPage();

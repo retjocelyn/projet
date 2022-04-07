@@ -18,11 +18,12 @@ class ProductView {
         return $page->getPage();
     }
     
-    public function displayadminAccount($products,$categories)
+    public function displayadminAccount($products,$categories,$commandes)
     {
         $page = new ProductPage();
         $page->setProducts($products);
         $page->setCategories($categories);
+        $page->setOrders($commandes);
         $page->adminAccountPage();
         return $page->getPage();
     }

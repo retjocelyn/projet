@@ -11,7 +11,22 @@ require_once './Repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
-   
+    public function fetchAll()
+    {
+        $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM users');
+            if ($query) {
+                $query->execute();
+                
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
     
     public function fetchLogin($email)
     {

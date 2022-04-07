@@ -6,7 +6,9 @@ require_once './model/class/Product.php';
 require_once './model/class/Product.php';
 require_once './Repository/ProductRepository.php';
 require_once './Repository/CategoryRepository.php';
+require_once './Repository/OrderRepository.php';
 require_once './model/class/User.php';
+require_once './model/class/Order.php';
 
 class AdminController {
     
@@ -21,6 +23,7 @@ class AdminController {
         $this->basket = new BasketRepository();
         $this->productRepository = new ProductRepository();
         $this->categoryRepository = new CategoryRepository();
+        $this->orderRepository = new OrderRepository();
     }
     
     public function  adminAccount()
@@ -65,8 +68,27 @@ class AdminController {
             $categories[] = $category;
            
         }
+         $datas = $this->orderRepository->findAllOrders();
+         $commandes = [];
+         var_dump($datas);
+         die();
         
-         echo $this->productView->displayadminAccount($products,$categories);
+        foreach($datas as $data){
+            $order = new Order();
+            $order->setId($data['id']);
+            $order->setDate($data['']);
+            $order->setCommandUserFamilyName($data['first_name']);
+            $order->settCommandUserName($data['last_name']);
+            $order->setCommandUserAdress($data['adress']);
+            $order->setCommandProductName($data['name']);
+            $order->setCommandProductQuantity($data['quantity']);
+            $order->setCommandProductPrice($data['price']);
+            
+             $commandes[] = $order;
+         }
+        
+        
+         echo $this->productView->displayadminAccount($products,$categories,$commandes);
     }
     
 }
