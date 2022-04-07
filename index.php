@@ -142,12 +142,20 @@ switch($url){
         $userController-> deleteArticleFromBasket();
         break;
         
-    case "createcommande":
+    case "createorder":
         $productController = new ProductController();
         $productController->createOrder();
         break;   
     
-    
+    case "orders":
+        $productController = new ProductController();
+        $productController->showOrders();
+        break;   
+        
+    case "deleteorder":
+        $productController = new ProductController();
+        $productController->deleteOrder();
+        break;       
 
 }
 

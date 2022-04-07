@@ -183,7 +183,7 @@ class ProductPage extends AbstractPage {
         $this->head->setDescription('votre panier');
         $this->body = $this->utils->searchHtml('basket');
        
-        if(empty( $this->products)){
+        if(empty($this->products)){
             $content = $this->utils->searchInc('message');
             $message = "votre panier est vide";
             $content = str_replace('{%message%}',$message, $content);
@@ -191,7 +191,6 @@ class ProductPage extends AbstractPage {
             $this->body = str_replace('{%article%}','', $this->body);
             $this->body = str_replace('{%prixtotal%}','', $this->body);
             
-            $this->constructPage();
         } 
        
         foreach($this->products as $product){
@@ -214,6 +213,42 @@ class ProductPage extends AbstractPage {
          
         
         $this->constructPage();
+     }
+     
+      public function orderPage()
+    {
+        $this->head->setTitle('symphony: commandes');
+        $this->head->setDescription('votre commandes');
+        $this->body = $this->utils->searchHtml('order');
+       
+        if(empty($this->products)){
+            
+            $content = $this->utils->searchInc('message');
+            $message = "votre commande est vide";
+            $content = str_replace('{%message%}',$message, $content);
+            $this->body = str_replace('{%message%}',$content,$this->body);
+            $this->body = str_replace('{%article%}','',$this->body);
+            $this->body = str_replace('{%prixtotal%}','',$this->body);
+            
+        } 
+       
+        foreach($this->products as $product){
+                $content = $this->utils->searchInc('produitbasket');
+                $content = str_replace('{%name%}', $product->getName(), $content);
+                $content = str_replace('{%id%}',$product->getId(), $content);
+                $content = str_replace('{%price%}',$product->getPrice(), $content);
+                $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
+                $content = str_replace('{%description%}',$product->getDescription(), $content);
+                $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+                
+                $this->article .= $content;
+            }
+        
+        $this->body = str_replace('{%message%}','', $this->body);
+        $this->body = str_replace('{%article%}',$this->article, $this->body);
+         
+        $this->constructPage();
+        
      }
     
 }

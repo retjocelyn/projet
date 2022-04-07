@@ -43,4 +43,11 @@ require_once './Repository/AbstractRepository.php';
         $sql = "DELETE FROM `panier` WHERE product_id = '$productid' ";
         $stmt = $this->connexion->query($sql);
     }
+    
+     public function deleteBasket($userid)
+    {
+        $sql = "DELETE FROM `panier` WHERE user_id = '$userid'";
+        $stmt = $this->connexion->query($sql);
+    }
+    
 }

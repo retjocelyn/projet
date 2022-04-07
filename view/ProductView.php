@@ -31,7 +31,7 @@ class ProductView {
     {
         $page = new ProductPage();
         $page->setCategories($categories);
-        $page-> CreateFormModifyProduct($product);
+        $page->CreateFormModifyProduct($product);
         return $page->getPage();   
     }
     
@@ -48,6 +48,14 @@ class ProductView {
         $page->setProducts($products);
         $page->setTotalPrice($totalprice);
         $page->basketPage();
+        return $page->getPage();   
+    }
+    
+    public function displayOrder($products)
+    {
+        $page = new ProductPage();
+        $page->setProducts($products);
+        $page->orderPage();
         return $page->getPage();   
     }
     

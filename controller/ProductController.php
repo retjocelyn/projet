@@ -3,6 +3,7 @@
 require_once './Repository/ProductRepository.php';
 require_once './Repository/CategoryRepository.php';
 require_once './Repository/BasketRepository.php';
+require_once './Repository/OrderRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Category.php';
 require_once './view/ProductView.php';
@@ -16,6 +17,7 @@ class ProductController {
         $this->repository = new ProductRepository();
         $this->categoryRepository = new CategoryRepository();
         $this->basketRepository = new BasketRepository();
+        $this->orderRepository = new OrderRepository();
     }
     
     
@@ -213,6 +215,7 @@ class ProductController {
             exit();
         }
         header('location: ./index.php?url=registeraccepted&message=categorie non modifiée');
+        exit();
     }
     
     public function deleteCategory()
@@ -261,6 +264,79 @@ class ProductController {
         
         echo $this->view->displayBasket($products,$totalprice);
    }
+   
+    public function createOrder(): void 
+    {
+        if(!isset($_SESSION['user'])){
+           
+        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
+        exit();
+        
+       }
        
+       $userid = unserialize($_SESSION['userid']);
+       
+       $datas = $this->basketRepository->findById($userid);
+       $productsid = [];
+       
+       foreach($datas as $data){
+           $productsid[] = $data['product_id'];
+       }
+      
+       $this->orderRepository->createOrder($userid,$productsid);
+       $this->basketRepository->deleteBasket($userid);
+       
+       header('location: ./index.php?url=registeraccepted&message=votre commande à été créée');
+       exit();
+    }
+    
+    
+     public function showOrders() : void
+    {
+       if(!isset($_SESSION['user'])){
+           
+        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
+        exit();
+        
+       }
+       
+        $userid =unserialize($_SESSION['userid']);
+        $datas = $this->orderRepository->findById($userid);
+        
+        $products = [];
+            
+        foreach($datas as $data){
+            $product = new Product();
+            $product->setId($data['product_id']);
+            $product->setName($data['name']);
+            $product->setQuantity($data['quantity']);
+            $product->setPrice($data['price']);
+            $product->setImage($data['url_picture']);
+            $product->setDescription($data['description']);
+            $product->setCategory($data['category_id']);
+            
+            $products[] = $product;
+           
+        }
+        
+        echo $this->view->displayOrder($products);
+   }
+   
+   
+    public function deleteOrder(): void
+    {
+        
+     if(!isset($_SESSION['user'])){
+           
+        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
+        exit();
+        
+       }
+        $userid =unserialize($_SESSION['userid']);
+        $this->orderRepository->deleteOrder($userid);
+        
+        header('location: ./index.php?url=registeraccepted&message=commande supprimée');
+        exit();
+   }
     
 }
