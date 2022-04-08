@@ -1,16 +1,15 @@
 
-<article class="instrument"> <!-- classe provisoire a retravailler-->
-    <img src="{%urlImage%}" alt=""/>
+<article class="orders"> <!-- classe provisoire a retravailler-->
     <ul>
-        <li>{%numerodelacommande%}</li>
-        <li>{%datedelacommande%}</li>
-        <li><h3>{%clientfamilyname%}</h3></li>
-        <li><h3>{%clientname%}</h3></li>
+        <li>Numéro de commande:{%numerodelacommande%}</li>
+        <li>date de la commande :{%datedelacommande%}</li>
+        <li><h3>Nom de famille : {%clientfamilyname%}</h3></li>
+        <li><h3>Prenom : {%clientname%}</h3></li>
         <li>Adresse du client : {%clientadresse%}</li>
-        <li><h3>{%nameproduit%}</h3></li>
+        <li><h3>Produit : {%nameproduit%}</h3></li>
         <li>Quantitité : {%quantity%}</li>
-        <li> {%price%} euros</li>
-        <li><a href="./index.php?url=validateOrder&id={%id%}">Modifier</a></li><!-- retravailler pour php-->
-        <li><a href="./index.php?url=deleteOrder&id={%id%}">Effacer</a></li><!-- retravailler pour php-->
+        <li>Prix de {%price%} euros</li>
+        <li><a href="./index.php?url=adminvalidateorder&id={%id%}">Modifier</a></li><!-- retravailler pour php-->
+        <li><a href="./index.php?url=admindeleteorder&id={%id%}">Effacer</a></li><!-- retravailler pour php-->
     </ul>
 </article>

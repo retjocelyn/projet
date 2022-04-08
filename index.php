@@ -131,7 +131,7 @@ switch($url){
         $userController->deleteUser();
         break;
         
-     case "deleteuser":
+    case "deleteuser":
         $userController = new UserController();
         $userController->deleteUser();
         break;
@@ -155,8 +155,18 @@ switch($url){
     case "deleteorder":
         $productController = new ProductController();
         $productController->deleteOrder();
-        break;       
-
+        break;    
+        
+    case "admindeleteorder":
+        $adminController = new AdminController();
+        $adminController->adminDeleteOrder();
+        break; 
+        
+     case "admindeleteuser":
+        $adminController = new AdminController();
+        $adminController->adminDeleteUser();
+        break;    
+        
 }
 
 

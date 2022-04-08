@@ -33,7 +33,7 @@ require_once './Repository/AbstractRepository.php';
     {  
         $data = null;
         try {
-            $query = $this->connexion->prepare('SELECT * FROM orders as o INNER JOIN users as u ON o.user_id = u.id INNER JOIN products as p ON o.product_id = p.id');
+            $query = $this->connexion->prepare('SELECT o.id, o.user_id, o.created_at, u.first_name, u.last_name, u.adress, p.name, p.quantity, p.price FROM orders as o INNER JOIN users as u ON o.user_id = u.id INNER JOIN products as p ON o.product_id = p.id');
             if ($query) {
                 $query->execute();
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -79,5 +79,14 @@ require_once './Repository/AbstractRepository.php';
         $sql = "DELETE FROM orders WHERE user_id = '$userid' ";
         $stmt = $this->connexion->query($sql);
       
-       }
+    }
+    
+     public function adminDeleteOrder($orderId)
+    {  
+        $sql = "DELETE FROM orders WHERE id = '$orderId'";
+        $stmt = $this->connexion->query($sql);
+      
+    }
+       
+       
 }

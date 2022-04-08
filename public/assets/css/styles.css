@@ -281,12 +281,43 @@ main{
     justify-content:center;
     margin:15px 0;
 }
+.orders{
+    border:1px solid black;
+    width:50%;
+    margin:5% 0;
+}
+.orders>ul{
+    list-style: none;
+}
+.users>ul{
+    list-style: none;
+}
 
 .showOrders>article{
     border:1px solid black;
     width:285px;
 }
-
+.showandhide{
+    display:flex;
+    justify-content:center;
+    
+}
+.showandhide>section{
+    width:80%;
+}
+.showAdminUsers{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.users{
+    display:flex;
+    width:50%;
+    justify-content:center;
+    border:1px solid black;
+    margin: 5% 0;
+}
 
 
 /* register*/
@@ -431,7 +462,7 @@ header{
 .laboutiquedesktop{
     display: none !important;
 }
-.mobile {
+.mobile{
     display: block;
     width:100%;
 }

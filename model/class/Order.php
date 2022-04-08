@@ -57,7 +57,7 @@ class Order {
      */
     public function getCommandUserFamilyName(): string
     {
-        return $this->CommandUserFamilyName;
+        return $this->commandUserFamilyName;
     }
     
     /**
@@ -65,7 +65,7 @@ class Order {
      */
     public function setCommandUserFamilyName(string $commandUserFamilyName): void
     {
-        $this->commandUserFamilyName = $CommandUserFamilyName;
+        $this->commandUserFamilyName = $commandUserFamilyName;
     }
     
      /**
@@ -79,7 +79,7 @@ class Order {
     /**
      * @param string CommandUserName
      */
-    public function settCommandUserName(string $CommandUserName): void
+    public function settCommandUserName(string $commandUserName): void
     {
         $this->commandUserName = $commandUserName;
     }
@@ -148,7 +148,7 @@ class Order {
      */
     public function setCommandProductPrice (int $commandProductPrice ): void
     {
-        $this->CommandProductPrice = $commandProductPrice;
+        $this->commandProductPrice = $commandProductPrice;
     }
     
 }

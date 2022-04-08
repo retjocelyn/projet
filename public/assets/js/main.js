@@ -5,14 +5,17 @@ let profil= document.getElementById("profil");
 let portefeuille = document.getElementById("wallet");
 let categories = document.getElementById("categories");
 let admincommande = document.getElementById("admincommande");
+let users = document.getElementById("users");
 
 let sectionCommandes = document.getElementsByClassName("showOrders")[0];
 let sectionProfil = document.getElementsByClassName("showprofil")[0];
 let sectionPortefeuille = document.getElementsByClassName("showwallet")[0];
 let sectionCategories = document.getElementsByClassName("showCategories")[0];
 let sectionAdminCommandes = document.getElementsByClassName("showAdminCommandes")[0];
+let sectionAdminUsers = document.getElementsByClassName("showAdminUsers")[0];
 
 sectionPortefeuille.style.display = "none";
+sectionAdminUsers.style.display = "none";
 sectionCommandes.style.display = "none";
 sectionCategories.style.display = "none";
 sectionAdminCommandes.style.display = "none";
@@ -25,6 +28,7 @@ profil.addEventListener('click', function(e) {
         sectionCommandes.style.display = "none";
         sectionPortefeuille.style.display = "none";
         sectionAdminCommandes.style.display = "none";
+        sectionAdminUsers.style.display = "none";
         sectionCategories.style.display = "none";
         profil.style.backgroundColor = "red";
         portefeuille.style.backgroundColor = "white";
@@ -34,11 +38,13 @@ profil.addEventListener('click', function(e) {
         profil.style.backgroundColor = "white";
     }
 })
-portefeuille.addEventListener('click', function(e) {
+
+portefeuille.addEventListener('click',function(e) {
      if (sectionPortefeuille.style.display === "none"){
         sectionPortefeuille.style.display = "block";
         sectionCommandes.style.display = "none";
         sectionCategories.style.display = "none";
+        sectionAdminUsers.style.display = "none";
         sectionAdminCommandes.style.display = "none";
         sectionProfil.style.display = "none";
         profil.style.backgroundColor = "white";
@@ -51,11 +57,13 @@ portefeuille.addEventListener('click', function(e) {
         
     }
 })    
+
 commandes.addEventListener('click', function(e) {
     if (sectionCommandes.style.display === "none"){
         sectionCommandes.style.display = "block";
         sectionProfil.style.display = "none";
         sectionCategories.style.display = "none";
+        sectionAdminUsers.style.display = "none";
         sectionPortefeuille.style.display = "none";
         sectionAdminCommandes.style.display = "none";
         profil.style.backgroundColor = "white";
@@ -67,13 +75,14 @@ commandes.addEventListener('click', function(e) {
     }
 })    
     
-categories.addEventListener('click', function(e) {
+categories.addEventListener('click',function(e) {
      if (sectionCategories.style.display === "none"){
         sectionCategories.style.display = "block";
         sectionProfil.style.display = "none";
         sectionPortefeuille.style.display = "none";
         sectionCommandes.style.display = "none";
         sectionAdminCommandes.style.display = "none";
+        sectionAdminUsers.style.display = "none";
         profil.style.backgroundColor = "white";
         portefeuille.style.backgroundColor = "white";
         categories.style.backgroundColor = "red";
@@ -82,12 +91,14 @@ categories.addEventListener('click', function(e) {
         categories.style.backgroundColor = "white";
     }
 })  
-admincommande.addEventListener('click', function(e) {
+
+admincommande.addEventListener('click',function(e) {
      if (sectionAdminCommandes.style.display === "none"){
         sectionAdminCommandes.style.display = "block";
         sectionProfil.style.display = "none";
         sectionPortefeuille.style.display = "none";
         sectionCommandes.style.display = "none";
+        sectionAdminUsers.style.display = "none";
         sectionCategories.style.display = "none";
         profil.style.backgroundColor = "white";
         portefeuille.style.backgroundColor = "white";
@@ -98,3 +109,18 @@ admincommande.addEventListener('click', function(e) {
     }    
 })
 
+users.addEventListener('click',function(e) {
+     if (sectionAdminUsers.style.display === "none"){
+        sectionAdminUsers.style.display = "block";
+        sectionProfil.style.display = "none";
+        sectionPortefeuille.style.display = "none";
+        sectionCommandes.style.display = "none";
+        sectionCategories.style.display = "none";
+        profil.style.backgroundColor = "white";
+        portefeuille.style.backgroundColor = "white";
+        categories.style.backgroundColor = "red";
+    } else{
+        sectionAdminUsers.style.display = "none";
+        users.style.backgroundColor = "white";
+    }    
+})

@@ -68,15 +68,13 @@ class AdminController {
             $categories[] = $category;
            
         }
-         $datas = $this->orderRepository->findAllOrders();
-         $commandes = [];
-         var_dump($datas);
-         die();
-        
+        $datas = $this->orderRepository->findAllOrders();
+        $commandes = [];
+      
         foreach($datas as $data){
             $order = new Order();
             $order->setId($data['id']);
-            $order->setDate($data['']);
+            $order->setDate($data['created_at']);
             $order->setCommandUserFamilyName($data['first_name']);
             $order->settCommandUserName($data['last_name']);
             $order->setCommandUserAdress($data['adress']);
@@ -86,10 +84,59 @@ class AdminController {
             
              $commandes[] = $order;
          }
+         
+        $datas = $this->repository->fetchAll();
+        $users = [];
+         foreach($datas as $data){
+            $user = new User();
+            $user->setid($data['id']);
+            $user->setlastName($data['last_name']);
+            $user->setFirstName($data['first_name']);
+            $user->setEmail($data['email']);
+            $user->setPassword($data['password']);
+            $user->setRole($data['role']);
+            $user->setAdresse($data['adress']);
+            $user->setWallet($data['wallet']);
+            
+             $users[] = $user;
+         }
         
-        
-         echo $this->productView->displayadminAccount($products,$categories,$commandes);
+        echo $this->productView->displayadminAccount($products,$categories,$commandes,$users);
     }
+    
+    public function adminDeleteOrder(){
+        
+     if(!isset($_SESSION['user']) or $_SESSION['role'] !== "admin"){
+         
+            header('location: ./index.php?url=login');
+            exit();
+            
+        }
+        
+        $orderId = $_GET['id'];
+        $this->orderRepository->adminDeleteOrder($orderId);
+        
+        header('location: ./index.php?url=registeraccepted&message=commande supprimée');
+        exit();
+        
+    }    
+    
+     public function adminDeleteUser():void
+    {
+        
+         if(!isset($_SESSION['user']) or $_SESSION['role'] !== "admin"){
+             
+                header('location: ./index.php?url=login');
+                exit();
+                
+        }
+        
+        $id = $_GET['id'];
+        $this->repository->deleteUser($id);
+        
+        header('location: ./index.php?url=registeraccepted&message=client supprimé');
+        exit();
+    } 
     
 }
 

@@ -164,7 +164,11 @@ class UserController {
     
     public function addArticleToBasket()
     {
-        if(isset($_GET['id'])){
+        if(!isset($_GET['id'],$_SESSION['user'])){
+            
+            header('location: ./index.php?url=login&error=veuillez vous connecter');
+            exit();
+        }
             
             $productid = $_GET['id'];
             $userid = unserialize($_SESSION['userid']);
@@ -172,9 +176,7 @@ class UserController {
         
             header('location: ./index.php?url=registeraccepted&message=article ajouté au panier');
             exit();
-        }
-        header('location: ./index.php?url=registeraccepted&message=article non ajouté au panier');
-        exit();
+       
     }
     
     

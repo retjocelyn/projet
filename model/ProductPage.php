@@ -14,6 +14,8 @@ class ProductPage extends AbstractPage {
     
     private int  $totalprice;
     
+    private array $users;
+    
     public function __construct()
     {
         parent::__construct();
@@ -107,6 +109,18 @@ class ProductPage extends AbstractPage {
         $this->totalprice = $totalprice;
     }
     
+     /**
+     * @param array $products
+     */
+    public function setUsers(array $users)
+    {
+        $this->users = $users;
+    }
+    
+    public function getUsers(): array
+    {
+        return $this->users;
+    }
     
     public function constructProducts(): void
     {
@@ -153,12 +167,14 @@ class ProductPage extends AbstractPage {
                 $categoryarticle .= $content;
             }
             
-             foreach($this->orders as $order){
+            $commandArticle = '';
+            foreach($this->orders as $order){
                 $content = $this->utils->searchInc('admincommandes');
                 $content = str_replace('{%numerodelacommande%}',$order->getId(),$content);
                 $content = str_replace('{%id%}',$order->getId(),$content);
                 $content = str_replace('{%datedelacommande%}',$order->getDate(),$content);
                 $content = str_replace('{%clientfamilyname%}',$order->getCommandUserFamilyName(),$content);
+                $content = str_replace('{%clientname%}',$order->getCommandUserName(),$content);
                 $content = str_replace('{%clientadresse%}',$order->getCommandUserAdress(),$content);
                 $content = str_replace('{%nameproduit%}',$order->getCommandProductName(),$content);
                 $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(),$content);
@@ -167,12 +183,24 @@ class ProductPage extends AbstractPage {
                 $commandArticle .=  $content;
             }
             
+            $adminUsers = '';
+            foreach($this->users as $user){
+                $content = $this->utils->searchInc('adminusers');
+                $content = str_replace('{%name%}',$user->getFirstName(),$content);
+                $content = str_replace('{%familyname%}',$user->getlastName(),$content);
+                $content = str_replace('{%id%}',$user->getId(),$content);
+            
+                $adminUsers .= $content;
+            }
+            
            
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'],$this->body);
         
         $this->body = str_replace('{%article%}', $this->article,$this->body);
         
         $this->body = str_replace('{%commandes%}', $commandArticle,$this->body);
+        
+         $this->body = str_replace('{%users%}', $adminUsers,$this->body);
         
         $this->body = str_replace('{%categories%}',$categoryarticle,$this->body);
         
@@ -275,7 +303,7 @@ class ProductPage extends AbstractPage {
         } 
        
         foreach($this->products as $product){
-                $content = $this->utils->searchInc('produitbasket');
+                $content = $this->utils->searchInc('produitorder');
                 $content = str_replace('{%name%}', $product->getName(), $content);
                 $content = str_replace('{%id%}',$product->getId(), $content);
                 $content = str_replace('{%price%}',$product->getPrice(), $content);
@@ -287,6 +315,7 @@ class ProductPage extends AbstractPage {
             }
         
         $this->body = str_replace('{%message%}','', $this->body);
+        $this->body = str_replace('{%id%}','', $this->body);
         $this->body = str_replace('{%article%}',$this->article, $this->body);
          
         $this->constructPage();
