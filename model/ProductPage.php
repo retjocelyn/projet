@@ -167,6 +167,16 @@ class ProductPage extends AbstractPage {
                 $categoryarticle .= $content;
             }
             
+            $allCategories = '';
+            foreach($this->categories as $category){
+                $content = $this->utils->searchInc('category');
+                $content = str_replace('{%name%}', $category->getName(), $content);
+                $content = str_replace('{%id%}',$category->getId(), $content);
+                $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
+              
+                $allCategories .= $content;
+            }
+            
             $commandArticle = '';
             foreach($this->orders as $order){
                 $content = $this->utils->searchInc('admincommandes');
@@ -194,18 +204,19 @@ class ProductPage extends AbstractPage {
             }
             
            
-        $this->body = str_replace('{%$token%}', $_SESSION['csrf'],$this->body);
-        
-        $this->body = str_replace('{%article%}', $this->article,$this->body);
-        
-        $this->body = str_replace('{%commandes%}', $commandArticle,$this->body);
-        
-         $this->body = str_replace('{%users%}', $adminUsers,$this->body);
-        
-        $this->body = str_replace('{%categories%}',$categoryarticle,$this->body);
-        
-        
-        $this->constructPage();
+            $this->body = str_replace('{%$token%}', $_SESSION['csrf'],$this->body);
+            
+            $this->body = str_replace('{%article%}', $this->article,$this->body);
+            
+            $this->body = str_replace('{%commandes%}', $commandArticle,$this->body);
+            
+            $this->body = str_replace('{%option%}', $allCategories,$this->body);
+            
+            $this->body = str_replace('{%users%}', $adminUsers,$this->body);
+            
+            $this->body = str_replace('{%categories%}',$categoryarticle,$this->body);
+
+            $this->constructPage();
      }
      
     public function CreateFormModifyProduct($product)
