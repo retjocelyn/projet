@@ -117,6 +117,7 @@ class UserController {
             $date;
             $wallet = 0;
            
+           /*correction a faire ici*/
             $this->repository->createUser($newlastName,$newfirstName,$newEmail,$newPass,$newAdress,$wallet);
             
             header('location: ./index.php?url=registeraccepted&message=votre compte a été crée');

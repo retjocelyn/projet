@@ -1,86 +1,112 @@
 body{
-    margin:0px;
+    margin:0;
 }
+
 .container{
     text-align:center;
 }
 
-.mobile {
-    display: none;
+button{
+    background:rgba( 239, 119, 25, 0.8);
+    border-radius:10%;
 }
-.shopinstrumentsmobile{
-    display:none;
+
+h2{
+    font-family: 'Grape Nuts', cursive;
+    color:rgba( 239, 119, 25, 0.8);
+}
+
+h3{
+    font-family: 'Grape Nuts', cursive;
 }
 
 /*header*/
 header{
-      background-color:#cfb1b1;
-      display:flex;
-      justify-content:space-around;
+    width:100%;
 }
-.laboutiquedesktop{
+
+.displayheader{
+    width:100%;
+    display:flex;
+    justify-content:space-evenly;
+    border-bottom: thick double black;
+    border-width:5px;
+  
+}
+
+.menuheader{
     display:flex;
     align-items:center;
-   
 }
-.socity{
+
+.menuheader>ul{
     display:flex;
-    align-items:center;
-    padding:10px;
+    list-style: none;
+    margin:0;
 }
-.socity>img{
-    width: 121px;
-    height: 110px;
-    border-radius: 71%;
-    margin-right: 19px;
+
+.menuheader>ul>li{
+    margin: 0 2%;
+    text-decoration:none;
+    transition:transform 1s;
+}
+.menuheader>ul>li:hover{
+    transform: scale(1.2);
+}
+
+.menu>li>a{
+    font-family: 'Grape Nuts', cursive;
+    text-decoration:none;
+    color:rgba( 239, 119, 25, 0.8);
+    font-size:1.7em;
+}
+
+
+main{
+    padding: 3% 10%;
+    background-image: url("../img/ripples.png");
+    /*background: #ededed;*/
 
 }
-.socity>h1{
-    font-size:46px;
-    font-family: 'League Gothic', sans-serif;
-}    
-.menuheader{
+
+/*main de home*/
+
+.block-search{
+    width:100%;
+    height: 6em;
     display:flex;
     justify-content:center;
     align-items:center;
 }
-.menuheader>li{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-    background-color: white;
-    width: 79px;
-    height: 29px;
-    margin: 0px 20px;
-    padding: 15px;
-    transition: 1s;
-    border-radius: 50% 91%;
-}
-.menuheader>li:hover{
-    transform: scale(1.2);
-    border-radius:0%;
+
+.search input[type=text]{
+  width: 500px;
+  height: 25px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
-.menuheader>li>a{
-    text-decoration:none;
-    color:black;
-    font-family: 'Fredoka', sans-serif;
-
+.search{
+  margin:7px;
 }
-
-                 /*main de home*/
-                 
-main{
-    margin:0 10%;
-}
+      
+.search button{
+  background-color: #422f2de0;
+  color: #fff;
+  padding: 5px 8px;
+  margin-left: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+} 
 
 .presentation{
     margin:37px 0;
     display:flex;
     justify-content:space-evenly;
     border:1px solid black;
-    background-color:#559557;
+    background-color:white;
 }
 
 .presentation>article{
@@ -95,8 +121,7 @@ main{
     display:flex;
     justify-content:space-evenly;
     border:1px solid black;
-    margin:37px 0;
-    background-color:#559557;
+    background-color:white;
 }
 
 .vendeur>article{
@@ -106,11 +131,6 @@ main{
 .vendeur>article>p{
     text-align:justify;
 }
-
-.bernard{
-    border-radius:29%;
-}
-
 
       /*main de login*/
       
@@ -129,6 +149,7 @@ main{
     flex-direction:column;
     width:300px;
     height:286px;
+    background:rgba(255,255,255, 0.9);
     border:1px solid black;
     margin:40px 0;
     border-radius:20%;
@@ -322,24 +343,10 @@ main{
 
 /* register*/
 
-      
-
-
-
+     
 .showregisterform{
     display:flex;
     justify-content:center;
-    
-}
-
-
-.register>h3,
-.register>label{
-    font-family: 'Fredoka', sans-serif;
-}
-
-.register>input{
-    margin-bottom: 37px;
 }
 
 .register{
@@ -350,13 +357,23 @@ main{
     flex-direction:column;
     width:300px;
     height:auto;
+    background:rgba(255,255,255, 0.9);
     border:1px solid black;
     margin:40px 0;
     border-radius:9%;
 }
 
-.champ{
-    display:flex;
+.register>h3,
+.register>label{
+    font-family: 'Fredoka', sans-serif;
+}
+
+.register>input{
+    margin-bottom: 37px;
+}
+
+.champbutton{
+    margin-bottom:2em;
 }
 
 /*register accepted*/
