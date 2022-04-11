@@ -2,20 +2,31 @@
                 <section class="showregisterform">    
                     <form class="register" action="index.php?url=registerSecurity" method="post">
                         <h3>Inscription</h3>
-                        <label for="lastName">Nom : </label> 
-                        <input type="text" id="lastName" name="lastName" value="" required>
-                        <label for="firstName">Prénom : </label> 
-                        <input type="text" id="firstName" name="firstName" value="" required>
-                        <label for="email">Email : </label> 
-                        <input type="email" id="email" name="email" value="" required>
-                        <label for="adress">Adresse du domicile : </label> 
-                        <input type="text" id="adress" name="adress" value="" required>
-                        <label for="password">Mot de Passe : </label> 
-                        <input type="password" id="password" name="password" value="" required>
-                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                        <div class="champbutton">
-                            <button type="submit">Inscription</button>
+                        <div class="newfamilyname">
+                            <label for="lastName">Nom : </label> 
+                            <input type="text" id="lastName" name="lastName" value="" required>
+                        </div>
+                        <div class="newname">
+                            <label for="firstName">Prénom : </label> 
+                            <input type="text" id="firstName" name="firstName" value="" required>
                         </div>    
+                        <div class="newemail">
+                            <label for="email">Email : </label> 
+                            <input type="email" id="email" name="email" value="" required>
+                        </div>
+                        <div class="newadress">
+                            <label for="adress">Adresse du domicile : </label> 
+                            <input type="text" id="adress" name="adress" value="" required>
+                        </div>  
+                        <div class="newpassword">
+                            <label for="password">Mot de Passe : </label> 
+                            <input type="password" id="password" name="password" value="" required>
+                        </div>    
+                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                        <div class="registerbutton">
+                            <button type="submit">Inscription</button>
+                        </div>
+                        <a href="index.php?url=login">Déja un compte ? Connectez vous.</a>
                     </form> 
                 </section>
                 </main>
