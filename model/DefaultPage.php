@@ -88,12 +88,6 @@ class DefaultPage extends AbstractPage {
             $this->constructPage();
             break;
                 
-            case'shop':
-            $this->head->setTitle('symphony: page catégories');
-            $this->head->setDescription('catégories');
-            $this->constructPage();
-            break;    
-                
                   
             case'basket':
             $this->head->setTitle('symphony: page panier');
