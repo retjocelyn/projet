@@ -193,7 +193,7 @@ main{
 }
 
 
-/* magasin*/
+/* shop*/
 .shopinstruments{
     display:flex;
     justify-content:center;
@@ -238,7 +238,7 @@ main{
 }
 
 
- /*main de categories*/
+ /*main de articles*/
  
 .ensembleinstruments{
     text-align: -webkit-center;
