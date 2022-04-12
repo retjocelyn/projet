@@ -131,6 +131,7 @@ class ProductPage extends AbstractPage {
             $content = str_replace('{%id%}',$product->getId(), $content);
             $content = str_replace('{%price%}',$product->getPrice(), $content);
             $content = str_replace('{%description%}',$product->getDescription(), $content);
+            $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
             $content = str_replace('{%urlImage%}',$product->getImage(), $content);
           
             $this->article .= $content;

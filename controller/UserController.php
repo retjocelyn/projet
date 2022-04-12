@@ -38,13 +38,13 @@ class UserController {
             header('location: ./index.php?url=login');
         }
          
+        if(!password_verify($password, $data['password'])){
+            header('location:./index.php?url=login');
+            exit();
+        }
+        
         if($data){
            
-            if(!password_verify($password, $data['password'])){
-                header('location: ./index.php?url=login');
-                exit();
-            }
-            
             $user = new User();
             $user->setid($data['id']);
             $user->setlastName($data['last_name']);
@@ -123,9 +123,12 @@ class UserController {
             header('location: ./index.php?url=registeraccepted&message=votre compte a été crée');
             exit();
         }
+        header('location: ./index.php?url=registeraccepted&message="Compte non crée"');
+        exit();
+        
     }
     
-    public function registerAccepted() : string
+    public function registerAccepted() 
     {
         if(isset($_GET['message'])){
         
