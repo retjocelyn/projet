@@ -12,11 +12,13 @@ class HomeController {
     }
     
     
-    public function home(){
+    public function home()
+    {
        echo $this->view->displayHome();
     }
     
-     public function shop(){
+     public function shop()
+     {
          $repository = new CategoryRepository();
          $datas = $repository->findAll();
          $categories = [];

@@ -1,10 +1,11 @@
                 <main>
-                    <section class="order">
-                        <div class="commande">
-                            <h2>Votre commande</h2>
+                     <section class="displayorders">
+                        <div class="commandes">
+                            <h2>Vos commandes</h2>
                             {%article%}
-                            {%message%}
-                            <a href="./index.php?url=deleteorder&id={%id%}"><input type="button" value="annuler la commande"></a>
+                            <form class="formdeleteorder" action="./index.php?url=deleteorder&id={%id%}" method="post">
+                                <button type="deleteorder">effacer les commandes</button>
+                            </form> 
                         </div>    
                     </section>
                 </main>
