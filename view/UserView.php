@@ -16,9 +16,10 @@ class UserView {
        
     }
     
-    public function displayAccount(): string
+    public function displayAccount($user): string
     {
         $page = new DefaultPage('account');
+        $page->displayAccount($user);
         $page->assemblerPage();
         return $page->getPage();
        
@@ -48,6 +49,13 @@ class UserView {
         $page->assemblerPage();
         return $page->getPage();
        
+    }
+    
+    public function displayFormModifyUser($user):string
+    {
+        $page = new DefaultPage('formmodifyuser');
+        $page->createFormModifyUser($user);
+        return $page->getPage();
     }
     
     

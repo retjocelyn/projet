@@ -46,6 +46,18 @@ switch($url){
         $userController->account();
         break;
         
+        
+     case "formmodifyuser":
+        $userController = new UserController();
+        $userController->formModifyUser();
+        break;
+        
+   
+    case "modifyuser":
+        $userController = new UserController();
+        $userController->modifyUser();
+        break;
+        
     case "logout":
         $userController = new UserController();
         $userController->logout();

@@ -60,20 +60,6 @@ class DefaultPage extends AbstractPage {
             $this->constructPage();
             break;
             
-            case'account':
-            $user = unserialize($_SESSION['user']); 
-            $this->head->setTitle('symphony: page compte');
-            $this->head->setDescription('compte');
-            $this->body = str_replace('{%nom%}', $user->getLastName(), $this->body);
-            $this->body = str_replace('{%prenom%}', $user->getFirstName(), $this->body);
-            $this->body = str_replace('{%email%}', $user->getEmail(), $this->body);
-            $this->body = str_replace('{%adresse%}', $user->getAdresse(), $this->body);
-            $this->body = str_replace('{%solde%}', $user->getWallet(), $this->body);
-            $this->body = str_replace('{%id%}', $user->getId(), $this->body);
-            $this->constructPage();
-            
-            break;
-            
             case'register':
             $this->head->setTitle('symphony: page inscription');
             $this->head->setDescription('inscription');
@@ -96,6 +82,33 @@ class DefaultPage extends AbstractPage {
             break;    
             
         }
+        
+    }
+    public function displayAccount($user)
+    {
+            $this->head->setTitle('symphony: page compte');
+            $this->head->setDescription('compte');
+            $this->body = str_replace('{%nom%}', $user->getLastName(), $this->body);
+            $this->body = str_replace('{%prenom%}', $user->getFirstName(), $this->body);
+            $this->body = str_replace('{%email%}', $user->getEmail(), $this->body);
+            $this->body = str_replace('{%adresse%}', $user->getAdresse(), $this->body);
+            $this->body = str_replace('{%solde%}', $user->getWallet(), $this->body);
+            $this->body = str_replace('{%id%}', $user->getId(), $this->body);
+            $this->constructPage();
+        
+    }
+    
+    public function createFormModifyUser($user)
+    {
+        $this->head->setTitle('symphony: modifier profil');
+        $this->head->setDescription('formulaire de modification de user');
+        $this->body = str_replace('{%familyname%}', $user->getLastName(), $this->body);
+        $this->body = str_replace('{%firstName%}', $user->getFirstName(), $this->body);
+        $this->body = str_replace('{%email%}', $user->getEmail(), $this->body);
+        $this->body = str_replace('{%adress%}', $user->getAdresse(), $this->body);
+        $this->body = str_replace('{%id%}', $user->getId(), $this->body);
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+        $this->constructPage();
         
     }
     

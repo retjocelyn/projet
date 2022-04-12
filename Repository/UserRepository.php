@@ -46,6 +46,24 @@ require_once './Repository/AbstractRepository.php';
         return $data;
     }
     
+    public function findById($userId)
+    {
+        $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM users WHERE id = :userId');
+            if ($query) {
+                $query->bindParam(':userId',$userId);
+                $query->execute();
+                
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
+    
     
     public function createUser(string $newlastName,string $newfirstName, string $newEmail, string $newPass,string $newAdress,int $wallet):void
     {
@@ -54,11 +72,21 @@ require_once './Repository/AbstractRepository.php';
        
     }
     
+     public function modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass)
+     {
+          $sql = " UPDATE users
+            SET first_name = '$newfirstName',last_name = '$newlastName',email = '$newEmail',adress = '$newAdress',password = '$newPass'
+            WHERE id = '$userId' ";
+         $stmt = $this->connexion->query($sql);
+        
+     }
+     
     public function deleteUser($id)
     {
         $sql = "DELETE FROM `users` WHERE id = '$id'";
          $stmt = $this->connexion->query($sql);
     }
+    
     
     
     

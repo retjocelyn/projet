@@ -1,0 +1,32 @@
+                <main>
+                <section class="showregisterform">    
+                     <form class="register" action="index.php?url=modifyuser&id={%id%}" method="post">
+                                <h2>Modifier  votre compte</h2>
+                        <div class="newfamilyname">
+                            <label for="lastName">Nom : </label> 
+                            <input type="text" id="lastName" name="lastName" value="{%familyname%}" required>
+                        </div>
+                        <div class="newname">
+                            <label for="firstName">Prénom : </label> 
+                            <input type="text" id="firstName" name="firstName" value="{%firstName%}" required>
+                        </div>    
+                        <div class="newemail">
+                            <label for="email">Email : </label> 
+                            <input type="email" id="email" name="email" value="{%email%}" required>
+                        </div>
+                        <div class="newadress">
+                            <label for="adress">Adresse du domicile : </label> 
+                            <input type="text" id="adress" name="adress" value="{%adress%}" required>
+                        </div>  
+                        <div class="newpassword">
+                            <label for="password">Mot de Passe : </label> 
+                            <input type="password" id="password" name="password" value="" required>
+                        </div>    
+                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                        <div class="usermodifybutton">
+                            <button type="submit">Modifier votre compte</button>
+                        </div>
+                    </form> 
+                </section>
+                </main>
+               

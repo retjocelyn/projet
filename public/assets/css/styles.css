@@ -318,25 +318,43 @@ main{
     background-color:orange;
     padding: 3px;
 }
+
 .showandhide{
     display:flex;
     justify-content:center;
 }
-.showprofil{
-    text-align: justify;
-    display: flex;
-    justify-content: center;
-    width: 270px;
+
+.displayprofil{
+    display:flex;
+    justify-content:center;
 }
-.showprofil>ul{
+
+.showprofil{
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    width:30em;
+    height:35em;
+    background-color:rgba(255,255,255, 0.9);
     border:1px solid black;
-    background-color:#ddbcbc;
-    border-radius:20%;
-    width:100%;
+    margin:40px 0;
+    border-radius:2em;
+}
+
+.showprofil>h2{
+    font-size:2em;
+}
+
+.showprofil>ul{
+    list-style:none;
+    margin:0;
+    padding:0;
 }
 
 .showprofil>ul>li{
     margin:36px 0;
+    text-align:start;
+    
 }
 
 .showwallet{
@@ -388,7 +406,8 @@ main{
 
 .showandhide{
     display:flex;
-    justify-content:center;
+    flex-direction:column;
+    align-items:center;
 }
 
 .showandhide>section{
@@ -408,6 +427,10 @@ main{
     justify-content:center;
     border:1px solid black;
     margin: 5% 0;
+}
+
+.hide{
+    display:none;
 }
 
 
@@ -555,7 +578,6 @@ footer>section>ul>li{
     list-style-type: none;
 }
 
-
 .panier{
     display:flex;
     justify-content:center;
@@ -568,6 +590,10 @@ footer>section>ul>li{
     align-items:center;
     background-color:white;
     border-radius:2em;
+}
+
+.possiblecommande>h2{
+    font-size:2em;
 }
 
 .possiblecommande>article{
@@ -639,17 +665,51 @@ footer>section>ul>li{
 }
 
 /*orders*/
+
 .displayorders{
     display:flex;
     justify-content:center;
-    width:100%;
 }
+
 .commandes{
+    width:70%;
     display:flex;
-    width:100%;
     flex-direction:column;
     align-items:center;
+    background-color:white;
+    border-radius:2em;
 }
+
+.commandes>article{
+    width:90%;
+    border:none;
+}
+
+.formdeleteorder>button{
+    height:2em;
+    font-size:1.5em;
+    margin:0.5em 0;
+    border:none;
+    background-color:white;
+    cursor: pointer;
+}
+
+.commandes>h2{
+    font-size:2em;
+}
+
+.commandes>form>button{
+    height:2em;
+    border-radius:2em;
+    background: linear-gradient(-135deg,#000000,#6e7181);
+    color:white;
+    border:none;
+    font-family: 'Fredoka', sans-serif;
+    font-size:1.5em;
+    margin:0.7em 0;
+    cursor: pointer;
+}
+
 
 
 /*empty order*/

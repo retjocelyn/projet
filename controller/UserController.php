@@ -85,7 +85,20 @@ class UserController {
             exit();
         }
         
-        echo $this->view->displayAccount();
+        $userId = unserialize($_SESSION['userid']);
+        $data = $this->repository->findById($userId);
+        $user = new User;
+        $user->setid($data['id']);
+        $user->setlastName($data['last_name']);
+        $user->setFirstName($data['first_name']);
+        $user->setEmail($data['email']);
+        $user->setPassword($data['password']);
+        $user->setRole($data['role']);
+        $user->setAdresse($data['adress']);
+        $user->setWallet($data['wallet']);
+        
+        
+        echo $this->view->displayAccount($user);
     }
     
     public function register()
@@ -142,6 +155,52 @@ class UserController {
     }
     
     
+    public function formModifyUser():void
+    {
+        $userId = $_GET['id'];
+        $data = $this->repository->findById($userId);
+        $user = new User();
+        $user->setid($data['id']);
+        $user->setlastName($data['last_name']);
+        $user->setFirstName($data['first_name']);
+        $user->setEmail($data['email']);
+        $user->setPassword($data['password']);
+        $user->setRole($data['role']);
+        $user->setAdresse($data['adress']);
+        $user->setWallet($data['wallet']);
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        echo $this->view->displayFormModifyUser($user);
+    }
+    
+     public function modifyUser():void
+    {
+         if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
+            echo 'Mauvais chemin';
+        }
+        
+        if(!isset($_SESSION['user'])){
+            header('location: ./index.php?url=login');
+            exit();
+        }
+        
+        $userId = $_GET['id'];
+        
+        $newlastName = htmlspecialchars($_POST['lastName']);
+        $newfirstName = htmlspecialchars($_POST['firstName']);
+        $newEmail = htmlspecialchars($_POST['email']);
+        $newAdress = htmlspecialchars($_POST['adress']);
+        $Pass = htmlspecialchars($_POST['password']);
+        $newPass = password_hash($Pass, PASSWORD_DEFAULT);
+        $this->repository->modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass);    
+        
+        header('location: ./index.php?url=registeraccepted&message=votre compte a été modifié');
+        exit();
+    }
+    
+     
+     
     public function logout() : void
     {
         session_destroy();
