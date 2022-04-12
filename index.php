@@ -71,6 +71,11 @@ switch($url){
         $productController->basket();
         break;
         
+     
+    case "deletebasket":
+        $productController = new ProductController();
+        $productController->deleteBasket();
+        break;
         
     case "adminaccount":
         $adminController = new AdminController();

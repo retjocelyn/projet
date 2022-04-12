@@ -243,6 +243,12 @@ class ProductController {
        
         $userid =unserialize($_SESSION['userid']);
         $datas = $this->basketRepository->findById($userid);
+        
+        if(empty($datas)){
+           echo $this->view->displayEmptyBasket();
+           exit();
+        }
+        
         $prices = [];
         $products = [];
             
@@ -264,6 +270,23 @@ class ProductController {
         
         echo $this->view->displayBasket($products,$totalprice);
    }
+   
+    public function deleteBasket() : void
+    {
+       if(!isset($_SESSION['user'])){
+           
+        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
+        exit();
+        
+    }
+       
+    $userId = unserialize($_SESSION['userid']);
+    $this->basketRepository->deleteBasket($userId);
+    
+    header('location: ./index.php?url=registeraccepted&message=panier supprimé');
+    exit();
+    }
+    
    
     public function createOrder(): void 
     {
@@ -302,6 +325,10 @@ class ProductController {
        
         $userid =unserialize($_SESSION['userid']);
         $datas = $this->orderRepository->findById($userid);
+        if(empty($datas)){
+           echo $this->view->displayEmptyOrders();
+           exit();
+        }
         
         $products = [];
             

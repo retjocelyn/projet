@@ -3,12 +3,14 @@
         <img src="{%urlImage%}" alt="image de produit"/>
     </div>   
     <div class="productcontent">
-    <h3><strong>{%name%}</strong></h3>
+        <h3><strong>{%name%}</strong></h3>
         <ul>
             <li class="productdescription"><strong>description:</strong> {%description%}.</li>
             <li class="productquantity"><strong>quantité:    {%quantity%}.</strong></li>
             <li class="productprice">Prix: {%price%} euros.</li>
-            <li><a href="./index.php?url=deletearticlefrombasket&id={%id%}">supprimer du panier</a></li><!-- retravailler pour php-->
         </ul>
+        <form class="formdeletearticlefrombasket" action="./index.php?url=deletearticlefrombasket&id={%id%}" method="post">
+            <button type="deletearticlefrombasket"><i class="fa-solid fa-trash-can"></i></button>
+        </form>    
     </div>
 </article>

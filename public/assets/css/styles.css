@@ -6,11 +6,6 @@ body{
     text-align:center;
 }
 
-button{
-    background:rgba( 239, 119, 25, 0.8);
-    border-radius:10%;
-}
-
 h2{
     font-family: 'Fredoka', sans-serif;
     color: rgb(64 ,51 ,97,1);
@@ -18,7 +13,9 @@ h2{
 
 h3{
     font-family: 'Fredoka', sans-serif;
+    
 }
+
 a{
     font-family: 'Fredoka', sans-serif;
 }
@@ -181,7 +178,7 @@ main{
 .loginbutton>button{
     height:2.5em;
     border-radius:2em;
-    background: linear-gradient(-135deg,#504141,#d5dbfa);
+    background: linear-gradient(-135deg,#000000,#6e7181);
     color:white;
     border:none;
     font-family: 'Fredoka', sans-serif;
@@ -209,7 +206,7 @@ main{
     margin: 20px 0;
 }
 .categories>article{
-    width: 30em;
+    width: 25em;
     height:25em;
     margin: 1% 2%;
     border:1px solid black;
@@ -224,11 +221,11 @@ main{
 
 .categories>article>h2{
     font-size:2em;
-    text-decoration:underline;
+    text-decoration:none;
 }
 .categories>article>a>img{
-    width: 25em;
-    height:18em;
+    width: 18em;
+    height:15em;
 }
 .search{
     width:50%;
@@ -369,14 +366,17 @@ main{
     justify-content:center;
     margin:15px 0;
 }
+
 .orders{
     border:1px solid black;
     width:50%;
     margin:5% 0;
 }
+
 .orders>ul{
     list-style: none;
 }
+
 .users>ul{
     list-style: none;
 }
@@ -385,20 +385,23 @@ main{
     border:1px solid black;
     width:285px;
 }
+
 .showandhide{
     display:flex;
     justify-content:center;
-    
 }
+
 .showandhide>section{
     width:80%;
 }
+
 .showAdminUsers{
     width:100%;
     display:flex;
     flex-direction:column;
     align-items:center;
 }
+
 .users{
     display:flex;
     width:50%;
@@ -452,7 +455,7 @@ main{
 .registerbutton>button{
     height:2.5em;
     border-radius:2em;
-    background: linear-gradient(-135deg,#c850c0,#4158d0);
+    background: linear-gradient(-135deg,#000000,#6e7181);
     color:white;
     border:none;
     font-family: 'Fredoka', sans-serif;
@@ -557,14 +560,123 @@ footer>section>ul>li{
     display:flex;
     justify-content:center;
 }
-.commande{
+
+.possiblecommande{
+    width:70%;
     display:flex;
     flex-direction:column;
     align-items:center;
+    background-color:white;
+    border-radius:2em;
 }
-.commande>h2{
-    margin-top: 54px;
+
+.possiblecommande>article{
+    width:90%;
+    border:none;
 }
+
+.formdeletearticlefrombasket>button{
+    height:2em;
+    font-size:1.5em;
+    margin:0.5em 0;
+    border:none;
+    background-color:white;
+    cursor: pointer;
+}
+
+.possiblecommande>h2:nth-child(3){
+    width:70%;
+}
+
+.possiblecommande>form>button{
+    height:2em;
+    border-radius:2em;
+    background: linear-gradient(-135deg,#000000,#6e7181);
+    color:white;
+    border:none;
+    font-family: 'Fredoka', sans-serif;
+    font-size:1.5em;
+    margin:0.7em 0;
+    cursor: pointer;
+}
+
+.formcreateorder>button{
+    width:10em;
+}
+
+.formdeletebasket>button{
+    width:10em;
+}
+
+/*emptybasket*/
+
+
+.displayemptypanier{
+   display:flex;
+   flex-direction:column;
+}
+
+.paniercontent{
+   display:flex; 
+   background-color:white;
+   border-radius:2em;
+   width:44%;
+}
+
+.emptybasketimage{
+    padding:2%;
+}
+.emptybasketimage>img{
+    width:12em;
+}
+
+
+.emptymessage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50%;
+}
+
+/*empty order*/
+
+
+.displayemptyorders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 22em;
+}
+
+.order{
+   display:flex; 
+   background-color:white;
+   border-radius:2em;
+   width:44%;
+}
+
+.orderscontent{
+    display:flex;
+    
+}
+.emptyorderimage{
+    padding:2%;
+}
+
+.emptyorderimage>img{
+    width:12em;
+}
+
+.emptymessage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50%;
+}
+
+
+
 
 /*** queryyyyyy time*****/
 @media screen and (max-width: 768px) {

@@ -265,16 +265,6 @@ class ProductPage extends AbstractPage {
         $this->head->setDescription('votre panier');
         $this->body = $this->utils->searchHtml('basket');
        
-        if(empty($this->products)){
-            $content = $this->utils->searchInc('message');
-            $message = "votre panier est vide";
-            $content = str_replace('{%message%}',$message, $content);
-            $this->body = str_replace('{%message%}',$content, $this->body);
-            $this->body = str_replace('{%article%}','', $this->body);
-            $this->body = str_replace('{%prixtotal%}','', $this->body);
-            
-        } 
-       
         foreach($this->products as $product){
                 $content = $this->utils->searchInc('produitbasket');
                 $content = str_replace('{%name%}', $product->getName(), $content);
@@ -297,22 +287,20 @@ class ProductPage extends AbstractPage {
         $this->constructPage();
      }
      
+     public function emptyBasketPage()
+     {
+        $this->head->setTitle('symphony: panier');
+        $this->head->setDescription('votre panier');
+        $this->body = $this->utils->searchHtml('emptybasket');
+        $this->constructPage();
+     }
+     
       public function orderPage()
     {
         $this->head->setTitle('symphony: commandes');
         $this->head->setDescription('votre commandes');
         $this->body = $this->utils->searchHtml('order');
        
-        if(empty($this->products)){
-            
-            $content = $this->utils->searchInc('message');
-            $message = "votre commande est vide";
-            $content = str_replace('{%message%}',$message, $content);
-            $this->body = str_replace('{%message%}',$content,$this->body);
-            $this->body = str_replace('{%article%}','',$this->body);
-            $this->body = str_replace('{%prixtotal%}','',$this->body);
-            
-        } 
        
         foreach($this->products as $product){
                 $content = $this->utils->searchInc('produitorder');
@@ -332,6 +320,14 @@ class ProductPage extends AbstractPage {
          
         $this->constructPage();
         
+     }
+     
+     public function emptyOrdersPage()
+     {
+        $this->head->setTitle('symphony: commandes');
+        $this->head->setDescription('votre commandes');
+        $this->body = $this->utils->searchHtml('emptyorders');
+        $this->constructPage();
      }
     
 }

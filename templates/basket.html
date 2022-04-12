@@ -1,12 +1,15 @@
                 <main>
                     <section class="panier">
-                        <div class="commande">
+                        <div class="possiblecommande">
                             <h2>Votre panier</h2>
                             {%article%}
-                            {%message%}
                             {%prixtotal%}
-                            <a href="./index.php?url=createorder"><input type="button" value="valider la commande"></a>
-                            <a href="./index.php?url=deletebasket"><input type="button" value="effacer le panier"></a>
+                            <form class="formcreateorder" action="./index.php?url=createorder" method="post">
+                                <button type="createorder">Valider  commande</button>
+                            </form>   
+                             <form class="formdeletebasket" action="./index.php?url=deletebasket" method="post">
+                                <button type="deletebasket">effacer le panier</button>
+                            </form> 
                         </div>    
                     </section>
                 </main>
