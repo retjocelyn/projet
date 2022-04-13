@@ -1,6 +1,6 @@
 <?php 
 require_once './view/HomeView.php';
-require_once './Repository/CategoryRepository.php';
+require_once './repository/CategoryRepository.php';
 require_once './model/class/Category.php';
 
 class HomeController {

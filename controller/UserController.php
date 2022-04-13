@@ -1,7 +1,7 @@
 <?php 
 require_once './view/UserView.php';
-require_once './Repository/UserRepository.php';
-require_once './Repository/BasketRepository.php';
+require_once './repository/UserRepository.php';
+require_once './repository/BasketRepository.php';
 require_once './model/class/User.php';
 
 class UserController {

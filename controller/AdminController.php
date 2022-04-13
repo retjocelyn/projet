@@ -1,12 +1,12 @@
 <?php 
 require_once './view/UserView.php';
 require_once './view/ProductView.php';
-require_once './Repository/UserRepository.php';
+require_once './repository/UserRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Product.php';
-require_once './Repository/ProductRepository.php';
-require_once './Repository/CategoryRepository.php';
-require_once './Repository/OrderRepository.php';
+require_once './repository/ProductRepository.php';
+require_once './repository/CategoryRepository.php';
+require_once './repository/OrderRepository.php';
 require_once './model/class/User.php';
 require_once './model/class/Order.php';
 

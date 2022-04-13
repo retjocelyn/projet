@@ -1,12 +1,12 @@
                 <main>
                     <nav class="menuaccount"><!--dhizdhizhdiz-->
                         <ul >
-                            <li class="display_profil"><h2>Profil</h2></li>
-                            <li class="display_wallet"><h2>portefeuille</h2></li>
+                            <li id="userprofil"><h2>Profil</h2></li>
+                            <li id="userwallet"><h2>portefeuille</h2></li>
                         </ul>
                     </nav>
                     <div class="showandhide">
-                        <section class="displayprofil">
+                        <section id="displayuserprofil" class="displayprofil">
                             <div class="showprofil">
                                 <h2>Votre compte</h2>
                                 <div class="userprofilecontent">
@@ -43,7 +43,7 @@
                                 </div>
                             </div>    
                         </section>
-                         <section class="showwallet">
+                         <section id="displayuserwallet" class="showwallet">
                             <article>
                                 <h2>Votre solde est de {%solde%} €</h2>
                                 <form  action="index.php?url=addargent" method="post">

@@ -1,66 +1,56 @@
                 <main>
-                    <nav class="menuaccount"><!--dhizdhizhdiz-->
+                    <nav class="menuadminaccount"><!--dhizdhizhdiz-->
                         <ul >
-                            <li id="profil">ajouter article</li>
-                            <li id="wallet">tous les articles</li>
-                            <li id="orders">creer catégorie</li>
-                            <li id="categories">toutes les  catégorie</li>
-                            <li id="admincommande"> Les commandes</li>
-                            <li id="users"> Les users</li>
-                            <li><a href="index.php?url=logout">se déconnecter</a></li>
+                            <li id="addarticle"><h2>Ajouter article</h2></li>
+                            <li id="products"><h2>Tous les articles</h2></li>
+                            <li id="addcategory"><h2>creer catégorie</h2></li>
+                            <li id="categories"><h2>Toutes les  catégories</h2></li>
+                            <li id="orders"><h2>Les commandes</h2></li>
+                            <li id="users"><h2>Tous les users</h2></li>
+                            <li id="logout"><a href="index.php?url=logout">Déconnexion</a></li>
                         </ul>
                     </nav>
                     <div class="showandhide">
-                        <section class="showprofil">
+                        <section id="adminaddproduct" class="adminaddproduct">
                              <form class="register" action="index.php?url=createproduct" method="POST" enctype="multipart/form-data">
-                                <h3>Créer un article</h3>
-                                <label for="category-select">Catégorie de l'intrument:</label>
-                                <select name="category" id="category-select" required>
-                                    <option value="">Veuillez choisir</option>
-                                    {%option%}
-                                </select>
-                                <label for="productName">Nom</label> 
-                                <input type="text" id="productName" name="name" value="" required>
-                                <label for="description">description</label> 
-                                <input type="text" id="description" name="description" value="" required maxlength="250">
-                                <label for="price">Prix </label> 
-                                <input type="number" id="price" name="price" value="" required>
-                                <label for="quantity">Quantité </label> 
-                                <input type="number" id="price" name="quantity" value="" required>
-                                <label for="file">Image</label>
-                                <input type="file" name="file">
+                                <h2>Créer un article</h2>
+                                <div>
+                                    <label for="category-select">Catégorie de l'intrument:</label>
+                                    <select name="category" id="category-select" required>
+                                        <option value="">Veuillez choisir</option>
+                                        {%option%}
+                                    </select>
+                                </div>    
+                                <div>
+                                    <label for="productName">Nom</label> 
+                                    <input type="text" id="productName" name="name" value="" required>
+                                </div>
+                                <div>
+                                    <label for="description">description</label> 
+                                    <input type="text" id="description" name="description" value="" required maxlength="250">
+                                </div> 
+                                <div>
+                                    <label for="price">Prix </label> 
+                                    <input type="number" id="price" name="price" value="" required>
+                                </div>
+                                <div>
+                                    <label for="quantity">Quantité </label> 
+                                    <input type="number" id="price" name="quantity" value="" required>
+                                </div>    
+                                <div>
+                                    <label for="file">Image</label>
+                                    <input type="file" name="file">
+                                </div>
                                 <input name="CSRFtoken" type="hidden" value="{%$token%}">
                                 <div class="champbutton">
-                                    <button type="submit">Créer article</button>
+                                    <button type="submit">Créer un article</button>
                                 </div>    
                             </form> 
                         </section>
-                         <section class="showwallet">
+                        <section id="showproducts" class"showproducts">
                             {%article%}
-                        </section>
-                         <section class="showOrders">
-                             <form class="register" action="index.php?url=createcategory" method="POST" enctype="multipart/form-data">
-                                <h3>Créer une catégorie</h3>
-                                <label for="categoryName">Nom</label> 
-                                <input type="text" id="categoryName" name="name" value="" required>
-                                <label for="file">Image</label>
-                                <input type="file" name="file">
-                                <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                                <div class="champbutton">
-                                    <button type="submit">Créer catégorie</button>
-                                </div>    
-                            </form>
-                        </section>
-                        <section class="showCategories">
-                           {%categories%}
-                        </section>
-                        <section class="showAdminCommandes">
-                           {%commandes%}
-                        </section>
-                        <section class="showAdminUsers">
-                        <h3>Les Users</h3>    
-                           {%users%}
                         </section>
                     </div>
                 </main>
+                        
                

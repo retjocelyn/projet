@@ -1,9 +1,9 @@
 <?php 
 
-require_once './Repository/ProductRepository.php';
-require_once './Repository/CategoryRepository.php';
-require_once './Repository/BasketRepository.php';
-require_once './Repository/OrderRepository.php';
+require_once './repository/ProductRepository.php';
+require_once './repository/CategoryRepository.php';
+require_once './repository/BasketRepository.php';
+require_once './repository/OrderRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Category.php';
 require_once './view/ProductView.php';

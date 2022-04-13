@@ -1,12 +1,23 @@
 /*section passe en display none*/ 
 
 
-let profil = document.getElementsByClassName("display_profil")[0]; 
-let portefeuille = document.getElementsByClassName("display_wallet")[0];;
+
+let profil= document.getElementById("userprofil");
+let portefeuille= document.getElementById("userwallet");
+let addproduct = document.getElementById("addarticle");
+let products = document.getElementById("products");
+let addCategory = document.getElementById("addcategory");
+let categories = document.getElementById("categories");
+let orders = document.getElementById("orders");                          
+let users = document.getElementById("users");                                       
+                            
+                            
+
+let sectionProfil = document.getElementById("displayuserprofil");
+let sectionPortefeuille = document.getElementById("displayuserwallet");
+let  sectionAdminAddProduct = document.getElementById("adminaddproduct");
 
 
-let sectionProfil = document.getElementsByClassName("showprofil")[0];
-let sectionPortefeuille = document.getElementsByClassName("showwallet")[0];
 
 
 function showHide(a){
@@ -17,29 +28,42 @@ function selected(a){
     a.classList.toggle("selection");
 }
 
-showHide(sectionPortefeuille);
 
-selected(profil);
+if(profil !== null){
+    selected(profil);
+    profil.addEventListener('click', function(e){
+        
+        showHide(sectionProfil);
+        selected(profil);
+        showHide(sectionPortefeuille);
+        selected(portefeuille);
+        
+    })
+}
 
 
-profil.addEventListener('click', function(e){
+if(portefeuille !== null){
     
+    showHide(sectionPortefeuille);
+    portefeuille.addEventListener('click', function(e){
+    
+    showHide(sectionPortefeuille);
     showHide(sectionProfil);
     selected(profil);
-    showHide(sectionPortefeuille);
     selected(portefeuille);
     
-})
+    })
+}    
 
-portefeuille.addEventListener('click', function(e){
+if(addproduct!== null){
     
-    showHide(sectionPortefeuille);
-    showHide(sectionProfil);
-    selected(profil);
-    selected(portefeuille);
+    addproduct.addEventListener('click', function(e){
+        
+    showHide(sectionAdminAddProduct);
+    selected(addproduct);
+   
     
 })
-
-
+}
 
 
