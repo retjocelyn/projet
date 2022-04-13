@@ -45,11 +45,16 @@
                         </section>
                          <section class="showwallet">
                             <article>
-                                <h3>Votre solde</h3>
-                                <p>{%solde%}€</p>   
+                                <h2>Votre solde est de {%solde%} €</h2>
                                 <form  action="index.php?url=addargent" method="post">
-                                    <input type="text" placeholder="Enter amount" name="montant" required>  <!-- retravailler pour php-->  
-                                    <button type="submit">ajouter argent</button>
+                                    <div class="money">
+                                        <label for="uname"><b>Somme à entrer</b></label>
+                                        <input type="password" placeholder="somme" name="password" required>
+                                    </div>
+                                    <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                    <div class="addmoneybutton">
+                                        <button type="submit">ajouter argent</button>
+                                    </div>
                                 </form>
                             </article>
                         </section>

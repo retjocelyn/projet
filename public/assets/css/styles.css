@@ -342,7 +342,12 @@ main{
 }
 
 .showprofil>h2{
-    font-size:2em;
+    font-size: 2.5em;
+    background-color: white;
+    border-radius: 2em;
+    width: 8em;
+    
+    padding: 0.2em
 }
 
 .showprofil>ul{
@@ -363,21 +368,75 @@ main{
 }
 
 .showwallet>article{
+    text-align:left;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    width:30em;
+    height:22em;
+    background-color:rgb(250 245 245 / 88%);
     border:1px solid black;
-    width:285px;
-    margin:15px 0;
+    margin:40px 0;
+    border-radius:10%;
 }
 
-.argent>input,
-.argent>button{
-   margin-bottom:15px;
+.showwallet>article>h2{
+    font-size: 1.8em;
+    background-color: white;
+    border-radius: 2em;
+    width: 10em;
+    padding: 0.4em;
 }
 
-.argent{
+.showwallet>article>form{
     display:flex;
     flex-direction:column;
-    align-items:center;
 }
+
+.money{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.money>input{
+    height:3em;
+    border-radius:2em;
+    background-color:#e6e6e6;
+    padding: 0 0 0 2em; 
+    border:none;
+}
+
+.money>label{
+    margin-left:1em;
+    font-family: 'Fredoka', sans-serif;
+}
+
+
+
+.addmoneybutton>button{
+    height:2.5em;
+    border-radius:2em;
+    background: linear-gradient(-135deg,#000000,#6e7181);
+    color:white;
+    border:none;
+    font-family: 'Fredoka', sans-serif;
+    font-size:1.5em;
+}
+
+.money,
+.addmoneybutton{
+    margin:1em 0;
+}
+
+.addmoneybutton{
+    display: flex;
+    justify-content: center;
+}
+
+
+/*admin account*/
 
 .showOrders{
     display:flex;
