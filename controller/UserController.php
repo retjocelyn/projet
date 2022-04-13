@@ -85,6 +85,8 @@ class UserController {
             exit();
         }
         
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $userId = unserialize($_SESSION['userid']);
         $data = $this->repository->findById($userId);
         $user = new User;

@@ -1,32 +1,56 @@
                 <main>
                     <nav class="menuaccount"><!--dhizdhizhdiz-->
                         <ul >
-                            <li class="display_profil">profil</li>
-                            <li class="display_wallet">portefeuille</li>
+                            <li class="display_profil"><h2>Profil</h2></li>
+                            <li class="display_wallet"><h2>portefeuille</h2></li>
                         </ul>
                     </nav>
                     <div class="showandhide">
                         <section class="displayprofil">
                             <div class="showprofil">
                                 <h2>Votre compte</h2>
-                                <ul>
-                                    <li>NOM : {%nom%}</li>
-                                    <li>Prénom: {%prenom%}</li>
-                                    <li>Email : {%email%}</li>
-                                    <li>Domicile : {%adresse%}</li>
-                                </ul>
-                                <a href="index.php?url=formmodifyuser&id={%id%}">Modifier profil.</a></li>
-                                <a href="index.php?url=logout">Se déconnecter.</a></li>
-                                <a href="index.php?url=deleteuser&id={%id%}">Supprimer votre compte.</a>
+                                <div class="userprofilecontent">
+                                    <div class="usercontent">
+                                        <h3>Name :</h3>
+                                        <h3>{%nom%}</h3>
+                                    </div>    
+                                    <div class="usercontent">
+                                        <h3>Prénom :</h3>
+                                        <h3>{%prenom%}</h3>
+                                    </div> 
+                                    <div class="usercontent">
+                                        <h3>Email :</h3>
+                                        <h3>{%email%}</h3>
+                                    </div> 
+                                     <div class="usercontent">
+                                        <h3>Domicile :</h3>
+                                        <h3>{%adresse%}</h3>
+                                    </div> 
+                                </div>
+                                <div class="userbuttons">
+                                    <form  action="index.php?url=formmodifyuser&id={%id%}" method="post">
+                                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                        <button type="submit">Modifier profil.</button>
+                                    </form>
+                                     <form  action="index.php?url=deleteuser&id={%id%}" method="post">
+                                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                        <button type="submit">Supprimer votre compte.</button>
+                                    </form>
+                                     <form  action="index.php?url=logout" method="post">
+                                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                        <button type="submit">Se déconnecter.</button>
+                                    </form>
+                                </div>
                             </div>    
                         </section>
                          <section class="showwallet">
                             <article>
                                 <h3>Votre solde</h3>
                                 <p>{%solde%}€</p>   
-                                <form class="argent" action="index.php?url=addargent" method="post">
-                                <input type="text" placeholder="Enter amount" name="montant" required>  <!-- retravailler pour php-->  
-                                <button type="submit">ajouter argent</button>
+                                <form  action="index.php?url=addargent" method="post">
+                                    <input type="text" placeholder="Enter amount" name="montant" required>  <!-- retravailler pour php-->  
+                                    <button type="submit">ajouter argent</button>
+                                </form>
                             </article>
                         </section>
                     </div>
