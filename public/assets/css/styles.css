@@ -514,6 +514,37 @@ main{
     font-size:1.5em;
 }
 
+.showadminproducts{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.admininstrument>div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 53%;
+}
+
+.admininstrument>div:nth-child(1)>img{
+    width: 80%;
+    height: 8em;
+}    
+    
+.displayicons{
+    height: 2.5em;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.displayicons>a>i{
+    width: 1em;
+    font-size: 1.5em;
+    color: black;
+}
 
 
 .showOrders{
