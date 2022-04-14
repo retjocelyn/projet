@@ -2,8 +2,8 @@
                     <nav class="menuadminaccount"><!--dhizdhizhdiz-->
                         <ul >
                             <li id="addarticle"><h2>Ajouter article</h2></li>
-                            <li id="products"><h2>Tous les articles</h2></li>
-                            <li id="addcategory"><h2>creer catégorie</h2></li>
+                            <li id="products"><h2>Articles</h2></li>
+                            <li id="addcategory"><h2>Créer catégorie</h2></li>
                             <li id="categories"><h2>Toutes les  catégories</h2></li>
                             <li id="orders"><h2>Les commandes</h2></li>
                             <li id="users"><h2>Tous les users</h2></li>
@@ -39,7 +39,7 @@
                                 </div>    
                                 <div>
                                     <label for="file">Image</label>
-                                    <input type="file" name="file">
+                                    <input class="addimage" type="file" name="file">
                                 </div>
                                 <input name="CSRFtoken" type="hidden" value="{%$token%}">
                                 <div class="champbutton">
@@ -49,6 +49,26 @@
                         </section>
                         <section id="showallproducts" class="showadminproducts">
                             {%article%}
+                        </section>
+                        <section class="adminaddcategory">
+                             <form class="register" action="index.php?url=createcategory" method="POST" enctype="multipart/form-data">
+                                <h3>Créer une catégorie</h3>
+                                <div class="separation">
+                                    <label for="categoryName">Nom</label> 
+                                    <input type="text" id="categoryName" name="name" value="" required>
+                                </div>    
+                                <div>
+                                    <label for="file">Image</label>
+                                    <input type="file" name="file">
+                                </div>    
+                                <div class="separation">
+                                    <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                    <div class="champbutton">
+                                </div> 
+                                <div>
+                                    <button type="submit">Créer catégorie</button>
+                                </div>    
+                            </form>
                         </section>
                     </div>
                 </main>
