@@ -4,7 +4,7 @@
                             <li id="addarticle"><h2>Ajouter article</h2></li>
                             <li id="products"><h2>Articles</h2></li>
                             <li id="addcategory"><h2>Créer catégorie</h2></li>
-                            <li id="categories"><h2>Toutes les  catégories</h2></li>
+                            <li id="categories"><h2>Catégories</h2></li>
                             <li id="orders"><h2>Les commandes</h2></li>
                             <li id="users"><h2>Tous les users</h2></li>
                             <li id="logout"><a href="index.php?url=logout">Déconnexion</a></li>
@@ -14,35 +14,35 @@
                         <section id="adminaddproduct" class="adminaddproduct">
                              <form class="register" action="index.php?url=createproduct" method="POST" enctype="multipart/form-data">
                                 <h2>Créer un article</h2>
-                                <div>
+                                <div class="separation">
                                     <label for="category-select">Catégorie de l'intrument:</label>
                                     <select name="category" id="category-select" required>
                                         <option value="">Veuillez choisir</option>
                                         {%option%}
                                     </select>
                                 </div>    
-                                <div>
+                                <div class="separation">
                                     <label for="productName">Nom</label> 
                                     <input type="text" id="productName" name="name" value="" required>
                                 </div>
-                                <div>
+                                <div class="separation">
                                     <label for="description">description</label> 
                                     <input type="text" id="description" name="description" value="" required maxlength="250">
                                 </div> 
-                                <div>
+                                <div class="separation">
                                     <label for="price">Prix </label> 
                                     <input type="number" id="price" name="price" value="" required>
                                 </div>
-                                <div>
+                                <div class="separation">
                                     <label for="quantity">Quantité </label> 
                                     <input type="number" id="price" name="quantity" value="" required>
                                 </div>    
-                                <div>
+                                <div class="addimage">
                                     <label for="file">Image</label>
-                                    <input class="addimage" type="file" name="file">
+                                    <input  type="file" name="file">
                                 </div>
                                 <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                                <div class="champbutton">
+                                <div class="registerbutton">
                                     <button type="submit">Créer un article</button>
                                 </div>    
                             </form> 
@@ -50,25 +50,27 @@
                         <section id="showallproducts" class="showadminproducts">
                             {%article%}
                         </section>
-                        <section class="adminaddcategory">
-                             <form class="register" action="index.php?url=createcategory" method="POST" enctype="multipart/form-data">
-                                <h3>Créer une catégorie</h3>
+                        <section class="adminaddcategory" id="adminaddcategory">
+                             <form class="categoryregister" action="index.php?url=createcategory" method="POST" enctype="multipart/form-data">
+                                <h2>Créer une catégorie</h2>
                                 <div class="separation">
                                     <label for="categoryName">Nom</label> 
                                     <input type="text" id="categoryName" name="name" value="" required>
                                 </div>    
-                                <div>
+                                <div class="addimage">
                                     <label for="file">Image</label>
                                     <input type="file" name="file">
                                 </div>    
                                 <div class="separation">
                                     <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                                    <div class="champbutton">
+                                </div>     
+                                <div class="registerbutton">
+                                    <button type="submit">Creer catégorie</button>
                                 </div> 
-                                <div>
-                                    <button type="submit">Créer catégorie</button>
-                                </div>    
                             </form>
+                        </section>    
+                        <section id="showallcategories" class="showallcategories">
+                           {%categories%}
                         </section>
                     </div>
                 </main>

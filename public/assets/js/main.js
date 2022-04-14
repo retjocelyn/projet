@@ -4,6 +4,7 @@
 
 let profil= document.getElementById("userprofil");
 let portefeuille= document.getElementById("userwallet");
+
 let addproduct = document.getElementById("addarticle");
 let allproducts = document.getElementById("products");
 let addCategory = document.getElementById("addcategory");
@@ -16,8 +17,10 @@ let users = document.getElementById("users");
 
 let sectionProfil = document.getElementById("displayuserprofil");
 let sectionPortefeuille = document.getElementById("displayuserwallet");
-let  sectionAdminAddProduct = document.getElementById("adminaddproduct");
-let  sectionAdminAllProduct = document.getElementById("showallproducts");
+let sectionAdminAddProduct = document.getElementById("adminaddproduct");
+let sectionAdminAllProduct = document.getElementById("showallproducts");
+let sectionAdminAddCategory = document.getElementById("adminaddcategory");
+let sectionAdminAllCategories = document.getElementById("showallcategories");
 
 
 
@@ -45,6 +48,7 @@ if(profil !== null){
         
         showHide(sectionProfil);
         selected(profil);
+        
         showHide(sectionPortefeuille);
         selected(portefeuille);
         
@@ -59,6 +63,7 @@ if(portefeuille !== null){
     
     showHide(sectionPortefeuille);
     showHide(sectionProfil);
+    
     selected(profil);
     selected(portefeuille);
     
@@ -74,9 +79,6 @@ if(addproduct !== null){
     showHide(sectionAdminAddProduct);
     selected(addproduct);
     
-    showHide(sectionAdminAllProduct);
-    selected(allproducts);
-   
     
 })
 }
@@ -87,10 +89,32 @@ if(allproducts !== null){
         
     showHide(sectionAdminAllProduct);
     selected(allproducts);
-    showHide(sectionAdminAddProduct);
-    selected(addproduct);
-   
+    
+    
     
 })
 }
 
+if(addCategory !== null){
+    showHide(sectionAdminAddCategory);
+    
+    addCategory.addEventListener('click', function(e){
+        
+    showHide(sectionAdminAddCategory);
+    selected(addCategory);
+   
+})
+}
+
+
+
+if(categories !== null){
+    showHide(sectionAdminAllCategories);
+    
+    categories.addEventListener('click', function(e){
+        
+    showHide(sectionAdminAllCategories);
+    selected(categories);
+   
+})
+}

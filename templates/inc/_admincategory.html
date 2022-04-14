@@ -1,8 +1,13 @@
-<article class="instrument"> <!-- classe provisoire a retravailler-->
-    <img src="{%urlImage%}" alt=""/>
-    <ul>
-        <li><h3>{%name%}</h3></li>
-        <li><a href="./index.php?url=formmodifycategory&id={%id%}">Modifier</a></li><!-- retravailler pour php-->
-        <li><a href="./index.php?url=deletecategory&id={%id%}">Effacer</a></li><!-- retravailler pour php-->
-    </ul>
+<article class="instrument admininstrument category"> <!-- classe provisoire a retravailler-->
+    <div class="productimage">
+        <img src="{%urlImage%}" alt="image de category"/>
+    </div>    
+    <div class="categorycontent">
+        <h2>{%name%}</h2>
+        <div class="displayicons">
+            <a href="./index.php?url=formmodifycategory&id={%id%}"><i class="fa-solid fa-pen-clip"></i></a><!-- retravailler pour php-->
+            <a href="./index.php?url=deletecategory&id={%id%}"><i class="fa-solid fa-trash-can"></i></a><!-- retravailler pour php-->
+        </div>
+    </div>
 </article>
+
