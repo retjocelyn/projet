@@ -7,7 +7,7 @@
                             <li id="categories"><h2>Catégories</h2></li>
                             <li id="orders"><h2>Les commandes</h2></li>
                             <li id="users"><h2>Tous les users</h2></li>
-                            <li id="logout"><a href="index.php?url=logout">Déconnexion</a></li>
+                            <li id="logout"><a href="index.php?url=logout"><i class="fa-solid fa-power-off"></i></a></li>
                         </ul>
                     </nav>
                     <div class="showandhide">
@@ -71,6 +71,9 @@
                         </section>    
                         <section id="showallcategories" class="showallcategories">
                            {%categories%}
+                        </section>
+                        <section id="showallorders" class="showallorders">
+                            {%commandes%}
                         </section>
                     </div>
                 </main>

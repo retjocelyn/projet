@@ -21,6 +21,7 @@ let sectionAdminAddProduct = document.getElementById("adminaddproduct");
 let sectionAdminAllProduct = document.getElementById("showallproducts");
 let sectionAdminAddCategory = document.getElementById("adminaddcategory");
 let sectionAdminAllCategories = document.getElementById("showallcategories");
+let sectionAdminAllOrders = document.getElementById("showallorders");
 
 
 
@@ -115,6 +116,19 @@ if(categories !== null){
         
     showHide(sectionAdminAllCategories);
     selected(categories);
+   
+})
+}
+
+
+
+if(orders !== null){
+    showHide(sectionAdminAllOrders);
+    
+    orders.addEventListener('click', function(e){
+        
+    showHide(sectionAdminAllOrders);
+    selected(orders);
    
 })
 }

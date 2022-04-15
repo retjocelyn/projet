@@ -1,13 +1,13 @@
             <main>
                 <section class="showlogin">
                     <form class="login" action="index.php?url=loginSecurity" method="post">
-                        <h3>VOUS CONNECTER</h3>
+                        <h2>VOUS CONNECTER</h2>
                         <div class="email">
-                            <label for="uname"><b>email</b></label>
+                            <label for="uname">email</label>
                             <input type="text" placeholder="Enter email" name="email" required>
                         </div>
                         <div class="password">
-                            <label for="uname"><b>password</b></label>
+                            <label for="uname">password</label>
                             <input type="password" placeholder="Enter password" name="password" required>
                         </div>
                         <input name="CSRFtoken" type="hidden" value="{%$token%}">
