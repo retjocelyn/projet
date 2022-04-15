@@ -633,6 +633,36 @@ main{
     list-style: none;
 }
 
+.orderproduct{
+    display:flex;
+    width:100%;
+}
+
+.orderproduct>div{
+    width:46%;
+}
+
+.orderproductcontent{
+    margin-left: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderproductimage{
+    width: 35%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.orderproductimage>img{
+    height: 81%;
+    width: 67%;
+}
+
 .users>ul{
     list-style: none;
 }

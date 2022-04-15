@@ -70,7 +70,7 @@ class AdminController {
         }
         $datas = $this->orderRepository->findAllOrders();
         $commandes = [];
-      
+    
         foreach($datas as $data){
             $order = new Order();
             $order->setId($data['id']);
@@ -78,6 +78,7 @@ class AdminController {
             $order->setCommandUserFamilyName($data['first_name']);
             $order->settCommandUserName($data['last_name']);
             $order->setCommandUserAdress($data['adress']);
+            $order->setCommandProductImage($data['url_picture']);
             $order->setCommandProductName($data['name']);
             $order->setCommandProductQuantity($data['quantity']);
             $order->setCommandProductPrice($data['price']);

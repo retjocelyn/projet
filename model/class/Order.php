@@ -17,6 +17,8 @@ class Order {
     
     private string $commandProductName;
     
+    private string $commandProductImage;
+    
     private int $commandProductPrice;
     
     
@@ -149,6 +151,23 @@ class Order {
     public function setCommandProductPrice (int $commandProductPrice ): void
     {
         $this->commandProductPrice = $commandProductPrice;
+    }
+    
+  
+     /**
+     * @return string
+     */
+    public function getCommandProductImage(): string
+    {
+        return $this->commandProductImage;
+    }
+    
+    /**
+     * @param string $commandProductImage
+     */
+    public function setCommandProductImage(string $commandProductImage): void
+    {
+        $this->commandProductImage = $commandProductImage;
     }
     
 }

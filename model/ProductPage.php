@@ -188,6 +188,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%clientfamilyname%}',$order->getCommandUserFamilyName(),$content);
                 $content = str_replace('{%clientname%}',$order->getCommandUserName(),$content);
                 $content = str_replace('{%clientadresse%}',$order->getCommandUserAdress(),$content);
+                $content = str_replace('{%urlImage%}',$order->getCommandProductImage(),$content);
                 $content = str_replace('{%nameproduit%}',$order->getCommandProductName(),$content);
                 $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(),$content);
                 $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
