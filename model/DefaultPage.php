@@ -73,6 +73,13 @@ class DefaultPage extends AbstractPage {
             $this->body = str_replace('{%message%}',$this->getErrors(),$this->body);
             $this->constructPage();
             break;
+            
+            case'confirmationornot':
+            $this->head->setTitle('symphony: message');
+            $this->head->setDescription('message de statut');
+            $this->body = str_replace('{%message%}',$this->getErrors(),$this->body);
+            $this->constructPage();
+            break;
                 
                   
             case'basket':

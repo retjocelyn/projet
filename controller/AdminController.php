@@ -117,7 +117,7 @@ class AdminController {
         $orderId = $_GET['id'];
         $this->orderRepository->adminDeleteOrder($orderId);
         
-        header('location: ./index.php?url=registeraccepted&message=commande supprimée');
+        header('location: ./index.php?url=confirmationornot&message=commande supprimée');
         exit();
         
     }    
@@ -135,7 +135,7 @@ class AdminController {
         $id = $_GET['id'];
         $this->repository->deleteUser($id);
         
-        header('location: ./index.php?url=registeraccepted&message=client supprimé');
+        header('location: ./index.php?url=confirmationornot&message=client supprimé');
         exit();
     } 
     

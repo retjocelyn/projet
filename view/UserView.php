@@ -43,6 +43,16 @@ class UserView {
        
     }
     
+    public function displayConfirmationOrNot(): string
+    {
+        $page = new DefaultPage('confirmationornot');
+        $message = $_SESSION['message'];
+        $page->setErrors($message);
+        $page->assemblerPage();
+        return $page->getPage();
+       
+    }
+    
     public function displayBasket(): string
     {
         $page = new DefaultPage('basket');

@@ -138,7 +138,7 @@ class UserController {
             header('location: ./index.php?url=registeraccepted&message=votre compte a été crée');
             exit();
         }
-        header('location: ./index.php?url=registeraccepted&message="Compte non crée"');
+        header('location: ./index.php?url=confirmationornot&message="Compte non crée"');
         exit();
         
     }
@@ -154,6 +154,19 @@ class UserController {
         
         
         echo $this->view->displayRegisterAccepted();
+    }
+    
+     public function confirmationOrNot() 
+    {
+        if(isset($_GET['message'])){
+        
+            $_SESSION['message'] = $_GET['message'];
+        }else{
+            $_SESSION['message'] = '';
+        }
+        
+        
+        echo $this->view->displayConfirmationOrNot();
     }
     
     
@@ -197,7 +210,7 @@ class UserController {
         $newPass = password_hash($Pass, PASSWORD_DEFAULT);
         $this->repository->modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass);    
         
-        header('location: ./index.php?url=registeraccepted&message=votre compte a été modifié');
+        header('location: ./index.php?url=confirmationornot&message=votre compte a été modifié');
         exit();
     }
     
@@ -219,7 +232,7 @@ class UserController {
             $this->repository->deleteUser($id);
             
             session_destroy();
-            header('location: ./index.php?url=registeraccepted&message=votre compte a été effacé');
+            header('location: ./index.php?url=confirmationornot&message=votre compte a été effacé');
             exit();
         }
         header('location: ./index.php?url=login&error=veuillez vous connecter');
@@ -238,7 +251,7 @@ class UserController {
             $userid = unserialize($_SESSION['userid']);
             $this->basket->addArticleToBasket($userid,$productid);
         
-            header('location: ./index.php?url=registeraccepted&message=article ajouté au panier');
+            header('location: ./index.php?url=confirmationornot&message=article ajouté au panier');
             exit();
        
     }
@@ -257,9 +270,8 @@ class UserController {
        
         $this->basket->deleteArticleFromBasket($productid);
         
-        header('location: ./index.php?url=registeraccepted&message=article supprimé du panier');
+        header('location: ./index.php?url=confirmationornot&message=article supprimé du panier');
         exit();
-        
     
     }
 }

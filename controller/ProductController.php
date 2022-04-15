@@ -72,11 +72,11 @@ class ProductController {
             $this->repository->createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
             
-            header('location: ./index.php?url=registeraccepted&message=article créer');
+            header('location: ./index.php?url=confirmationornot&message=article créer');
             exit();
         }
        
-            header('location: ./index.php?url=registeraccepted&message=article non crée');
+            header('location: ./index.php?url=confirmationornot&message=article non crée');
             exit();
     }
     
@@ -132,11 +132,11 @@ class ProductController {
             $this->repository->modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
             
-            header('location: ./index.php?url=registeraccepted&message=article modifié');
+            header('location: ./index.php?url=confirmationornot&message=article modifié');
             exit();
             
         }
-        header('location: ./index.php?url=registeraccepted&message=article non modifié');
+        header('location: ./index.php?url=confirmationornot&message=article non modifié');
     }
     
      public function deleteProduct()
@@ -145,11 +145,11 @@ class ProductController {
            {
                 $id = $_GET['id'];
                 $this->repository->deleteProduct($id); 
-                header('location: ./index.php?url=registeraccepted&message=article effacé');
+                header('location: ./index.php?url=confirmationornot&message=article effacé');
                 exit();
             }
             
-            header('location: ./index.php?url=registeraccepted&message=article non effacé');
+            header('location: ./index.php?url=confirmationornot&message=article non effacé');
             exit();
     }
     
@@ -157,7 +157,7 @@ class ProductController {
     {
         if($_POST['CSRFtoken'] !== $_SESSION['csrf']){
             
-            header('location: ./index.php?url=registeraccepted&message=categorie non créée');
+            header('location: ./index.php?url=confirmationornot&message=categorie non créée');
             exit();
         }
         
@@ -174,11 +174,11 @@ class ProductController {
             $newCategoryImage = "./public/assets/img/$name";
             $this->categoryRepository->createCategory($newCategoryName,$newCategoryImage);
             
-            header('location: ./index.php?url=registeraccepted&message=categorie créée');
+            header('location: ./index.php?url=confirmationornot&message=categorie créée');
             exit();
         }
         
-            header('location: ./index.php?url=registeraccepted&message=categorie non créée');
+            header('location: ./index.php?url=confirmationornot&message=categorie non créée');
             exit();
     }
      public function formModifyCategory()
@@ -211,10 +211,10 @@ class ProductController {
             
             $this->categoryRepository->modifyCategory($id,$newCategoryName,$newProductImage);
             
-            header('location: ./index.php?url=registeraccepted&message=categorie modifiée');
+            header('location: ./index.php?url=confirmationornot&message=categorie modifiée');
             exit();
         }
-        header('location: ./index.php?url=registeraccepted&message=categorie non modifiée');
+        header('location: ./index.php?url=confirmationornot&message=categorie non modifiée');
         exit();
     }
     
@@ -225,10 +225,10 @@ class ProductController {
             $id = $_GET['id'];
             $this->categoryRepository->deleteCategory($id);
         
-            header('location: ./index.php?url=registeraccepted&message=catégorie supprimée');
+            header('location: ./index.php?url=confirmationornot&message=catégorie supprimée');
             exit();
         }
-        header('location: ./index.php?url=registeraccepted&message=catégorie non supprimée');
+        header('location: ./index.php?url=confirmationornot&message=catégorie non supprimée');
         exit();
     }
     
@@ -283,7 +283,7 @@ class ProductController {
     $userId = unserialize($_SESSION['userid']);
     $this->basketRepository->deleteBasket($userId);
     
-    header('location: ./index.php?url=registeraccepted&message=panier supprimé');
+    header('location: ./index.php?url=confirmationornot&message=panier supprimé');
     exit();
     }
     
@@ -309,7 +309,7 @@ class ProductController {
        $this->orderRepository->createOrder($userid,$productsid);
        $this->basketRepository->deleteBasket($userid);
        
-       header('location: ./index.php?url=registeraccepted&message=votre commande à été créée');
+       header('location: ./index.php?url=confirmationornot&message=votre commande à été créée');
        exit();
     }
     
@@ -362,7 +362,7 @@ class ProductController {
         $userid =unserialize($_SESSION['userid']);
         $this->orderRepository->deleteOrder($userid);
         
-        header('location: ./index.php?url=registeraccepted&message=commande supprimée');
+        header('location: ./index.php?url=confirmationornot&message=commande supprimée');
         exit();
    }
     
