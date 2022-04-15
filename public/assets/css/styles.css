@@ -629,8 +629,8 @@ main{
     border-radius: 2em;
 }
 
-.orders>ul{
-    list-style: none;
+.client{
+margin-right: 5%;
 }
 
 .orderproduct{
@@ -663,9 +663,6 @@ main{
     width: 67%;
 }
 
-.users>ul{
-    list-style: none;
-}
 
 .showOrders>article{
     border:1px solid black;
@@ -692,11 +689,20 @@ main{
 
 
 .users{
-    display:flex;
-    width:50%;
+    width: 52%;
+    height: 15em;
+    display: flex;
+    flex-direction: column;
     justify-content:center;
-    border:1px solid black;
+    align-items: center;
     margin: 5% 0;
+    background-color: white;
+    border-radius: 2em;
+}
+.users>a>i{
+    width: 1em;
+    font-size: 1.5em;
+    color: black;
 }
 
 .hide{
