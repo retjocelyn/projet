@@ -30,15 +30,15 @@
                                 <div class="userbuttons">
                                     <form  action="index.php?url=formmodifyuser&id={%id%}" method="post">
                                         <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                                        <button type="submit">Modifier profil.</button>
+                                        <button type="submit">Modifier profil</button>
                                     </form>
                                      <form  action="index.php?url=deleteuser&id={%id%}" method="post">
                                         <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                                        <button type="submit">Supprimer votre compte.</button>
+                                        <button onclick="return confirm_delete()" type="submit">Supprimer votre compte</button>
                                     </form>
                                      <form  action="index.php?url=logout" method="post">
                                         <input name="CSRFtoken" type="hidden" value="{%$token%}">
-                                        <button type="submit">Se déconnecter.</button>
+                                        <button  type="submit">Se déconnecter</button>
                                     </form>
                                 </div>
                             </div>    
@@ -46,14 +46,14 @@
                          <section id="displayuserwallet" class="showwallet">
                             <article>
                                 <h2>Votre solde est de {%solde%} €</h2>
-                                <form  action="index.php?url=addargent" method="post">
+                                <form  action="index.php?url=addmoney&id={%id%}" method="post">
                                     <div class="money">
                                         <label for="uname"><b>Somme à entrer</b></label>
-                                        <input type="password" placeholder="somme" name="password" required>
+                                        <input type="number" placeholder="somme" name="amount" required>
                                     </div>
                                     <input name="CSRFtoken" type="hidden" value="{%$token%}">
                                     <div class="addmoneybutton">
-                                        <button type="submit">ajouter argent</button>
+                                        <button onclick="return confirm_delete()" class="checkbutton" type="submit">ajouter argent</button>
                                     </div>
                                 </form>
                             </article>

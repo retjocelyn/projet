@@ -412,7 +412,6 @@ main{
     width:30em;
     height:22em;
     background-color:rgb(250 245 245 / 88%);
-    border:1px solid black;
     margin:40px 0;
     border-radius:10%;
 }
@@ -421,7 +420,6 @@ main{
     font-size: 1.8em;
     background-color: white;
     border-radius: 2em;
-    width: 10em;
     padding: 0.4em;
 }
 

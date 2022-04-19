@@ -214,6 +214,39 @@ class UserController {
         exit();
     }
     
+    public function addMoney() : void
+    {
+        
+         if(!isset($_SESSION['user'])){
+            header('location: ./index.php?url=login');
+            exit();
+        }
+        
+        if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
+            
+            header('location: ./index.php?url=login');
+            exit();;
+        }
+        
+        if(isset($_POST['amount'])){
+           
+            $amount = htmlspecialchars($_POST['amount']);
+            $userId = $_GET['id'] ;
+            $this->repository->addMoney($userId,$amount);
+            header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
+            exit();
+            
+        }
+        
+        if(isset($_SESSION['error'])){
+            header('location: ./index.php?url=confirmationornot&message="Une erreur est survenue"');
+            exit();
+        }
+        
+        header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
+        exit();
+        
+    }
      
      
     public function logout() : void
@@ -235,6 +268,7 @@ class UserController {
             header('location: ./index.php?url=confirmationornot&message=votre compte a été effacé');
             exit();
         }
+        
         header('location: ./index.php?url=login&error=veuillez vous connecter');
         exit();
     }

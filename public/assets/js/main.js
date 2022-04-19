@@ -23,7 +23,7 @@ let sectionAdminAddCategory = document.getElementById("adminaddcategory");
 let sectionAdminAllCategories = document.getElementById("showallcategories");
 let sectionAdminAllOrders = document.getElementById("showallorders");
 
-
+let checkbutton = document.getElementsByClassName("checkbutton")[0];             
 
 
 
@@ -131,4 +131,8 @@ if(orders !== null){
     selected(orders);
    
 })
+}
+
+function confirm_delete() {
+  return confirm('effectuer cette action?');
 }

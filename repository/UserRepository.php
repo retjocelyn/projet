@@ -73,21 +73,37 @@ require_once './repository/AbstractRepository.php';
     }
     
      public function modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass)
-     {
-          $sql = " UPDATE users
+    {
+        $sql = " UPDATE users
             SET first_name = '$newfirstName',last_name = '$newlastName',email = '$newEmail',adress = '$newAdress',password = '$newPass'
             WHERE id = '$userId' ";
-         $stmt = $this->connexion->query($sql);
+        $stmt = $this->connexion->query($sql);
         
-     }
+    }
      
     public function deleteUser($id)
     {
         $sql = "DELETE FROM `users` WHERE id = '$id'";
-         $stmt = $this->connexion->query($sql);
+        $stmt = $this->connexion->query($sql);
     }
     
-    
-    
-    
+    public function  addMoney($userId,$amount)
+    {
+     
+        try {
+            $query = $this->connexion->prepare('UPDATE users SET wallet = :amount WHERE id = :userId');
+            if ($query) {
+                
+                $query->bindParam(':amount', $amount);
+                $query->bindParam(':userId',$userId );
+                $query->execute();
+             
+            }
+        } catch (Exception $e) {
+            $_SESSION['error'] = ['error' => $e->getMessage()];
+        }
+    }
+       
 }
+    
+    

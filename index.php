@@ -41,6 +41,11 @@ switch($url){
         $userController-> registeraccepted();
         break;
         
+    case "addmoney":
+        $userController = new UserController();
+        $userController-> addMoney();
+        break;
+        
     case "confirmationornot":
         $userController = new UserController();
         $userController-> confirmationOrNot();
