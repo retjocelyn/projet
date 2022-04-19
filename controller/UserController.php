@@ -89,7 +89,7 @@ class UserController {
         
         $userId = unserialize($_SESSION['userid']);
         $data = $this->repository->findById($userId);
-        $user = new User;
+        $user = new User();
         $user->setid($data['id']);
         $user->setlastName($data['last_name']);
         $user->setFirstName($data['first_name']);

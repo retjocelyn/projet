@@ -80,6 +80,23 @@ class ProductController {
             exit();
     }
     
+    public function showOneProduct()
+    {
+        $productId = $_GET['id'];
+        $data = $this->repository->findById($productId);
+        
+        $product = new Product();
+        $product->setId($data['id']);
+        $product->setName($data['name']);
+        $product->setQuantity($data['quantity']);
+        $product->setPrice($data['price']);
+        $product->setImage($data['url_picture']);
+        $product->setDescription($data['description']);
+        $product->setCategory($data['category_id']);
+        
+        echo $this->view->displayOneProduct($product);
+        
+    }
     
     public function formModifyProduct()
     {

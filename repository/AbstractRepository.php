@@ -17,7 +17,7 @@ abstract class AbstractRepository
         $this->table = $table;
     }
     
-    public function fetchAll(){
+    /*public function fetchAll(){
         $data = null;
         try {
             $resultat = $this->connexion->query('SELECT * FROM '.$this->table);
@@ -29,7 +29,7 @@ abstract class AbstractRepository
         }
         
         return $data;
-    }
+    }*/
     
     
     private function constructConnexion(){

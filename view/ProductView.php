@@ -43,6 +43,12 @@ class ProductView {
         $page->CreateFormModifyCategory($category);
         return $page->getPage();   
     }
+    public function displayOneProduct($product)
+    {
+        $page = new ProductPage();
+        $page->displayOneProduct($product);
+        return $page->getPage();  
+    }
     
     public function displayBasket($products,$totalprice)
     {

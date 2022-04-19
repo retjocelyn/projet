@@ -114,6 +114,12 @@ switch($url){
         $productController->formModifyProduct();
         break;     
     
+    case "showoneproduct":
+        $productController = new ProductController();
+        $productController->showOneProduct();
+        break;    
+        
+        
     case "modifyproduct":
         $productController = new ProductController();
         $productController->modifyProduct();

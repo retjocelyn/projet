@@ -239,6 +239,12 @@ main{
     content:"ppppppp";
 }
 
+/*main de display one intrument*/
+.displayoneinstrument{
+    display:flex;
+    justify-content:center;
+}
+
 
  /*main de articles*/
  
@@ -1036,106 +1042,34 @@ footer>section>ul>li{
 /*** queryyyyyy time*****/
 @media screen and (max-width: 768px) {
     
-body{
-    background-color:red;
+.displayheader{
+    flex-direction:column;
+    align-items:center;
 }    
-.container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:100%;
-    margin:0;
-}
-header{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-}
-.laboutiquedesktop{
-    display: none !important;
-}
-.mobile{
-    display: block;
-    width:100%;
-}
-.mobilemenu{
-    display: block;
-    list-style: none;
-    margin:0;
-    padding:0;
-}
 
-.mobilemenu>li>a{
-    text-decoration:none;
-    color:black;
-}
-main{
-    width:80%;
-}
+.menuheader{
+    width:2em;
+}    
 
-
-
-/*@media shop*/
-
-.shopinstrumentsdesktop{
-    display:none;
-}
-
-.shopinstrumentsmobile{
-    display:block;
-   
-}
-.categoriesmobile{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
-.search{
-    margin:none;
-}
-.categoriesmobile>article{
-    width: 63%;
-    border:1px solid black;
-    background-color:grey;
-    border-radius:9%;
-}
-
-.categoriesmobile>article>a>img{
-    width:5px;
-}
-
-categoriesmobile>article{
-    border:1px solid black;
-}
-
-.instrument{
-    flex-direction:column;
-}
-
-.instrument>img{
-    width:100%;
-}
-
-/**@media footer**/
 footer{
     display:flex;
     flex-direction:column;
     align-items:center;
     width:99%;
 }
+
 .infos,
 .reseaux,
 .fournisseurs{
     margin:15px 0;
 }
+
 .presentation,
 .vendeur{
     flex-direction:column;
 }
 
 }
-
-
 
 
 

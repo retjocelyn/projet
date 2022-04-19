@@ -23,8 +23,7 @@ let sectionAdminAddCategory = document.getElementById("adminaddcategory");
 let sectionAdminAllCategories = document.getElementById("showallcategories");
 let sectionAdminAllOrders = document.getElementById("showallorders");
 
-let checkbutton = document.getElementsByClassName("checkbutton")[0];             
-
+let sections = [sectionProfil,sectionPortefeuille,sectionAdminAddProduct,sectionAdminAllProduct,sectionAdminAddCategory,sectionAdminAllCategories,sectionAdminAllOrders];         
 
 
 /*fonction pour faire apparaitre ou disparaitre une section*/
@@ -96,14 +95,32 @@ if(allproducts !== null){
 })
 }
 
+console.log(sectionAdminAddProduct.style.display);
+
 if(addCategory !== null){
     showHide(sectionAdminAddCategory);
     
     addCategory.addEventListener('click', function(e){
         
-    showHide(sectionAdminAddCategory);
-    selected(addCategory);
-   
+        if(sectionAdminAddCategory.style.display === "block"){
+            for (let i = 0; i < sections.length ; i++) {  
+                
+                if(sections[i].style.display === "block"){
+                    showHide(sections[i]);
+                }
+            }
+            
+            selected(addCategory);
+        }else{
+             for (let i = 0; i < sections.length ; i++) {  
+                
+                if(sections[i].style.display === "block"){
+                    showHide(sections[i]);
+                }
+            }
+            showHide(sectionAdminAddCategory);
+            selected(addCategory);
+        }    
 })
 }
 
@@ -134,5 +151,43 @@ if(orders !== null){
 }
 
 function confirm_delete() {
-  return confirm('effectuer cette action?');
+  return confirm('effectuer cette action ?');
+}
+
+
+
+
+
+
+let input = document.getElementById('search');
+let search = document.getElementById('list-search');
+
+if(input){
+input.addEventListener('keyup', (e) => {
+    let value = e.target.value
+    removeOldList()
+    query(value)
+    .then(data => data.json())
+    .then(data => {
+        if(value !== ""){
+            for(let i = 0; i < data.length; i++){
+                let li = document.createElement('li');
+                search.appendChild(li);
+                li.innerHTML = `<a href="https://ans01.sites.3wa.io/projects/mvc-php/index.php?url=orders&id=${data[i].id}">${data[i].name}</a>`
+            }
+        }
+    })
+    
+})
+}
+const query = async (value) => {
+    return await fetch(`https://ans01.sites.3wa.io/projects/mvc-php/index.php?url=search&q=${value}`);
+}
+
+function removeOldList() {
+    let listItem = search.children
+    
+    for(let i = listItem.length - 1; i >= 0; i--){
+        listItem[i].remove();
+    }
 }
