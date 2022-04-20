@@ -12,18 +12,23 @@ let categories = document.getElementById("categories");
 let orders = document.getElementById("orders");                          
 let users = document.getElementById("users");                                       
                             
-                            
+                           
 /*section qui vont apparaitres ou disparaitres selon les selecteurs choisis*/
 
 let sectionProfil = document.getElementById("displayuserprofil");
 let sectionPortefeuille = document.getElementById("displayuserwallet");
+
 let sectionAdminAddProduct = document.getElementById("adminaddproduct");
 let sectionAdminAllProduct = document.getElementById("showallproducts");
 let sectionAdminAddCategory = document.getElementById("adminaddcategory");
 let sectionAdminAllCategories = document.getElementById("showallcategories");
 let sectionAdminAllOrders = document.getElementById("showallorders");
+let sectionAdminAllUsers = document.getElementById("showAdminUsers");
 
-let sections = [sectionProfil,sectionPortefeuille,sectionAdminAddProduct,sectionAdminAllProduct,sectionAdminAddCategory,sectionAdminAllCategories,sectionAdminAllOrders];         
+
+let sections = [sectionAdminAddProduct,sectionAdminAllProduct,sectionAdminAddCategory,sectionAdminAllCategories,sectionAdminAllUsers,sectionAdminAllOrders];         
+
+let selecteurs = [addproduct,allproducts,addCategory,categories ,orders,users];
 
 
 /*fonction pour faire apparaitre ou disparaitre une section*/
@@ -39,7 +44,7 @@ function selected(a){
     a.classList.toggle("selection");
 }
 
-
+console.log(addproduct.style.color);
 /*user menu*/
 
 if(profil !== null){
@@ -73,15 +78,35 @@ if(portefeuille !== null){
 /*admin menu*/
 
 if(addproduct !== null){
+    
     selected(addproduct);
+    showHide(sectionAdminAddProduct);
+    
     addproduct.addEventListener('click', function(e){
         
-    showHide(sectionAdminAddProduct);
-    selected(addproduct);
+     if (sectionAdminAddProduct.style.display === "none"){
+         
+        for (let i = 0; i < sections.length; i++) {
+             sections[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < selecteurs.length; i++) {
+            
+             selecteurs[i].style.color = "blue";
+        }
+        
+        sectionAdminAddProduct.style.display = "flex";
+        addproduct.style.color = "red";
+       
+    } else{
+        sectionAdminAddProduct.style.display = "none";
+        addproduct.style.color = "blue";
+    }
+
     
-    
-})
+    })
 }
+
 
 if(allproducts !== null){
     showHide(sectionAdminAllProduct);
@@ -150,8 +175,10 @@ if(orders !== null){
 })
 }
 
+
+
 function confirm_delete() {
-  return confirm('effectuer cette action ?');
+  return confirm('Effectuer cette action ?');
 }
 
 
@@ -173,7 +200,7 @@ input.addEventListener('keyup', (e) => {
             for(let i = 0; i < data.length; i++){
                 let li = document.createElement('li');
                 search.appendChild(li);
-                li.innerHTML = `<a href="https://ans01.sites.3wa.io/projects/mvc-php/index.php?url=orders&id=${data[i].id}">${data[i].name}</a>`
+                li.innerHTML = `<a href="https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=showoneproduct&id=${data[i].id}">${data[i].name}</a>`
             }
         }
     })
@@ -181,7 +208,7 @@ input.addEventListener('keyup', (e) => {
 })
 }
 const query = async (value) => {
-    return await fetch(`https://ans01.sites.3wa.io/projects/mvc-php/index.php?url=search&q=${value}`);
+    return await fetch(`https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=search&q=${value}`);
 }
 
 function removeOldList() {

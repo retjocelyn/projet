@@ -119,6 +119,10 @@ switch($url){
         $productController->showOneProduct();
         break;    
         
+    case "search":
+        $controller = new ProductController();
+        $controller->querySearch();
+        break;
         
     case "modifyproduct":
         $productController = new ProductController();

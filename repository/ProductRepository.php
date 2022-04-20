@@ -79,10 +79,29 @@ require_once './repository/AbstractRepository.php';
         
     }
     
-     public function deleteProduct($id)
-     {
+    public function deleteProduct($id)
+    {
          $sql = "DELETE FROM products WHERE id = '$id' ";
          $stmt = $this->connexion->query($sql);
-     }
+    }
+     
+    public function fetchQuery($product): array
+    {
+        $request = '%'.$product.'%';
+        $data = [];
+        try {
+            $query = $this->connexion->prepare("SELECT * FROM products WHERE name LIKE :name LIMIT 3");
+            if ($query) {
+                $query->bindParam(':name', $request);
+                $query->execute();
+                
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            $data = ['error' => $e->getMessage()];
+        }
+        
+        return $data;
+    }
     
 }

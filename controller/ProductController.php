@@ -98,6 +98,13 @@ class ProductController {
         
     }
     
+    public function querySearch(): void
+    {
+        $query = $_GET['q'] ?? "";
+        $products = $this->repository->fetchQuery($query);
+        echo json_encode($products);
+    }
+    
     public function formModifyProduct()
     {
         $datas = $this->categoryRepository->findAll();
