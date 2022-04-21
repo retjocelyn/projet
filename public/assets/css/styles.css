@@ -670,10 +670,11 @@ margin-right: 5%;
     width:285px;
 }
 
-.showandhide{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.showandhide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
 }
 
 .showandhide>section{

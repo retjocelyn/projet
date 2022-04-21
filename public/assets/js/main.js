@@ -44,7 +44,7 @@ function selected(a){
     a.classList.toggle("selection");
 }
 
-console.log(addproduct.style.color);
+
 /*user menu*/
 
 if(profil !== null){
@@ -77,10 +77,32 @@ if(portefeuille !== null){
 
 /*admin menu*/
 
+/*fonction pour afficher au moins section une section si besoin */
+
+function stillDisplayone()
+{
+    var checker = 0;
+    
+      for (let i = 0; i < sections.length; i++) {
+          
+             if(sections[i].style.display === "none"){
+                 checker ++ ;
+             }
+             
+        }
+
+        if(checker === sections.length){
+    
+            sectionAdminAddProduct.style.display = "flex";
+            addproduct.style.color = "red";
+        }    
+    
+}
+
 if(addproduct !== null){
     
-    selected(addproduct);
-    showHide(sectionAdminAddProduct);
+    sectionAdminAddProduct.style.display = "flex";
+    addproduct.style.color = "red";
     
     addproduct.addEventListener('click', function(e){
         
@@ -95,12 +117,13 @@ if(addproduct !== null){
              selecteurs[i].style.color = "blue";
         }
         
-        sectionAdminAddProduct.style.display = "flex";
-        addproduct.style.color = "red";
+       sectionAdminAddProduct.style.display = "flex";
+        addproduct.style.color = "red"; 
        
-    } else{
+    }else{
         sectionAdminAddProduct.style.display = "none";
         addproduct.style.color = "blue";
+        stillDisplayone();
     }
 
     
@@ -109,55 +132,92 @@ if(addproduct !== null){
 
 
 if(allproducts !== null){
-    showHide(sectionAdminAllProduct);
+    sectionAdminAllProduct.style.display = "none";
+    allproducts.style.color = "blue";
+    
     allproducts.addEventListener('click', function(e){
+   
+    if (sectionAdminAllProduct.style.display === "none"){
+         
+        for (let i = 0; i < sections.length; i++) {
+             sections[i].style.display = "none";
+        }
         
-    showHide(sectionAdminAllProduct);
-    selected(allproducts);
+        for (let i = 0; i < selecteurs.length; i++) {
+            
+             selecteurs[i].style.color = "blue";
+        }
+        
+        sectionAdminAllProduct.style.display = "flex";
+        allproducts.style.color = "red";
+       
+    }else{
+    sectionAdminAllProduct.style.display = "none";
+       allproducts .style.color = "blue";
+       stillDisplayone();
+    }
     
-    
-    
-})
+    })
 }
 
-console.log(sectionAdminAddProduct.style.display);
+
 
 if(addCategory !== null){
-    showHide(sectionAdminAddCategory);
+   
+    sectionAdminAddCategory.style.display = "none";
+    addCategory.style.color = "blue";
     
     addCategory.addEventListener('click', function(e){
         
-        if(sectionAdminAddCategory.style.display === "block"){
-            for (let i = 0; i < sections.length ; i++) {  
-                
-                if(sections[i].style.display === "block"){
-                    showHide(sections[i]);
-                }
-            }
+    if (sectionAdminAddCategory.style.display === "none"){
+        
+       for (let i = 0; i < sections.length; i++) {
+             sections[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < selecteurs.length; i++) {
             
-            selected(addCategory);
-        }else{
-             for (let i = 0; i < sections.length ; i++) {  
-                
-                if(sections[i].style.display === "block"){
-                    showHide(sections[i]);
-                }
-            }
-            showHide(sectionAdminAddCategory);
-            selected(addCategory);
-        }    
-})
+             selecteurs[i].style.color = "blue";
+        }
+        
+        sectionAdminAddCategory.style.display = "flex";
+        addCategory.style.color = "red";
+       
+     } else{
+        sectionAdminAddCategory.style.display = "none";
+        addCategory .style.color = "blue";
+        stillDisplayone()
+    }
+    
+    })
 }
 
 
 
 if(categories !== null){
-    showHide(sectionAdminAllCategories);
+    sectionAdminAllCategories.style.display = "none";
+    categories.style.color = "blue";
     
     categories.addEventListener('click', function(e){
+     if (sectionAdminAllCategories.style.display === "none"){
         
-    showHide(sectionAdminAllCategories);
-    selected(categories);
+       for (let i = 0; i < sections.length; i++) {
+             sections[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < selecteurs.length; i++) {
+            
+             selecteurs[i].style.color = "blue";
+        }
+        
+        sectionAdminAllCategories.style.display = "flex";
+        categories.style.color = "red";
+       
+     }else{
+        sectionAdminAllCategories.style.display = "none";
+        categories .style.color = "blue";
+        stillDisplayone()
+    }
    
 })
 }
@@ -165,48 +225,103 @@ if(categories !== null){
 
 
 if(orders !== null){
-    showHide(sectionAdminAllOrders);
+    
+    sectionAdminAllOrders.style.display = "none";
+    orders.style.color = "blue";
     
     orders.addEventListener('click', function(e){
         
-    showHide(sectionAdminAllOrders);
-    selected(orders);
+   if (sectionAdminAllOrders.style.display === "none"){
+        
+       for (let i = 0; i < sections.length; i++) {
+             sections[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < selecteurs.length; i++) {
+            
+             selecteurs[i].style.color = "blue";
+        }
+        
+        sectionAdminAllOrders.style.display = "flex";
+        orders.style.color = "red";
+       
+     }else{
+        sectionAdminAllOrders.style.display = "none";
+        orders .style.color = "blue";
+        stillDisplayone();
+    }
+   
+})
+}
+
+if(users !== null){
+    
+    sectionAdminAllUsers.style.display = "none";
+    users.style.color = "blue";
+    
+    users.addEventListener('click', function(e){
+        
+   if (sectionAdminAllUsers.style.display === "none"){
+        
+       for (let i = 0; i < sections.length; i++) {
+             sections[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < selecteurs.length; i++) {
+            
+             selecteurs[i].style.color = "blue";
+        }
+        
+       sectionAdminAllUsers.style.display = "flex";
+        users.style.color = "red";
+       
+     }else{
+        sectionAdminAllUsers.style.display = "none";
+        users .style.color = "blue";
+        stillDisplayone();
+    }
    
 })
 }
 
 
 
-function confirm_delete() {
+
+/*fonction pour confirmation d'action */
+
+function confirm_delete(){
+    
   return confirm('Effectuer cette action ?');
+  
 }
 
 
 
 
-
+/*partie qui gere le ajax pour barre de recherche dans home*/
 
 let input = document.getElementById('search');
 let search = document.getElementById('list-search');
 
 if(input){
-input.addEventListener('keyup', (e) => {
-    let value = e.target.value
-    removeOldList()
-    query(value)
-    .then(data => data.json())
-    .then(data => {
-        if(value !== ""){
-            for(let i = 0; i < data.length; i++){
-                let li = document.createElement('li');
-                search.appendChild(li);
-                li.innerHTML = `<a href="https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=showoneproduct&id=${data[i].id}">${data[i].name}</a>`
+    input.addEventListener('keyup', (e) => {
+        let value = e.target.value
+        removeOldList()
+        query(value)
+        .then(data => data.json())
+        .then(data => {
+            if(value !== ""){
+                for(let i = 0; i < data.length; i++){
+                    let li = document.createElement('li');
+                    search.appendChild(li);
+                    li.innerHTML = `<a href="https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=showoneproduct&id=${data[i].id}">${data[i].name}</a>`
+                }
             }
-        }
+        })
+        
     })
-    
-})
 }
+
 const query = async (value) => {
     return await fetch(`https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=search&q=${value}`);
 }
