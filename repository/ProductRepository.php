@@ -84,6 +84,25 @@ require_once './repository/AbstractRepository.php';
          $sql = "DELETE FROM products WHERE id = '$id' ";
          $stmt = $this->connexion->query($sql);
     }
+    
+    public function fetchImage($id)
+    {
+        $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT url_picture FROM products WHERE id = :id');
+            if ($query) {
+                $query->bindParam(':id', $id);
+                $query->execute();
+                
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            die($e);
+        }
+        
+        return $data;
+    }
+    
      
     public function fetchQuery($product): array
     {

@@ -139,19 +139,29 @@ class ProductController {
          if(isset($_POST['id'],$_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
             
             $tmpName = $_FILES['file']['tmp_name'];
-            $newFileName = md5(time()).'.jpg';
+            //$_FILES['file']['name']
+            $file_name = $_FILES['file']['name'];
+            $temp= explode('.',$file_name);
+            $extension = end($temp);
+           
+            $newFileName = md5(time()).'.'.$extension;
+            
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
             
-          
             move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
             $id = $_POST['id'];
+            
             $newProductCategory = $_POST['category'];
             $newProductName= $_POST['name'];
             $newProductDescription = $_POST['description'];
             $newProductPrice = (int)$_POST['price'];
             $newProductQuantity = (int)$_POST['quantity'];
             $newProductImage = "./public/assets/img/$newFileName";
+            
+            $data = $this->repository->fetchImage($id);
+          
+            unlink($data);
             
             $this->repository->modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             
