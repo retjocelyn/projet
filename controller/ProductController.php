@@ -160,8 +160,9 @@ class ProductController {
             $newProductImage = "./public/assets/img/$newFileName";
             
             $data = $this->repository->fetchImage($id);
-          
-            unlink($data);
+            
+           unlink($data['url_picture']);
+           
             
             $this->repository->modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
             

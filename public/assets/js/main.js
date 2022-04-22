@@ -1,6 +1,6 @@
 /*section passe en display none*/ 
 
-/*les slecteurs de munu pour admin et users*/
+/*les selecteurs de munu pour admin et users*/
 
 let profil= document.getElementById("userprofil");
 let portefeuille= document.getElementById("userwallet");
