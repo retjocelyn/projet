@@ -17,7 +17,8 @@ class User {
     
     private string $adresse;
     
-    private string $wallet;
+    private int $wallet;
+    
     
     
     /**
@@ -148,7 +149,6 @@ class User {
     {
         $this->wallet = $wallet;
     }
-    
     
     
 }

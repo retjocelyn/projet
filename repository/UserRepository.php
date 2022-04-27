@@ -65,12 +65,29 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function createUser(string $newlastName,string $newfirstName, string $newEmail, string $newPass,string $newAdress,int $wallet):void
+    public function createUser($user)
     {
-        $sql = "INSERT INTO users (first_name, last_name, email, password,adress,wallet,role, created_at) VALUES ('$newfirstName','$newlastName','$newEmail','$newPass','$newAdress','$wallet','client', NOW())";
-        $stmt = $this->connexion->query($sql);
-       
+        
+        try {
+            $query = $this->connexion->prepare('INSERT INTO users (first_name, last_name, email, password,adress,wallet,role,created_at) 
+            VALUES (:newfirstName,:newlastName,:email,:newPass,:adress,:wallet,:role, NOW() )');
+            if ($query) {
+               
+                $query->bindValue(':newlastName',$user->getFirstName());
+                $query->bindValue(':newfirstName',$user->getlastName());
+                $query->bindValue(':email',$user->getEmail());
+                $query->bindValue(':newPass',$user->getPassword());
+                $query->bindValue(':adress',$user->getAdresse());
+                $query->bindValue(':wallet',$user->getWallet());
+                $query->bindValue(':role', $user->getRole());
+                
+                 return $query->execute();
+            }
+        } catch (Exception $e) {
+           return $data = ['error' => $e->getMessage()];
+        }
     }
+       
     
      public function modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass)
     {

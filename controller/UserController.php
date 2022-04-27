@@ -57,11 +57,6 @@ class UserController {
             
             $_SESSION['user'] = serialize($user);
             
-            $_SESSION['userid'] = serialize($user->getId()); /*(droit de le faire en non serialize)*/
-           
-            $_SESSION['role'] = $user->getRole();
-            
-            
                 if($user->getRole() === "admin"){
                     header('location: ./index.php?url=adminaccount');
                     exit();
@@ -74,21 +69,24 @@ class UserController {
     
     public function account()
     {
+        
         if(!isset($_SESSION['user'])){
             header('location: ./index.php?url=login');
             exit();
         }
         
-        if($_SESSION['role'] === "admin")
+        $userInfos = unserialize($_SESSION['user']);
+        
+        if($userInfos->getRole() === "admin")
         {   
             header('location: ./index.php?url=adminaccount');
             exit();
         }
-        
+      
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
-        $userId = unserialize($_SESSION['userid']);
-        $data = $this->repository->findById($userId);
+       
+        $data = $this->repository->findById($userInfos->getId());
         $user = new User();
         $user->setid($data['id']);
         $user->setlastName($data['last_name']);
@@ -122,26 +120,29 @@ class UserController {
         }
         
         if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
-        
-            $newlastName = htmlspecialchars($_POST['lastName']);
-            $newfirstName = htmlspecialchars($_POST['firstName']);
-            $newEmail = htmlspecialchars($_POST['email']);
-            $newAdress = htmlspecialchars($_POST['adress']);
+            $user = new User();
+            $user->setlastName(htmlspecialchars($_POST['lastName']));
+            $user->setFirstName(htmlspecialchars($_POST['firstName']));
+            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setAdresse(htmlspecialchars($_POST['adress']));
             $Pass = htmlspecialchars($_POST['password']);
-            $newPass = password_hash($Pass, PASSWORD_DEFAULT);
-            $date;
-            $wallet = 0;
-           
-           /*correction a faire ici*/
-            $this->repository->createUser($newlastName,$newfirstName,$newEmail,$newPass,$newAdress,$wallet);
-            
+            $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
+            $user->setWallet(0);
+            $user->setRole('client');
+          
+          
+           if($query = $this->repository->createUser($user)){
+               
+            $_SESSION['user'] = serialize($user);
             header('location: ./index.php?url=registeraccepted&message=votre compte a été crée');
             exit();
-        }
+            
+           }
+         
         header('location: ./index.php?url=confirmationornot&message="Compte non crée"');
         exit();
-        
-    }
+         }    
+    }     
     
     public function registerAccepted() 
     {
