@@ -28,8 +28,9 @@ class AdminController {
     
     public function  adminAccount()
     {
+        $user = unserialize($_SESSION['user']);
         
-        if(!isset($_SESSION['user']) or $_SESSION['role'] !== "admin"){
+        if(!isset($_SESSION['user']) or $user->getRole() !== "admin"){
             header('location: ./index.php?url=login');
             exit();
         }

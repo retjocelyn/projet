@@ -23,6 +23,7 @@ class UserController {
     
     public function loginSecurity(): void 
     {
+        
         if(!isset($_POST['email'], $_POST['password'])){
             header('location: ./index.php?url=login');
             exit();
@@ -37,14 +38,14 @@ class UserController {
             
             header('location: ./index.php?url=login');
         }
-         
+        
         if(!password_verify($password, $data['password'])){
             header('location:./index.php?url=login');
             exit();
         }
-        
+         
         if($data){
-           
+          
             $user = new User();
             $user->setid($data['id']);
             $user->setlastName($data['last_name']);
@@ -56,7 +57,7 @@ class UserController {
             $user->setWallet($data['wallet']);
             
             $_SESSION['user'] = serialize($user);
-            
+          
                 if($user->getRole() === "admin"){
                     header('location: ./index.php?url=adminaccount');
                     exit();
@@ -110,7 +111,7 @@ class UserController {
    public function registerSecurity() : void
     {
     
-        if(!isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
+        if(!isset($_POST)){
                 header('location: ./index.php?url=register');
                 exit();
             }
@@ -276,7 +277,9 @@ class UserController {
     
     public function addArticleToBasket()
     {
-        if(!isset($_GET['id'],$_SESSION['user'])){
+        var_dump("on est dans addBasket");
+        die();
+        if(!isset($_GET['id'] or $_SESSION['user'])){
             
             header('location: ./index.php?url=login&error=veuillez vous connecter');
             exit();
