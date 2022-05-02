@@ -12,6 +12,8 @@ class DefaultPage extends AbstractPage {
     
     private string $csrf;
     
+    private string $message;
+    
     
     public function __construct(string $html)
     {
@@ -47,6 +49,16 @@ class DefaultPage extends AbstractPage {
         $this->csrf = $csrf;
     }
     
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+    
+    public function setMessage($message): void
+    {
+        $this->message = $message;
+    }
+    
     
     public function assemblerPage(): void 
     {
@@ -61,21 +73,24 @@ class DefaultPage extends AbstractPage {
             case'login':
             $this->head->setTitle('symphony: page connexion');
             $this->head->setDescription('formulaire connexion');    
+            $this->body = str_replace('{%$token%}',$this->getCsrf(), $this->body);
             $this->body = str_replace('{%error%}',$this->getErrors(), $this->body); 
             $this->constructPage();
             break;
             
             case'register':
+               
             $this->head->setTitle('symphony: page inscription');
             $this->head->setDescription('inscription');
-            $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);    
+            $this->body = str_replace('{%error%}',$this->getErrors(),$this->body);  
+            $this->body = str_replace('{%$token%}',$this->getCsrf(), $this->body);    
             $this->constructPage();
             break;
             
             case'registeraccepted':
             $this->head->setTitle('symphony: page inscription');
             $this->head->setDescription('inscription');
-            $this->body = str_replace('{%message%}',"lol",$this->body);
+            $this->body = str_replace('{%message%}',"",$this->body);
             $this->constructPage();
             break;
             

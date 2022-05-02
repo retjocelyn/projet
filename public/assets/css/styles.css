@@ -73,6 +73,9 @@ main{
     background-color: #d0cbcb;
 }
 
+.erreur{
+    color:red;
+}
 /*main de home*/
 
 .block-search{
@@ -538,6 +541,7 @@ main{
     border: none;
 }
 
+
 .addimage{
    display:flex;
    flex-direction:column;
@@ -760,7 +764,14 @@ margin-right: 5%;
     font-family: 'Fredoka', sans-serif;
 }
 
+.registerbutton{
+    width:70%;
+    display:flex;
+    justify-content:center;
+}
+
 .registerbutton>button{
+    width:100%;
     height:2.5em;
     border-radius:2em;
     background: linear-gradient(-135deg,#000000,#6e7181);
@@ -783,6 +794,7 @@ margin-right: 5%;
     font-size:1.5em;
     text-decoration:none;
 }
+
 
 
 

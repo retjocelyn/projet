@@ -13,12 +13,14 @@ class Authentificator{
         
             if(!isset($_SESSION['user'])){
                 
-            $_SESSION['error'] = "vous devez être connecté";  
-            header('location: ./index.php?url=login');
-            exit();
-        }
-        $userId = unserialize($_SESSION['user']);
-        return $userid->getId();
+                $_SESSION['error'] = "vous devez être connecté";  
+                
+                header('location: ./index.php?url=login');
+                exit();
+            }
+        
+        $user = unserialize($_SESSION['user']);
+        return $user;
     }
     
     

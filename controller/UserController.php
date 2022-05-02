@@ -15,7 +15,7 @@ class UserController {
         $this->view = new UserView();
         $this->repository = new UserRepository();
         $this->basket = new BasketRepository();
-        $authentificator = new Authentificator();
+       
     }
     
     public function login(){
@@ -33,20 +33,28 @@ class UserController {
             header('location:./index.php?url=login');
             exit();
         }
-        
-        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
-            header('location: ./index.php?url=login&error="pas de csrf"');
+          
+       if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+           
+            $_SESSION['error'] = "Vous nêtes pas autorisé";
+            header('location: ./index.php?url=login');
+            exit();
         }
-            
+           
         
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
-        $data = $this->repository->fetchLogin($email);
-             
+        
+        $data = $this->repository->fetchLogin($email); 
        
+        if($data === false){
+            $_SESSION ['error'] = "Identifiant incconu";
+            header('location:./index.php?url=login');
+            exit();
+          }
         
         if(!password_verify($password, $data['password'])){
-            $_SESSION ['error'] = "mauvais  password";
+            $_SESSION ['error'] = "Mauvais mot de passe";
             header('location:./index.php?url=login');
             exit();
         }
@@ -77,12 +85,10 @@ class UserController {
     
     public function account()
     {
+         $authentificator = new Authentificator();
+         $user = $authentificator->checkUser();
         
-        $this->authentificator->checkUser();
-        
-        $userInfos = unserialize($_SESSION['user']);
-        
-        if($userInfos->getRole() === "admin")
+        if($user->getRole() === "admin")
         {   
             header('location: ./index.php?url=adminaccount');
             exit();
@@ -91,7 +97,7 @@ class UserController {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
        
-        $data = $this->repository->findById($userInfos->getId());
+        $data = $this->repository->findById($user->getId());
         $user = new User();
         $user->setid($data['id']);
         $user->setlastName($data['last_name']);
@@ -115,15 +121,30 @@ class UserController {
    public function registerSecurity() : void
     {
     
-        if(!isset($_POST)){
-                header('location: ./index.php?url=register');
-                exit();
-            }
-        
-        if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            echo "erreur 401";
+        if(empty($_POST)){
+            
+            $_SESSION['error'] = "document non remplis";
+            header('location: ./index.php?url=register');
+            exit();
         }
-    
+        
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+           
+            $_SESSION['error'] = "Vous nêtes pas autorisé";
+            header('location: ./index.php?url=login');
+            exit();
+        }
+        
+        $email = htmlspecialchars($_POST['email']);
+        
+        $data = $this->repository->fetchLogin($email);
+            
+        if($data === true){    
+           
+            $_SESSION['error'] = "Email existe déja";
+            header('location: ./index.php?url=login');
+            exit();
+        }
         
         if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
             $user = new User();
@@ -137,13 +158,12 @@ class UserController {
             $user->setRole('client');
           
           
-           if($query = $this->repository->createUser($user)){
-               
-            $_SESSION['user'] = serialize($user);
-            header('location: ./index.php?url=registeraccepted&message=votre compte a été crée');
-            exit();
-            
-           }
+            if($query = $this->repository->createUser($user)){
+              
+                $_SESSION['user'] = serialize($user);
+                header('location: ./index.php?url=registeraccepted&message="votre compte a été crée"');
+                exit();
+            }
          
         header('location: ./index.php?url=confirmationornot&message="Compte non crée"');
         exit();

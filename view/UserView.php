@@ -15,6 +15,7 @@ class UserView {
         $page->setErrors('');
         if(isset($_SESSION['error'])){
             $page->setErrors($_SESSION['error']);
+            unset($_SESSION['error']);
         }
         $page->assemblerPage();
         return $page->getPage();
@@ -32,17 +33,25 @@ class UserView {
     
     public function displayRegister(): string
     {
+    
         $page = new DefaultPage('register');
+        $page->setCsrf($_SESSION['csrf']);
+        $page->setErrors('');
+       
+        if(isset($_SESSION['error'])){
+            $page->setErrors($_SESSION['error']);
+            unset($_SESSION['error']);
+        }
         $page->assemblerPage();
         return $page->getPage();
        
     }
     
+    
     public function displayRegisterAccepted(): string
     {
         $page = new DefaultPage('registeraccepted');
-        $message = $_SESSION['message'];
-        $page->setErrors($message);
+        $page->setMessage($_SESSION['message']);
         $page->assemblerPage();
         return $page->getPage();
        

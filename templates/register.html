@@ -2,6 +2,7 @@
                 <section class="showregisterform">    
                     <form class="register" action="index.php?url=registerSecurity" method="post">
                         <h2>Inscription</h2>
+                        <p class="erreur">{%error%}</p>
                         <div class="separation">
                             <label for="lastName">Nom : </label> 
                             <input type="text" id="lastName" name="lastName" value="" required>
@@ -22,7 +23,7 @@
                             <label for="password">Mot de Passe : </label> 
                             <input type="password" id="password" name="password" value="" required>
                         </div>    
-                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                        <input name="csrf_token" type="hidden" value="{%$token%}">
                         <div class="registerbutton">
                             <button type="submit">Inscription</button>
                         </div>
