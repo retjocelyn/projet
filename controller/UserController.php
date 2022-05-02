@@ -71,6 +71,7 @@ class UserController {
             $user->setAdresse($data['adress']);
             $user->setWallet($data['wallet']);
             
+              
             $_SESSION['user'] = serialize($user);
           
                 if($user->getRole() === "admin"){
@@ -86,9 +87,9 @@ class UserController {
     public function account()
     {
          $authentificator = new Authentificator();
-         $user = $authentificator->checkUser();
+         $userAuth = $authentificator->checkUser();
         
-        if($user->getRole() === "admin")
+        if($userAuth->getRole() === "admin")
         {   
             header('location: ./index.php?url=adminaccount');
             exit();
@@ -97,7 +98,7 @@ class UserController {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
        
-        $data = $this->repository->findById($user->getId());
+        $data = $this->repository->findById($userAuth->getEmail());
         $user = new User();
         $user->setid($data['id']);
         $user->setlastName($data['last_name']);
@@ -108,7 +109,7 @@ class UserController {
         $user->setAdresse($data['adress']);
         $user->setWallet($data['wallet']);
         
-        
+      
         echo $this->view->displayAccount($user);
     }
     
@@ -160,7 +161,6 @@ class UserController {
           
             if($query = $this->repository->createUser($user)){
               
-                $_SESSION['user'] = serialize($user);
                 header('location: ./index.php?url=registeraccepted&message="votre compte a été crée"');
                 exit();
             }

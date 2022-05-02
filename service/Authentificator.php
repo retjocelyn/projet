@@ -19,8 +19,8 @@ class Authentificator{
                 exit();
             }
         
-        $user = unserialize($_SESSION['user']);
-        return $user;
+        $userAuth = unserialize($_SESSION['user']);
+        return $userAuth;
     }
     
     
