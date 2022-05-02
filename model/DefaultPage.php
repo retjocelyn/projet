@@ -19,6 +19,11 @@ class DefaultPage extends AbstractPage {
         
         $this->html = $html;
         $this->body = $this->utils->searchHtml($html);
+        $this->errors = '';
+        
+        if($_SESSION['error'] === "404"){
+                $this->setErrors("pas recu de datas");
+        }
     }
     
     
@@ -56,7 +61,7 @@ class DefaultPage extends AbstractPage {
             case'login':
             $this->head->setTitle('symphony: page connexion');
             $this->head->setDescription('formulaire connexion');    
-            $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body); 
+            $this->body = str_replace('{%error%}',$this->getErrors(), $this->body); 
             $this->constructPage();
             break;
             
@@ -70,7 +75,7 @@ class DefaultPage extends AbstractPage {
             case'registeraccepted':
             $this->head->setTitle('symphony: page inscription');
             $this->head->setDescription('inscription');
-            $this->body = str_replace('{%message%}',$this->getErrors(),$this->body);
+            $this->body = str_replace('{%message%}',"lol",$this->body);
             $this->constructPage();
             break;
             

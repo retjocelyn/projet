@@ -11,6 +11,7 @@ class UserView {
     public function displayLogin(): string
     {
         $page = new DefaultPage('login');
+        $page->setCsrf($_SESSION['csrf']);
         $page->assemblerPage();
         return $page->getPage();
        

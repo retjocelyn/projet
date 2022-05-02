@@ -2,6 +2,8 @@
                 <section class="showlogin">
                     <form class="login" action="index.php?url=loginSecurity" method="post">
                         <h2>VOUS CONNECTER</h2>
+                        <p>{%error%}</p>
+                        <input name="error" type="hidden" value="{%$token%}">
                         <div class="email">
                             <label for="uname"><b>email</b></label>
                             <input type="text" placeholder="Enter email" name="email" required>

@@ -314,7 +314,7 @@ if(input){
                 for(let i = 0; i < data.length; i++){
                     let li = document.createElement('li');
                     search.appendChild(li);
-                    li.innerHTML = `<a href="https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=showoneproduct&id=${data[i].id}">${data[i].name}</a>`
+                    li.innerHTML = `<a href="https://jocelynretiere.sites.3wa.io/projetdefindanneevraie/index.php?url=showoneproduct&id=${data[i].id}">${data[i].name}</a>`
                 }
             }
         })
@@ -323,7 +323,7 @@ if(input){
 }
 
 const query = async (value) => {
-    return await fetch(`https://jocelynretiere.sites.3wa.io/projet-de%20-fin-d'ann%C3%A9e/index.php?url=search&q=${value}`);
+    return await fetch(`https://jocelynretiere.sites.3wa.io/projetdefindanneevraie/index.php?url=search&q=${value}`);
 }
 
 function removeOldList() {

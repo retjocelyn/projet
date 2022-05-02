@@ -41,16 +41,6 @@ switch($url){
         $userController-> registeraccepted();
         break;
         
-    case "addmoney":
-        $userController = new UserController();
-        $userController-> addMoney();
-        break;
-        
-    case "confirmationornot":
-        $userController = new UserController();
-        $userController-> confirmationOrNot();
-        break;   
-        
     case "account":
         $userController = new UserController();
         $userController->account();
@@ -114,16 +104,6 @@ switch($url){
         $productController->formModifyProduct();
         break;     
     
-    case "showoneproduct":
-        $productController = new ProductController();
-        $productController->showOneProduct();
-        break;    
-        
-    case "search":
-        $controller = new ProductController();
-        $controller->querySearch();
-        break;
-        
     case "modifyproduct":
         $productController = new ProductController();
         $productController->modifyProduct();
@@ -200,8 +180,17 @@ switch($url){
      case "admindeleteuser":
         $adminController = new AdminController();
         $adminController->adminDeleteUser();
-        break;    
+        break;   
         
+    case "showoneproduct":
+        $productController = new ProductController();
+        $productController->showOneProduct();
+        break;        
+        
+    case "search":
+        $controller = new ProductController();
+        $controller->querySearch();
+        break;    
 }
 
 

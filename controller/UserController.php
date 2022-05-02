@@ -3,6 +3,7 @@ require_once './view/UserView.php';
 require_once './repository/UserRepository.php';
 require_once './repository/BasketRepository.php';
 require_once './model/class/User.php';
+require_once './service/Authentificator.php';
 
 class UserController {
     
@@ -18,6 +19,10 @@ class UserController {
     
     public function login(){
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        if(isset($_GET['error'])){
+            $_SESSION['error'] = $_GET['error'];
+        }
         echo $this->view->displayLogin();
     }
     
@@ -25,19 +30,22 @@ class UserController {
     {
         
         if(!isset($_POST['email'], $_POST['password'])){
-            header('location: ./index.php?url=login');
+            header('location:./index.php?url=login&error="404"');
             exit();
         }
+        
+        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+            header('location: ./index.php?url=login&message="pas de csrf"');
+        }
+            
+        
         
         
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
         $data = $this->repository->fetchLogin($email);
              
-        if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            
-            header('location: ./index.php?url=login');
-        }
+       
         
         if(!password_verify($password, $data['password'])){
             header('location:./index.php?url=login');
@@ -277,9 +285,8 @@ class UserController {
     
     public function addArticleToBasket()
     {
-        var_dump("on est dans addBasket");
-        die();
-        if(!isset($_GET['id'] or $_SESSION['user'])){
+       
+        if(!isset($_SESSION['user'])){
             
             header('location: ./index.php?url=login&error=veuillez vous connecter');
             exit();
