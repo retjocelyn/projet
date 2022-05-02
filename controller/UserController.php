@@ -15,14 +15,12 @@ class UserController {
         $this->view = new UserView();
         $this->repository = new UserRepository();
         $this->basket = new BasketRepository();
+        $authentificator = new Authentificator();
     }
     
     public function login(){
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
-        if(isset($_GET['error'])){
-            $_SESSION['error'] = $_GET['error'];
-        }
         echo $this->view->displayLogin();
     }
     
@@ -30,16 +28,16 @@ class UserController {
     {
         
         if(!isset($_POST['email'], $_POST['password'])){
-            header('location:./index.php?url=login&error="404"');
+            
+            $_SESSION['error'] = "vous n'avez pas remplis le formulaire";
+            header('location:./index.php?url=login');
             exit();
         }
         
         if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
-            header('location: ./index.php?url=login&message="pas de csrf"');
+            header('location: ./index.php?url=login&error="pas de csrf"');
         }
             
-        
-        
         
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
@@ -48,6 +46,7 @@ class UserController {
        
         
         if(!password_verify($password, $data['password'])){
+            $_SESSION ['error'] = "mauvais  password";
             header('location:./index.php?url=login');
             exit();
         }
@@ -79,10 +78,7 @@ class UserController {
     public function account()
     {
         
-        if(!isset($_SESSION['user'])){
-            header('location: ./index.php?url=login');
-            exit();
-        }
+        $this->authentificator->checkUser();
         
         $userInfos = unserialize($_SESSION['user']);
         
@@ -125,8 +121,9 @@ class UserController {
             }
         
         if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            echo 'Mot de passe incorrect';
+            echo "erreur 401";
         }
+    
         
         if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
             $user = new User();
@@ -202,7 +199,7 @@ class UserController {
      public function modifyUser():void
     {
          if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            echo 'Mauvais chemin';
+            echo 'error 401';
         }
         
         if(!isset($_SESSION['user'])){

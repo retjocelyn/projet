@@ -19,11 +19,11 @@ class DefaultPage extends AbstractPage {
         
         $this->html = $html;
         $this->body = $this->utils->searchHtml($html);
-        $this->errors = '';
-        
-        if($_SESSION['error'] === "404"){
-                $this->setErrors("pas recu de datas");
+        if(!isset($_SESSION['error'])){
+            $this->errors = '';
         }
+        
+        
     }
     
     

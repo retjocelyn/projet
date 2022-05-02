@@ -12,6 +12,10 @@ class UserView {
     {
         $page = new DefaultPage('login');
         $page->setCsrf($_SESSION['csrf']);
+        $page->setErrors('');
+        if(isset($_SESSION['error'])){
+            $page->setErrors($_SESSION['error']);
+        }
         $page->assemblerPage();
         return $page->getPage();
        
