@@ -133,6 +133,7 @@ class ProductPage extends AbstractPage {
             $content = str_replace('{%description%}',$product->getDescription(), $content);
             $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
             $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+            $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
           
             $this->article .= $content;
         }
@@ -282,6 +283,7 @@ class ProductPage extends AbstractPage {
         $this->head->setTitle('symphony: panier');
         $this->head->setDescription('votre panier');
         $this->body = $this->utils->searchHtml('basket');
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
        
         foreach($this->products as $product){
                 $content = $this->utils->searchInc('produitbasket');
@@ -291,6 +293,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
                 $content = str_replace('{%description%}',$product->getDescription(), $content);
                 $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+                $content = str_replace('{%$token%}', $_SESSION['csrf'], $content);
                 
                 $this->article .= $content;
             }

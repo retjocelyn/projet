@@ -210,8 +210,6 @@ class UserController {
         $this->authentificator->csrfTokenChecker();
         $this->authentificator->checkUser();
         
-        
-        
         $user = new User();
         $user->setId($_GET['id']);
         $user->setlastName(htmlspecialchars($_POST['lastName']));
@@ -289,32 +287,43 @@ class UserController {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();
             
-            $productid = $_GET['id'];
-            $userid = unserialize($_SESSION['userid']);
-            $this->basket->addArticleToBasket($userid,$productid);
+        $productid = $_GET['id'];
+            
+        if($this->basket->addArticleToBasket($userAuth->getId(),$productid)){
         
             header('location: ./index.php?url=confirmationornot&message=article ajouté au panier');
             exit();
+        }    
        
+        header('location: ./index.php?url=confirmationornot&message=article non ajouté au panier');
+        exit();
     }
     
     
     public function deleteArticleFromBasket()
     {
+        
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+        
         if(!isset($_GET['id'])){
             
-            header('location: ./index.php?url=login&error=veuillez vous connecter');
+            header('location: ./index.php?url=shop');
             exit();
             
         }
         
         $productid = $_GET['id'];
        
-        $this->basket->deleteArticleFromBasket($productid);
+        if($this->basket->deleteArticleFromBasket($productid,$userAuth->getId())){
         
-        header('location: ./index.php?url=confirmationornot&message=article supprimé du panier');
+            header('location: ./index.php?url=confirmationornot&message=article supprimé du panier');
+            exit();
+        
+        }
+        
+        header('location: ./index.php?url=confirmationornot&message=article non supprimé du panier');
         exit();
-    
     }
 }
 

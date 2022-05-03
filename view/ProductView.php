@@ -24,7 +24,7 @@ class ProductView {
         $page->setProducts($products);
         $page->setCategories($categories);
         $page->setOrders($commandes);
-         $page->setUsers($users);
+        $page->setUsers($users);
         $page->adminAccountPage();
         return $page->getPage();
     }

@@ -8,7 +8,10 @@
             <li class="productdescription"><strong>description:</strong> {%description%}.</li>
             <li class="productquantity"><strong>quantité:    {%quantity%}.</strong></li>
             <li class="productprice"><strong>Prix:</strong> {%price%} euros.</li>
-            <a href="./index.php?url=addarticletobasket&id={%id%}" title="ajoute l'article dans le panier de user">Ajouter au panier.</a>
+            <form  action="./index.php?url=addarticletobasket&id={%id%}" method="post" >
+                <input name="csrf_token" type="hidden" value="{%$token%}">
+                <button type="submit"><i class="fa-solid fa-cart-arrow-down"></i></button>
+            </form>
         </ul>
     </div>
 </article>

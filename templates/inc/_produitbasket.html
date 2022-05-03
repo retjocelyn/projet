@@ -10,6 +10,7 @@
             <li class="productprice">Prix: {%price%} euros.</li>
         </ul>
         <form class="formdeletearticlefrombasket" action="./index.php?url=deletearticlefrombasket&id={%id%}" method="post">
+            <input name="csrf_token" type="hidden" value="{%$token%}">
             <button type="deletearticlefrombasket"><i class="fa-solid fa-trash-can"></i></button>
         </form>    
     </div>

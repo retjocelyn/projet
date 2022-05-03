@@ -5,9 +5,11 @@
                             {%article%}
                             {%prixtotal%}
                             <form class="formcreateorder" action="./index.php?url=createorder" method="post">
+                                <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <button type="submit">Valider  commande</button>
                             </form>   
-                             <form class="formdeletebasket" action="./index.php?url=deletebasket" method="post">
+                            <form class="formdeletebasket" action="./index.php?url=deletebasket" method="post">
+                                <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <button type="submit">effacer le panier</button>
                             </form> 
                         </div>    

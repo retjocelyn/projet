@@ -18,12 +18,14 @@ class ProductController {
         $this->categoryRepository = new CategoryRepository();
         $this->basketRepository = new BasketRepository();
         $this->orderRepository = new OrderRepository();
+        $this->authentificator = new Authentificator();
     }
     
     
     public function instruments(): void
     {
         $category = $_GET['id'];
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
         $datas = $this->repository->findByCategory($category);
         
         $products = [];
@@ -46,7 +48,7 @@ class ProductController {
        echo $this->view->dislplayInstruments($products);
     }
     
-     public function addArticle(){
+     public function addArticle(){      /*voir ce que cest*/
         echo("oui on ajoute article");
         
     }
@@ -269,15 +271,10 @@ class ProductController {
     
     public function basket() : void
     {
-       if(!isset($_SESSION['user'])){
-           
-        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
-        exit();
         
-       }
-       
-        $userid =unserialize($_SESSION['userid']);
-        $datas = $this->basketRepository->findById($userid);
+        $userAuth = $this->authentificator->checkUser();
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        $datas = $this->basketRepository->findById($userAuth->getId());
         
         if(empty($datas)){
            echo $this->view->displayEmptyBasket();
@@ -308,43 +305,45 @@ class ProductController {
    
     public function deleteBasket() : void
     {
-       if(!isset($_SESSION['user'])){
-           
-        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+        
+       
+       if($this->basketRepository->deleteBasket($userAuth->getId())){
+    
+            header('location: ./index.php?url=confirmationornot&message=panier supprimé');
+            exit();
+        }
+    
+        header('location: ./index.php?url=confirmationornot&message=panier non supprimé');
         exit();
         
     }
-       
-    $userId = unserialize($_SESSION['userid']);
-    $this->basketRepository->deleteBasket($userId);
     
-    header('location: ./index.php?url=confirmationornot&message=panier supprimé');
-    exit();
-    }
-    
-   
     public function createOrder(): void 
     {
-        if(!isset($_SESSION['user'])){
-           
-        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
-        exit();
         
-       }
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
        
-       $userid = unserialize($_SESSION['userid']);
        
-       $datas = $this->basketRepository->findById($userid);
-       $productsid = [];
+       if($datas = $this->basketRepository->findById($userAuth->getId())){
+           
        
-       foreach($datas as $data){
-           $productsid[] = $data['product_id'];
-       }
-      
-       $this->orderRepository->createOrder($userid,$productsid);
-       $this->basketRepository->deleteBasket($userid);
+           $productsid = [];
+           
+           foreach($datas as $data){
+               $productsid[] = $data['product_id'];
+           }
+          
+           $this->orderRepository->createOrder($userAuth->getId(),$productsid);
+           $this->basketRepository->deleteBasket($userAuth->getId());
+           
+           header('location: ./index.php?url=confirmationornot&message=votre commande à été créée');
+           exit();
+       }   
        
-       header('location: ./index.php?url=confirmationornot&message=votre commande à été créée');
+       header('location: ./index.php?url=confirmationornot&message= Commande non créée');
        exit();
     }
     
