@@ -149,7 +149,7 @@ class UserController {
           
             if($query = $this->repository->createUser($user)){
               
-                header('location: ./index.php?url=confirmationornot&message="votre compte a été crée"');
+                header('location: ./index.php?url=registeraccepted&message="votre compte a été crée"');
                 exit();
             }
          
@@ -211,7 +211,6 @@ class UserController {
         $this->authentificator->checkUser();
         
         
-        $userId = $_GET['id'];
         
         $user = new User();
         $user->setId($_GET['id']);
@@ -222,49 +221,46 @@ class UserController {
         $Pass = htmlspecialchars($_POST['password']);
         $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
         
-        $this->repository->modifyUser($user);    
+        if($this->repository->modifyUser($user)){
+       
+            header('location: ./index.php?url=confirmationornot&message="Compte modifié"');
+            exit();
+        }   
         
-        header('location: ./index.php?url=confirmationornot&message="Compte modifié"');
+        header('location: ./index.php?url=confirmationornot&message="Compte non modifié"');
         exit();
+        
     }
     
     public function addMoney() : void
     {
         
-         if(!isset($_SESSION['user'])){
-            header('location: ./index.php?url=login');
-            exit();
-        }
-        
-        if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            
-            header('location: ./index.php?url=login');
-            exit();;
-        }
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkUser();
         
         if(isset($_POST['amount'])){
            
             $amount = htmlspecialchars($_POST['amount']);
             $userId = $_GET['id'] ;
-            $this->repository->addMoney($userId,$amount);
-            header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
-            exit();
             
-        }
+            if($this->repository->addMoney($userId,$amount)){
+                
+                header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
+                exit();
+            
+            }
         
-        if(isset($_SESSION['error'])){
-            header('location: ./index.php?url=confirmationornot&message="Une erreur est survenue"');
+            header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
             exit();
         }
-        
-        header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
-        exit();
-        
     }
      
      
     public function logout() : void
     {
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkUser();
+        
         session_destroy();
         header('location: ./index.php?url=home');
         exit();
@@ -272,29 +268,26 @@ class UserController {
     
      public function deleteUser() : void
     {
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
        
-        if(isset($_SESSION['userid'])){
+        if($this->repository->deleteUser($userAuth->getId())){
         
-            $id = unserialize($_SESSION['userid']);
-            $this->repository->deleteUser($id);
-            
             session_destroy();
+            
             header('location: ./index.php?url=confirmationornot&message=votre compte a été effacé');
             exit();
         }
         
-        header('location: ./index.php?url=login&error=veuillez vous connecter');
+        header('location: ./index.php?url=confirmationornot&message=compte non effacé');
         exit();
     }
     
     public function addArticleToBasket()
     {
        
-        if(!isset($_SESSION['user'])){
-            
-            header('location: ./index.php?url=login&error=veuillez vous connecter');
-            exit();
-        }
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
             
             $productid = $_GET['id'];
             $userid = unserialize($_SESSION['userid']);

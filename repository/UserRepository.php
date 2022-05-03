@@ -89,22 +89,48 @@ require_once './repository/AbstractRepository.php';
     }
        
     
-     public function modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass)
+     public function modifyUser(User $user):bool
     {
-        $sql = " UPDATE users
-            SET first_name = '$newfirstName',last_name = '$newlastName',email = '$newEmail',adress = '$newAdress',password = '$newPass'
-            WHERE id = '$userId' ";
-        $stmt = $this->connexion->query($sql);
-        
+        try{
+             $query = $this->connexion->prepare('UPDATE users
+                SET first_name = :newfirstName,last_name = :newlastName,
+                email = :newEmail, adress = :newAdress,password = :newPass
+                WHERE id = :id');
+            
+            if ($query) {
+               
+                $query->bindValue(':newlastName',$user->getFirstName());
+                $query->bindValue(':newfirstName',$user->getlastName());
+                $query->bindValue(':newEmail',$user->getEmail());
+                $query->bindValue(':newPass',$user->getPassword());
+                $query->bindValue(':newAdress',$user->getAdresse());
+                $query->bindValue(':id',$user->getId());
+               
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
-     
-    public function deleteUser($id)
+       
+       
+    public function deleteUser($userId)
     {
-        $sql = "DELETE FROM `users` WHERE id = '$id'";
-        $stmt = $this->connexion->query($sql);
+      try{
+             $query = $this->connexion->prepare('DELETE from users WHERE id = :id');
+            
+            if ($query) {
+                $query->bindValue(':id',$userId);
+               
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
+         
     
-    public function  addMoney($userId,$amount)
+    public function addMoney($userId,$amount)
     {
      
         try {
@@ -113,11 +139,12 @@ require_once './repository/AbstractRepository.php';
                 
                 $query->bindParam(':amount', $amount);
                 $query->bindParam(':userId',$userId );
-                $query->execute();
+                
+                return $query->execute();
              
             }
         } catch (Exception $e) {
-            $_SESSION['error'] = ['error' => $e->getMessage()];
+            return false;
         }
     }
        

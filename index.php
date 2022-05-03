@@ -37,6 +37,12 @@ switch($url){
         break;
     
         
+    case "registeraccepted":
+        $userController = new UserController();
+        $userController->registerAccepted() ;
+        break;
+        
+        
     case "confirmationornot":
         $userController = new UserController();
         $userController->confirmationOrNot() ;
@@ -58,6 +64,11 @@ switch($url){
         $userController = new UserController();
         $userController->modifyUser();
         break;
+        
+    case "addmoney":
+        $userController = new UserController();
+        $userController->addMoney();
+        break;  
         
     case "logout":
         $userController = new UserController();
@@ -140,11 +151,6 @@ switch($url){
     case "addarticletobasket":
         $userController = new UserController();
         $userController->addArticleToBasket();
-        break;
-        
-    case "deleteuser":
-        $userController = new UserController();
-        $userController->deleteUser();
         break;
         
     case "deleteuser":

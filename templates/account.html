@@ -29,15 +29,15 @@
                                 </div>
                                 <div class="userbuttons">
                                     <form  action="index.php?url=formmodifyuser&id={%id%}" method="post">
-                                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                        <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button type="submit">Modifier profil</button>
                                     </form>
                                      <form  action="index.php?url=deleteuser&id={%id%}" method="post">
-                                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                        <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button onclick="return confirm_delete()" type="submit">Supprimer votre compte</button>
                                     </form>
                                      <form  action="index.php?url=logout" method="post">
-                                        <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                        <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button  type="submit">Se déconnecter</button>
                                     </form>
                                 </div>
@@ -51,7 +51,7 @@
                                         <label for="uname"><b>Somme à entrer</b></label>
                                         <input type="number" placeholder="somme" name="amount" required>
                                     </div>
-                                    <input name="CSRFtoken" type="hidden" value="{%$token%}">
+                                    <input name="csrf_token" type="hidden" value="{%$token%}">
                                     <div class="addmoneybutton">
                                         <button onclick="return confirm_delete()" class="checkbutton" type="submit">ajouter argent</button>
                                     </div>
