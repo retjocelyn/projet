@@ -321,8 +321,8 @@ class ProductPage extends AbstractPage {
         $this->head->setTitle('symphony: commandes');
         $this->head->setDescription('votre commandes');
         $this->body = $this->utils->searchHtml('order');
-       
-       
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+    
         foreach($this->products as $product){
                 $content = $this->utils->searchInc('produitorder');
                 $content = str_replace('{%name%}', $product->getName(), $content);

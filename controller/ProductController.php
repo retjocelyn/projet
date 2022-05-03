@@ -10,7 +10,7 @@ require_once './view/ProductView.php';
 
 class ProductController {
     
-    private $view;
+   
     
     public function __construct(){
         $this->view = new ProductView();
@@ -48,10 +48,6 @@ class ProductController {
        echo $this->view->dislplayInstruments($products);
     }
     
-     public function addArticle(){      /*voir ce que cest*/
-        echo("oui on ajoute article");
-        
-    }
     
     public function createProduct(){
         
@@ -326,19 +322,16 @@ class ProductController {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();
        
-       
-       if($datas = $this->basketRepository->findById($userAuth->getId())){
+        if($datas = $this->basketRepository->findById($userAuth->getId())){
            
-       
-           $productsid = [];
            
-           foreach($datas as $data){
-               $productsid[] = $data['product_id'];
+            foreach($datas as $data){
+                
+                $this->orderRepository->createOrder($userAuth->getId(),$data['product_id']);
+                $this->basketRepository->deleteBasket($userAuth->getId());
            }
           
-           $this->orderRepository->createOrder($userAuth->getId(),$productsid);
-           $this->basketRepository->deleteBasket($userAuth->getId());
-           
+         
            header('location: ./index.php?url=confirmationornot&message=votre commande à été créée');
            exit();
        }   
@@ -348,20 +341,17 @@ class ProductController {
     }
     
     
-     public function showOrders() : void
+    public function showOrders() : void
     {
-       if(!isset($_SESSION['user'])){
-           
-        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
-        exit();
-        
-       }
+        $userAuth = $this->authentificator->checkUser();
        
-        $userid =unserialize($_SESSION['userid']);
-        $datas = $this->orderRepository->findById($userid);
+        $datas = $this->orderRepository->findById($userAuth->getId());
+        
         if(empty($datas)){
+            
            echo $this->view->displayEmptyOrders();
            exit();
+           
         }
         
         $products = [];
@@ -386,17 +376,17 @@ class ProductController {
    
     public function deleteOrder(): void
     {
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+       
         
-     if(!isset($_SESSION['user'])){
-           
-        header('location: ./index.php?url=login&message=Pas connecté a votre compte');
-        exit();
+       if($this->orderRepository->deleteOrder($userAuth->getId())){
         
+            header('location: ./index.php?url=confirmationornot&message=commande supprimée');
+            exit();
+            
        }
-        $userid =unserialize($_SESSION['userid']);
-        $this->orderRepository->deleteOrder($userid);
-        
-        header('location: ./index.php?url=confirmationornot&message=commande supprimée');
+        header('location: ./index.php?url=confirmationornot&message=commande non supprimée');
         exit();
    }
     

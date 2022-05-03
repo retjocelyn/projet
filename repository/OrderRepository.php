@@ -45,20 +45,30 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function createOrder($userid,$productsid)
+    public function createOrder($userId,$productId)
     {  
-        foreach($productsid as $productid){
-            
-            $sql = "INSERT INTO orders (user_id,product_id,created_at) VALUES ('$userid','$productid', NOW())";
-            $stmt = $this->connexion->query($sql);
-            
-       }
+        
+            try {
+                $query = $this->connexion->prepare('INSERT INTO orders (user_id,product_id,created_at) 
+                VALUES (:userId,:productId, NOW())');
+                
+                if ($query) {   
+               
+                    $query->bindValue(':userId', $userId);
+                    $query->bindValue(':productId',$productId);
+                    
+                     return $query->execute();
+                }    
+                
+            } catch (Exception $e) {
+                return false;
+        }
         
     }
     
-     public function findById($userid)
+    public function findById($userid)
     {
-         $data = null;
+        $data = null;
         try {                                  
             $query = $this->connexion->prepare('SELECT * FROM products as p INNER JOIN orders as ord ON p.id = ord.product_id WHERE ord.user_id = :id');
             if ($query) {
@@ -74,12 +84,25 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-     public function deleteOrder($userid)
+    public function deleteOrder($userId)
     {  
-        $sql = "DELETE FROM orders WHERE user_id = '$userid' ";
-        $stmt = $this->connexion->query($sql);
-      
+        
+         try {
+                $query = $this->connexion->prepare('DELETE FROM orders WHERE user_id = :userId');
+                if ($query) {   
+               
+                    $query->bindValue(':userId', $userId);
+                    
+                    return $query->execute();
+                }    
+                
+            } catch (Exception $e) {
+                return false;
+        }
+        
     }
+      
+    
     
      public function adminDeleteOrder($orderId)
     {  

@@ -4,6 +4,7 @@
                             <h2>Vos commandes</h2>
                             {%article%}
                             <form class="formdeleteorder" action="./index.php?url=deleteorder&id={%id%}" method="post">
+                                <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <button type="deleteorder">effacer les commandes</button>
                             </form> 
                         </div>    
