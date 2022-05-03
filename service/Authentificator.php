@@ -24,11 +24,16 @@ class Authentificator{
     }
     
     
-    public function CsrfTokenChecker(){
+    public function csrfTokenChecker()
+    {
         
-        if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            echo "Faux mot de passe";
-        }
+     if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
+           
+            $_SESSION['error'] = "Vous nêtes pas autorisé";
+            header('location: ./index.php?url=login');
+            exit();
+        }    
+        
         
     }
  }

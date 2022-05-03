@@ -15,6 +15,7 @@ class UserController {
         $this->view = new UserView();
         $this->repository = new UserRepository();
         $this->basket = new BasketRepository();
+        $this->authentificator = new Authentificator();
        
     }
     
@@ -34,14 +35,7 @@ class UserController {
             exit();
         }
           
-       if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
-           
-            $_SESSION['error'] = "Vous nêtes pas autorisé";
-            header('location: ./index.php?url=login');
-            exit();
-        }
-           
-        
+      
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
         
@@ -86,11 +80,10 @@ class UserController {
     
     public function account()
     {
-         $authentificator = new Authentificator();
-         $userAuth = $authentificator->checkUser();
-        
-        if($userAuth->getRole() === "admin")
-        {   
+         
+         $userAuth = $this->authentificator->checkUser();
+       
+        if($userAuth->getRole() === "admin"){
             header('location: ./index.php?url=adminaccount');
             exit();
         }
@@ -98,9 +91,9 @@ class UserController {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
        
-        $data = $this->repository->findById($userAuth->getEmail());
+        $data = $this->repository->findById($userAuth->getId());
         $user = new User();
-        $user->setid($data['id']);
+        $user->setId($data['id']);
         $user->setlastName($data['last_name']);
         $user->setFirstName($data['first_name']);
         $user->setEmail($data['email']);
@@ -129,12 +122,7 @@ class UserController {
             exit();
         }
         
-        if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
-           
-            $_SESSION['error'] = "Vous nêtes pas autorisé";
-            header('location: ./index.php?url=login');
-            exit();
-        }
+        $this->authentificator->csrfTokenChecker();
         
         $email = htmlspecialchars($_POST['email']);
         
@@ -161,7 +149,7 @@ class UserController {
           
             if($query = $this->repository->createUser($user)){
               
-                header('location: ./index.php?url=registeraccepted&message="votre compte a été crée"');
+                header('location: ./index.php?url=confirmationornot&message="votre compte a été crée"');
                 exit();
             }
          
@@ -170,7 +158,7 @@ class UserController {
          }    
     }     
     
-    public function registerAccepted() 
+    public function registerAccepted() /* a enlever*/
     {
         if(isset($_GET['message'])){
         
@@ -202,7 +190,7 @@ class UserController {
         $userId = $_GET['id'];
         $data = $this->repository->findById($userId);
         $user = new User();
-        $user->setid($data['id']);
+        $user->setId($data['id']);
         $user->setlastName($data['last_name']);
         $user->setFirstName($data['first_name']);
         $user->setEmail($data['email']);
@@ -218,26 +206,25 @@ class UserController {
     
      public function modifyUser():void
     {
-         if(!$_POST['CSRFtoken'] === $_SESSION['csrf']){
-            echo 'error 401';
-        }
         
-        if(!isset($_SESSION['user'])){
-            header('location: ./index.php?url=login');
-            exit();
-        }
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkUser();
+        
         
         $userId = $_GET['id'];
         
-        $newlastName = htmlspecialchars($_POST['lastName']);
-        $newfirstName = htmlspecialchars($_POST['firstName']);
-        $newEmail = htmlspecialchars($_POST['email']);
-        $newAdress = htmlspecialchars($_POST['adress']);
+        $user = new User();
+        $user->setId($_GET['id']);
+        $user->setlastName(htmlspecialchars($_POST['lastName']));
+        $user->setFirstName(htmlspecialchars($_POST['firstName']));
+        $user->setEmail(htmlspecialchars($_POST['email']));
+        $user->setAdresse(htmlspecialchars($_POST['adress']));
         $Pass = htmlspecialchars($_POST['password']);
-        $newPass = password_hash($Pass, PASSWORD_DEFAULT);
-        $this->repository->modifyUser($userId,$newlastName,$newfirstName,$newEmail,$newAdress,$newPass);    
+        $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
         
-        header('location: ./index.php?url=confirmationornot&message=votre compte a été modifié');
+        $this->repository->modifyUser($user);    
+        
+        header('location: ./index.php?url=confirmationornot&message="Compte modifié"');
         exit();
     }
     

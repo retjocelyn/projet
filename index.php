@@ -36,9 +36,10 @@ switch($url){
         $userController->register();
         break;
     
-    case "registeraccepted":
+        
+    case "confirmationornot":
         $userController = new UserController();
-        $userController-> registeraccepted();
+        $userController->confirmationOrNot() ;
         break;
         
     case "account":
@@ -190,7 +191,9 @@ switch($url){
     case "search":
         $controller = new ProductController();
         $controller->querySearch();
-        break;    
+        break;   
+        
+        
 }
 
 
