@@ -14,6 +14,7 @@ class ProductController {
    
     
     public function __construct(){
+        
         $this->view = new ProductView();
         $this->repository = new ProductRepository();
         $this->categoryRepository = new CategoryRepository();
@@ -29,7 +30,9 @@ class ProductController {
     public function instruments(): void
     {
         $category = $_GET['id'];
+        
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $datas = $this->repository->findByCategory($category);
         
         $products = [];

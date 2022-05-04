@@ -22,7 +22,7 @@ require_once './repository/AbstractRepository.php';
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
             }
         } catch (Exception $e) {
-            die($e);
+            $data = ['error' => $e->getMessage()];
         }
         
         return $data;

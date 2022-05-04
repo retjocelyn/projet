@@ -9,6 +9,7 @@ require_once './repository/CategoryRepository.php';
 require_once './repository/OrderRepository.php';
 require_once './model/class/User.php';
 require_once './model/class/Order.php';
+require_once './service/Authentificator.php';
 
 class AdminController {
     
@@ -24,17 +25,16 @@ class AdminController {
         $this->productRepository = new ProductRepository();
         $this->categoryRepository = new CategoryRepository();
         $this->orderRepository = new OrderRepository();
+        $this->authentificator = new Authentificator();
+        
     }
     
-    public function  adminAccount()
+    public function  adminAccount() /*voir si cest view*/
     {
-        $user = unserialize($_SESSION['user']);
+        $this->authentificator->checkAdmin();
         
-        if(!isset($_SESSION['user']) or $user->getRole() !== "admin"){
-            header('location: ./index.php?url=login');
-            exit();
-        }
-        
+       /*$this->authentificator->csrfTokenChecker();*/
+       
         /*$_SESSION['csrf'] = bin2hex(random_bytes(32));*/
         
         $datas = $this->productRepository->findAll();
@@ -50,7 +50,6 @@ class AdminController {
             $product->setImage($data['url_picture']);
             $product->setDescription($data['description']);
             $product->setCategory($data['category_id']);
-            
             
             $products[] = $product;
            
@@ -70,6 +69,7 @@ class AdminController {
            
         }
         $datas = $this->orderRepository->findAllOrders();
+        
         $commandes = [];
     
         foreach($datas as $data){
@@ -88,8 +88,11 @@ class AdminController {
          }
          
         $datas = $this->repository->fetchAll();
+        
         $users = [];
-         foreach($datas as $data){
+        
+        foreach($datas as $data){
+            
             $user = new User();
             $user->setid($data['id']);
             $user->setlastName($data['last_name']);
@@ -106,39 +109,43 @@ class AdminController {
         echo $this->productView->displayadminAccount($products,$categories,$commandes,$users);
     }
     
-    public function adminDeleteOrder(){
+    public function adminDeleteOrder()
+    {
         
-     if(!isset($_SESSION['user']) or $_SESSION['role'] !== "admin"){
-         
-            header('location: ./index.php?url=login');
+        $this->authentificator->checkAdmin();
+        
+        /*$this->authentificator->csrfTokenChecker();*/
+        
+        $orderId = $_GET['id'];
+        
+        if($this->orderRepository->adminDeleteOrder($orderId)){
+            
+            header('location: ./index.php?url=confirmationornot&message=commande supprimée');
             exit();
             
         }
-        
-        $orderId = $_GET['id'];
-        $this->orderRepository->adminDeleteOrder($orderId);
-        
-        header('location: ./index.php?url=confirmationornot&message=commande supprimée');
+        header('location: ./index.php?url=confirmationornot&message=commande non supprimée');
         exit();
         
     }    
     
      public function adminDeleteUser():void
     {
+         $this->authentificator->checkAdmin();
         
-         if(!isset($_SESSION['user']) or $_SESSION['role'] !== "admin"){
-             
-                header('location: ./index.php?url=login');
-                exit();
-                
-        }
+        /*$this->authentificator->csrfTokenChecker();*/
         
-        $id = $_GET['id'];
-        $this->repository->deleteUser($id);
+        $userId = $_GET['id'];
         
-        header('location: ./index.php?url=confirmationornot&message=client supprimé');
+        if($this->repository->deleteUser($userId)){
+        
+            header('location: ./index.php?url=confirmationornot&message=user supprimé');
+            exit();
+        } 
+         
+        header('location: ./index.php?url=confirmationornot&message=user non supprimé');
         exit();
-    } 
+    }    
     
 }
 

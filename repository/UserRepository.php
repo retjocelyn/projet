@@ -84,7 +84,7 @@ require_once './repository/AbstractRepository.php';
                  return $query->execute();
             }
         } catch (Exception $e) {
-           return $data = ['error' => $e->getMessage()];
+           return false;
         }
     }
        
@@ -114,8 +114,9 @@ require_once './repository/AbstractRepository.php';
     }
        
        
-    public function deleteUser($userId)
+    public function deleteUser($userId):bool
     {
+        
       try{
              $query = $this->connexion->prepare('DELETE from users WHERE id = :id');
             

@@ -49,8 +49,9 @@ require_once './repository/AbstractRepository.php';
     {  
         
             try {
-                $query = $this->connexion->prepare('INSERT INTO orders (user_id,product_id,created_at) 
-                VALUES (:userId,:productId, NOW())');
+                $query = $this->connexion->prepare('INSERT INTO orders
+                    (user_id,product_id,created_at) 
+                    VALUES (:userId,:productId, NOW())');
                 
                 if ($query) {   
                
@@ -69,8 +70,12 @@ require_once './repository/AbstractRepository.php';
     public function findById($userid)
     {
         $data = null;
+        
         try {                                  
-            $query = $this->connexion->prepare('SELECT * FROM products as p INNER JOIN orders as ord ON p.id = ord.product_id WHERE ord.user_id = :id');
+            $query = $this->connexion->prepare('SELECT * FROM products as p 
+                INNER JOIN orders as ord ON p.id = ord.product_id 
+                WHERE ord.user_id = :id');
+                
             if ($query) {
                 
                 $query->bindParam(':id', $userid);
@@ -105,12 +110,21 @@ require_once './repository/AbstractRepository.php';
       
     
     
-     public function adminDeleteOrder($orderId)
+    public function adminDeleteOrder($orderId)
     {  
-        $sql = "DELETE FROM orders WHERE id = '$orderId'";
-        $stmt = $this->connexion->query($sql);
-      
+       
+        try {
+            $query = $this->connexion->prepare('DELETE FROM orders WHERE id = :orderId');
+                if ($query) {   
+               
+                    $query->bindValue(':orderId',$orderId);
+                    
+                    return $query->execute();
+                }    
+                
+            } catch (Exception $e) {
+                return false;
+            }
     }
-       
-       
+      
 }
