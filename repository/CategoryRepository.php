@@ -47,24 +47,65 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function createCategory($newCategoryName,$newCategoryImage){
-        $sql = "INSERT INTO category (name,url_picture) VALUES ('$newCategoryName','$newCategoryImage')";
-        $stmt = $this->connexion->query($sql);
+    public function createCategory($newCategory):bool
+    {
+       
+        try{
+             $query = $this->connexion->prepare('INSERT INTO category (name,url_picture) 
+                VALUES (:categoryName,:categoryImage)');
+
+            if ($query) {
+               
+                $query->bindValue(':categoryName',$newCategory->getName());
+                $query->bindValue(':categoryImage',$newCategory->getUrlImage());
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
     
-    public function modifyCategory($id,$newCategoryName,$newProductImage)
+    
+    public function modifyCategory($newCategory):bool
     {
-         $sql = " UPDATE category
-            SET name = '$newCategoryName',url_picture = '$newProductImage'
-            WHERE id = '$id'";
-         $stmt = $this->connexion->query($sql);
+       
+        try{
+             $query = $this->connexion->prepare('UPDATE category
+                SET name = :newCategoryName,url_picture = :newCategoryImage
+                WHERE id = :categoryId');
+
+            if ($query) {
+               
+                $query->bindValue(':newCategoryName',$newCategory->getName());
+                $query->bindValue(':newCategoryImage',$newCategory->getUrlImage());
+                $query->bindValue(':categoryId',$newCategory->getId());
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
     
-    public function deleteCategory($id)
+    
+    public function deleteCategory($id):bool
     {
-         $sql = "DELETE FROM category
-                WHERE id = '$id'";
-         $stmt = $this->connexion->query($sql);
+         
+        try{
+             $query = $this->connexion->prepare('DELETE FROM category
+                WHERE id = :categoryId');
+
+            if ($query) {
+               
+                $query->bindValue(':categoryId',$id);
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
+    
 
 }

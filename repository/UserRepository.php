@@ -89,7 +89,7 @@ require_once './repository/AbstractRepository.php';
     }
        
     
-     public function modifyUser(User $user):bool
+    public function modifyUser(User $user):bool
     {
         try{
              $query = $this->connexion->prepare('UPDATE users

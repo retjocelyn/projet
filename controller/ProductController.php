@@ -21,6 +21,7 @@ class ProductController {
         $this->orderRepository = new OrderRepository();
         $this->authentificator = new Authentificator();
         $product = new Product();
+        $this->category = new Category();
         
     }
     
@@ -217,24 +218,34 @@ class ProductController {
         if(isset($_POST['name'],$_FILES)){
             
             $tmpName = $_FILES['file']['tmp_name'];
-            $name = basename($_FILES['file']['name']);
+            $file_name = $_FILES['file']['name'];
+            $temp= explode('.',$file_name);
+            $extension = end($temp);
+           
+            $newFileName = md5(time()).'.'.$extension;
+            
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
             
-          
-            move_uploaded_file($tmpName,'./public/assets/img/'.$name);
-            $newCategoryName = $_POST['name'];
-            $newCategoryImage = "./public/assets/img/$name";
-            $this->categoryRepository->createCategory($newCategoryName,$newCategoryImage);
+            move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
             
-            header('location: ./index.php?url=confirmationornot&message=categorie créée');
-            exit();
-        }
+            $this->category->setName(htmlspecialchars($_POST['name'])) ;
+            $this->category->setUrlImage("./public/assets/img/$newFileName");
+            
+            
+            if($this->categoryRepository->createCategory($this->category)){
+            
+                header('location: ./index.php?url=confirmationornot&message=categorie créée');
+                exit();
+            }
         
             header('location: ./index.php?url=confirmationornot&message=categorie non créée');
             exit();
+        }
     }
-     public function formModifyCategory()
+    
+    
+    public function formModifyCategory()
     {
         $category = $_GET['id'];
         $data = $this->categoryRepository->findById($category);
@@ -246,33 +257,49 @@ class ProductController {
         echo $this->view->displayFormModifyCategory($category);
     }
     
+    
     public function modifyCategory()
     {
+        
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkAdmin();
+        
         if(isset($_POST['id'],$_POST['name'],$_FILES))
         {
             
             $tmpName = $_FILES['file']['tmp_name'];
-            $name = basename($_FILES['file']['name']);
+            $file_name = $_FILES['file']['name'];
+            $temp= explode('.',$file_name);
+            $extension = end($temp);
+           
+            $newFileName = md5(time()).'.'.$extension;
+            
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
             
-          
-            move_uploaded_file($tmpName,'./public/assets/img/'.$name);
-            $id = $_POST['id'];
-            $newCategoryName = $_POST['name'];
-            $newProductImage = "./public/assets/img/$name";
+            move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
             
-            $this->categoryRepository->modifyCategory($id,$newCategoryName,$newProductImage);
             
-            header('location: ./index.php?url=confirmationornot&message=categorie modifiée');
-            exit();
-        }
+            $this->category->setId(htmlspecialchars($_POST['id']));
+            $this->category->setName(htmlspecialchars($_POST['name']));
+            $this->category->setUrlImage("./public/assets/img/$newFileName");
+            
+            if($this->categoryRepository->modifyCategory($this->category)){
+            
+                header('location: ./index.php?url=confirmationornot&message=categorie modifiée');
+                exit();
+            }
+            
         header('location: ./index.php?url=confirmationornot&message=categorie non modifiée');
         exit();
-    }
+        
+        }
+    }    
     
     public function deleteCategory()
     {
+        $this->authentificator->checkAdmin();
+        
         if(isset($_GET['id']))
         {
             $id = $_GET['id'];
