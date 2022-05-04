@@ -228,6 +228,7 @@ class ProductPage extends AbstractPage {
         $this->head->setTitle('page produit');
         $this->head->setDescription('affiche un produit');
         $this->body = $this->utils->searchHtml('oneproduct');
+        
         $content = $this->utils->searchInc('produit');
         $content = str_replace('{%name%}', $product->getName(), $content);
         $content = str_replace('{%id%}',$product->getId(), $content);
@@ -236,6 +237,7 @@ class ProductPage extends AbstractPage {
         $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
         $content = str_replace('{%urlImage%}',$product->getImage(), $content);
         $this->body = str_replace('{% article %}',$content,$this->body);
+        
         $this->constructPage();
      }
      
@@ -253,7 +255,7 @@ class ProductPage extends AbstractPage {
                  
                  $this->article .= $content;
             }
-            
+           
             $this->body = str_replace('{%option%}', $this->article, $this->body);
             $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
             $this->body = str_replace('{%name%}',$product->getName(), $this->body);

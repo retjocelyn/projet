@@ -72,6 +72,7 @@ require_once './repository/AbstractRepository.php';
         try {                                  
             $query = $this->connexion->prepare('SELECT * FROM products as p INNER JOIN orders as ord ON p.id = ord.product_id WHERE ord.user_id = :id');
             if ($query) {
+                
                 $query->bindParam(':id', $userid);
                 $query->execute();
                 

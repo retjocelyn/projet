@@ -7,6 +7,7 @@ require_once './repository/OrderRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Category.php';
 require_once './view/ProductView.php';
+require_once './service/Authentificator.php';
 
 class ProductController {
     
@@ -19,6 +20,8 @@ class ProductController {
         $this->basketRepository = new BasketRepository();
         $this->orderRepository = new OrderRepository();
         $this->authentificator = new Authentificator();
+        $product = new Product();
+        
     }
     
     
@@ -49,36 +52,44 @@ class ProductController {
     }
     
     
-    public function createProduct(){
+    public function createProduct()
+    {
         
-         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkAdmin();
+        
+        if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
            
             $tmpName = $_FILES['file']['tmp_name'];
-            $name = basename($_FILES['file']['name']);
+            $fileName = md5(time()).'.'.$extension;
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
             
-            move_uploaded_file($tmpName,'./public/assets/img/'.$name);
             
-            $newProductCategory = $_POST['category'];
-            $newProductName= $_POST['name'];
-            $newProductDescription = $_POST['description'];
-            $newProductPrice = (int)$_POST['price'];
-            $newProductQuantity = (int)$_POST['quantity'];
-            $newProductImage = "./public/assets/img/$name";
+            move_uploaded_file($tmpName,'./public/assets/img/'.$fileName);
             
-            $this->repository->createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
+            $product = new Product();
+            $product->setCategory(htmlspecialchars($_POST['category'])); 
+            $product->setName(htmlspecialchars($_POST['name']));
+            $product->setDescription(htmlspecialchars($_POST['description']));
+            $product->setPrice((int)htmlspecialchars($_POST['price']));
+            $product->setQuantity((int)htmlspecialchars($_POST['quantity']));
+            $product->setImage("./public/assets/img/$fileName");
             
+            if($this->repository->createProduct($product)){
+                
+                header('location: ./index.php?url=confirmationornot&message=article créer');
+                exit();
+            }
             
-            header('location: ./index.php?url=confirmationornot&message=article créer');
+            header('location: ./index.php?url=confirmationornot&message=article non crée');
             exit();
         }
        
-            header('location: ./index.php?url=confirmationornot&message=article non crée');
-            exit();
-    }
+    }       
     
-    public function showOneProduct()
+    
+    public function showOneProduct():view    /*revoir si cest bonle view*/
     {
         $productId = $_GET['id'];
         $data = $this->repository->findById($productId);
@@ -105,6 +116,9 @@ class ProductController {
     
     public function formModifyProduct()
     {
+        
+        $this->authentificator->checkAdmin();
+        
         $datas = $this->categoryRepository->findAll();
         $categories = [];
         
@@ -118,6 +132,7 @@ class ProductController {
         
         $produit = $_GET['id'];
         $data = $this->repository->findById($produit);
+        
         $product = new Product();
         $product->setId($data['id']);
         $product->setName($data['name']);
@@ -131,10 +146,13 @@ class ProductController {
         echo $this->view->displayFormModifyProduct($product,$categories);
     }
     
-     public function modifyProduct()
-     {
-          
-         if(isset($_POST['id'],$_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
+    public function modifyProduct()
+    {
+        
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkAdmin();
+        
+        if(isset($_POST['id'],$_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
             
             $tmpName = $_FILES['file']['tmp_name'];
             //$_FILES['file']['name']
@@ -148,35 +166,40 @@ class ProductController {
             $error = $_FILES['file']['error'];
             
             move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
-            $id = $_POST['id'];
             
-            $newProductCategory = $_POST['category'];
-            $newProductName= $_POST['name'];
-            $newProductDescription = $_POST['description'];
-            $newProductPrice = (int)$_POST['price'];
-            $newProductQuantity = (int)$_POST['quantity'];
-            $newProductImage = "./public/assets/img/$newFileName";
+            $product = new Product();
+            $product->setId(htmlspecialchars($_POST['id']));
+            $product->setCategory(htmlspecialchars($_POST['category'])); 
+            $product->setName(htmlspecialchars($_POST['name']));
+            $product->setDescription(htmlspecialchars($_POST['description']));
+            $product->setPrice((int)htmlspecialchars($_POST['price']));
+            $product->setQuantity((int)htmlspecialchars($_POST['quantity']));
+            $product->setImage("./public/assets/img/$newFileName");
             
-            $data = $this->repository->fetchImage($id);
+            $data = $this->repository->fetchImage($product->getId());
             
-           unlink($data['url_picture']);
-           
+            /*unlink($data['url_picture']);*/
+         
+            if($this->repository->modifyProduct($product)){
             
-            $this->repository->modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage);
+                header('location: ./index.php?url=confirmationornot&message=article modifié');
+                exit();
             
-            
-            header('location: ./index.php?url=confirmationornot&message=article modifié');
-            exit();
-            
+            }
+        
+            header('location: ./index.php?url=confirmationornot&message=article non modifié');
         }
-        header('location: ./index.php?url=confirmationornot&message=article non modifié');
     }
     
-     public function deleteProduct()
-     {
+    
+    public function deleteProduct()
+    {
+        
+        $this->authentificator->checkAdmin();
+        
            if(isset($_GET['id']))
            {
-                $id = $_GET['id'];
+                $productId = $_GET['id'];
                 $this->repository->deleteProduct($id); 
                 header('location: ./index.php?url=confirmationornot&message=article effacé');
                 exit();
@@ -188,11 +211,8 @@ class ProductController {
     
     public function createCategory()
     {
-        if($_POST['CSRFtoken'] !== $_SESSION['csrf']){
-            
-            header('location: ./index.php?url=confirmationornot&message=categorie non créée');
-            exit();
-        }
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkAdmin();
         
         if(isset($_POST['name'],$_FILES)){
             

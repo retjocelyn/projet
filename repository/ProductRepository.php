@@ -64,34 +64,90 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function createProduct($newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage)
+    public function createProduct($product):bool
     {    
-        $sql = "INSERT INTO products (name,description,quantity,price,category_id,url_picture,created_at) VALUES ('$newProductName','$newProductDescription','$newProductQuantity','$newProductPrice','$newProductCategory','$newProductImage', NOW())";
-        $stmt = $this->connexion->query($sql);
-    }
-    
-    public function modifyProduct($id,$newProductCategory,$newProductName,$newProductDescription,$newProductPrice,$newProductQuantity,$newProductImage)
-    {    
-        $sql = " UPDATE products
-            SET name = '$newProductName',description = '$newProductDescription',quantity = '$newProductQuantity',price = '$newProductPrice', category_id = '$newProductCategory', url_picture = '$newProductImage',created_at = NOW()
-            WHERE id = '$id' ";
-         $stmt = $this->connexion->query($sql);
         
+        try{
+             $query = $this->connexion->prepare('INSERT INTO products
+                (name,description,quantity,price,category_id,url_picture,created_at)
+                VALUES (:productName,:productDescription,:productQuantity,
+                :productPrice,:productCategory,:productImage, NOW())');
+
+            
+            if ($query) {
+               
+                $query->bindValue(':productName',$product->getName());
+                $query->bindValue(':productDescription',$product->getDescription());
+                $query->bindValue(':productQuantity',$product->getQuantity());
+                $query->bindValue(':productPrice',$product->getPrice());
+                $query->bindValue(':productCategory',$product->getCategory());
+                $query->bindValue(':productImage',$product->getImage());
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
     
-    public function deleteProduct($id)
+    
+    public function modifyProduct( Product $product) :bool
+    {    
+       
+         
+         try{
+             $query = $this->connexion->prepare('UPDATE products
+                SET name = :name,description = :description,
+                quantity = :quantity,price = :price, 
+                category_id = :category, url_picture = :image,
+                created_at = NOW()
+                WHERE id = :id ');
+            
+            if ($query) {
+               
+                $query->bindValue(':name',$product->getName());
+                $query->bindValue(':description',$product->getDescription());
+                $query->bindValue(':quantity',$product->getQuantity());
+                $query->bindValue(':price',$product->getPrice());
+                $query->bindValue(':category',$product->getCategory());
+                $query->bindValue(':image',$product->getImage());
+                $query->bindValue(':id',$product->getId());
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
+    }
+        
+    
+    
+    public function deleteProduct($productId) :bool
     {
-         $sql = "DELETE FROM products WHERE id = '$id' ";
-         $stmt = $this->connexion->query($sql);
+         
+         try{
+             $query = $this->connexion->prepare('DELETE FROM products WHERE id = :id');
+            
+            if ($query) {
+               
+                $query->bindValue(':id',$productId);
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
     }
+        
     
-    public function fetchImage($id)
+    
+    public function fetchImage($productId)
     {
         $data = null;
         try {
             $query = $this->connexion->prepare('SELECT url_picture FROM products WHERE id = :id');
             if ($query) {
-                $query->bindParam(':id', $id);
+                $query->bindParam(':id', $productId);
                 $query->execute();
                 
                 $data = $query->fetch(PDO::FETCH_ASSOC);

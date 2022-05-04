@@ -256,9 +256,7 @@ class UserController {
      
     public function logout() : void
     {
-        $this->authentificator->csrfTokenChecker();
-        $this->authentificator->checkUser();
-        
+       
         session_destroy();
         header('location: ./index.php?url=home');
         exit();
