@@ -73,8 +73,8 @@ require_once './repository/AbstractRepository.php';
             VALUES (:newfirstName,:newlastName,:email,:newPass,:adress,:wallet,:role, NOW() )');
             if ($query) {
                
-                $query->bindValue(':newlastName',$user->getFirstName());
-                $query->bindValue(':newfirstName',$user->getlastName());
+                $query->bindValue(':newlastName',$user->getlastName());
+                $query->bindValue(':newfirstName',$user->getFirstName());
                 $query->bindValue(':email',$user->getEmail());
                 $query->bindValue(':newPass',$user->getPassword());
                 $query->bindValue(':adress',$user->getAdresse());
@@ -99,8 +99,8 @@ require_once './repository/AbstractRepository.php';
             
             if ($query) {
                
-                $query->bindValue(':newlastName',$user->getFirstName());
-                $query->bindValue(':newfirstName',$user->getlastName());
+                $query->bindValue(':newlastName',$user->getlastName());
+                $query->bindValue(':newfirstName',$user->getFirstName());
                 $query->bindValue(':newEmail',$user->getEmail());
                 $query->bindValue(':newPass',$user->getPassword());
                 $query->bindValue(':newAdress',$user->getAdresse());
@@ -136,6 +136,7 @@ require_once './repository/AbstractRepository.php';
      
         try {
             $query = $this->connexion->prepare('UPDATE users SET wallet = :amount WHERE id = :userId');
+            
             if ($query) {
                 
                 $query->bindParam(':amount', $amount);

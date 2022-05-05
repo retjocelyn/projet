@@ -15,8 +15,10 @@ require_once './repository/AbstractRepository.php';
     public function findAll() /*doute si utile???*/
     {
         $data = null;
+        
         try {
             $query = $this->connexion->prepare('SELECT * FROM orders ');
+            
             if ($query) {
                 $query->execute();
                 
@@ -33,7 +35,11 @@ require_once './repository/AbstractRepository.php';
     {  
         $data = null;
         try {
-            $query = $this->connexion->prepare('SELECT o.id, o.user_id, o.created_at, u.first_name, u.last_name, u.adress, p.name, p.quantity,p.url_picture , p.price FROM orders as o INNER JOIN users as u ON o.user_id = u.id INNER JOIN products as p ON o.product_id = p.id');
+            $query = $this->connexion->prepare('SELECT o.id, o.user_id, o.created_at,
+            u.first_name, u.last_name, u.adress, p.name, p.quantity,p.url_picture , p.price
+            FROM orders as o INNER JOIN users as u ON o.user_id = u.id 
+            INNER JOIN products as p ON o.product_id = p.id');
+            
             if ($query) {
                 $query->execute();
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -109,8 +115,7 @@ require_once './repository/AbstractRepository.php';
     }
       
     
-    
-    public function adminDeleteOrder($orderId)
+    public function adminDeleteOrder($orderId):bool
     {  
        
         try {

@@ -1,7 +1,8 @@
             <main>
                 <section class="showregisterform">    
-                     <form class="register" action="index.php?url=modifyuser&id={%id%}" method="post">
-                                <h2>Modifier  votre compte</h2>
+                    <form class="register" action="index.php?url=modifyuser" method="post">
+                        <h2>Modifier  votre compte</h2>
+                        <input type="hidden"  name="id" value="{%id%}" required>
                         <div class="separation newfamilyname">
                             <label for="lastName">Nom : </label> 
                             <input type="text" id="lastName" name="lastName" value="{%familyname%}" required>

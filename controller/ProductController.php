@@ -181,9 +181,9 @@ class ProductController {
             $product->setImage("./public/assets/img/$newFileName");
             
             $data = $this->repository->fetchImage($product->getId());
+           
+            unlink($data['url_picture']);
             
-            /*unlink($data['url_picture']);*/
-         
             if($this->repository->modifyProduct($product)){
             
                 header('location: ./index.php?url=confirmationornot&message=article modifié');
@@ -192,6 +192,7 @@ class ProductController {
             }
         
             header('location: ./index.php?url=confirmationornot&message=article non modifié');
+            exit();
         }
     }
     
@@ -200,18 +201,26 @@ class ProductController {
     {
         
         $this->authentificator->checkAdmin();
-        
+       
            if(isset($_GET['id']))
-           {
+           {    
                 $productId = $_GET['id'];
-                $this->repository->deleteProduct($id); 
-                header('location: ./index.php?url=confirmationornot&message=article effacé');
-                exit();
-            }
-            
+                
+                $data = $this->repository->fetchImage($productId);
+                
+                unlink($data['url_picture']);
+                
+                if($this->repository->deleteProduct($productId)){
+                   
+                    header('location: ./index.php?url=confirmationornot&message=article effacé');
+                    exit();
+               } 
+                
             header('location: ./index.php?url=confirmationornot&message=article non effacé');
             exit();
-    }
+            
+            }
+    }        
     
     public function createCategory()
     {
@@ -247,7 +256,6 @@ class ProductController {
         }
     }
     
-    
     public function formModifyCategory()
     {
         $category = $_GET['id'];
@@ -282,10 +290,14 @@ class ProductController {
             
             move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
             
+            $data = $this->categoryRepository->fetchImage($categoryId);
+           
+            unlink($data['url_picture']);
             
             $this->category->setId(htmlspecialchars($_POST['id']));
             $this->category->setName(htmlspecialchars($_POST['name']));
             $this->category->setUrlImage("./public/assets/img/$newFileName");
+            
             
             if($this->categoryRepository->modifyCategory($this->category)){
             
@@ -305,8 +317,13 @@ class ProductController {
         
         if(isset($_GET['id']))
         {
-            $id = $_GET['id'];
-            $this->categoryRepository->deleteCategory($id);
+            $categoryId = $_GET['id'];
+            
+            $data = $this->categoryRepository->fetchImage($categoryId);
+           
+            unlink($data['url_picture']);
+            
+            $this->categoryRepository->deleteCategory($categoryId);
         
             header('location: ./index.php?url=confirmationornot&message=catégorie supprimée');
             exit();
@@ -319,7 +336,9 @@ class ProductController {
     {
         
         $userAuth = $this->authentificator->checkUser();
+        
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $datas = $this->basketRepository->findById($userAuth->getId());
         
         if(empty($datas)){

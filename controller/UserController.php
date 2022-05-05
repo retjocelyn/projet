@@ -10,7 +10,7 @@ class UserController {
     /*private $view; interet???*/
     
     
-     public function __construct()
+    public function __construct()
     {
         $this->view = new UserView();
         $this->repository = new UserRepository();
@@ -187,8 +187,10 @@ class UserController {
     
     public function formModifyUser():void
     {
-        $userId = $_GET['id'];
+        $userId = $_POST['id'];
+        
         $data = $this->repository->findById($userId);
+        
         $user = new User();
         $user->setId($data['id']);
         $user->setlastName($data['last_name']);
@@ -204,18 +206,20 @@ class UserController {
         echo $this->view->displayFormModifyUser($user);
     }
     
-     public function modifyUser():void
+    
+    public function modifyUser():void
     {
         
         $this->authentificator->csrfTokenChecker();
         $this->authentificator->checkUser();
         
         $user = new User();
-        $user->setId($_GET['id']);
+        $user->setId($_POST['id']);
         $user->setlastName(htmlspecialchars($_POST['lastName']));
         $user->setFirstName(htmlspecialchars($_POST['firstName']));
         $user->setEmail(htmlspecialchars($_POST['email']));
         $user->setAdresse(htmlspecialchars($_POST['adress']));
+        
         $Pass = htmlspecialchars($_POST['password']);
         $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
         
@@ -230,18 +234,19 @@ class UserController {
         
     }
     
+    
     public function addMoney() : void
     {
         
         $this->authentificator->csrfTokenChecker();
-        $this->authentificator->checkUser();
+        $userAuth = $this->authentificator->checkUser();
         
         if(isset($_POST['amount'])){
            
             $amount = htmlspecialchars($_POST['amount']);
-            $userId = $_GET['id'] ;
             
-            if($this->repository->addMoney($userId,$amount)){
+            
+            if($this->repository->addMoney($userAuth->getId(),$amount)){
                 
                 header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
                 exit();

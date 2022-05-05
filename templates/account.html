@@ -11,7 +11,7 @@
                                 <h2>Votre compte</h2>
                                 <div class="userprofilecontent">
                                     <div class="usercontent">
-                                        <h3>Name :</h3>
+                                        <h3>Nom :</h3>
                                         <h3>{%nom%}</h3>
                                     </div>    
                                     <div class="usercontent">
@@ -28,11 +28,13 @@
                                     </div> 
                                 </div>
                                 <div class="userbuttons">
-                                    <form  action="index.php?url=formmodifyuser&id={%id%}" method="post">
+                                    <form  action="index.php?url=formmodifyuser" method="post">
+                                        <input type="hidden"  name="id" value="{%id%}" required>
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button type="submit">Modifier profil</button>
                                     </form>
-                                     <form  action="index.php?url=deleteuser&id={%id%}" method="post">
+                                    <form  action="index.php?url=deleteuser" method="post">
+                                        <input type="hidden"  name="id" value="{%id%}" required>
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button onclick="return confirm_delete()" type="submit">Supprimer votre compte</button>
                                     </form>
@@ -46,9 +48,10 @@
                          <section id="displayuserwallet" class="showwallet">
                             <article>
                                 <h2>Votre solde est de {%solde%} €</h2>
-                                <form  action="index.php?url=addmoney&id={%id%}" method="post">
+                                <form action="index.php?url=addmoney" method="post">
+                                    <input type="hidden"  name="id" value="{%id%}" required>
                                     <div class="money">
-                                        <label for="uname"><b>Somme à entrer</b></label>
+                                        <label for="amount"><b>Somme à entrer</b></label>
                                         <input type="number" placeholder="somme" name="amount" required>
                                     </div>
                                     <input name="csrf_token" type="hidden" value="{%$token%}">
