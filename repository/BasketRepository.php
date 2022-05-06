@@ -49,16 +49,18 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function deleteArticleFromBasket($productId,$userId)
+   
+    
+    public function deleteArticleFromBasket($ArticleBasketId)
     {
        
         try {
             $query = $this->connexion->prepare('DELETE FROM `panier` 
-            WHERE product_id = :productId and user_id = :userId  ');
+            WHERE id = :articleBasketId');
             
             if ($query) {
-                $query->bindParam(':userId', $userId);
-                $query->bindParam(':productId', $productId);
+                $query->bindParam(':articleBasketId', $ArticleBasketId);
+                
                
                return $query->execute();
             }    

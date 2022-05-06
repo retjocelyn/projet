@@ -35,7 +35,7 @@ class AdminController {
         
        /*$this->authentificator->csrfTokenChecker();*/
        
-        /*$_SESSION['csrf'] = bin2hex(random_bytes(32));*/
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $datas = $this->productRepository->findAll();
         

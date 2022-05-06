@@ -76,6 +76,14 @@ main{
 .erreur{
     color:red;
 }
+
+.form_icon_button{
+    border: none;
+    background-color: white;
+    font-size: 1.5em;
+    cursor:pointer;
+}
+
 /*main de home*/
 
 .block-search{
@@ -261,7 +269,6 @@ main{
     margin: 31px 0;
     width: 60%;
     background-color: white;
-    border: 1px solid black;
     border-radius: 1em;
 }
 
@@ -405,6 +412,7 @@ main{
     border:none;
     font-family: 'Fredoka', sans-serif;
     font-size:1.3em;
+    cursor: pointer;
 }
 
 .showwallet{

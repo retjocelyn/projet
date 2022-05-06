@@ -4,6 +4,8 @@ class Product {
 
     
     private int $id;
+
+    private int $insideBasketId;
     
     private string $name;
     
@@ -32,6 +34,22 @@ class Product {
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+    
+     /**
+     * @return int
+     */
+    public function getInsideBasketId(): int
+    {
+        return $this->insideBasketId;
+    }
+    
+    /**
+     * @param int $insideBasketId
+     */
+    public function setInsideBasketId(int $insideBasketId): void
+    {
+        $this->id = $insideBasketId;
     }
     
     /**

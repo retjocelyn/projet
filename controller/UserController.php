@@ -12,6 +12,7 @@ class UserController {
     
     public function __construct()
     {
+       
         $this->view = new UserView();
         $this->repository = new UserRepository();
         $this->basket = new BasketRepository();
@@ -20,6 +21,7 @@ class UserController {
     }
     
     public function login(){
+        
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         echo $this->view->displayLogin();
@@ -187,6 +189,10 @@ class UserController {
     
     public function formModifyUser():void
     {
+        $this->authentificator->csrfTokenChecker();
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
         $userId = $_POST['id'];
         
         $data = $this->repository->findById($userId);
@@ -200,8 +206,6 @@ class UserController {
         $user->setRole($data['role']);
         $user->setAdresse($data['adress']);
         $user->setWallet($data['wallet']);
-        
-        $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         echo $this->view->displayFormModifyUser($user);
     }
@@ -241,12 +245,20 @@ class UserController {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();
         
-        if(isset($_POST['amount'])){
+        if(!isset($_POST['amount'])){
+            header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
+            exit();
+        }    
            
             $amount = htmlspecialchars($_POST['amount']);
             
+            $datas = $this->repository->findById($userAuth->getId());
             
-            if($this->repository->addMoney($userAuth->getId(),$amount)){
+            $userWallet = $datas['wallet'];
+            
+            $newAmount = $userWallet + $amount;
+            
+            if($this->repository->addMoney($userAuth->getId(),$newAmount)){
                 
                 header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
                 exit();
@@ -255,8 +267,8 @@ class UserController {
         
             header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
             exit();
-        }
     }
+    
      
      
     public function logout() : void
@@ -290,7 +302,7 @@ class UserController {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();
             
-        $productid = $_GET['id'];
+        $productid = $_POST['id'];
             
         if($this->basket->addArticleToBasket($userAuth->getId(),$productid)){
         
@@ -309,16 +321,17 @@ class UserController {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();
         
-        if(!isset($_GET['id'])){
+        if(!isset($_POST['id'])){
             
             header('location: ./index.php?url=shop');
             exit();
             
         }
         
-        $productid = $_GET['id'];
+        $ArticleBasketId = $_POST['id'];
        
-        if($this->basket->deleteArticleFromBasket($productid,$userAuth->getId())){
+       
+        if($this->basket->deleteArticleFromBasket($ArticleBasketId)){
         
             header('location: ./index.php?url=confirmationornot&message=article supprimé du panier');
             exit();

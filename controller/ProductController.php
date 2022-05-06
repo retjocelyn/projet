@@ -340,7 +340,7 @@ class ProductController {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $datas = $this->basketRepository->findById($userAuth->getId());
-        
+       
         if(empty($datas)){
            echo $this->view->displayEmptyBasket();
            exit();
@@ -351,7 +351,7 @@ class ProductController {
             
         foreach($datas as $data){
             $product = new Product();
-            $product->setId($data['product_id']);
+            $product->setInsideBasketId($data['id']);
             $product->setName($data['name']);
             $product->setQuantity($data['quantity']);
             $product->setPrice($data['price']);
@@ -359,10 +359,11 @@ class ProductController {
             $product->setDescription($data['description']);
             $product->setCategory($data['category_id']);
             
+            
             $products[] = $product;
             $prices[] = $product->getPrice();
         }
-        
+       
         $totalprice = array_sum($prices);
         
         echo $this->view->displayBasket($products,$totalprice);
