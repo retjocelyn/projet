@@ -7,8 +7,14 @@
                             <li><h2 id="categories">Catégories</h2></li>
                             <li><h2 id="orders">Les commandes</h2></li>
                             <li><h2 id="users">Tous les users</h2></li>
-                            <li id="logout"><a href="index.php?url=logout"><i class="fa-solid fa-power-off"></i></a></li>
                         </ul>
+                        <form id="icon_form_admin" action="index.php?url=logout" method="post">
+                            <input type="hidden"  name="id" value="{%id%}" required>
+                            <input name="csrf_token" type="hidden" value="{%$token%}">
+                            <button class="form_icon_button" type="submit">
+                                <i class="fa-solid fa-power-off"></i>
+                            </button>
+                        </form>
                     </nav>
                     <div class="showandhide">
                         <section id="adminaddproduct" class="adminaddproduct">

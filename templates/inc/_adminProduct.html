@@ -10,9 +10,21 @@
             <li class="productprice">Prix: {%price%} euros.</li>
         </ul>
         <div class="displayicons">
-            <a href="./index.php?url=formmodifyproduct&id={%id%}&token={%token%}"><i class="fa-solid fa-pen-clip"></i></a>
-            <a href="./index.php?url=deleteproduct&id={%id%}&token={%token%}"><i class="fa-solid fa-trash-can"></i></a>
-        </div>  
+            <form class="icon_form" action="./index.php?url=formmodifyproduct" method="post" >
+                <input type="hidden"  name="id" value="{%id%}" required>
+                <input name="csrf_token" type="hidden" value="{%$token%}">
+                <button class="form_icon_button" type="submit">
+                    <i class="fa-solid fa-pen-clip"></i>
+                </button>
+            </form>
+            <form class="icon_form" action="./index.php?url=deleteproduct" method="post" >
+                <input type="hidden"  name="id" value="{%id%}" required>
+                <input name="csrf_token" type="hidden" value="{%$token%}">
+                <button class="form_icon_button" type="submit">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
+       </div>  
     </div>
 </article>
 

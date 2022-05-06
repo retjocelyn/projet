@@ -512,13 +512,6 @@ main{
     transition:transform 1s;
 }
 
-#logout{
-    width:7em;
-}
-
-#logout>a{
-    font-size: 2em;
-}
 
 
 .menuadminaccount>ul>li:hover{
@@ -530,6 +523,14 @@ main{
     justify-content:center;
 }
 
+#icon_form_admin{
+    display: flex;
+    width: 9%;
+}
+
+#icon_form_admin>button{
+    color:blue;
+}
 
 .champbutton>button{
     height:2.5em;

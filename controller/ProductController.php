@@ -122,6 +122,7 @@ class ProductController {
     {
         
         $this->authentificator->checkAdmin();
+         $this->authentificator->csrfTokenChecker();
         
         $datas = $this->categoryRepository->findAll();
         $categories = [];
@@ -134,8 +135,8 @@ class ProductController {
             $categories[] = $category;
         }
         
-        $produit = $_GET['id'];
-        $data = $this->repository->findById($produit);
+        $produitId = $_POST['id'];
+        $data = $this->repository->findById($produitId);
         
         $product = new Product();
         $product->setId($data['id']);
@@ -201,26 +202,32 @@ class ProductController {
     {
         
         $this->authentificator->checkAdmin();
+        $this->authentificator->csrfTokenChecker();
        
-           if(isset($_GET['id']))
-           {    
-                $productId = $_GET['id'];
-                
-                $data = $this->repository->fetchImage($productId);
-                
-                unlink($data['url_picture']);
-                
-                if($this->repository->deleteProduct($productId)){
-                   
-                    header('location: ./index.php?url=confirmationornot&message=article effacé');
-                    exit();
-               } 
-                
-            header('location: ./index.php?url=confirmationornot&message=article non effacé');
+        if(!isset($_POST['id'])){
+           
+            header('location: ./index.php?url=confirmationornot&message=article non trouvé');
             exit();
+           
+        }
+        
+        $productId = $_POST['id'];
+        
+        $data = $this->repository->fetchImage($productId);
+        
+        unlink($data['url_picture']);
             
-            }
+        if($this->repository->deleteProduct($productId)){
+           
+            header('location: ./index.php?url=confirmationornot&message=article effacé');
+            exit();
+       } 
+                
+        header('location: ./index.php?url=confirmationornot&message=article non effacé');
+        exit();
+        
     }        
+    
     
     public function createCategory()
     {

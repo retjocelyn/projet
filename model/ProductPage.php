@@ -157,6 +157,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%price%}',$product->getPrice(), $content);
                 $content = str_replace('{%description%}',$product->getDescription(),$content);
                 $content = str_replace('{%urlImage%}',$product->getImage(),$content);
+                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
               
                 $this->article .= $content;
             }
