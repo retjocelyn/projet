@@ -9,7 +9,6 @@
                             <li><h2 id="users">Tous les users</h2></li>
                         </ul>
                         <form id="icon_form_admin" action="index.php?url=logout" method="post">
-                            <input type="hidden"  name="id" value="{%id%}" required>
                             <input name="csrf_token" type="hidden" value="{%$token%}">
                             <button class="form_icon_button" type="submit">
                                 <i class="fa-solid fa-power-off"></i>
@@ -45,7 +44,7 @@
                                 </div>    
                                 <div class="addimage">
                                     <label for="file">Image</label>
-                                    <input  type="file" name="file">
+                                    <input  type="file" name="file" required>
                                 </div>
                                 <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <div class="registerbutton">
@@ -65,7 +64,7 @@
                                 </div>    
                                 <div class="addimage">
                                     <label for="file">Image</label>
-                                    <input type="file" name="file">
+                                    <input type="file" name="file" required>
                                 </div>    
                                 <div class="separation">
                                     <input name="csrf_token" type="hidden" value="{%$token%}">

@@ -70,13 +70,14 @@ class UserController {
               
             $_SESSION['user'] = serialize($user);
           
-                if($user->getRole() === "admin"){
-                    header('location: ./index.php?url=adminaccount');
-                    exit();
-                }else{
-                    header('location: ./index.php?url=account');
-                    exit();
-                }
+            if($user->getRole() === "admin"){
+                header('location: ./index.php?url=adminaccount');
+                exit();
+            }else{
+                header('location: ./index.php?url=account');
+                exit();
+            }
+            
         }
     }
     
@@ -173,7 +174,7 @@ class UserController {
         echo $this->view->displayRegisterAccepted();
     }
     
-     public function confirmationOrNot() 
+    public function confirmationOrNot() 
     {
         if(isset($_GET['message'])){
         
@@ -229,6 +230,8 @@ class UserController {
         
         if($this->repository->modifyUser($user)){
        
+            $_SESSION['user'] = serialize($user);
+            
             header('location: ./index.php?url=confirmationornot&message="Compte modifié"');
             exit();
         }   
@@ -242,8 +245,9 @@ class UserController {
     public function addMoney() : void
     {
         
-        $this->authentificator->csrfTokenChecker();
+        
         $userAuth = $this->authentificator->checkUser();
+        $this->authentificator->csrfTokenChecker();
         
         if(!isset($_POST['amount'])){
             header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
@@ -273,7 +277,9 @@ class UserController {
      
     public function logout() : void
     {
-       
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+        
         session_destroy();
         header('location: ./index.php?url=home');
         exit();
@@ -299,8 +305,9 @@ class UserController {
     public function addArticleToBasket()
     {
        
-        $this->authentificator->csrfTokenChecker();
+        
         $userAuth = $this->authentificator->checkUser();
+        $this->authentificator->csrfTokenChecker();
             
         $productid = $_POST['id'];
             

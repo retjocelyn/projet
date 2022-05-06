@@ -122,7 +122,9 @@ class ProductController {
     {
         
         $this->authentificator->checkAdmin();
-         $this->authentificator->csrfTokenChecker();
+        $this->authentificator->csrfTokenChecker();
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $datas = $this->categoryRepository->findAll();
         $categories = [];
@@ -265,7 +267,12 @@ class ProductController {
     
     public function formModifyCategory()
     {
-        $category = $_GET['id'];
+        $this->authentificator->csrfTokenChecker();
+        $this->authentificator->checkAdmin();
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        $category = $_POST['id'];
         $data = $this->categoryRepository->findById($category);
         $category = new Category();
         $category->setId($data['id']);
@@ -297,6 +304,8 @@ class ProductController {
             
             move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
             
+            $categoryId = $_POST['id'];
+            
             $data = $this->categoryRepository->fetchImage($categoryId);
            
             unlink($data['url_picture']);
@@ -318,23 +327,29 @@ class ProductController {
         }
     }    
     
-    public function deleteCategory()
+    public function deleteCategory():void
     {
+        $this->authentificator->csrfTokenChecker();
         $this->authentificator->checkAdmin();
         
-        if(isset($_GET['id']))
-        {
-            $categoryId = $_GET['id'];
-            
-            $data = $this->categoryRepository->fetchImage($categoryId);
-           
-            unlink($data['url_picture']);
-            
-            $this->categoryRepository->deleteCategory($categoryId);
-        
-            header('location: ./index.php?url=confirmationornot&message=catégorie supprimée');
+        if(!isset($_POST['id'])){
+            header('location: ./index.php?url=confirmationornot&message=catégorie non supprimée');
             exit();
+        }    
+        
+        $categoryId = $_POST['id'];
+        
+        $data = $this->categoryRepository->fetchImage($categoryId);
+       
+        unlink($data['url_picture']);
+        
+        if($this->categoryRepository->deleteCategory($categoryId)){
+        
+                header('location: ./index.php?url=confirmationornot&message=catégorie supprimée');
+                exit();
+                
         }
+        
         header('location: ./index.php?url=confirmationornot&message=catégorie non supprimée');
         exit();
     }

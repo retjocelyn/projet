@@ -33,8 +33,6 @@ class AdminController {
     {
         $this->authentificator->checkAdmin();
         
-       /*$this->authentificator->csrfTokenChecker();*/
-       
        
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
@@ -110,14 +108,19 @@ class AdminController {
         echo $this->productView->displayadminAccount($products,$categories,$commandes,$users);
     }
     
-    public function adminDeleteOrder()
+    public function adminDeleteOrder():void
     {
         
         $this->authentificator->checkAdmin();
+        $this->authentificator->csrfTokenChecker();
         
-        /*$this->authentificator->csrfTokenChecker();*/
+        if(!isset($_POST['id'])){
+            
+            header('location: ./index.php?url=confirmationornot&message=commande non supprimée');
+            exit();
+        }
         
-        $orderId = $_GET['id'];
+        $orderId = $_POST['id'];
         
         if($this->orderRepository->adminDeleteOrder($orderId)){
             
@@ -130,7 +133,7 @@ class AdminController {
         
     }    
     
-     public function adminDeleteUser():void
+    public function adminDeleteUser():void
     {
          $this->authentificator->checkAdmin();
         

@@ -167,6 +167,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%name%}', $category->getName(), $content);
                 $content = str_replace('{%id%}',$category->getId(), $content);
                 $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
+                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
               
                 $categoryarticle .= $content;
             }
@@ -177,6 +178,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%name%}', $category->getName(), $content);
                 $content = str_replace('{%id%}',$category->getId(), $content);
                 $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
+                
               
                 $allCategories .= $content;
             }
@@ -194,6 +196,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%nameproduit%}',$order->getCommandProductName(),$content);
                 $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(),$content);
                 $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
+                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
             
                 $commandArticle .=  $content;
             }
@@ -224,8 +227,8 @@ class ProductPage extends AbstractPage {
             $this->constructPage();
      }
      
-     public function displayOneProduct($product)
-     {
+    public function displayOneProduct($product)
+    {
         $this->head->setTitle('page produit');
         $this->head->setDescription('affiche un produit');
         $this->body = $this->utils->searchHtml('oneproduct');
@@ -237,10 +240,12 @@ class ProductPage extends AbstractPage {
         $content = str_replace('{%description%}',$product->getDescription(), $content);
         $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
         $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+        $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
+        
         $this->body = str_replace('{% article %}',$content,$this->body);
         
         $this->constructPage();
-     }
+    }
      
     public function CreateFormModifyProduct($product)
     {

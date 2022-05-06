@@ -15,7 +15,7 @@ require_once './repository/AbstractRepository.php';
     {
         $data = null;
         try {
-            $query = $this->connexion->prepare('SELECT * FROM users');
+            $query = $this->connexion->prepare('SELECT * FROM users WHERE role = "client"');
             if ($query) {
                 $query->execute();
                 
