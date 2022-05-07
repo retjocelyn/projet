@@ -15,7 +15,6 @@ function showHide(a){
     a.classList.toggle("hide");
 }
 
-
 /*montre quel selecteur a ete choisis*/
 
 function selected(a){

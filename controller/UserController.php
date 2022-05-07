@@ -285,7 +285,7 @@ class UserController {
         exit();
     }
     
-     public function deleteUser() : void
+    public function deleteUser() : void
     {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();

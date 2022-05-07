@@ -11,7 +11,6 @@ require_once './service/Authentificator.php';
 
 class ProductController {
     
-   
     
     public function __construct(){
         

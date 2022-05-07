@@ -7,21 +7,19 @@ let input = document.getElementById('search');
 let search = document.getElementById('list-search');
 
 if(input){
-    input.addEventListener('keyup', (e) => {
+    input.addEventListener('keyup', async (e) => {
         let value = e.target.value
         removeOldList()
-        query(value)
-        .then(data => data.json())
-        .then(data => {
-            if(value !== ""){
-                for(let i = 0; i < data.length; i++){
-                    let li = document.createElement('li');
-                    search.appendChild(li);
-                    li.innerHTML = `<a href="https://jocelynretiere.sites.3wa.io/projetdefindanneevraie/index.php?url=showoneproduct&id=${data[i].id}">${data[i].name}</a>`
-                }
-            }
-        })
-        
+        const data = await query(value)
+        const res = await data.json();
+
+        if(value !== ""){
+          for(let i = 0; i < res.length; i++){
+              let li = document.createElement('li');
+              search.appendChild(li);
+              li.innerHTML =`<a href="https://jocelynretiere.sites.3wa.io/projetdefindanneevraie/index.php?url=showoneproduct&id=${res[i].id}">${res[i].name}</a>`
+          }
+      }
     })
 }
 

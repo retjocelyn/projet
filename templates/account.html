@@ -33,12 +33,12 @@
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button type="submit">Modifier profil</button>
                                     </form>
-                                    <form  action="index.php?url=deleteuser" method="post">
+                                    <form   class="form_checker" action="index.php?url=deleteuser" method="post">
                                         <input type="hidden"  name="id" value="{%id%}" required>
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
-                                        <button onclick="return confirm_delete()" type="submit">Supprimer votre compte</button>
+                                        <button  type="submit">Supprimer votre compte</button>
                                     </form>
-                                     <form  action="index.php?url=logout" method="post">
+                                     <form  class="form_checker" action="index.php?url=logout" method="post">
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button  type="submit">Se déconnecter</button>
                                     </form>

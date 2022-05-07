@@ -1,6 +1,6 @@
 
-let addproduct = document.getElementById("addarticle");
-let allproducts = document.getElementById("products");
+let addProduct = document.getElementById("addarticle");
+let allProducts = document.getElementById("products");
 let addCategory = document.getElementById("addcategory");
 let categories = document.getElementById("categories");
 let orders = document.getElementById("orders");                          
@@ -18,92 +18,61 @@ let sectionAdminAllUsers = document.getElementById("showAdminUsers");
 
 let sections = [sectionAdminAddProduct,sectionAdminAllProduct,sectionAdminAddCategory,sectionAdminAllCategories,sectionAdminAllUsers,sectionAdminAllOrders];         
 
-let selecteurs = [addproduct,allproducts,addCategory,categories ,orders,users];
+let selecteurs = [addProduct,allProducts,addCategory,categories ,orders,users];
 
 
 /*admin menu*/
 
 /*fonction pour afficher au moins section une section si besoin */
 
-function stillDisplayone()
-{
-    var checker = 0;
-    
-      for (let i = 0; i < sections.length; i++) {
-          
-             if(sections[i].style.display === "none"){
-                 checker ++ ;
-             }
-             
-        }
+const stillDisplayOne = () => {
+    const noSectionDisplayed = sections.every(section => section.style.display === "none");
 
-        if(checker === sections.length){
+    if(noSectionDisplayed){
+      sectionAdminAddProduct.style.display = "flex";
+      addProduct.style.color = "red";
+    }
+} 
+
+
+const eventListenerBuilder = (section, button) => (e) => {
+  if (section.style.display === "none"){
+          
+    for (let i = 0; i < sections.length; i++) {
+      sections[i].style.display = "none";
+    }
     
-            sectionAdminAddProduct.style.display = "flex";
-            addproduct.style.color = "red";
-        }    
+    for (let i = 0; i < selecteurs.length; i++) {
+      selecteurs[i].style.color = "blue";
+    }
     
+    section.style.display = "flex";
+    button.style.color = "red"; 
+  
+  }
+  else {
+    section.style.display = "none";
+    button.style.color = "blue";
+    stillDisplayOne();
+  }
 }
 
-if(addproduct !== null){
+
+if(addProduct !== null){
     
     sectionAdminAddProduct.style.display = "flex";
-    addproduct.style.color = "red";
+    addProduct.style.color = "red";
     
-    addproduct.addEventListener('click', function(e){
-        
-     if (sectionAdminAddProduct.style.display === "none"){
-         
-        for (let i = 0; i < sections.length; i++) {
-             sections[i].style.display = "none";
-        }
-        
-        for (let i = 0; i < selecteurs.length; i++) {
-            
-             selecteurs[i].style.color = "blue";
-        }
-        
-       sectionAdminAddProduct.style.display = "flex";
-        addproduct.style.color = "red"; 
-       
-    }else{
-        sectionAdminAddProduct.style.display = "none";
-        addproduct.style.color = "blue";
-        stillDisplayone();
-    }
-
-    
-    })
+    addProduct.addEventListener('click', eventListenerBuilder(sectionAdminAddProduct,addProduct));
 }
 
 
-if(allproducts !== null){
+if(allProducts !== null){
     sectionAdminAllProduct.style.display = "none";
-    allproducts.style.color = "blue";
+    allProducts.style.color = "blue";
+
+    allProducts.addEventListener('click', eventListenerBuilder(sectionAdminAllProduct,allProducts));
     
-    allproducts.addEventListener('click', function(e){
-   
-    if (sectionAdminAllProduct.style.display === "none"){
-         
-        for (let i = 0; i < sections.length; i++) {
-             sections[i].style.display = "none";
-        }
-        
-        for (let i = 0; i < selecteurs.length; i++) {
-            
-             selecteurs[i].style.color = "blue";
-        }
-        
-        sectionAdminAllProduct.style.display = "flex";
-        allproducts.style.color = "red";
-       
-    }else{
-    sectionAdminAllProduct.style.display = "none";
-       allproducts .style.color = "blue";
-       stillDisplayone();
-    }
-    
-    })
 }
 
 
@@ -113,61 +82,18 @@ if(addCategory !== null){
     sectionAdminAddCategory.style.display = "none";
     addCategory.style.color = "blue";
     
-    addCategory.addEventListener('click', function(e){
-        
-    if (sectionAdminAddCategory.style.display === "none"){
-        
-       for (let i = 0; i < sections.length; i++) {
-             sections[i].style.display = "none";
-        }
-        
-        for (let i = 0; i < selecteurs.length; i++) {
-            
-             selecteurs[i].style.color = "blue";
-        }
-        
-        sectionAdminAddCategory.style.display = "flex";
-        addCategory.style.color = "red";
-       
-     } else{
-        sectionAdminAddCategory.style.display = "none";
-        addCategory .style.color = "blue";
-        stillDisplayone()
-    }
-    
-    })
-}
+    addCategory.addEventListener('click', eventListenerBuilder(sectionAdminAddCategory,addCategory));
+}    
 
 
 
 if(categories !== null){
     sectionAdminAllCategories.style.display = "none";
     categories.style.color = "blue";
-    
-    categories.addEventListener('click', function(e){
-     if (sectionAdminAllCategories.style.display === "none"){
-        
-       for (let i = 0; i < sections.length; i++) {
-             sections[i].style.display = "none";
-        }
-        
-        for (let i = 0; i < selecteurs.length; i++) {
-            
-             selecteurs[i].style.color = "blue";
-        }
-        
-        sectionAdminAllCategories.style.display = "flex";
-        categories.style.color = "red";
-       
-     }else{
-        sectionAdminAllCategories.style.display = "none";
-        categories .style.color = "blue";
-        stillDisplayone()
-    }
    
-})
-}
+    categories.addEventListener('click', eventListenerBuilder(sectionAdminAllCategories,categories)); 
 
+}
 
 
 if(orders !== null){
@@ -175,59 +101,15 @@ if(orders !== null){
     sectionAdminAllOrders.style.display = "none";
     orders.style.color = "blue";
     
-    orders.addEventListener('click', function(e){
-        
-   if (sectionAdminAllOrders.style.display === "none"){
-        
-       for (let i = 0; i < sections.length; i++) {
-             sections[i].style.display = "none";
-        }
-        
-        for (let i = 0; i < selecteurs.length; i++) {
-            
-             selecteurs[i].style.color = "blue";
-        }
-        
-        sectionAdminAllOrders.style.display = "flex";
-        orders.style.color = "red";
-       
-     }else{
-        sectionAdminAllOrders.style.display = "none";
-        orders .style.color = "blue";
-        stillDisplayone();
-    }
-   
-})
-}
+    orders.addEventListener('click', eventListenerBuilder(sectionAdminAllOrders,orders)); 
+}    
+
 
 if(users !== null){
     
     sectionAdminAllUsers.style.display = "none";
     users.style.color = "blue";
     
-    users.addEventListener('click', function(e){
-        
-   if (sectionAdminAllUsers.style.display === "none"){
-        
-       for (let i = 0; i < sections.length; i++) {
-             sections[i].style.display = "none";
-        }
-        
-        for (let i = 0; i < selecteurs.length; i++) {
-            
-             selecteurs[i].style.color = "blue";
-        }
-        
-       sectionAdminAllUsers.style.display = "flex";
-        users.style.color = "red";
-       
-     }else{
-        sectionAdminAllUsers.style.display = "none";
-        users .style.color = "blue";
-        stillDisplayone();
-    }
-   
-})
-}
-
+    users.addEventListener('click', eventListenerBuilder(sectionAdminAllUsers,users)); 
+}    
 

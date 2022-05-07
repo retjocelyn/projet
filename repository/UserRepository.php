@@ -11,9 +11,10 @@ require_once './repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
-    public function fetchAll()
+    public function fetchAllCostumers()
     {
         $data = null;
+        
         try {
             $query = $this->connexion->prepare('SELECT * FROM users WHERE role = "client"');
             if ($query) {

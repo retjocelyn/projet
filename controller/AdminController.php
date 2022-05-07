@@ -86,7 +86,7 @@ class AdminController {
              $commandes[] = $order;
          }
          
-        $datas = $this->repository->fetchAll();
+        $datas = $this->repository->fetchAllCostumers();
         
         $users = [];
         
