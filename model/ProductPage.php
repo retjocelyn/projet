@@ -24,6 +24,7 @@ class ProductPage extends AbstractPage {
         $this->article = '';
         $this->products = [];
         $this->categories = [];
+        $this->orders = [];
         $this->totalprice = 0;
     }
     
@@ -86,7 +87,7 @@ class ProductPage extends AbstractPage {
     /**
      * @param array $orders
      */
-     public function setOrders(array $orders)
+    public function setOrders(array $orders)
     {
         $this->orders = $orders;
     }
@@ -286,6 +287,17 @@ class ProductPage extends AbstractPage {
             $this->constructPage();
      }
      
+    public function CreateFormModifyOrder($order)
+    {
+        $this->head->setTitle('symphony: page modifer commande');
+        $this->head->setDescription('modifier commande');
+        $this->body = $this->utils->searchHtml('formmodifyorder');
+        $this->body = str_replace('{%id%}',$category->getId(), $this->body);
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+         
+        $this->constructPage();
+    }
+     
     public function basketPage()
     {
         $this->head->setTitle('symphony: panier');
@@ -331,14 +343,16 @@ class ProductPage extends AbstractPage {
         $this->body = $this->utils->searchHtml('order');
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
     
-        foreach($this->products as $product){
+        foreach($this->orders as $order){
+          
                 $content = $this->utils->searchInc('produitorder');
-                $content = str_replace('{%name%}', $product->getName(), $content);
-                $content = str_replace('{%id%}',$product->getId(), $content);
-                $content = str_replace('{%price%}',$product->getPrice(), $content);
-                $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
-                $content = str_replace('{%description%}',$product->getDescription(), $content);
-                $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+                $content = str_replace('{%name%}', $order->getCommandProductName(), $content);
+                $content = str_replace('{%id%}',$order->getCommandProductId(), $content);
+                $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
+                $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(), $content);
+                $content = str_replace('{%description%}',$order->getCommandProductDescription(), $content);
+                $content = str_replace('{%status%}',$order->getStatus(), $content);
+                $content = str_replace('{%urlImage%}',$order->getCommandProductImage(), $content);
                 
                 $this->article .= $content;
             }

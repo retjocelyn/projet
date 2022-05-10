@@ -56,13 +56,14 @@ require_once './repository/AbstractRepository.php';
         
             try {
                 $query = $this->connexion->prepare('INSERT INTO orders
-                    (user_id,product_id,created_at) 
-                    VALUES (:userId,:productId, NOW())');
+                    (user_id,product_id,created_at,status_id) 
+                    VALUES (:userId,:productId, NOW(),:status_id)');
                 
                 if ($query) {   
                
                     $query->bindValue(':userId', $userId);
                     $query->bindValue(':productId',$productId);
+                    $query->bindValue(':status_id',1);
                     
                      return $query->execute();
                 }    
@@ -80,6 +81,7 @@ require_once './repository/AbstractRepository.php';
         try {                                  
             $query = $this->connexion->prepare('SELECT * FROM products as p 
                 INNER JOIN orders as ord ON p.id = ord.product_id 
+                INNER JOIN status as stat ON ord.status_id = stat.id 
                 WHERE ord.user_id = :id');
                 
             if ($query) {

@@ -43,6 +43,15 @@ class ProductView {
         $page->CreateFormModifyCategory($category);
         return $page->getPage();   
     }
+    
+    public function displayFormModifyOrder($order)
+    {
+        $page = new ProductPage();
+        $page->CreateFormModifyOrder($order);
+        return $page->getPage();   
+    }
+    
+    
     public function displayOneProduct($product)
     {
         $page = new ProductPage();
@@ -65,10 +74,10 @@ class ProductView {
         return $page->getPage();   
     }
     
-    public function displayOrder($products)
+    public function displayOrder($orders)
     {
         $page = new ProductPage();
-        $page->setProducts($products);
+        $page->setOrders($orders);
         $page->orderPage();
         return $page->getPage();   
     }

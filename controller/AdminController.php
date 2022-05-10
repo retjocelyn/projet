@@ -16,7 +16,7 @@ class AdminController {
     /*private $view; interet???*/
     
     
-     public function __construct()
+    public function __construct()
     {
         $this->view = new UserView();
         $this->productView = new ProductView();
@@ -132,6 +132,8 @@ class AdminController {
         exit();
         
     }    
+    
+   
     
     public function adminDeleteUser():void
     {

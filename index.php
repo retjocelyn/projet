@@ -201,7 +201,8 @@ switch($url){
         $controller->querySearch();
         break;   
         
-        
+    case "test":
+        echo("on est dans index");
 }
 
 

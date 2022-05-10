@@ -19,8 +19,13 @@ class Order {
     
     private string $commandProductImage;
     
+    private string $commandProductDescription;
+    
+    private int $commandProductId;
+    
     private int $commandProductPrice;
     
+    private string $status;
     
     /**
      * @return int
@@ -120,7 +125,6 @@ class Order {
     }
     
     
-   
      /**
      * @return string
      */
@@ -136,6 +140,48 @@ class Order {
     {
         $this->commandProductName = $commandProductName;
     }
+    
+     /**
+     * @return string
+     */
+    public function getCommandProductDescription(): string
+    {
+        return $this->commandProductDescription;
+    }
+    
+    /**
+     * @param string $commandProductDescription
+     */
+    public function setCommandProductDescription(string $commandProductDescription): void
+    {
+        $this->commandProductDescription = $commandProductDescription;
+    }
+    
+    
+    
+    
+    
+     /**
+     * @return int
+     */
+    public function getCommandProductId(): int
+    {
+        return $this->commandProductId;
+    }
+    
+    /**
+     * @param int $id 
+     */
+    public function setCommandProductId(int $CommandProductId): void
+    {
+        $this->commandProductId = $CommandProductId;
+    }
+    
+    
+    
+    
+    
+    
     
     /**
      * @return int
@@ -168,6 +214,22 @@ class Order {
     public function setCommandProductImage(string $commandProductImage): void
     {
         $this->commandProductImage = $commandProductImage;
+    }
+ 
+  /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+    
+     /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
     }
     
 }

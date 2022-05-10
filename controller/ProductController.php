@@ -353,6 +353,7 @@ class ProductController {
         exit();
     }
     
+    
     public function basket() : void
     {
         
@@ -414,11 +415,11 @@ class ProductController {
         $userAuth = $this->authentificator->checkUser();
        
         if($datas = $this->basketRepository->findById($userAuth->getId())){
-           
-           
+         
             foreach($datas as $data){
-                
+                 
                 $this->orderRepository->createOrder($userAuth->getId(),$data['product_id']);
+    
                 $this->basketRepository->deleteBasket($userAuth->getId());
            }
           
@@ -437,7 +438,7 @@ class ProductController {
         $userAuth = $this->authentificator->checkUser();
        
         $datas = $this->orderRepository->findById($userAuth->getId());
-        
+      
         if(empty($datas)){
             
            echo $this->view->displayEmptyOrders();
@@ -445,23 +446,23 @@ class ProductController {
            
         }
         
-        $products = [];
-            
+        $orders = [];
+           
         foreach($datas as $data){
-            $product = new Product();
-            $product->setId($data['product_id']);
-            $product->setName($data['name']);
-            $product->setQuantity($data['quantity']);
-            $product->setPrice($data['price']);
-            $product->setImage($data['url_picture']);
-            $product->setDescription($data['description']);
-            $product->setCategory($data['category_id']);
+            $order = new Order();
+            $order->setCommandProductId($data['product_id']);
+            $order->setCommandProductName($data['name']);
+            $order->setCommandProductQuantity($data['quantity']);
+            $order->setCommandProductPrice($data['price']);
+            $order->setCommandProductImage($data['url_picture']);
+            $order->setCommandProductDescription($data['description']);
+            $order->setStatus($data['order_status']);
             
-            $products[] = $product;
+            $orders[] = $order;
            
         }
-        
-        echo $this->view->displayOrder($products);
+       
+        echo $this->view->displayOrder($orders);
    }
    
    
