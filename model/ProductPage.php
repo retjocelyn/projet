@@ -292,7 +292,7 @@ class ProductPage extends AbstractPage {
         $this->head->setTitle('symphony: page modifer commande');
         $this->head->setDescription('modifier commande');
         $this->body = $this->utils->searchHtml('formmodifyorder');
-        $this->body = str_replace('{%id%}',$category->getId(), $this->body);
+        $this->body = str_replace('{%id%}',$order, $this->body);
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
          
         $this->constructPage();

@@ -465,6 +465,24 @@ class ProductController {
         echo $this->view->displayOrder($orders);
    }
    
+    public function formModifyOrder()
+    {
+       
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+        
+        if(!isset($_POST['id'])){
+            header('location: ./index.php?url=confirmationornot&message=commande non modifiée');
+            exit();
+        }    
+        
+        $order = $_POST['id'];
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        echo $this->view->displayFormModifyOrder($order);
+    }
+       
    
     public function deleteOrder(): void
     {

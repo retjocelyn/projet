@@ -115,6 +115,24 @@ require_once './repository/AbstractRepository.php';
         }
         
     }
+    
+     public function adminModifyOrder($orderId,$statusId){
+        try{
+             $query = $this->connexion->prepare('UPDATE orders
+                SET status_id = :statusId
+                WHERE id = :orderId');
+            
+            if ($query) {
+               
+                $query->bindValue(':orderId',$orderId);
+                $query->bindValue(':statusId',$statusId);
+                
+                return $query->execute();
+            }
+        }catch (Exception $e) {
+            return false;
+        }
+    }
       
     
     public function adminDeleteOrder($orderId):bool

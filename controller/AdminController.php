@@ -108,6 +108,31 @@ class AdminController {
         echo $this->productView->displayadminAccount($products,$categories,$commandes,$users);
     }
     
+    public function adminModifyOrder():void
+    {
+        $this->authentificator->checkAdmin();
+        $this->authentificator->csrfTokenChecker();
+        
+        if(!isset($_POST['id'],$_POST['status_id'])){
+            
+            header('location: ./index.php?url=confirmationornot&message=commande non modifiée');
+            exit();
+        }
+        
+        $orderId = $_POST['id'];
+        $statusId = $_POST['status_id'];
+        
+        if($this->orderRepository->adminModifyOrder($orderId,$statusId)){
+            
+            header('location: ./index.php?url=confirmationornot&message=commande modifiée');
+            exit();
+            
+        }
+        header('location: ./index.php?url=confirmationornot&message=commande non modifiée');
+        exit();
+        
+    }
+    
     public function adminDeleteOrder():void
     {
         

@@ -186,6 +186,16 @@ switch($url){
         $adminController->adminDeleteOrder();
         break; 
         
+    case "formmodifyorder":
+        $controller = new ProductController();
+        $controller->formModifyOrder();
+        break;
+        
+    case "adminmodifyorder":
+        $controller = new AdminController();
+        $controller->adminModifyOrder();
+        break;
+    
      case "admindeleteuser":
         $adminController = new AdminController();
         $adminController->adminDeleteUser();
@@ -201,8 +211,8 @@ switch($url){
         $controller->querySearch();
         break;   
         
-    case "test":
-        echo("on est dans index");
+    
+        
 }
 
 
