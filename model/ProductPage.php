@@ -208,6 +208,7 @@ class ProductPage extends AbstractPage {
                 $content = str_replace('{%name%}',$user->getFirstName(),$content);
                 $content = str_replace('{%familyname%}',$user->getlastName(),$content);
                 $content = str_replace('{%id%}',$user->getId(),$content);
+                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
             
                 $adminUsers .= $content;
             }

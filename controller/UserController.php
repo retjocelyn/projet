@@ -131,11 +131,11 @@ class UserController {
         
         $data = $this->repository->fetchLogin($email);
             
-        if($data === true){    
-           
+        if($data !== false){    
             $_SESSION['error'] = "Email existe déja";
-            header('location: ./index.php?url=login');
+            header('location:./index.php?url=login');
             exit();
+            
         }
         
         if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
@@ -156,8 +156,8 @@ class UserController {
                 exit();
             }
          
-        header('location: ./index.php?url=confirmationornot&message="Compte non crée"');
-        exit();
+            header('location: ./index.php?url=confirmationornot&message="Compte non crée"');
+            exit();
          }    
     }     
     

@@ -162,11 +162,10 @@ class AdminController {
     
     public function adminDeleteUser():void
     {
-         $this->authentificator->checkAdmin();
+        $this->authentificator->checkAdmin();
+        $this->authentificator->csrfTokenChecker();
         
-        /*$this->authentificator->csrfTokenChecker();*/
-        
-        $userId = $_GET['id'];
+        $userId = $_POST['id'];
         
         if($this->repository->deleteUser($userId)){
         
