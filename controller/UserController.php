@@ -264,6 +264,10 @@ class UserController {
             
             if($this->repository->addMoney($userAuth->getId(),$newAmount)){
                 
+                
+                $userAuth->setWallet($newAmount);
+                $_SESSION['user'] = serialize($userAuth);
+               
                 header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
                 exit();
             
