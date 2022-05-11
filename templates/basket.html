@@ -4,7 +4,9 @@
                             <h2>Votre panier</h2>
                             {%article%}
                             {%prixtotal%}
+                            <p>Votre portefeuille contient {%solde%} euros</p>
                             <form class="formcreateorder" action="./index.php?url=createorder" method="post">
+                                <input name="amount_after_buy" type="hidden" value="{%amount_after_buy%}">
                                 <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <button type="submit">Valider  commande</button>
                             </form>   

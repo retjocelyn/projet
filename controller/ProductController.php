@@ -16,6 +16,7 @@ class ProductController {
         
         $this->view = new ProductView();
         $this->repository = new ProductRepository();
+        $this->UserRepository = new UserRepository();
         $this->categoryRepository = new CategoryRepository();
         $this->basketRepository = new BasketRepository();
         $this->orderRepository = new OrderRepository();
@@ -386,9 +387,11 @@ class ProductController {
             $prices[] = $product->getPrice();
         }
        
-        $totalprice = array_sum($prices);
+        $totalPrice = array_sum($prices);
         
-        echo $this->view->displayBasket($products,$totalprice);
+        $amountAfterBuy = ($userAuth->getWallet()-$totalPrice);
+        
+        echo $this->view->displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy);
    }
    
     public function deleteBasket() : void
@@ -414,6 +417,21 @@ class ProductController {
         $this->authentificator->csrfTokenChecker();
         $userAuth = $this->authentificator->checkUser();
        
+       if(!isset($_POST['amount_after_buy']) || $_POST['amount_after_buy']<0){
+            header('location: ./index.php?url=confirmationornot&message= Fonds insufisants');
+            exit();
+       }
+       
+        $userAuth->setWallet($_POST['amount_after_buy']);
+        
+       
+        if(!$this->UserRepository->addMoney($userAuth->getId(),$userAuth->getWallet())){
+            header('location: ./index.php?url=confirmationornot&message= Commande non créée');
+            exit();
+        }
+        
+        $_SESSION['user'] = serialize($userAuth);
+        
         if($datas = $this->basketRepository->findById($userAuth->getId())){
          
             foreach($datas as $data){
@@ -421,7 +439,7 @@ class ProductController {
                 $this->orderRepository->createOrder($userAuth->getId(),$data['product_id']);
     
                 $this->basketRepository->deleteBasket($userAuth->getId());
-           }
+            }
           
          
            header('location: ./index.php?url=confirmationornot&message=votre commande à été créée');

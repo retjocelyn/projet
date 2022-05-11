@@ -140,9 +140,8 @@ require_once './repository/AbstractRepository.php';
             
             if ($query) {
                 
-                $query->bindParam(':amount', $amount);
                 $query->bindParam(':userId',$userId );
-                
+                $query->bindParam(':amount', $amount); 
                 return $query->execute();
              
             }
@@ -150,7 +149,7 @@ require_once './repository/AbstractRepository.php';
             return false;
         }
     }
-       
+    
 }
     
     

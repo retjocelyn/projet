@@ -59,11 +59,13 @@ class ProductView {
         return $page->getPage();  
     }
     
-    public function displayBasket($products,$totalprice)
+    public function displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy)
     {
         $page = new ProductPage();
         $page->setProducts($products);
-        $page->setTotalPrice($totalprice);
+        $page->setTotalPrice($totalPrice);
+        $page->setUserWallet($userAuth->getWallet());
+        $page->setAmountAfterBuy($amountAfterBuy);
         $page->basketPage();
         return $page->getPage();   
     }

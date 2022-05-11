@@ -16,6 +16,10 @@ class ProductPage extends AbstractPage {
     
     private array $users;
     
+    private int $userWallet;
+    
+    private int $amountAfterBuy;
+    
     public function __construct()
     {
         parent::__construct();
@@ -26,6 +30,7 @@ class ProductPage extends AbstractPage {
         $this->categories = [];
         $this->orders = [];
         $this->totalprice = 0;
+        $this->userWallet = 0;
     }
     
     
@@ -92,8 +97,6 @@ class ProductPage extends AbstractPage {
         $this->orders = $orders;
     }
     
-   
-    
      /**
      * @return int
      */
@@ -103,7 +106,7 @@ class ProductPage extends AbstractPage {
     }
     
     /**
-     * @param array $categories
+     * @param int $totalPrice
      */
     public function setTotalPrice( int $totalprice)
     {
@@ -111,17 +114,54 @@ class ProductPage extends AbstractPage {
     }
     
      /**
-     * @param array $products
+     * @return int
+     */
+    public function getUserWallet(): int
+    {
+        return $this->userWallet;
+    }
+    
+    /**
+     * @param int $userWallet
+     */
+    public function setUserWallet( int $userWallet)
+    {
+        $this->userWallet = $userWallet;
+    }
+    
+     /**
+     * @return array
+     */
+    public function getUsers(): array
+    {
+        return $this->users;
+    }
+    
+     /**
+     * @param array $users
      */
     public function setUsers(array $users)
     {
         $this->users = $users;
     }
     
-    public function getUsers(): array
+     /**
+     * @return int
+     */
+    public function getAmountAfterBuy(): int
     {
-        return $this->users;
+        return $this->amountAfterBuy;
     }
+    
+    /**
+     * @param int $amountAfterBuy
+     */
+    public function setAmountAfterBuy( int $amountAfterBuy)
+    {
+        $this->amountAfterBuy = $amountAfterBuy;
+    }
+    
+   
     
     public function constructProducts(): void
     {
@@ -321,10 +361,12 @@ class ProductPage extends AbstractPage {
         
         $content = $this->utils->searchInc('prix');
         $content = str_replace('{%prixtotal%}',$this->getTotalPrice(), $content);
+        
         $this->body = str_replace('{%prixtotal%}',$content, $this->body);
+        $this->body = str_replace('{%solde%}',$this->getUserWallet(), $this->body);
         $this->body = str_replace('{%message%}','', $this->body);
         $this->body = str_replace('{%article%}',$this->article, $this->body);
-         
+        $this->body = str_replace('{%amount_after_buy%}',$this->getAmountAfterBuy(), $this->body); 
         
         $this->constructPage();
      }
