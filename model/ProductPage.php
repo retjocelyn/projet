@@ -359,10 +359,8 @@ class ProductPage extends AbstractPage {
                 $this->article .= $content;
             }
         
-        $content = $this->utils->searchInc('prix');
-        $content = str_replace('{%prixtotal%}',$this->getTotalPrice(), $content);
         
-        $this->body = str_replace('{%prixtotal%}',$content, $this->body);
+        $this->body = str_replace('{%prixtotal%}',$this->getTotalPrice(),$this->body);
         $this->body = str_replace('{%solde%}',$this->getUserWallet(), $this->body);
         $this->body = str_replace('{%message%}','', $this->body);
         $this->body = str_replace('{%article%}',$this->article, $this->body);

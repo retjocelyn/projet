@@ -3,14 +3,14 @@
                         <div class="possiblecommande">
                             <h2>Votre panier</h2>
                             {%article%}
-                            <h2>Total de  {%prixtotal%} €</h2>
-                            <h2>Votre portefeuille contient {%solde%} euros</h2>
-                            <form class="formcreateorder" action="./index.php?url=createorder" method="post">
+                            <h2>Le prix du panier s'élève à {%prixtotal%} euros</h2>
+                            <p>Votre portefeuille contient {%solde%} euros</p>
+                            <form class="formcreateorder form_checker" action="./index.php?url=createorder" method="post">
                                 <input name="amount_after_buy" type="hidden" value="{%amount_after_buy%}">
                                 <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <button type="submit">Valider  commande</button>
                             </form>   
-                            <form class="formdeletebasket" action="./index.php?url=deletebasket" method="post">
+                            <form class="formdeletebasket form_checker" action="./index.php?url=deletebasket" method="post">
                                 <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <button type="submit">effacer le panier</button>
                             </form> 

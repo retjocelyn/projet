@@ -9,7 +9,7 @@
             <li class="productquantity"><strong>quantité:    {%quantity%}.</strong></li>
             <li class="productprice">Prix: {%price%} euros.</li>
         </ul>
-        <form class="formdeletearticlefrombasket" action="./index.php?url=deletearticlefrombasket" method="post">
+        <form class="formdeletearticlefrombasket form_checker" action="./index.php?url=deletearticlefrombasket" method="post">
             <input type="hidden"  name="id" value="{%id%}" required>
             <input name="csrf_token" type="hidden" value="{%$token%}">
             <button type="deletearticlefrombasket"><i class="fa-solid fa-trash-can"></i></button>
