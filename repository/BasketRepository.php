@@ -12,7 +12,7 @@ require_once './repository/AbstractRepository.php';
     }
     
    
-    public function addArticleToBasket($userId,$productId): bool
+    public function addArticleToBasket(int $userId,int $productId): bool
     {
        
         try {
@@ -31,7 +31,7 @@ require_once './repository/AbstractRepository.php';
     }
        
     
-    public function findById($userId)
+    public function findById(int $userId)
     {
          $data = null;
         try {
@@ -51,7 +51,7 @@ require_once './repository/AbstractRepository.php';
     
    
     
-    public function deleteArticleFromBasket($ArticleBasketId)
+    public function deleteArticleFromBasket(int $ArticleBasketId): bool
     {
        
         try {
@@ -71,7 +71,7 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function deleteBasket($userId)
+    public function deleteBasket(int $userId): bool
     {
        
          try {

@@ -115,7 +115,7 @@ require_once './repository/AbstractRepository.php';
     }
        
        
-    public function deleteUser($userId):bool
+    public function deleteUser(?int $userId):bool
     {
         
       try{
@@ -132,7 +132,7 @@ require_once './repository/AbstractRepository.php';
     }
          
     
-    public function addMoney($userId,$amount)
+    public function addMoney(int $userId, int $amount)
     {
      
         try {

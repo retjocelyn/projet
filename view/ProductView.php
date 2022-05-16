@@ -12,6 +12,7 @@ class ProductView {
     
     public function dislplayInstruments($products): string
     {
+        
         $page = new ProductPage();
         $page->setProducts($products);
         $page->constructProducts();
@@ -29,7 +30,7 @@ class ProductView {
         return $page->getPage();
     }
     
-    public function displayFormModifyProduct($product,$categories)
+    public function displayFormModifyProduct(Product $product,array $categories)
     {
         $page = new ProductPage();
         $page->setCategories($categories);

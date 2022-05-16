@@ -19,6 +19,7 @@ class HomeView {
     
     public function displayShop($categories): string
     {
+        
         $page = new ShopPage();
         $page->setCategories($categories);
         $page->constructShop();

@@ -30,14 +30,14 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function findById($category)
+    public function findById(int $categoryId)
     {
         $data = null; 
         
         try {
              $query = $this->connexion->prepare('SELECT * FROM category WHERE id = :id');
             if ($query) {
-                $query->bindParam(':id', $category);
+                $query->bindParam(':id', $categoryId);
                 $query->execute();
                 
                 $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +49,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function fetchImage($categoryId)
+    public function fetchImage(int $categoryId)
     {
         $data = null;
         
@@ -68,7 +68,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function createCategory($newCategory):bool
+    public function createCategory(Category $newCategory):bool
     {
        
         try{
@@ -88,7 +88,7 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function modifyCategory($newCategory):bool
+    public function modifyCategory(Category $newCategory):bool
     {
        
         try{
@@ -110,7 +110,7 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function deleteCategory($id):bool
+    public function deleteCategory(int $id):bool
     {
          
         try{

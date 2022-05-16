@@ -119,8 +119,8 @@ class AdminController {
             exit();
         }
         
-        $orderId = $_POST['id'];
-        $statusId = $_POST['status_id'];
+        $orderId = htmlspecialchars($_POST['id']);
+        $statusId = htmlspecialchars($_POST['status_id']);
         
         if($this->orderRepository->adminModifyOrder($orderId,$statusId)){
             
@@ -145,7 +145,7 @@ class AdminController {
             exit();
         }
         
-        $orderId = $_POST['id'];
+        $orderId = htmlspecialchars($_POST['id']);
         
         if($this->orderRepository->adminDeleteOrder($orderId)){
             
@@ -165,7 +165,7 @@ class AdminController {
         $this->authentificator->checkAdmin();
         $this->authentificator->csrfTokenChecker();
         
-        $userId = $_POST['id'];
+        $userId = htmlspecialchars($_POST['id']);
         
         if($this->repository->deleteUser($userId)){
         

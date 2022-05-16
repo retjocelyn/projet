@@ -3,8 +3,8 @@
                         <div class="possiblecommande">
                             <h2>Votre panier</h2>
                             {%article%}
-                            {%prixtotal%}
-                            <p>Votre portefeuille contient {%solde%} euros</p>
+                            <h2>Total de  {%prixtotal%} €</h2>
+                            <h2>Votre portefeuille contient {%solde%} euros</h2>
                             <form class="formcreateorder" action="./index.php?url=createorder" method="post">
                                 <input name="amount_after_buy" type="hidden" value="{%amount_after_buy%}">
                                 <input name="csrf_token" type="hidden" value="{%$token%}">

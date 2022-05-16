@@ -28,13 +28,13 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function findByCategory($category)
+    public function findByCategory(int $categoryId)
     {
         $data = null;
         try {
             $query = $this->connexion->prepare('SELECT * FROM products WHERE category_id = :id');
             if ($query) {
-                $query->bindParam(':id', $category);
+                $query->bindParam(':id', $categoryId);
                 $query->execute();
                 
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +64,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function createProduct($product):bool
+    public function createProduct(Product $product):bool
     {    
         
         try{
@@ -122,7 +122,7 @@ require_once './repository/AbstractRepository.php';
         
     
     
-    public function deleteProduct($productId) :bool
+    public function deleteProduct(int $productId) :bool
     {
          
          try{
@@ -141,7 +141,7 @@ require_once './repository/AbstractRepository.php';
         
     
     
-    public function fetchImage($productId)
+    public function fetchImage(int $productId)
     {
         $data = null;
         try {

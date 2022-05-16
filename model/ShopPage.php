@@ -55,15 +55,15 @@ class ShopPage extends AbstractPage {
     {
         foreach($this->categories as $category){
             $content = $this->utils->searchInc('article_category');
-            $content = str_replace('{% nom %}', $category->getName(), $content);
-            $content = str_replace('{% id %}',$category->getId(), $content);
-            $content = str_replace('{% urlImage %}',$category->getUrlImage(), $content);
+            $content = str_replace('{%nom%}', $category->getName(), $content);
+            $content = str_replace('{%id%}',$category->getId(), $content);
+            $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
             
             
             $this->article .= $content;
         }
         
-        $this->body = str_replace('{% article %}', $this->article, $this->body);
+        $this->body = str_replace('{%article%}', $this->article, $this->body);
         
         
         

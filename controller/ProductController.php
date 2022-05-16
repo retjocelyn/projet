@@ -29,12 +29,11 @@ class ProductController {
     
     public function instruments(): void
     {
-        $category = $_GET['id'];
+        $categoryId = $_GET['id'];
         
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
-        $datas = $this->repository->findByCategory($category);
-        
+        $datas = $this->repository->findByCategory($categoryId);
         $products = [];
         
         foreach($datas as $data){
@@ -65,9 +64,20 @@ class ProductController {
         if(isset($_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
            
             $tmpName = $_FILES['file']['tmp_name'];
+            $file_name = $_FILES['file']['name'];
+            $temp= explode('.',$file_name);
+            $extension = end($temp);
+           
             $fileName = md5(time()).'.'.$extension;
+            
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
+            
+            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
+               
+                header('location: ./index.php?url=confirmationornot&message=article non modifié');
+                exit();
+            }
             
             
             move_uploaded_file($tmpName,'./public/assets/img/'.$fileName);
@@ -145,9 +155,9 @@ class ProductController {
         $product->setName($data['name']);
         $product->setQuantity($data['quantity']);
         $product->setPrice($data['price']);
-        $product->setImage($data['url_picture']);
         $product->setDescription($data['description']);
         $product->setCategory($data['category_id']);
+        
         
         
         echo $this->view->displayFormModifyProduct($product,$categories);
@@ -162,7 +172,7 @@ class ProductController {
         if(isset($_POST['id'],$_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
             
             $tmpName = $_FILES['file']['tmp_name'];
-            //$_FILES['file']['name']
+            
             $file_name = $_FILES['file']['name'];
             $temp= explode('.',$file_name);
             $extension = end($temp);
@@ -172,7 +182,11 @@ class ProductController {
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
             
-            move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
+            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName)){
+               
+                header('location: ./index.php?url=confirmationornot&message=article non modifié');
+                exit();
+            }
             
             $product = new Product();
             $product->setId(htmlspecialchars($_POST['id']));
@@ -183,8 +197,12 @@ class ProductController {
             $product->setQuantity((int)htmlspecialchars($_POST['quantity']));
             $product->setImage("./public/assets/img/$newFileName");
             
-            $data = $this->repository->fetchImage($product->getId());
-           
+            /*recupere l'ancienne image pour l'effacer*/
+            if(!$data = $this->repository->fetchImage($product->getId())){
+                header('location: ./index.php?url=confirmationornot&message=article non modifié');
+                exit();
+            }
+            
             unlink($data['url_picture']);
             
             if($this->repository->modifyProduct($product)){
@@ -213,11 +231,14 @@ class ProductController {
            
         }
         
-        $productId = $_POST['id'];
+        $productId = htmlspecialchars($_POST['id']);
         
-        $data = $this->repository->fetchImage($productId);
+        $data = $this->repository->fetchImage( $productId);
         
-        unlink($data['url_picture']);
+        if(!unlink($data['url_picture'])){
+            header('location: ./index.php?url=confirmationornot&message=article non effacé');
+            exit();
+        }
             
         if($this->repository->deleteProduct($productId)){
            
@@ -243,15 +264,15 @@ class ProductController {
             $temp= explode('.',$file_name);
             $extension = end($temp);
            
-            $newFileName = md5(time()).'.'.$extension;
+            $fileName = md5(time()).'.'.$extension;
             
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
             
-            move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
+            move_uploaded_file($tmpName,'./public/assets/img/'.$fileName);
             
             $this->category->setName(htmlspecialchars($_POST['name'])) ;
-            $this->category->setUrlImage("./public/assets/img/$newFileName");
+            $this->category->setUrlImage("./public/assets/img/$fileName");
             
             
             if($this->categoryRepository->createCategory($this->category)){
@@ -272,8 +293,8 @@ class ProductController {
         
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
-        $category = $_POST['id'];
-        $data = $this->categoryRepository->findById($category);
+        $categoryId = htmlspecialchars($_POST['id']);
+        $data = $this->categoryRepository->findById($categoryId);
         $category = new Category();
         $category->setId($data['id']);
         $category->setName($data['name']);
