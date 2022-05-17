@@ -197,6 +197,8 @@ class ProductController {
             $error = $_FILES['file']['error'];
             $temp= explode('.',$file_name);
             $extension = end($temp);
+             /*unité en bytes*/
+            $maxSize = 400000;
            
             $fileName = md5(time()).'.'.$extension;
             
@@ -208,20 +210,7 @@ class ProductController {
             $product->setPrice((int)htmlspecialchars($_POST['price']));
             $product->setQuantity((int)htmlspecialchars($_POST['quantity']));
             $product->setImage("./public/assets/img/$fileName");
-            
-            /*recupere l'ancienne image pour l'effacer*/
-            
-            if(!$data = $this->repository->fetchImage($product->getId())){
-                header('location: ./index.php?url=confirmationornot&message=article non modifié');
-                exit();
-            }
-            
-            unlink($data['url_picture']);
-            
            
-            /*unité en bytes*/
-            $maxSize = 400000;
-            
             if($error !== 0 ){
                 header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
                 exit();
@@ -239,6 +228,16 @@ class ProductController {
                 header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
                 exit();
             }
+            
+             
+            /*recupere l'ancienne image pour l'effacer*/
+            
+            if(!$data = $this->repository->fetchImage($product->getId())){
+                header('location: ./index.php?url=confirmationornot&message=article non modifié');
+                exit();
+            }
+            
+            unlink($data['url_picture']);
             
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
                
@@ -275,8 +274,8 @@ class ProductController {
         
         $productId = htmlspecialchars($_POST['id']);
         
-        $data = $this->repository->fetchImage( $productId);
-        
+        $data = $this->repository->fetchImage($productId);
+       
         if(!unlink($data['url_picture'])){
             header('location: ./index.php?url=confirmationornot&message=article non effacé');
             exit();
@@ -303,15 +302,39 @@ class ProductController {
             
             $tmpName = $_FILES['file']['tmp_name'];
             $file_name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
             $temp= explode('.',$file_name);
             $extension = end($temp);
            
             $fileName = md5(time()).'.'.$extension;
             
-            $size = $_FILES['file']['size'];
-            $error = $_FILES['file']['error'];
+            /*unité en bytes*/
+            $maxSize = 400000;
             
-            move_uploaded_file($tmpName,'./public/assets/img/'.$fileName);
+            if($error !== 0 ){
+                header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
+                exit();
+            }
+            
+            if($size >= $maxSize){
+               
+                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                exit();
+            }
+            
+            $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+            
+            if(in_array($extension, $extensions) !== true){
+                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                exit();
+            }
+            
+            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
+               
+                header('location: ./index.php?url=confirmationornot&message=Catégorie non modifiée');
+                exit();
+            }
             
             $this->category->setName(htmlspecialchars($_POST['name'])) ;
             $this->category->setUrlImage("./public/assets/img/$fileName");
@@ -337,12 +360,11 @@ class ProductController {
         
         $categoryId = htmlspecialchars($_POST['id']);
         $data = $this->categoryRepository->findById($categoryId);
-        $category = new Category();
-        $category->setId($data['id']);
-        $category->setName($data['name']);
-        $category->setUrlImage($data['url_picture']);
+        $this->category->setId($data['id']);
+        $this->category->setName($data['name']);
+        $this->category->setUrlImage($data['url_picture']);
         
-        echo $this->view->displayFormModifyCategory($category);
+        echo $this->view->displayFormModifyCategory($this->category);
     }
     
     
@@ -354,37 +376,62 @@ class ProductController {
         
         if(isset($_POST['id'],$_POST['name'],$_FILES))
         {
-            
             $tmpName = $_FILES['file']['tmp_name'];
             $file_name = $_FILES['file']['name'];
-            $temp= explode('.',$file_name);
-            $extension = end($temp);
-           
-            $newFileName = md5(time()).'.'.$extension;
-            
             $size = $_FILES['file']['size'];
             $error = $_FILES['file']['error'];
-            
-            move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName);
-            
-            $categoryId = $_POST['id'];
-            
-            $data = $this->categoryRepository->fetchImage($categoryId);
+            $temp= explode('.',$file_name);
+            $extension = end($temp);
+             /*unité en bytes*/
+            $maxSize = 400000;
            
-            unlink($data['url_picture']);
-            
+            $newFileName = md5(time()).'.'.$extension;
+           
             $this->category->setId(htmlspecialchars($_POST['id']));
             $this->category->setName(htmlspecialchars($_POST['name']));
             $this->category->setUrlImage("./public/assets/img/$newFileName");
+           
+            if($error !== 0 ){
+                header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
+                exit();
+            }
+            
+            if($size >= $maxSize){
+               
+                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                exit();
+            }
+            
+            $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+            
+            if(in_array($extension, $extensions) !== true){
+                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                exit();
+            }
+            
+             
+            /*recupere l'ancienne image pour l'effacer*/
+            if(!$data = $this->categoryRepository->fetchImage($this->category->getId())){
+                header('location: ./index.php?url=confirmationornot&message=Catégorie non modifiée');
+                exit();
+            }
+            
+            unlink($data['url_picture']);
+        
+            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName)){
+               
+                header('location: ./index.php?url=confirmationornot&message=Catégorie non modifié');
+                exit();
+            }
             
             
             if($this->categoryRepository->modifyCategory($this->category)){
             
-                header('location: ./index.php?url=confirmationornot&message=categorie modifiée');
+                header('location: ./index.php?url=confirmationornot&message=Categorie modifiée');
                 exit();
             }
             
-        header('location: ./index.php?url=confirmationornot&message=categorie non modifiée');
+        header('location: ./index.php?url=confirmationornot&message=Categorie non modifiée');
         exit();
         
         }
