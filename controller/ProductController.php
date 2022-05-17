@@ -106,6 +106,9 @@ class ProductController {
     public function showOneProduct():view    /*revoir si cest bonle view*/
     {
         $productId = $_GET['id'];
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+         
         $data = $this->repository->findById($productId);
         
         $product = new Product();

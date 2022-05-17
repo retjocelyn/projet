@@ -284,7 +284,7 @@ class ProductPage extends AbstractPage {
         $content = str_replace('{%urlImage%}',$product->getImage(), $content);
         $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
         
-        $this->body = str_replace('{% article %}',$content,$this->body);
+        $this->body = str_replace('{%article%}',$content,$this->body);
         
         $this->constructPage();
     }
