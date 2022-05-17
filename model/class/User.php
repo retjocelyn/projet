@@ -17,7 +17,7 @@ class User {
     
     private string $adresse;
     
-    private int $wallet;
+    private float $wallet;
     
     
     
@@ -135,17 +135,17 @@ class User {
     
     
      /**
-     * @return int $wallet
+     * @return float $wallet
      */
-      public function getWallet(): int
+      public function getWallet(): float
     {
         return $this->wallet;
     }
     
     /**
-     * @param int $wallet
+     * @param float $wallet
      */
-    public function setWallet(string $wallet): void
+    public function setWallet(float $wallet): void
     {
         $this->wallet = $wallet;
     }

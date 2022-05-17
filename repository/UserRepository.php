@@ -132,7 +132,7 @@ require_once './repository/AbstractRepository.php';
     }
          
     
-    public function addMoney(int $userId, int $amount)
+    public function addMoney(int $userId, float $newAmount)
     {
      
         try {
@@ -141,7 +141,7 @@ require_once './repository/AbstractRepository.php';
             if ($query) {
                 
                 $query->bindParam(':userId',$userId );
-                $query->bindParam(':amount', $amount); 
+                $query->bindParam(':amount', $newAmount); 
                 return $query->execute();
              
             }

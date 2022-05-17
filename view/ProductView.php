@@ -62,7 +62,6 @@ class ProductView {
     
     public function displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy)
     {
-        
         $page = new ProductPage();
         $page->setProducts($products);
         $page->setTotalPrice($totalPrice);

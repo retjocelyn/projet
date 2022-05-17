@@ -12,13 +12,13 @@ class ProductPage extends AbstractPage {
     
     private array $orders;
     
-    private int  $totalprice;
+    private float  $totalprice;
     
     private array $users;
     
-    private int $userWallet;
+    private float $userWallet;
     
-    private int $amountAfterBuy;
+    private float $amountAfterBuy;
     
     public function __construct()
     {
@@ -98,33 +98,33 @@ class ProductPage extends AbstractPage {
     }
     
      /**
-     * @return int
+     * @return float
      */
-     public function getTotalPrice(): int
+     public function getTotalPrice(): float
     {
         return $this->totalprice;
     }
     
     /**
-     * @param int $totalPrice
+     * @param float $totalPrice
      */
-    public function setTotalPrice( int $totalprice)
+    public function setTotalPrice(float $totalprice)
     {
         $this->totalprice = $totalprice;
     }
     
      /**
-     * @return int
+     * @return float
      */
-    public function getUserWallet(): int
+    public function getUserWallet(): float
     {
         return $this->userWallet;
     }
     
     /**
-     * @param int $userWallet
+     * @param float $userWallet
      */
-    public function setUserWallet( int $userWallet)
+    public function setUserWallet(float $userWallet)
     {
         $this->userWallet = $userWallet;
     }
@@ -146,17 +146,17 @@ class ProductPage extends AbstractPage {
     }
     
      /**
-     * @return int
+     * @return float
      */
-    public function getAmountAfterBuy(): int
+    public function getAmountAfterBuy(): float
     {
         return $this->amountAfterBuy;
     }
     
     /**
-     * @param int $amountAfterBuy
+     * @param float $amountAfterBuy
      */
-    public function setAmountAfterBuy( int $amountAfterBuy)
+    public function setAmountAfterBuy(float $amountAfterBuy)
     {
         $this->amountAfterBuy = $amountAfterBuy;
     }
@@ -359,7 +359,7 @@ class ProductPage extends AbstractPage {
                 $this->article .= $content;
             }
         
-        
+       
         $this->body = str_replace('{%prixtotal%}',$this->getTotalPrice(),$this->body);
         $this->body = str_replace('{%solde%}',$this->getUserWallet(), $this->body);
         $this->body = str_replace('{%message%}','', $this->body);

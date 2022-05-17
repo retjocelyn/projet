@@ -11,7 +11,7 @@ class Product {
     
     private string $description;
     
-    private int $price;
+    private float $price;
     
     private string $category;
     
@@ -89,15 +89,15 @@ class Product {
      /**
      * @return int 
      */
-      public function getPrice(): int
+      public function getPrice(): float
     {
         return $this->price;
     }
     
     /**
-     * @param int $price
+     * @param float $price
      */
-    public function setPrice(string $price): void
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }

@@ -92,9 +92,10 @@ class UserController {
         }
       
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
-        
+       
        
         $data = $this->repository->findById($userAuth->getId());
+         
         $user = new User();
         $user->setId($data['id']);
         $user->setlastName($data['last_name']);
@@ -104,7 +105,6 @@ class UserController {
         $user->setRole($data['role']);
         $user->setAdresse($data['adress']);
         $user->setWallet($data['wallet']);
-        
       
         echo $this->view->displayAccount($user);
     }
@@ -146,7 +146,7 @@ class UserController {
             $user->setAdresse(htmlspecialchars($_POST['adress']));
             $Pass = htmlspecialchars($_POST['password']);
             $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
-            $user->setWallet(0);
+            $user->setWallet(0,00);
             $user->setRole('client');
           
           
@@ -254,14 +254,14 @@ class UserController {
             exit();
         }    
            
-            $amount = htmlspecialchars($_POST['amount']);
+            $amount = (float)htmlspecialchars($_POST['amount']);
             
             $datas = $this->repository->findById($userAuth->getId());
             
-            $userWallet = $datas['wallet'];
+            $userWallet = (float)$datas['wallet'];
             
             $newAmount = $userWallet + $amount;
-            
+           
             if($this->repository->addMoney($userAuth->getId(),$newAmount)){
                 
                 
