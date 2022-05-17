@@ -65,22 +65,39 @@ class ProductController {
            
             $tmpName = $_FILES['file']['tmp_name'];
             $file_name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
             $temp= explode('.',$file_name);
             $extension = end($temp);
            
             $fileName = md5(time()).'.'.$extension;
             
-            $size = $_FILES['file']['size'];
-            $error = $_FILES['file']['error'];
+            /*unité en bytes*/
+            $maxSize = 400000;
             
-            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
-               
-                header('location: ./index.php?url=confirmationornot&message=article non modifié');
+            if($error !== 0 ){
+                header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
                 exit();
             }
             
+            if($size >= $maxSize){
+               
+                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                exit();
+            }
             
-            move_uploaded_file($tmpName,'./public/assets/img/'.$fileName);
+            $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+            
+            if(in_array($extension, $extensions) !== true){
+                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                exit();
+            }
+            
+            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
+               
+                header('location: ./index.php?url=confirmationornot&message=Article non modifié');
+                exit();
+            }
             
             $product = new Product();
             $product->setCategory(htmlspecialchars($_POST['category'])); 
@@ -175,21 +192,13 @@ class ProductController {
         if(isset($_POST['id'],$_POST['category'],$_POST['name'],$_POST['description'], $_POST['price'],$_POST['quantity'],$_FILES)){
             
             $tmpName = $_FILES['file']['tmp_name'];
-            
             $file_name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
             $temp= explode('.',$file_name);
             $extension = end($temp);
            
-            $newFileName = md5(time()).'.'.$extension;
-            
-            $size = $_FILES['file']['size'];
-            $error = $_FILES['file']['error'];
-            
-            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName)){
-               
-                header('location: ./index.php?url=confirmationornot&message=article non modifié');
-                exit();
-            }
+            $fileName = md5(time()).'.'.$extension;
             
             $product = new Product();
             $product->setId(htmlspecialchars($_POST['id']));
@@ -198,15 +207,45 @@ class ProductController {
             $product->setDescription(htmlspecialchars($_POST['description']));
             $product->setPrice((int)htmlspecialchars($_POST['price']));
             $product->setQuantity((int)htmlspecialchars($_POST['quantity']));
-            $product->setImage("./public/assets/img/$newFileName");
+            $product->setImage("./public/assets/img/$fileName");
             
             /*recupere l'ancienne image pour l'effacer*/
+            
             if(!$data = $this->repository->fetchImage($product->getId())){
                 header('location: ./index.php?url=confirmationornot&message=article non modifié');
                 exit();
             }
             
             unlink($data['url_picture']);
+            
+           
+            /*unité en bytes*/
+            $maxSize = 400000;
+            
+            if($error !== 0 ){
+                header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
+                exit();
+            }
+            
+            if($size >= $maxSize){
+               
+                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                exit();
+            }
+            
+            $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+            
+            if(in_array($extension, $extensions) !== true){
+                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                exit();
+            }
+            
+            if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
+               
+                header('location: ./index.php?url=confirmationornot&message=Article non modifié');
+                exit();
+            }
+            
             
             if($this->repository->modifyProduct($product)){
             
