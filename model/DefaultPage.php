@@ -113,6 +113,7 @@ class DefaultPage extends AbstractPage {
     }
     public function displayAccount($user)
     {
+        
             $this->head->setTitle('symphony: page compte');
             $this->head->setDescription('compte');
             $this->body = str_replace('{%nom%}', $user->getLastName(), $this->body);
@@ -128,6 +129,7 @@ class DefaultPage extends AbstractPage {
     
     public function createFormModifyUser($user)
     {
+        
         $this->head->setTitle('symphony: modifier profil');
         $this->head->setDescription('formulaire de modification de user');
         $this->body = str_replace('{%familyname%}', $user->getLastName(), $this->body);
@@ -135,6 +137,8 @@ class DefaultPage extends AbstractPage {
         $this->body = str_replace('{%email%}', $user->getEmail(), $this->body);
         $this->body = str_replace('{%adress%}', $user->getAdresse(), $this->body);
         $this->body = str_replace('{%id%}', $user->getId(), $this->body);
+        $this->body = str_replace('{%role%}', $user->getRole(), $this->body);
+        $this->body = str_replace('{%wallet%}', $user->getWallet(), $this->body);
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
         $this->constructPage();
         

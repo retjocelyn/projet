@@ -1,7 +1,7 @@
 <article class="users"> <!-- classe provisoire a retravailler-->
         <h2>Prénom :{%name%}</h2>
         <h2>Nom :{%familyname%}</h2>
-        <form class="icon_form form_checker" action="./index.php?url=admindeleteuser" method="post" >
+        <form class="icon_form form_checker" action="./index.php?url=adminDeleteUser" method="post" >
                 <input type="hidden"  name="id" value="{%id%}" required>
                 <input name="csrf_token" type="hidden" value="{%$token%}">
                 <button class="form_icon_button" type="submit">

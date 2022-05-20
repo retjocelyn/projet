@@ -28,12 +28,12 @@
                                     </div> 
                                 </div>
                                 <div class="userbuttons">
-                                    <form  action="index.php?url=formmodifyuser" method="post">
+                                    <form  action="index.php?url=formModifyUser" method="post">
                                         <input type="hidden"  name="id" value="{%id%}" required>
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button type="submit">Modifier profil</button>
                                     </form>
-                                    <form   class="form_checker" action="index.php?url=deleteuser" method="post">
+                                    <form   class="form_checker" action="index.php?url=deleteUser" method="post">
                                         <input type="hidden"  name="id" value="{%id%}" required>
                                         <input name="csrf_token" type="hidden" value="{%$token%}">
                                         <button  type="submit">Supprimer votre compte</button>
@@ -48,7 +48,7 @@
                          <section id="displayuserwallet" class="showwallet">
                             <article>
                                 <h2>Votre solde est de {%solde%} €</h2>
-                                <form class="form_checker" action="index.php?url=addmoney" method="post">
+                                <form class="form_checker" action="index.php?url=addMoney" method="post">
                                     <input type="hidden"  name="id" value="{%id%}" required>
                                     <div class="money">
                                         <label for="amount"><b>Somme à entrer</b></label>

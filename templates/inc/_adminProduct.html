@@ -10,14 +10,14 @@
             <li class="productprice">Prix: {%price%} euros.</li>
         </ul>
         <div class="displayicons">
-            <form class="icon_form" action="./index.php?url=formmodifyproduct" method="post" >
+            <form class="icon_form" action="./index.php?url=formModifyProduct" method="post" >
                 <input type="hidden"  name="id" value="{%id%}" required>
                 <input name="csrf_token" type="hidden" value="{%$token%}">
                 <button class="form_icon_button" type="submit">
                     <i class="fa-solid fa-pen-clip"></i>
                 </button>
             </form>
-            <form class="icon_form form_checker " action="./index.php?url=deleteproduct" method="post" >
+            <form class="icon_form form_checker " action="./index.php?url=deleteProduct" method="post" >
                 <input type="hidden"  name="id" value="{%id%}" required>
                 <input name="csrf_token" type="hidden" value="{%$token%}">
                 <button class="form_icon_button" type="submit">

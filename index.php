@@ -39,13 +39,13 @@ switch($url){
         break;
     
         
-    case "registeraccepted":
+    case "registerAccepted":
         $userController = new UserController();
         $userController->registerAccepted() ;
         break;
         
         
-    case "confirmationornot":
+    case "confirmationOrNot":
         $userController = new UserController();
         $userController->confirmationOrNot() ;
         break;
@@ -56,18 +56,18 @@ switch($url){
         break;
         
         
-     case "formmodifyuser":
+     case "formModifyUser":
         $userController = new UserController();
         $userController->formModifyUser();
         break;
         
    
-    case "modifyuser":
+    case "modifyUser":
         $userController = new UserController();
         $userController->modifyUser();
         break;
         
-    case "addmoney":
+    case "addMoney":
         $userController = new UserController();
         $userController->addMoney();
         break;  
@@ -98,75 +98,76 @@ switch($url){
         break;
         
      
-    case "deletebasket":
+    case "deleteBasket":
         $productController = new ProductController();
         $productController->deleteBasket();
         break;
         
-    case "adminaccount":
+    case "adminAccount":
+        
         $adminController = new AdminController();
         $adminController->adminAccount();
         break; 
         
-    case "createproduct":
+    case "createProduct":
         $productController = new ProductController();
         $productController->createProduct();
         break;    
     
-    case "formmodifyproduct":
+    case "formModifyProduct":
         $productController = new ProductController();
         $productController->formModifyProduct();
         break;     
     
-    case "modifyproduct":
+    case "modifyProduct":
         $productController = new ProductController();
         $productController->modifyProduct();
         break;    
         
-    case "deleteproduct":
+    case "deleteProduct":
         $productController = new ProductController();
         $productController->deleteProduct();
         break;  
         
-    case "createcategory":
+    case "createCategory":
         $productController = new ProductController();
         $productController->createCategory();
         break;
         
       
-    case "formmodifycategory":
+    case "formModifyCategory":
         $productController = new ProductController();
         $productController->formModifyCategory();
         break;  
         
-    case "modifycategory":
+    case "modifyCategory":
         $productController = new ProductController();
         $productController->modifyCategory();
         break;  
         
-    case "deletecategory":
+    case "deleteCategory":
         $productController = new ProductController();
         $productController->deleteCategory();
         break;      
 
 
-    case "addarticletobasket":
+    case "addArticleToBasket":
         $userController = new UserController();
         $userController->addArticleToBasket();
         break;
         
-    case "deleteuser":
+    case "deleteUser":
         $userController = new UserController();
         $userController->deleteUser();
         break;
         
    
-    case "deletearticlefrombasket":
+    case "deleteArticleFromBasket":
         $userController = new UserController();
         $userController-> deleteArticleFromBasket();
         break;
         
-    case "createorder":
+    case "createOrder":
         $productController = new ProductController();
         $productController->createOrder();
         break;   
@@ -176,32 +177,32 @@ switch($url){
         $productController->showOrders();
         break;   
         
-    case "deleteorder":
+    case "deleteOrder":
         $productController = new ProductController();
         $productController->deleteOrder();
         break;    
         
-    case "admindeleteorder":
+    case "adminDeleteOrder":
         $adminController = new AdminController();
         $adminController->adminDeleteOrder();
         break; 
         
-    case "formmodifyorder":
+    case "formModifyOrder":
         $controller = new ProductController();
         $controller->formModifyOrder();
         break;
         
-    case "adminmodifyorder":
+    case "adminModifyOrder":
         $controller = new AdminController();
         $controller->adminModifyOrder();
         break;
     
-     case "admindeleteuser":
+     case "adminDeleteUser":
         $adminController = new AdminController();
         $adminController->adminDeleteUser();
         break;   
         
-    case "showoneproduct":
+    case "showOneProduct":
         $productController = new ProductController();
         $productController->showOneProduct();
         break;        
@@ -210,8 +211,6 @@ switch($url){
         $controller = new ProductController();
         $controller->querySearch();
         break;   
-        
-    
         
 }
 

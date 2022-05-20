@@ -115,7 +115,7 @@ class AdminController {
         
         if(!isset($_POST['id'],$_POST['status_id'])){
             
-            header('location: ./index.php?url=confirmationornot&message=commande non modifiée');
+            header('location: ./index.php?url=confirmationOrNot&message=commande non modifiée');
             exit();
         }
         
@@ -124,11 +124,11 @@ class AdminController {
         
         if($this->orderRepository->adminModifyOrder($orderId,$statusId)){
             
-            header('location: ./index.php?url=confirmationornot&message=commande modifiée');
+            header('location: ./index.php?url=confirmationOrNot&message=commande modifiée');
             exit();
             
         }
-        header('location: ./index.php?url=confirmationornot&message=commande non modifiée');
+        header('location: ./index.php?url=confirmationOrNot&message=commande non modifiée');
         exit();
         
     }
@@ -141,7 +141,7 @@ class AdminController {
         
         if(!isset($_POST['id'])){
             
-            header('location: ./index.php?url=confirmationornot&message=commande non supprimée');
+            header('location: ./index.php?url=confirmationOrNot&message=commande non supprimée');
             exit();
         }
         
@@ -149,16 +149,14 @@ class AdminController {
         
         if($this->orderRepository->adminDeleteOrder($orderId)){
             
-            header('location: ./index.php?url=confirmationornot&message=commande supprimée');
+            header('location: ./index.php?url=confirmationOrNot&message=commande supprimée');
             exit();
             
         }
-        header('location: ./index.php?url=confirmationornot&message=commande non supprimée');
+        header('location: ./index.php?url=confirmationOrNot&message=commande non supprimée');
         exit();
         
     }    
-    
-   
     
     public function adminDeleteUser():void
     {
@@ -169,11 +167,11 @@ class AdminController {
         
         if($this->repository->deleteUser($userId)){
         
-            header('location: ./index.php?url=confirmationornot&message=user supprimé');
+            header('location: ./index.php?url=confirmationOrNot&message=user supprimé');
             exit();
         } 
          
-        header('location: ./index.php?url=confirmationornot&message=user non supprimé');
+        header('location: ./index.php?url=confirmationOrNot&message=user non supprimé');
         exit();
     }    
     

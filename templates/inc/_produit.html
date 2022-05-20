@@ -9,7 +9,7 @@
             <li class="productquantity"><strong>quantité:    {%quantity%}.</strong></li>
             <li class="productprice"><strong>Prix:</strong> {%price%} euros.</li>
         </ul>
-        <form class="icon_form" action="./index.php?url=addarticletobasket" method="post" >
+        <form class="icon_form" action="./index.php?url=addArticleToBasket" method="post" >
                 <input type="hidden"  name="id" value="{%id%}" required>
                 <input name="csrf_token" type="hidden" value="{%$token%}">
                 <button class="form_icon_button" type="submit"><i class="fa-solid fa-cart-arrow-down"></i></button>

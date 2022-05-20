@@ -1,6 +1,6 @@
             <main>
                 <section class="showregisterform">    
-                    <form class="register" action="index.php?url=modifyuser" method="post">
+                    <form class="register" action="index.php?url=modifyUser" method="post">
                         <h2>Modifier  votre compte</h2>
                         <input type="hidden"  name="id" value="{%id%}" required>
                         <div class="separation newfamilyname">
@@ -24,6 +24,8 @@
                             <input type="password" id="password" name="password" value="" required>
                         </div>    
                         <input name="csrf_token" type="hidden" value="{%$token%}">
+                        <input name="role" type="hidden" value="{%role%}">
+                        <input name="userwallet" type="hidden" value="{%wallet%}">
                         <div class="registerbutton">
                             <button type="submit">Modifier votre compte</button>
                         </div>

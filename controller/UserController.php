@@ -71,7 +71,7 @@ class UserController {
             $_SESSION['user'] = serialize($user);
           
             if($user->getRole() === "admin"){
-                header('location: ./index.php?url=adminaccount');
+                header('location: ./index.php?url=adminAccount');
                 exit();
             }else{
                 header('location: ./index.php?url=account');
@@ -84,10 +84,10 @@ class UserController {
     public function account()
     {
          
-         $userAuth = $this->authentificator->checkUser();
+        $userAuth = $this->authentificator->checkUser();
        
         if($userAuth->getRole() === "admin"){
-            header('location: ./index.php?url=adminaccount');
+            header('location: ./index.php?url=adminAccount');
             exit();
         }
       
@@ -115,7 +115,7 @@ class UserController {
         echo $this->view->displayRegister();
     }
 
-   public function registerSecurity() : void
+    public function registerSecurity() : void
     {
     
         if(empty($_POST)){
@@ -152,16 +152,16 @@ class UserController {
           
             if($query = $this->repository->createUser($user)){
               
-                header('location: ./index.php?url=registeraccepted&message="votre compte a été crée"');
+                header('location: ./index.php?url=registerAccepted&message="votre compte a été crée"');
                 exit();
             }
          
-            header('location: ./index.php?url=confirmationornot&message="Compte non crée"');
+            header('location: ./index.php?url=confirmationOrNot&message="Compte non crée"');
             exit();
          }    
     }     
     
-    public function registerAccepted() /* a enlever*/
+    public function registerAccepted() 
     {
         if(isset($_GET['message'])){
         
@@ -207,7 +207,7 @@ class UserController {
         $user->setRole($data['role']);
         $user->setAdresse($data['adress']);
         $user->setWallet($data['wallet']);
-        
+       
         echo $this->view->displayFormModifyUser($user);
     }
     
@@ -224,7 +224,8 @@ class UserController {
         $user->setFirstName(htmlspecialchars($_POST['firstName']));
         $user->setEmail(htmlspecialchars($_POST['email']));
         $user->setAdresse(htmlspecialchars($_POST['adress']));
-        
+        $user->setRole(htmlspecialchars($_POST['role']));
+        $user->setWallet(htmlspecialchars((float)$_POST['userwallet']));
         $Pass = htmlspecialchars($_POST['password']);
         $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
         
@@ -232,11 +233,11 @@ class UserController {
        
             $_SESSION['user'] = serialize($user);
             
-            header('location: ./index.php?url=confirmationornot&message="Compte modifié"');
+            header('location: ./index.php?url=confirmationOrNot&message="Compte modifié"');
             exit();
         }   
         
-        header('location: ./index.php?url=confirmationornot&message="Compte non modifié"');
+        header('location: ./index.php?url=confirmationOrNot&message="Compte non modifié"');
         exit();
         
     }
@@ -245,12 +246,11 @@ class UserController {
     public function addMoney() : void
     {
         
-        
         $userAuth = $this->authentificator->checkUser();
         $this->authentificator->csrfTokenChecker();
         
         if(!isset($_POST['amount'])){
-            header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
+            header('location: ./index.php?url=confirmationOrNot&message="Argent non ajouté"');
             exit();
         }    
            
@@ -268,12 +268,12 @@ class UserController {
                 $userAuth->setWallet($newAmount);
                 $_SESSION['user'] = serialize($userAuth);
                
-                header('location: ./index.php?url=confirmationornot&message="Argent ajouté"');
+                header('location: ./index.php?url=confirmationOrNot&message="Argent ajouté"');
                 exit();
             
             }
         
-            header('location: ./index.php?url=confirmationornot&message="Argent non ajouté"');
+            header('location: ./index.php?url=confirmationOrNot&message="Argent non ajouté"');
             exit();
     }
     
@@ -298,11 +298,11 @@ class UserController {
         
             session_destroy();
             
-            header('location: ./index.php?url=confirmationornot&message=votre compte a été effacé');
+            header('location: ./index.php?url=confirmationOrNot&message=votre compte a été effacé');
             exit();
         }
         
-        header('location: ./index.php?url=confirmationornot&message=compte non effacé');
+        header('location: ./index.php?url=confirmationOrNot&message=compte non effacé');
         exit();
     }
     
@@ -313,15 +313,15 @@ class UserController {
         $userAuth = $this->authentificator->checkUser();
         $this->authentificator->csrfTokenChecker();
             
-        $productid = $_POST['id'];
+        $productId = $_POST['id'];
             
-        if($this->basket->addArticleToBasket($userAuth->getId(),$productid)){
+        if($this->basket->addArticleToBasket($userAuth->getId(),$productId)){
         
-            header('location: ./index.php?url=confirmationornot&message=article ajouté au panier');
+            header('location: ./index.php?url=confirmationOrNot&message=article ajouté au panier');
             exit();
         }    
        
-        header('location: ./index.php?url=confirmationornot&message=article non ajouté au panier');
+        header('location: ./index.php?url=confirmationOrNot&message=article non ajouté au panier');
         exit();
     }
     
@@ -344,12 +344,12 @@ class UserController {
        
         if($this->basket->deleteArticleFromBasket($ArticleBasketId)){
         
-            header('location: ./index.php?url=confirmationornot&message=article supprimé du panier');
+            header('location: ./index.php?url=confirmationOrNot&message=article supprimé du panier');
             exit();
         
         }
         
-        header('location: ./index.php?url=confirmationornot&message=article non supprimé du panier');
+        header('location: ./index.php?url=confirmationOrNot&message=article non supprimé du panier');
         exit();
     }
 }

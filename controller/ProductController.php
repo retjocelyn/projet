@@ -76,26 +76,26 @@ class ProductController {
             $maxSize = 400000;
             
             if($error !== 0 ){
-                header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
+                header('location: ./index.php?url=confirmationOrNot&message= Une erreure est survenue');
                 exit();
             }
             
             if($size >= $maxSize){
                
-                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                header('location: ./index.php?url=confirmationOrNot&message=Taille image trop grande');
                 exit();
             }
             
             $extensions = ['jpg', 'png', 'jpeg', 'gif'];
             
             if(in_array($extension, $extensions) !== true){
-                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                header('location: ./index.php?url=confirmationOrNot&message=Mauvaise extension');
                 exit();
             }
             
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
                
-                header('location: ./index.php?url=confirmationornot&message=Article non modifié');
+                header('location: ./index.php?url=confirmationOrNot&message=Article non modifié');
                 exit();
             }
             
@@ -109,11 +109,11 @@ class ProductController {
             
             if($this->repository->createProduct($product)){
                 
-                header('location: ./index.php?url=confirmationornot&message=article créer');
+                header('location: ./index.php?url=confirmationOrNot&message=article créer');
                 exit();
             }
             
-            header('location: ./index.php?url=confirmationornot&message=article non crée');
+            header('location: ./index.php?url=confirmationOrNot&message=article non crée');
             exit();
         }
        
@@ -212,20 +212,20 @@ class ProductController {
             $product->setImage("./public/assets/img/$fileName");
            
             if($error !== 0 ){
-                header('location: ./index.php?url=confirmationornot&message= Une erreure est survenue');
+                header('location: ./index.php?url=confirmationOrNot&message= Une erreure est survenue');
                 exit();
             }
             
             if($size >= $maxSize){
                
-                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                header('location: ./index.php?url=confirmationOrNot&message=Taille image trop grande');
                 exit();
             }
             
             $extensions = ['jpg', 'png', 'jpeg', 'gif'];
             
             if(in_array($extension, $extensions) !== true){
-                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                header('location: ./index.php?url=confirmationOrNot&message=Mauvaise extension');
                 exit();
             }
             
@@ -233,7 +233,7 @@ class ProductController {
             /*recupere l'ancienne image pour l'effacer*/
             
             if(!$data = $this->repository->fetchImage($product->getId())){
-                header('location: ./index.php?url=confirmationornot&message=Article non modifié');
+                header('location: ./index.php?url=confirmationOrNot&message=Article non modifié');
                 exit();
             }
             
@@ -241,19 +241,19 @@ class ProductController {
             
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
                
-                header('location: ./index.php?url=confirmationornot&message=Article non modifié');
+                header('location: ./index.php?url=confirmationOrNot&message=Article non modifié');
                 exit();
             }
             
             
             if($this->repository->modifyProduct($product)){
             
-                header('location: ./index.php?url=confirmationornot&message=Article modifié');
+                header('location: ./index.php?url=confirmationOrNot&message=Article modifié');
                 exit();
             
             }
         
-            header('location: ./index.php?url=confirmationornot&message=article non modifié');
+            header('location: ./index.php?url=confirmationOrNot&message=article non modifié');
             exit();
         }
     }
@@ -267,7 +267,7 @@ class ProductController {
        
         if(!isset($_POST['id'])){
            
-            header('location: ./index.php?url=confirmationornot&message=Article non trouvé');
+            header('location: ./index.php?url=confirmationOrNot&message=Article non trouvé');
             exit();
            
         }
@@ -277,17 +277,17 @@ class ProductController {
         $data = $this->repository->fetchImage($productId);
        
         if(!unlink($data['url_picture'])){
-            header('location: ./index.php?url=confirmationornot&message=Article non effacé');
+            header('location: ./index.php?url=confirmationOrNot&message=Article non effacé');
             exit();
         }
             
         if($this->repository->deleteProduct($productId)){
            
-            header('location: ./index.php?url=confirmationornot&message=Article effacé');
+            header('location: ./index.php?url=confirmationOrNot&message=Article effacé');
             exit();
        } 
                 
-        header('location: ./index.php?url=confirmationornot&message=Article non effacé');
+        header('location: ./index.php?url=confirmationOrNot&message=Article non effacé');
         exit();
         
     }        
@@ -313,26 +313,26 @@ class ProductController {
             $maxSize = 400000;
             
             if($error !== 0 ){
-                header('location: ./index.php?url=confirmationornot&message=Une erreure est survenue');
+                header('location: ./index.php?url=confirmationOrNot&message=Une erreure est survenue');
                 exit();
             }
             
             if($size >= $maxSize){
                
-                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                header('location: ./index.php?url=confirmationOrNot&message=Taille image trop grande');
                 exit();
             }
             
             $extensions = ['jpg', 'png', 'jpeg', 'gif'];
             
             if(in_array($extension, $extensions) !== true){
-                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                header('location: ./index.php?url=confirmationOrNot&message=Mauvaise extension');
                 exit();
             }
             
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
                
-                header('location: ./index.php?url=confirmationornot&message=Catégorie non créee');
+                header('location: ./index.php?url=confirmationOrNot&message=Catégorie non créee');
                 exit();
             }
             
@@ -342,11 +342,11 @@ class ProductController {
             
             if($this->categoryRepository->createCategory($this->category)){
             
-                header('location: ./index.php?url=confirmationornot&message=Categorie créée');
+                header('location: ./index.php?url=confirmationOrNot&message=Categorie créée');
                 exit();
             }
         
-            header('location: ./index.php?url=confirmationornot&message=Categorie non créée');
+            header('location: ./index.php?url=confirmationOrNot&message=Categorie non créée');
             exit();
         }
     }
@@ -392,27 +392,27 @@ class ProductController {
             $this->category->setUrlImage("./public/assets/img/$newFileName");
            
             if($error !== 0 ){
-                header('location: ./index.php?url=confirmationornot&message=Une erreure est survenue');
+                header('location: ./index.php?url=confirmationOrNot&message=Une erreure est survenue');
                 exit();
             }
             
             if($size >= $maxSize){
                
-                header('location: ./index.php?url=confirmationornot&message=Taille image trop grande');
+                header('location: ./index.php?url=confirmationOrNot&message=Taille image trop grande');
                 exit();
             }
             
             $extensions = ['jpg', 'png', 'jpeg', 'gif'];
             
             if(in_array($extension, $extensions) !== true){
-                header('location: ./index.php?url=confirmationornot&message=Mauvaise extension');
+                header('location: ./index.php?url=confirmationOrNot&message=Mauvaise extension');
                 exit();
             }
             
              
             /*recupere l'ancienne image pour l'effacer*/
             if(!$data = $this->categoryRepository->fetchImage($this->category->getId())){
-                header('location: ./index.php?url=confirmationornot&message=Catégorie non modifiée');
+                header('location: ./index.php?url=confirmationOrNot&message=Catégorie non modifiée');
                 exit();
             }
             
@@ -420,18 +420,18 @@ class ProductController {
         
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName)){
                
-                header('location: ./index.php?url=confirmationornot&message=Catégorie non modifié');
+                header('location: ./index.php?url=confirmationOrNot&message=Catégorie non modifié');
                 exit();
             }
             
             
             if($this->categoryRepository->modifyCategory($this->category)){
             
-                header('location: ./index.php?url=confirmationornot&message=Categorie modifiée');
+                header('location: ./index.php?url=confirmationOrNot&message=Categorie modifiée');
                 exit();
             }
             
-        header('location: ./index.php?url=confirmationornot&message=Categorie non modifiée');
+        header('location: ./index.php?url=confirmationOrNot&message=Categorie non modifiée');
         exit();
         
         }
@@ -443,7 +443,7 @@ class ProductController {
         $this->authentificator->checkAdmin();
         
         if(!isset($_POST['id'])){
-            header('location: ./index.php?url=confirmationornot&message=Catégorie non supprimée');
+            header('location: ./index.php?url=confirmationOrNot&message=Catégorie non supprimée');
             exit();
         }    
         
@@ -455,12 +455,12 @@ class ProductController {
         
         if($this->categoryRepository->deleteCategory($categoryId)){
         
-                header('location: ./index.php?url=confirmationornot&message=catégorie supprimée');
+                header('location: ./index.php?url=confirmationOrNot&message=catégorie supprimée');
                 exit();
                 
         }
         
-        header('location: ./index.php?url=confirmationornot&message=Catégorie non supprimée');
+        header('location: ./index.php?url=confirmationOrNot&message=Catégorie non supprimée');
         exit();
     }
     
@@ -512,11 +512,11 @@ class ProductController {
        
        if($this->basketRepository->deleteBasket($userAuth->getId())){
     
-            header('location: ./index.php?url=confirmationornot&message=panier supprimé');
+            header('location: ./index.php?url=confirmationOrNot&message=panier supprimé');
             exit();
         }
     
-        header('location: ./index.php?url=confirmationornot&message=panier non supprimé');
+        header('location: ./index.php?url=confirmationOrNot&message=panier non supprimé');
         exit();
         
     }
@@ -528,7 +528,7 @@ class ProductController {
         $userAuth = $this->authentificator->checkUser();
        
        if(!isset($_POST['amount_after_buy']) || $_POST['amount_after_buy']<0){
-            header('location: ./index.php?url=confirmationornot&message= Fonds insufisants');
+            header('location: ./index.php?url=confirmationOrNot&message= Fonds insufisants');
             exit();
        }
        
@@ -536,7 +536,7 @@ class ProductController {
         
        
         if(!$this->UserRepository->addMoney($userAuth->getId(),$userAuth->getWallet())){
-            header('location: ./index.php?url=confirmationornot&message= Commande non créée');
+            header('location: ./index.php?url=confirmationOrNot&message= Commande non créée');
             exit();
         }
         
@@ -552,11 +552,11 @@ class ProductController {
             }
           
          
-           header('location: ./index.php?url=confirmationornot&message=Votre commande à été créée');
+           header('location: ./index.php?url=confirmationOrNot&message=Votre commande à été créée');
            exit();
        }   
        
-       header('location: ./index.php?url=confirmationornot&message=Commande non créée');
+       header('location: ./index.php?url=confirmationOrNot&message=Commande non créée');
        exit();
     }
     
@@ -600,7 +600,7 @@ class ProductController {
         $userAuth = $this->authentificator->checkUser();
         
         if(!isset($_POST['id'])){
-            header('location: ./index.php?url=confirmationornot&message=Commande non modifiée');
+            header('location: ./index.php?url=confirmationOrNot&message=Commande non modifiée');
             exit();
         }    
         
@@ -620,11 +620,11 @@ class ProductController {
         
        if($this->orderRepository->deleteOrder($userAuth->getId())){
         
-            header('location: ./index.php?url=confirmationornot&message=commande supprimée');
+            header('location: ./index.php?url=confirmationOrNot&message=commande supprimée');
             exit();
             
        }
-        header('location: ./index.php?url=confirmationornot&message=commande non supprimée');
+        header('location: ./index.php?url=confirmationOrNot&message=commande non supprimée');
         exit();
    }
     
