@@ -4,6 +4,8 @@ body{
 
 .container{
     text-align:center;
+    margin:0;
+    padding:0;
 }
 
 h2{
@@ -282,7 +284,7 @@ main{
 }
 
 .productcontent>ul>li{
-    margin:1% 0;
+    margin:2% 0;
 }
 
 .productimage{
@@ -323,10 +325,11 @@ main{
 
 .menuaccount>ul{
     display: flex;
-    justify-content: space-evenly;
+    justify-content:space-evenly;
     background-color:white;
-    width:50%;
+    width:30%;
     border-radius:2em;
+    padding:0;
 }
 
 .menuaccount>ul>li{
@@ -354,8 +357,6 @@ main{
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 51em;
-    height: 25em;
     background-color: rgb(250 245 245 / 88%);
     margin: 40px 0;
     border-radius: 2em;
@@ -391,7 +392,7 @@ main{
 .usercontent{
     display: flex;
     align-items: center;
-    width: 38%;
+    min-width:38%;
     background-color:white;
     margin: 6px 31px;
     border-radius: 1em;
@@ -607,6 +608,13 @@ main{
     margin: 40px 0;
     border-radius: 2em;
 }
+.categoryregister>div>select{
+    height: 3em;
+    border-radius: 2em;
+    background-color: #e6e6e6;
+    padding: 0 0 0 2em;
+    border: none;
+}
 
 .adminaddcategory{
     display:flex;
@@ -755,13 +763,13 @@ margin-right: 5%;
     border-radius:2em;
 }
 
-.separation{
+.field{
     display:flex;
     width:70%;
     flex-direction:column;
 }
 
-.separation>input{
+.field>input{
     height:3em;
     border-radius:2em;
     background-color:#e6e6e6;
@@ -769,7 +777,7 @@ margin-right: 5%;
     border:none;
 }
 
-.separation>label{
+.field>label{
     margin-left:1em;
     font-family: 'Fredoka', sans-serif;
 }
@@ -817,7 +825,6 @@ margin-right: 5%;
 }
 
 .confirmed{
-    text-align:left;
     display:flex;
     justify-content:space-evenly;
     align-items:center;
@@ -966,7 +973,7 @@ footer>section>ul>li{
    display:flex; 
    background-color:white;
    border-radius:2em;
-   width:44%;
+   width:52%;
 }
 
 .emptybasketimage{
@@ -981,7 +988,6 @@ footer>section>ul>li{
     display:flex;
     justify-content:center;
     align-items:center;
-    width:50%;
 }
 
 /*orders*/
@@ -992,7 +998,6 @@ footer>section>ul>li{
 }
 
 .commandes{
-    width:70%;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -1075,6 +1080,7 @@ footer>section>ul>li{
 /*** queryyyyyy time*****/
 @media screen and (max-width: 768px) {
     
+/**header query max-width: 768px**/    
 .displayheader{
     flex-direction:column;
     align-items:center;
@@ -1086,7 +1092,7 @@ footer>section>ul>li{
     align-items:center;
 }
 
-
+/**footer query max-width: 768px***/
 footer{
     display:flex;
     flex-direction:column;
@@ -1100,13 +1106,167 @@ footer{
     margin:15px 0;
 }
 
+/****main de login basket query max-width: 768px****/
+
+.login>a{
+    font-size: 1.2em;
+}
+
+/****main de  register query max-width: 768px****/
+
+.register>a{
+    font-size:1.1em;
+}
+
+
+/****main de  registeraccepted query max-width: 768px****/
+
+.confirmed>a{
+    font-size:2em;
+}
+
+
+/****main de home query max-width: 768px****/
 .presentation,
 .vendeur{
     flex-direction:column;
 }
 
+/****main de account query max-width: 768px****/
+.menuaccount>ul{
+    width:84%;
+    justify-content:flex-start;
+}
+
+.showandhide>section{
+    width:100%;
+}
+
+.showprofil>h2{
+    background:none;
+}
+.userbuttons{
+    flex-direction:column;
+}
+
+.userbuttons>form{
+    margin: 3% 0;
+}
+
+.userprofilecontent{
+    justify-content:center;
+}
+
+.usercontent{
+    flex-direction: column;
+    min-width: 78%;
+}
+.userbuttons>form>button {
+    width: 68%;
+}
+
+#displayuserwallet>article>h2{
+    background:none;
+}
+
+/****main de  instruments query max-width: 768px****/
+
+.ensembleinstruments>article{
+    margin: 10% 0;
+    width: 100%;
+}
+
+.ensembleinstruments>article>div:nth-child(2){
+    width:77%;
+}
+
+.productcontent>h2{
+    text-align:center;
+}
+
+/****main de  basket query max-width: 768px****/
+
+.possiblecommande>h2{
+    font-size:1em;
+}
+
+.possiblecommande>p{
+    font-size:0.7em;
+}
+
+.possiblecommande>form>button {
+    font-size: 1em;
+}
+
+.instrument{
+    margin:0;
+}
+/****main de empty basket query max-width: 768px****/
+
+.paniercontent{
+    width:22em;    
+}
+
+.emptybasketimage{
+    padding: 3%;
+}
+
+.emptybasketimage>img {
+    width: 8em;
+}
+
+.panier{
+    margin:20% 0;
+}
+
+.paniercontent{
+    flex-direction:column;
+    align-items:center;
+}
+
+.emptymessage{
+    width:100%;
+}
+
+/****main de order query max-width: 768px****/
+.instrument{
+    flex-direction:column;
+    align-items:center;
+}
+
+.productimage{
+    width:100%
+}
+
+.productcontent{
+    width:100%;
+}
+
+.productcontent>ul{
+    padding:0;
+}
+
+.commandes {
+    margin:13% 0;
+}
+
+/****main de empty order query max-width: 768px****/
+.order{
+    width: 72%;
+}
+.orderscontent {
+    flex-direction: column;
 }
 
 
 
+/****main de confirmedOrNot query max-width: 768px****/
+.confirmed>h2 {
+    font-size: 2.3em;
+}
 
+.confirmed{
+padding: 2%;
+}
+
+}

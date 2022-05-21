@@ -152,11 +152,11 @@ class UserController {
           
             if($query = $this->repository->createUser($user)){
               
-                header('location: ./index.php?url=registerAccepted&message="votre compte a été crée"');
+                header('location: ./index.php?url=registerAccepted&message=votre compte a été crée');
                 exit();
             }
          
-            header('location: ./index.php?url=confirmationOrNot&message="Compte non crée"');
+            header('location: ./index.php?url=confirmationOrNot&message=Compte non crée');
             exit();
          }    
     }     

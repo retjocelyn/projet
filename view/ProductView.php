@@ -12,7 +12,6 @@ class ProductView {
     
     public function dislplayInstruments($products): string
     {
-        
         $page = new ProductPage();
         $page->setProducts($products);
         $page->constructProducts();
