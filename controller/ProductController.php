@@ -120,7 +120,7 @@ class ProductController {
     }       
     
     
-    public function showOneProduct():view    /*revoir si cest bonle view*/
+    public function showOneProduct():void /*revoir si cest bonle view*/
     {
         $productId = $_GET['id'];
         

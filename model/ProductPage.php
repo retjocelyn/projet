@@ -188,7 +188,7 @@ class ProductPage extends AbstractPage {
      {
             $this->head->setTitle('page admin');
             $this->head->setDescription('admin');
-            $this->body = $this->utils->searchHtml('adminaccount');
+            $this->body = $this->utils->searchHtml('adminAccount');
             $categoryarticle = '';
             foreach($this->products as $product){
                 $content = $this->utils->searchInc('adminProduct');
@@ -204,7 +204,7 @@ class ProductPage extends AbstractPage {
             }
             
             foreach($this->categories as $category){
-                $content = $this->utils->searchInc('admincategory');
+                $content = $this->utils->searchInc('adminCategory');
                 $content = str_replace('{%name%}', $category->getName(), $content);
                 $content = str_replace('{%id%}',$category->getId(), $content);
                 $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
@@ -226,7 +226,7 @@ class ProductPage extends AbstractPage {
             
             $commandArticle = '';
             foreach($this->orders as $order){
-                $content = $this->utils->searchInc('admincommandes');
+                $content = $this->utils->searchInc('adminCommandes');
                 $content = str_replace('{%numerodelacommande%}',$order->getId(),$content);
                 $content = str_replace('{%id%}',$order->getId(),$content);
                 $content = str_replace('{%datedelacommande%}',$order->getDate(),$content);
@@ -244,7 +244,7 @@ class ProductPage extends AbstractPage {
             
             $adminUsers = '';
             foreach($this->users as $user){
-                $content = $this->utils->searchInc('adminusers');
+                $content = $this->utils->searchInc('adminUsers');
                 $content = str_replace('{%name%}',$user->getFirstName(),$content);
                 $content = str_replace('{%familyname%}',$user->getlastName(),$content);
                 $content = str_replace('{%id%}',$user->getId(),$content);
@@ -273,7 +273,7 @@ class ProductPage extends AbstractPage {
     {
         $this->head->setTitle('page produit');
         $this->head->setDescription('affiche un produit');
-        $this->body = $this->utils->searchHtml('oneproduct');
+        $this->body = $this->utils->searchHtml('oneProduct');
         
         $content = $this->utils->searchInc('produit');
         $content = str_replace('{%name%}', $product->getName(), $content);
@@ -294,7 +294,7 @@ class ProductPage extends AbstractPage {
             
             $this->head->setTitle('symphony: page modifer produit');
             $this->head->setDescription('modifier produit');
-            $this->body = $this->utils->searchHtml('formmodifyproduct');
+            $this->body = $this->utils->searchHtml('formModifyProduct');
             
             foreach($this->categories as $category){
                  $content = $this->utils->searchInc('category');
@@ -320,7 +320,7 @@ class ProductPage extends AbstractPage {
     {
             $this->head->setTitle('symphony: page modifer category');
             $this->head->setDescription('modifier produit');
-            $this->body = $this->utils->searchHtml('formmodifycategory');
+            $this->body = $this->utils->searchHtml('formModifyCategory');
             $this->body = str_replace('{%name%}',$category->getName(), $this->body);
             $this->body = str_replace('{%id%}',$category->getId(), $this->body);
             $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
@@ -332,7 +332,7 @@ class ProductPage extends AbstractPage {
     {
         $this->head->setTitle('symphony: page modifer commande');
         $this->head->setDescription('modifier commande');
-        $this->body = $this->utils->searchHtml('formmodifyorder');
+        $this->body = $this->utils->searchHtml('formModifyOrder');
         $this->body = str_replace('{%id%}',$order, $this->body);
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
          
@@ -347,7 +347,7 @@ class ProductPage extends AbstractPage {
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
        
         foreach($this->products as $product){
-                $content = $this->utils->searchInc('produitbasket');
+                $content = $this->utils->searchInc('produitBasket');
                 $content = str_replace('{%name%}', $product->getName(), $content);
                 $content = str_replace('{%id%}',$product->getId(), $content);
                 $content = str_replace('{%price%}',$product->getPrice(), $content);
@@ -373,7 +373,7 @@ class ProductPage extends AbstractPage {
      {
         $this->head->setTitle('symphony: panier');
         $this->head->setDescription('votre panier');
-        $this->body = $this->utils->searchHtml('emptybasket');
+        $this->body = $this->utils->searchHtml('emptyBasket');
         $this->constructPage();
      }
      
@@ -386,7 +386,7 @@ class ProductPage extends AbstractPage {
     
         foreach($this->orders as $order){
           
-                $content = $this->utils->searchInc('produitorder');
+                $content = $this->utils->searchInc('produitOrder');
                 $content = str_replace('{%name%}', $order->getCommandProductName(), $content);
                 $content = str_replace('{%id%}',$order->getCommandProductId(), $content);
                 $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
@@ -410,7 +410,7 @@ class ProductPage extends AbstractPage {
      {
         $this->head->setTitle('symphony: commandes');
         $this->head->setDescription('votre commandes');
-        $this->body = $this->utils->searchHtml('emptyorders');
+        $this->body = $this->utils->searchHtml('emptyOrders');
         $this->constructPage();
      }
     

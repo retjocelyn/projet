@@ -87,14 +87,14 @@ class DefaultPage extends AbstractPage {
             $this->constructPage();
             break;
             
-            case'registeraccepted':
+            case'registerAccepted':
             $this->head->setTitle('symphony: page inscription');
             $this->head->setDescription('inscription');
             $this->body = str_replace('{%message%}',$this->getMessage(),$this->body);
             $this->constructPage();
             break;
             
-            case'confirmationornot':
+            case'confirmationOrNot':
             $this->head->setTitle('symphony: message');
             $this->head->setDescription('message de statut');
             $this->body = str_replace('{%message%}',$this->getErrors(),$this->body);

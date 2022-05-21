@@ -54,7 +54,7 @@ class ShopPage extends AbstractPage {
     public function constructShop(): void
     {
         foreach($this->categories as $category){
-            $content = $this->utils->searchInc('article_category');
+            $content = $this->utils->searchInc('articleCategory');
             $content = str_replace('{%nom%}', $category->getName(), $content);
             $content = str_replace('{%id%}',$category->getId(), $content);
             $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);

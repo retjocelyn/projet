@@ -47,7 +47,7 @@ header{
 .menuheader>ul{
     display:flex;
     list-style: none;
-    margin:0;
+    padding:0;
 }
 
 .menuheader>ul>li{
@@ -87,34 +87,34 @@ main{
 /*main de home*/
 
 .block-search{
-    width:100%;
+    
+    width: 100%;
     height: 6em;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-.search input[type=text]{
-  width: 500px;
+#search{
+  width: 42%;
   height: 25px;
   border-radius: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 1);
   text-align: center;
 }
 
-.search{
-  margin:7px;
+#list-search{
+    padding:0;
+    list-style:none;
+    background-color:white;
 }
-      
-.search button{
-  background-color: #422f2de0;
-  color: #fff;
-  padding: 5px 8px;
-  margin-left: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-} 
+
+#list-search>li>a{
+    text-decoration:none;
+    font-size: 1.5em;
+}
+
+
 
 .presentation{
     margin:37px 0;
@@ -163,7 +163,7 @@ main{
     height:30em;
     background-color:rgba(255,255,255, 0.9);
     margin:40px 0;
-    border-radius:10%;
+    border-radius:2em;
 }
 
 .login>div{
@@ -203,6 +203,7 @@ main{
     font-family: 'Fredoka', sans-serif;
     font-size:1.5em;
     text-decoration:none;
+    text-align:center;
 }
 
 
@@ -875,11 +876,21 @@ footer>section{
     margin-right:11px;
 }
 
-.reseaux>a{
+.socialIcons>a{
     color:#8a93ff;
     font-size:35px;
     text-decoration:none;
     margin:0 21px;
+}
+
+.conditions{
+    display:flex;
+    flex-direction:column;
+}
+.conditions>a{
+    margin:6% 0;
+    text-decoration:none;
+    color:#eadc0c;
 }
 
 footer>section>ul>li{
@@ -1069,9 +1080,12 @@ footer>section>ul>li{
     align-items:center;
 }    
 
-.menuheader{
-    width:2em;
-}    
+.menuheader>ul{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
 
 footer{
     display:flex;

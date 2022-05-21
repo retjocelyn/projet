@@ -50,7 +50,7 @@ class UserView {
     
     public function displayRegisterAccepted(): string
     {
-        $page = new DefaultPage('registeraccepted');
+        $page = new DefaultPage('registerAccepted');
         $page->setMessage($_SESSION['message']);
         $page->assemblerPage();
         return $page->getPage();
@@ -59,7 +59,7 @@ class UserView {
     
     public function displayConfirmationOrNot(): string
     {
-        $page = new DefaultPage('confirmationornot');
+        $page = new DefaultPage('confirmationOrNot');
         $message = $_SESSION['message'];
         $page->setErrors($message);
         $page->assemblerPage();
@@ -77,7 +77,7 @@ class UserView {
     
     public function displayFormModifyUser($user):string
     {
-        $page = new DefaultPage('formmodifyuser');
+        $page = new DefaultPage('formModifyUser');
         $page->createFormModifyUser($user);
         return $page->getPage();
     }
