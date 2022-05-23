@@ -11,7 +11,7 @@ $url = isset($_GET['url']) ? $_GET['url'] : "home";
 
 switch($url){
     // Route index.php?url=home
-    case "home" : 
+    case "home": 
         $homeController = new HomeController();
         $homeController->home();
         break;

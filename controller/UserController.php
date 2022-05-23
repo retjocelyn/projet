@@ -42,7 +42,12 @@ class UserController {
         $password = htmlspecialchars($_POST['password']);
         
         $data = $this->repository->fetchLogin($email); 
-       
+        
+        if(['error'][0] === 'error'){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         if($data === false){
             $_SESSION ['error'] = "Identifiant incconu";
             header('location:./index.php?url=login');
@@ -161,26 +166,23 @@ class UserController {
          }    
     }     
     
-    public function registerAccepted() 
+    public function registerAccepted()
     {
         if(isset($_GET['message'])){
-        
             $_SESSION['message'] = $_GET['message'];
         }else{
-            $_SESSION['message'] = '';
+            $_SESSION['message'] = 'erreur';
         }
-        
         
         echo $this->view->displayRegisterAccepted();
     }
     
-    public function confirmationOrNot() 
+    public function confirmationOrNot()
     {
         if(isset($_GET['message'])){
-        
             $_SESSION['message'] = $_GET['message'];
         }else{
-            $_SESSION['message'] = '';
+            $_SESSION['message'] = 'erreur';
         }
         
         
