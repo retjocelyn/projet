@@ -5,13 +5,7 @@ require_once './repository/AbstractRepository.php';
  class BasketRepository extends AbstractRepository
 {
     
-    private const TABLE = "panier";
-    
-    public function __construct(){
-        parent::__construct(self::TABLE);
-    }
-    
-   
+
     public function addArticleToBasket(int $userId,int $productId): bool
     {
        

@@ -25,7 +25,7 @@ let selecteurs = [addProduct,allProducts,addCategory,categories ,orders,users];
 
 /*fonction pour afficher au moins section une section si besoin */
 
-const stillDisplayOne = () => {
+function stillDisplayOne(){
     const noSectionDisplayed = sections.every(section => section.style.display === "none");
 
     if(noSectionDisplayed){
@@ -35,7 +35,7 @@ const stillDisplayOne = () => {
 } 
 
 
-const eventListenerBuilder = (section, button) => (e) => {
+function eventListenerBuilder(section, button) {
   if (section.style.display === "none"){
           
     for (let i = 0; i < sections.length; i++) {
@@ -63,7 +63,8 @@ if(addProduct !== null){
     sectionAdminAddProduct.style.display = "flex";
     addProduct.style.color = "red";
     
-    addProduct.addEventListener('click', eventListenerBuilder(sectionAdminAddProduct,addProduct));
+    addProduct.addEventListener('click',() => eventListenerBuilder(sectionAdminAddProduct,addProduct ))
+
 }
 
 
@@ -71,7 +72,8 @@ if(allProducts !== null){
     sectionAdminAllProduct.style.display = "none";
     allProducts.style.color = "blue";
 
-    allProducts.addEventListener('click', eventListenerBuilder(sectionAdminAllProduct,allProducts));
+    allProducts.addEventListener('click',() => eventListenerBuilder(sectionAdminAllProduct,allProducts ))
+   
     
 }
 
@@ -82,7 +84,8 @@ if(addCategory !== null){
     sectionAdminAddCategory.style.display = "none";
     addCategory.style.color = "blue";
     
-    addCategory.addEventListener('click', eventListenerBuilder(sectionAdminAddCategory,addCategory));
+    addCategory.addEventListener('click',() => eventListenerBuilder(sectionAdminAddCategory,addCategory))
+    
 }    
 
 
@@ -91,7 +94,8 @@ if(categories !== null){
     sectionAdminAllCategories.style.display = "none";
     categories.style.color = "blue";
    
-    categories.addEventListener('click', eventListenerBuilder(sectionAdminAllCategories,categories)); 
+   categories.addEventListener('click',() => eventListenerBuilder(sectionAdminAllCategories,categories))
+   
 
 }
 
@@ -101,7 +105,7 @@ if(orders !== null){
     sectionAdminAllOrders.style.display = "none";
     orders.style.color = "blue";
     
-    orders.addEventListener('click', eventListenerBuilder(sectionAdminAllOrders,orders)); 
+    orders.addEventListener('click',() => eventListenerBuilder(sectionAdminAllOrders,orders))
 }    
 
 
@@ -110,6 +114,8 @@ if(users !== null){
     sectionAdminAllUsers.style.display = "none";
     users.style.color = "blue";
     
-    users.addEventListener('click', eventListenerBuilder(sectionAdminAllUsers,users)); 
+    
+    users.addEventListener('click',() => eventListenerBuilder(sectionAdminAllUsers,users ))
+    
 }    
 

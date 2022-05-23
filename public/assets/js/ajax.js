@@ -8,7 +8,8 @@ let search = document.getElementById('list-search');
 
 if(input){
     input.addEventListener('keyup', async (e) => {
-        let value = e.target.value
+        /*recupere valeur de l input*/
+        let value = e.target.value;
         removeOldList()
         const data = await query(value)
         const res = await data.json();

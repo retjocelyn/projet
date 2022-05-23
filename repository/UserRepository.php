@@ -66,7 +66,7 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function createUser($user)
+    public function createUser($user): bool
     {
         
         try {

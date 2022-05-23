@@ -43,7 +43,7 @@ class UserController {
         
         $data = $this->repository->fetchLogin($email); 
         
-        if(['error'][0] === 'error'){
+        if($data['error']){
             header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
             exit();
         }

@@ -7,14 +7,13 @@ abstract class AbstractRepository
     private const PASSWORD = "dabe70939c4c64d41ab82bc666ae29d5";
     private const BASE = "jocelynretiere_symphonie";
     
-    protected $table;
     protected $connexion;
     protected $query;
 
-    public function __construct(string $table)
+    public function __construct()
     {
         $this->constructConnexion();
-        $this->table = $table;
+      
     }
     
   
