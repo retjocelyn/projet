@@ -143,7 +143,13 @@ class UserController {
             
         }
         
-        if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['adress'])){
+        if($_POST['password'] !== $_POST['checkPassword']){
+            $_SESSION['error'] = "Le mot de passe n'est pas le même";
+            header('location:./index.php?url=register');
+            exit();
+        }
+        
+        if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['password'],$_POST['checkPassword'],$_POST['adress'])){
             $user = new User();
             $user->setlastName(htmlspecialchars($_POST['lastName']));
             $user->setFirstName(htmlspecialchars($_POST['firstName']));
@@ -192,11 +198,12 @@ class UserController {
     
     public function formModifyUser():void
     {
-        $this->authentificator->csrfTokenChecker();
+       
+        $userAuth = $this->authentificator->checkUser();
         
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
-        $userId = $_POST['id'];
+        $userId = $userAuth->getId();
         
         $data = $this->repository->findById($userId);
         
@@ -216,29 +223,56 @@ class UserController {
     
     public function modifyUser():void
     {
-        
+        $userAuth = $this->authentificator->checkUser();
         $this->authentificator->csrfTokenChecker();
-        $this->authentificator->checkUser();
-        
-        $user = new User();
-        $user->setId($_POST['id']);
-        $user->setlastName(htmlspecialchars($_POST['lastName']));
-        $user->setFirstName(htmlspecialchars($_POST['firstName']));
-        $user->setEmail(htmlspecialchars($_POST['email']));
-        $user->setAdresse(htmlspecialchars($_POST['adress']));
-        $user->setRole(htmlspecialchars($_POST['role']));
-        $user->setWallet(htmlspecialchars((float)$_POST['userwallet']));
-        $Pass = htmlspecialchars($_POST['password']);
-        $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
-        
-        if($this->repository->modifyUser($user)){
        
-            $_SESSION['user'] = serialize($user);
-            
-            header('location: ./index.php?url=confirmationOrNot&message="Compte modifié"');
-            exit();
-        }   
         
+        if(empty($_POST)){
+            
+            $_SESSION['error'] = "document non remplis";
+            header('location: ./index.php?url=formModifyUser');
+            exit();
+        }
+        
+       
+        
+        if(isset($_POST['lastName'],$_POST['firstName'],$_POST['email'], $_POST['newPassword'],$_POST['checkNewPassword'],
+            $_POST['adress'])){
+          
+            if($_POST['newPassword'] !== $_POST['checkNewPassword']){
+                $_SESSION['error'] = "Le mot de passe n'est pas le même";
+                header('location:./index.php?url=formModifyUser');
+                exit();
+            }
+            
+            $user = new User();
+            $user->setId($_POST['id']);
+            $user->setlastName(htmlspecialchars($_POST['lastName']));
+            $user->setFirstName(htmlspecialchars($_POST['firstName']));
+            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setAdresse(htmlspecialchars($_POST['adress']));
+            $user->setRole(htmlspecialchars($_POST['role']));
+            $user->setWallet(htmlspecialchars((float)$_POST['userwallet']));
+            $Pass = htmlspecialchars($_POST['newPassword']);
+            $user->setPassword(password_hash($Pass, PASSWORD_DEFAULT));
+            
+            $data = $this->repository->fetchLogin($user->getEmail());
+            
+            if($user->getEmail() !== $userAuth->getEmail() && $data !== false){    
+                $_SESSION['error'] = "Email deja utilisé";
+                header('location:./index.php?url=formModifyUser');
+                exit();
+                
+            }
+        
+            if($this->repository->modifyUser($user)){
+           
+                $_SESSION['user'] = serialize($user);
+                
+                header('location: ./index.php?url=confirmationOrNot&message="Compte modifié"');
+                exit();
+            }   
+        }
         header('location: ./index.php?url=confirmationOrNot&message="Compte non modifié"');
         exit();
         

@@ -78,6 +78,10 @@ class UserView {
     public function displayFormModifyUser($user):string
     {
         $page = new DefaultPage('formModifyUser');
+        if(isset($_SESSION['error'])){
+            $page->setErrors($_SESSION['error']);
+            unset($_SESSION['error']);
+        }
         $page->createFormModifyUser($user);
         return $page->getPage();
     }

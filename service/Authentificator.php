@@ -29,7 +29,7 @@ class Authentificator{
         
      if(!$_SESSION['csrf'] || $_SESSION['csrf'] !== $_POST['csrf_token']){
            
-            $_SESSION['error'] = "403 Vous nêtes pas autorisé";
+            $_SESSION['error'] = "Vous nêtes pas autorisé";
             
             header('location: ./index.php?url=login');
             exit();
@@ -52,7 +52,7 @@ class Authentificator{
        
         if($adminChecked->getRole() !== "admin"){
             
-            $_SESSION['error'] = "403 vous n'êtes pas autorisé";  
+            $_SESSION['error'] = "vous n'êtes pas autorisé";  
             
             header('location: ./index.php?url=login');
             exit();

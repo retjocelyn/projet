@@ -35,7 +35,7 @@ function stillDisplayOne(){
 } 
 
 
-function eventListenerBuilder(section, button) {
+function eventListenerBuilder(section, selecteur) {
   if (section.style.display === "none"){
           
     for (let i = 0; i < sections.length; i++) {
@@ -47,12 +47,12 @@ function eventListenerBuilder(section, button) {
     }
     
     section.style.display = "flex";
-    button.style.color = "red"; 
+    selecteur.style.color = "red"; 
   
   }
   else {
     section.style.display = "none";
-    button.style.color = "blue";
+    selecteur.style.color = "blue";
     stillDisplayOne();
   }
 }

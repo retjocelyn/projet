@@ -2,6 +2,7 @@
                 <section class="showregisterform">    
                     <form class="register" action="index.php?url=modifyUser" method="post">
                         <h2>Modifier  votre compte</h2>
+                        <p class="erreur">{%error%}</p>
                         <input type="hidden"  name="id" value="{%id%}" required>
                         <div class="field newfamilyname">
                             <label for="lastName">Nom : </label> 
@@ -20,9 +21,13 @@
                             <input type="text" id="adress" name="adress" value="{%adress%}" required>
                         </div>  
                         <div class="field newpassword">
-                            <label for="password">Mot de Passe : </label> 
-                            <input type="password" id="password" name="password" value="" required>
+                            <label for="newPasswordpassword">Mot de Passe : </label> 
+                            <input type="password" id="newPassword" name="newPassword" value="" required>
                         </div>    
+                        <div class="field newpassword">
+                            <label for="checkNewPassword">Entrez de nouveau le mot de passe : </label>
+                            <input type="password" id="checkNewPassword" name="checkNewPassword" value="" required>
+                        </div>   
                         <input name="csrf_token" type="hidden" value="{%$token%}">
                         <input name="role" type="hidden" value="{%role%}">
                         <input name="userwallet" type="hidden" value="{%wallet%}">

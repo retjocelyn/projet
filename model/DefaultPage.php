@@ -132,6 +132,7 @@ class DefaultPage extends AbstractPage {
         
         $this->head->setTitle('symphony: modifier profil');
         $this->head->setDescription('formulaire de modification de user');
+        $this->body = str_replace('{%error%}',$this->getErrors(),$this->body); 
         $this->body = str_replace('{%familyname%}', $user->getLastName(), $this->body);
         $this->body = str_replace('{%firstName%}', $user->getFirstName(), $this->body);
         $this->body = str_replace('{%email%}', $user->getEmail(), $this->body);

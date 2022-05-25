@@ -28,10 +28,9 @@
                                     </div> 
                                 </div>
                                 <div class="userbuttons">
-                                    <form  action="index.php?url=formModifyUser" method="post">
-                                        <input type="hidden"  name="id" value="{%id%}" required>
-                                        <input name="csrf_token" type="hidden" value="{%$token%}">
-                                        <button type="submit">Modifier profil</button>
+                                <a href="index.php?url=formModifyUser">
+                                    <button type="submit">Modifier profil</button>
+                                </a>
                                     </form>
                                     <form   class="form_checker" action="index.php?url=deleteUser" method="post">
                                         <input type="hidden"  name="id" value="{%id%}" required>
