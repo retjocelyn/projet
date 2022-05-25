@@ -115,7 +115,7 @@ if(users !== null){
     users.style.color = "blue";
     
     
-    users.addEventListener('click',() => eventListenerBuilder(sectionAdminAllUsers,users ))
+    users.addEventListener('click',() => eventListenerBuilder(sectionAdminAllUsers,users))
     
 }    
 
