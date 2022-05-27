@@ -2,7 +2,9 @@
 <article class="orders"> 
     <div class="ordercontent">
         <h2>Commande:numéro {%numerodelacommande%}</h2>
-        <h3><strong>Date de la commande :</strong>{%datedelacommande%}</h3>
+        <h3><strong>Date de la commande : </strong>{%datedelacommande%}</h3>
+        <h3><strong>Statut de la commande :</strong></h3>
+        <h3>{%status%}</h3>
     </div>
      <!--client de la commande-->
     <div class="client">
@@ -14,13 +16,9 @@
     <div class="orderproduct">
         <!--produit commandé par le client-->
         <div class="orderproductcontent">
-            <h2>Produit:</h2>
-            <h2>{%nameproduit%}</h2>
+            <h2>Produit: {%nameproduit%}</h2>
             <h3>Quantitité : {%quantity%}</h3>
             <h3>Prix de {%price%} euros</h3>
-        </div>
-        <div class="orderproductimage">
-            <img src="{%urlImage%}" alt="image de produit"/>
         </div>
     </div>    
     <div class="displayicons">

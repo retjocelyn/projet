@@ -5,7 +5,7 @@
                             <h2>Votre panier</h2>
                             {%article%}
                             <h2>Le panier s'élève à {%prixtotal%} euros</h2>
-                            <p>Votre portefeuille contient {%solde%} euros</p>
+                            <h3>Votre portefeuille contient {%solde%} euros</h3>
                             <!--permet de créer la commande -->
                             <form class="formcreateorder form_checker" action="./index.php?url=createOrder" method="post">
                                 <input name="amount_after_buy" type="hidden" value="{%amount_after_buy%}">

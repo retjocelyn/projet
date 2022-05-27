@@ -70,10 +70,11 @@ class AdminController {
         $datas = $this->orderRepository->findAllOrders();
         
         $commandes = [];
-    
+   
         foreach($datas as $data){
             $order = new Order();
             $order->setId($data['id']);
+            $order->setStatus($data['order_status']);
             $order->setDate($data['created_at']);
             $order->setCommandUserFamilyName($data['first_name']);
             $order->settCommandUserName($data['last_name']);

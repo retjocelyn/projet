@@ -667,6 +667,7 @@ margin-right: 5%;
 
 .orderproduct{
     display:flex;
+    justify-content:center;
     width:100%;
 }
 
@@ -958,7 +959,7 @@ footer>section>ul>li{
     border:none;
     font-family: 'Fredoka', sans-serif;
     font-size:1.5em;
-    margin:0.7em 0;
+    margin:1em 0;
     cursor: pointer;
 }
 

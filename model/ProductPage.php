@@ -234,6 +234,7 @@ class ProductPage extends AbstractPage {
             $commandArticle = '';
             foreach($this->orders as $order){
                 $content = $this->utils->searchInc('adminCommandes');
+                $content = str_replace('{%status%}',$order->getStatus(),$content);
                 $content = str_replace('{%numerodelacommande%}',$order->getId(),$content);
                 $content = str_replace('{%id%}',$order->getId(),$content);
                 $content = str_replace('{%datedelacommande%}',$order->getDate(),$content);
@@ -335,7 +336,7 @@ class ProductPage extends AbstractPage {
             $this->constructPage();
      }
      
-    public function CreateFormModifyOrder(Order $order): void
+    public function CreateFormModifyOrder(string $order): void
     {
         $this->head->setTitle('symphonie: page modifer commande');
         $this->head->setDescription('modifier commande');
