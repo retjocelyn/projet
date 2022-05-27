@@ -28,32 +28,49 @@ class DefaultPage extends AbstractPage {
         
     }
     
-    
+    /**
+     * @return string $error
+     */
     public function getErrors(): string
     {
         return $this->errors;
     }
     
+     /**
+     * @param string $error
+     */
     public function setErrors($errors):void
     {
         $this->errors = $errors;
     }
     
+     /**
+     * @return string $csrf
+     */
     public function getCsrf(): string
     {
         return $this->csrf;
     }
     
+     /**
+     * @param string $csrf
+     */
     public function setCsrf($csrf): void
     {
         $this->csrf = $csrf;
     }
     
+     /**
+     * @return string $message
+     */
     public function getMessage(): string
     {
         return $this->message;
     }
     
+     /**
+     * @param string $message
+     */
     public function setMessage($message): void
     {
         $this->message = $message;
@@ -111,7 +128,8 @@ class DefaultPage extends AbstractPage {
         }
         
     }
-    public function displayAccount($user)
+    
+    public function displayAccount(User $user):void
     {
         
             $this->head->setTitle('symphony: page compte');
@@ -127,7 +145,7 @@ class DefaultPage extends AbstractPage {
         
     }
     
-    public function createFormModifyUser($user)
+    public function createFormModifyUser(User $user):void
     {
         
         $this->head->setTitle('symphony: modifier profil');

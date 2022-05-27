@@ -1,12 +1,25 @@
                 <main>
-                    <nav class="menuadminaccount"><!--dhizdhizhdiz-->
+                    <!--menu du choix de l'admin-->
+                    <nav class="menuadminaccount">
                         <ul >
-                            <li><h2 id="addarticle">Ajouter article</h2></li>
-                            <li><h2 id="products">Articles</h2></li>
-                            <li><h2 id="addcategory">Créer catégorie</h2></li>
-                            <li><h2 id="categories">Catégories</h2></li>
-                            <li><h2 id="orders">Les commandes</h2></li>
-                            <li><h2 id="users">Tous les users</h2></li>
+                            <li>
+                                <h2 id="addarticle">Ajouter article</h2>
+                            </li>
+                            <li>
+                                <h2 id="products">Articles</h2>
+                            </li>
+                            <li>
+                                <h2 id="addcategory">Créer catégorie</h2>
+                            </li>
+                            <li>
+                                <h2 id="categories">Catégories</h2>
+                            </li>
+                            <li>
+                                <h2 id="orders">Les commandes</h2>
+                            </li>
+                            <li>
+                                <h2 id="users">Tous les users</h2>
+                            </li>
                         </ul>
                         <form id="icon_form_admin" action="index.php?url=logout" method="post">
                             <input name="csrf_token" type="hidden" value="{%$token%}">
@@ -16,6 +29,7 @@
                         </form>
                     </nav>
                     <div class="showandhide">
+                        <!--permet d'ajouter un produit -->
                         <section id="adminaddproduct" class="adminaddproduct">
                              <form class="register" action="index.php?url=createProduct" method="POST" enctype="multipart/form-data">
                                 <h2>Créer un article</h2>
@@ -43,8 +57,8 @@
                                     <input type="number" id="price" name="quantity" value="" required>
                                 </div>    
                                 <div class="addimage">
-                                    <label for="file">Image</label>
-                                    <input  type="file" name="file" required>
+                                    <label for="productFile">Image</label>
+                                    <input id="productFile" type="file" name="file" required>
                                 </div>
                                 <input name="csrf_token" type="hidden" value="{%$token%}">
                                 <div class="registerbutton">
@@ -53,6 +67,7 @@
                             </form> 
                         </section>
                         <section id="showallproducts" class="showadminproducts">
+                            <!--article est l'ensemble des instruments de la bas de donnée-->
                             {%article%}
                         </section>
                         <section class="adminaddcategory" id="adminaddcategory">
@@ -63,8 +78,8 @@
                                     <input type="text" id="categoryName" name="name" value="" required>
                                 </div>    
                                 <div class="addimage">
-                                    <label for="file">Image</label>
-                                    <input type="file" name="file" required>
+                                    <label for="categoryFile">Image</label>
+                                    <input id="categoryFile" type="file" name="file" required>
                                 </div>    
                                 <div class="field">
                                     <input name="csrf_token" type="hidden" value="{%$token%}">
@@ -75,12 +90,15 @@
                             </form>
                         </section>    
                         <section id="showallcategories" class="showallcategories">
+                        <!--categories est l'ensemble des catégories de la bas de donnée-->
                            {%categories%}
                         </section>
                         <section id="showallorders" class="showallorders">
+                        <!--commandes est l'ensemble des commandes de la bas de donnée-->
                             {%commandes%}
                         </section>
                         <section id="showAdminUsers" class="showAdminUsers">
+                         <!--users est l'ensemble des users de la bas de donnée-->
                            {%users%}
                         </section>
                     </div>

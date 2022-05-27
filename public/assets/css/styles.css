@@ -197,6 +197,7 @@ main{
     border:none;
     font-family: 'Fredoka', sans-serif;
     font-size:1.5em;
+    cursor: pointer;
 }
 
 .login>a{
@@ -509,8 +510,8 @@ main{
 .menuadminaccount>ul{
     display: flex;
     justify-content: space-evenly;
-    background-color:white;
-    border-radius:2em;
+    padding:0;
+   
 }
 
 .menuadminaccount>ul>li{
@@ -648,7 +649,6 @@ main{
 }
 
 .orders{
-    text-align: left;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -766,7 +766,6 @@ margin-right: 5%;
     width:35em;
     height:45em;
     background-color:rgba(255,255,255, 0.9);
-    border:1px solid black;
     margin:40px 0;
     border-radius:2em;
 }
@@ -805,6 +804,8 @@ margin-right: 5%;
     border:none;
     font-family: 'Fredoka', sans-serif;
     font-size:1.3em;
+    cursor: pointer;
+    
 }
 
 .register>h3,
@@ -1184,6 +1185,49 @@ footer{
     background:none;
 }
 
+/****main de addmin account query max-width: 768px****/
+
+.menuadminaccount{
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.menuadminaccount>ul{
+    flex-direction:column;
+}
+
+#icon_form_admin {
+    margin-bottom: 2em;
+}
+
+.showandhide{
+    margin:2em 0;
+}
+
+.admininstrument{
+    width:90%;
+}
+
+.admininstrument>div:nth-child(1)>img{
+    height: 12em;
+    width: 76%;
+}
+
+.categoryregister{
+    width:100%;
+}
+.categoryregister>h2{
+    text-align:center;
+}
+
+.orders{
+    width:100%;
+}
+
+.users{
+    width:100%;
+}
 /****main de  instruments query max-width: 768px****/
 
 .ensembleinstruments>article{
@@ -1201,6 +1245,10 @@ footer{
 
 /****main de  basket query max-width: 768px****/
 
+.possiblecommande{
+    width:100%;    
+}
+
 .possiblecommande>h2{
     font-size:1em;
 }
@@ -1214,7 +1262,7 @@ footer{
 }
 
 .instrument{
-    margin:0;
+    margin:1em 0;
 }
 /****main de empty basket query max-width: 768px****/
 

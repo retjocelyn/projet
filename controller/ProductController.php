@@ -504,62 +504,9 @@ class ProductController {
         echo $this->view->displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy);
    }
    
-    public function deleteBasket() : void
-    {
-        $this->authentificator->csrfTokenChecker();
-        $userAuth = $this->authentificator->checkUser();
-        
-       
-       if($this->basketRepository->deleteBasket($userAuth->getId())){
+   
     
-            header('location: ./index.php?url=confirmationOrNot&message=panier supprimé');
-            exit();
-        }
-    
-        header('location: ./index.php?url=confirmationOrNot&message=panier non supprimé');
-        exit();
-        
-    }
-    
-    public function createOrder(): void 
-    {
-        
-        $this->authentificator->csrfTokenChecker();
-        $userAuth = $this->authentificator->checkUser();
-       
-       if(!isset($_POST['amount_after_buy']) || $_POST['amount_after_buy']<0){
-            header('location: ./index.php?url=confirmationOrNot&message= Fonds insufisants');
-            exit();
-       }
-       
-        $userAuth->setWallet($_POST['amount_after_buy']);
-        
-       
-        if(!$this->UserRepository->addMoney($userAuth->getId(),$userAuth->getWallet())){
-            header('location: ./index.php?url=confirmationOrNot&message= Commande non créée');
-            exit();
-        }
-        
-        $_SESSION['user'] = serialize($userAuth);
-        
-        if($datas = $this->basketRepository->findById($userAuth->getId())){
-         
-            foreach($datas as $data){
-                 
-                $this->orderRepository->createOrder($userAuth->getId(),$data['product_id']);
-    
-                $this->basketRepository->deleteBasket($userAuth->getId());
-            }
-          
-         
-           header('location: ./index.php?url=confirmationOrNot&message=Votre commande à été créée');
-           exit();
-       }   
-       
-       header('location: ./index.php?url=confirmationOrNot&message=Commande non créée');
-       exit();
-    }
-    
+   
     
     public function showOrders() : void
     {
@@ -610,22 +557,5 @@ class ProductController {
         
         echo $this->view->displayFormModifyOrder($order);
     }
-       
-   
-    public function deleteOrder(): void
-    {
-        $this->authentificator->csrfTokenChecker();
-        $userAuth = $this->authentificator->checkUser();
-       
-        
-       if($this->orderRepository->deleteOrder($userAuth->getId())){
-        
-            header('location: ./index.php?url=confirmationOrNot&message=commande supprimée');
-            exit();
-            
-       }
-        header('location: ./index.php?url=confirmationOrNot&message=commande non supprimée');
-        exit();
-   }
     
 }

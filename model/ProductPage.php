@@ -35,7 +35,7 @@ class ProductPage extends AbstractPage {
     
     
     /**
-     * @return string
+     * @return string $article
      */
     public function getArticle(): string
     {
@@ -45,13 +45,13 @@ class ProductPage extends AbstractPage {
     /**
      * @param string $article
      */
-    public function setArticle(string $article)
+    public function setArticle(string $article): void
     {
         $this->article = $article;
     }
     
     /**
-     * @return array
+     * @return array $products
      */
     public function getProducts(): array
     {
@@ -61,11 +61,14 @@ class ProductPage extends AbstractPage {
     /**
      * @param array $products
      */
-    public function setProducts(array $products)
+    public function setProducts(array $products): void
     {
         $this->products = $products;
     }
     
+     /**
+     * @return array $categories
+     */
     public function getCategories(): array
     {
         return $this->categories;
@@ -74,14 +77,14 @@ class ProductPage extends AbstractPage {
     /**
      * @param array $categories
      */
-    public function setCategories(array $categories)
+    public function setCategories(array $categories): void
     {
         $this->categories = $categories;
     }
     
     
      /**
-     * @return array
+     * @return array $orders
      */
      public function getOrders(): array
     {
@@ -92,13 +95,13 @@ class ProductPage extends AbstractPage {
     /**
      * @param array $orders
      */
-    public function setOrders(array $orders)
+    public function setOrders(array $orders): void
     {
         $this->orders = $orders;
     }
     
      /**
-     * @return float
+     * @return float $totalPrice
      */
      public function getTotalPrice(): float
     {
@@ -108,13 +111,13 @@ class ProductPage extends AbstractPage {
     /**
      * @param float $totalPrice
      */
-    public function setTotalPrice(float $totalprice)
+    public function setTotalPrice(float $totalprice): void
     {
         $this->totalprice = $totalprice;
     }
     
      /**
-     * @return float
+     * @return float $userWallet
      */
     public function getUserWallet(): float
     {
@@ -124,13 +127,13 @@ class ProductPage extends AbstractPage {
     /**
      * @param float $userWallet
      */
-    public function setUserWallet(float $userWallet)
+    public function setUserWallet(float $userWallet): void
     {
         $this->userWallet = $userWallet;
     }
     
      /**
-     * @return array
+     * @return array $users
      */
     public function getUsers(): array
     {
@@ -140,13 +143,13 @@ class ProductPage extends AbstractPage {
      /**
      * @param array $users
      */
-    public function setUsers(array $users)
+    public function setUsers(array $users): void
     {
         $this->users = $users;
     }
     
      /**
-     * @return float
+     * @return float $amountAfterBuy
      */
     public function getAmountAfterBuy(): float
     {
@@ -156,7 +159,7 @@ class ProductPage extends AbstractPage {
     /**
      * @param float $amountAfterBuy
      */
-    public function setAmountAfterBuy(float $amountAfterBuy)
+    public function setAmountAfterBuy(float $amountAfterBuy): void
     {
         $this->amountAfterBuy = $amountAfterBuy;
     }
@@ -165,7 +168,10 @@ class ProductPage extends AbstractPage {
     
     public function constructProducts(): void
     {
-       
+     
+        $this->head->setTitle('symphonie: page instruments');
+        $this->head->setDescription('montre instruments par categorie');  
+        
         foreach($this->products as $product){
             $content = $this->utils->searchInc('produit');
             $content = str_replace('{%name%}', $product->getName(), $content);
@@ -184,12 +190,13 @@ class ProductPage extends AbstractPage {
         $this->constructPage();
     }
     
-    public function adminAccountPage()
-     {
-            $this->head->setTitle('page admin');
+    public function adminAccountPage(): void
+    {
+            $this->head->setTitle('symphonie: page admin');
             $this->head->setDescription('admin');
             $this->body = $this->utils->searchHtml('adminAccount');
             $categoryarticle = '';
+            
             foreach($this->products as $product){
                 $content = $this->utils->searchInc('adminProduct');
                 $content = str_replace('{%name%}', $product->getName(),$content);
@@ -269,9 +276,9 @@ class ProductPage extends AbstractPage {
             $this->constructPage();
      }
      
-    public function displayOneProduct($product)
+    public function displayOneProduct(Product $product): void
     {
-        $this->head->setTitle('page produit');
+        $this->head->setTitle("symphonie: page d'un produit");
         $this->head->setDescription('affiche un produit');
         $this->body = $this->utils->searchHtml('oneProduct');
         
@@ -289,10 +296,10 @@ class ProductPage extends AbstractPage {
         $this->constructPage();
     }
      
-    public function CreateFormModifyProduct($product)
+    public function CreateFormModifyProduct(Product $product): void 
     {
             
-            $this->head->setTitle('symphony: page modifer produit');
+            $this->head->setTitle('symphonie: page modifer produit');
             $this->head->setDescription('modifier produit');
             $this->body = $this->utils->searchHtml('formModifyProduct');
             
@@ -316,9 +323,9 @@ class ProductPage extends AbstractPage {
             
     }
     
-    public function CreateFormModifyCategory($category)
+    public function CreateFormModifyCategory(Category $category): void 
     {
-            $this->head->setTitle('symphony: page modifer category');
+            $this->head->setTitle('symphonie: page modifer category');
             $this->head->setDescription('modifier produit');
             $this->body = $this->utils->searchHtml('formModifyCategory');
             $this->body = str_replace('{%name%}',$category->getName(), $this->body);
@@ -328,9 +335,9 @@ class ProductPage extends AbstractPage {
             $this->constructPage();
      }
      
-    public function CreateFormModifyOrder($order)
+    public function CreateFormModifyOrder(Order $order): void
     {
-        $this->head->setTitle('symphony: page modifer commande');
+        $this->head->setTitle('symphonie: page modifer commande');
         $this->head->setDescription('modifier commande');
         $this->body = $this->utils->searchHtml('formModifyOrder');
         $this->body = str_replace('{%id%}',$order, $this->body);
@@ -339,25 +346,25 @@ class ProductPage extends AbstractPage {
         $this->constructPage();
     }
      
-    public function basketPage()
+    public function basketPage(): void
     {
-        $this->head->setTitle('symphony: panier');
+        $this->head->setTitle('symphonie: panier');
         $this->head->setDescription('votre panier');
         $this->body = $this->utils->searchHtml('basket');
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
        
         foreach($this->products as $product){
-                $content = $this->utils->searchInc('produitBasket');
-                $content = str_replace('{%name%}', $product->getName(), $content);
-                $content = str_replace('{%id%}',$product->getId(), $content);
-                $content = str_replace('{%price%}',$product->getPrice(), $content);
-                $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
-                $content = str_replace('{%description%}',$product->getDescription(), $content);
-                $content = str_replace('{%urlImage%}',$product->getImage(), $content);
-                $content = str_replace('{%$token%}', $_SESSION['csrf'], $content);
-                
-                $this->article .= $content;
-            }
+            $content = $this->utils->searchInc('produitBasket');
+            $content = str_replace('{%name%}', $product->getName(), $content);
+            $content = str_replace('{%id%}',$product->getId(), $content);
+            $content = str_replace('{%price%}',$product->getPrice(), $content);
+            $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
+            $content = str_replace('{%description%}',$product->getDescription(), $content);
+            $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+            $content = str_replace('{%$token%}', $_SESSION['csrf'], $content);
+            
+            $this->article .= $content;
+        }
         
        
         $this->body = str_replace('{%prixtotal%}',$this->getTotalPrice(),$this->body);
@@ -367,36 +374,35 @@ class ProductPage extends AbstractPage {
         $this->body = str_replace('{%amount_after_buy%}',$this->getAmountAfterBuy(), $this->body); 
         
         $this->constructPage();
-     }
+    }
      
-     public function emptyBasketPage()
-     {
-        $this->head->setTitle('symphony: panier');
+    public function emptyBasketPage(): void
+    {
+        $this->head->setTitle('symphonie: panier');
         $this->head->setDescription('votre panier');
         $this->body = $this->utils->searchHtml('emptyBasket');
         $this->constructPage();
      }
      
-      public function orderPage()
+    public function orderPage(): void
     {
-        $this->head->setTitle('symphony: commandes');
+        $this->head->setTitle('symphonie: commandes');
         $this->head->setDescription('votre commandes');
         $this->body = $this->utils->searchHtml('order');
         $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
     
         foreach($this->orders as $order){
-          
-                $content = $this->utils->searchInc('produitOrder');
-                $content = str_replace('{%name%}', $order->getCommandProductName(), $content);
-                $content = str_replace('{%id%}',$order->getCommandProductId(), $content);
-                $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
-                $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(), $content);
-                $content = str_replace('{%description%}',$order->getCommandProductDescription(), $content);
-                $content = str_replace('{%status%}',$order->getStatus(), $content);
-                $content = str_replace('{%urlImage%}',$order->getCommandProductImage(), $content);
-                
-                $this->article .= $content;
-            }
+            $content = $this->utils->searchInc('produitOrder');
+            $content = str_replace('{%name%}', $order->getCommandProductName(), $content);
+            $content = str_replace('{%id%}',$order->getCommandProductId(), $content);
+            $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
+            $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(), $content);
+            $content = str_replace('{%description%}',$order->getCommandProductDescription(), $content);
+            $content = str_replace('{%status%}',$order->getStatus(), $content);
+            $content = str_replace('{%urlImage%}',$order->getCommandProductImage(), $content);
+            
+            $this->article .= $content;
+        }
         
         $this->body = str_replace('{%message%}','', $this->body);
         $this->body = str_replace('{%id%}','', $this->body);
@@ -406,12 +412,11 @@ class ProductPage extends AbstractPage {
         
      }
      
-     public function emptyOrdersPage()
-     {
-        $this->head->setTitle('symphony: commandes');
-        $this->head->setDescription('votre commandes');
+    public function emptyOrdersPage(): void
+    {
+        $this->head->setTitle('symphonie: commande vide');
+        $this->head->setDescription('Commande vide');
         $this->body = $this->utils->searchHtml('emptyOrders');
         $this->constructPage();
-     }
-    
+    }
 }

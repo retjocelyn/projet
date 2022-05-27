@@ -1,13 +1,14 @@
-<article class="instrument admininstrument"> <!-- classe provisoire a retravailler-->
+<!--va afficher un produit en  base de donnée pour l'admin-->
+<article class="instrument admininstrument">
     <div class="productimage">
         <img src="{%urlImage%}" alt="image de produit"/>
     </div>   
     <div class="productcontent">
     <h2><strong>{%name%}</strong></h2>
         <ul>
-            <li class="productdescription"><strong>description:</strong> {%description%}.</li>
-            <li class="productquantity"><strong>quantité:    {%quantity%}.</strong></li>
-            <li class="productprice">Prix: {%price%} euros.</li>
+            <li class="productdescription"><strong>Description:</strong> {%description%}.</li>
+            <li class="productquantity"><strong>Quantité:    {%quantity%}.</strong></li>
+            <li class="productprice"><strong>Prix: </strong>{%price%} euros.</li>
         </ul>
         <div class="displayicons">
             <form class="icon_form" action="./index.php?url=formModifyProduct" method="post" >

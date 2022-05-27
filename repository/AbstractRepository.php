@@ -8,8 +8,7 @@ abstract class AbstractRepository
     private const BASE = "jocelynretiere_symphonie";
     
     protected $connexion;
-    protected $query;
-
+    
     public function __construct()
     {
         $this->constructConnexion();

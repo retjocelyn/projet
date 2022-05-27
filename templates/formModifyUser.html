@@ -1,32 +1,33 @@
             <main>
                 <section class="showregisterform">    
+                <!--formulaire pour modifier les informations du user par le user-->
                     <form class="register" action="index.php?url=modifyUser" method="post">
                         <h2>Modifier  votre compte</h2>
                         <p class="erreur">{%error%}</p>
                         <input type="hidden"  name="id" value="{%id%}" required>
                         <div class="field newfamilyname">
-                            <label for="lastName">Nom : </label> 
-                            <input type="text" id="lastName" name="lastName" value="{%familyname%}" required>
+                            <label for="newLastName">Nom : </label> 
+                            <input type="text" id="newLastName" name="lastName" value="{%familyname%}" required>
                         </div>
                         <div class="field newname">
-                            <label for="firstName">Prénom : </label> 
-                            <input type="text" id="firstName" name="firstName" value="{%firstName%}" required>
+                            <label for="newFirstName">Prénom : </label> 
+                            <input type="text" id="newFirstName" name="firstName" value="{%firstName%}" required>
                         </div>    
                         <div class="field newemail">
-                            <label for="email">Email : </label> 
-                            <input type="email" id="email" name="email" value="{%email%}" required>
+                            <label for="modifyEmail">Email : </label> 
+                            <input type="email" id="modifyEmail" name="email" value="{%email%}" required>
                         </div>
                         <div class="field newadress">
-                            <label for="adress">Adresse du domicile : </label> 
-                            <input type="text" id="adress" name="adress" value="{%adress%}" required>
+                            <label for="newAdress">Adresse du domicile : </label> 
+                            <input type="text" id="newAdress" name="adress" value="{%adress%}" required>
                         </div>  
                         <div class="field newpassword">
-                            <label for="newPasswordpassword">Mot de Passe : </label> 
-                            <input type="password" id="newPassword" name="newPassword" value="" required>
+                            <label for="modifyPassword">Mot de Passe : </label> 
+                            <input type="password" id="modifyPassword" name="newPassword" value="" required>
                         </div>    
                         <div class="field newpassword">
-                            <label for="checkNewPassword">Entrez de nouveau le mot de passe : </label>
-                            <input type="password" id="checkNewPassword" name="checkNewPassword" value="" required>
+                            <label for="checkModifyPassword">Entrez de nouveau le mot de passe : </label>
+                            <input type="password" id="checkModifyPassword" name="checkNewPassword" value="" required>
                         </div>   
                         <input name="csrf_token" type="hidden" value="{%$token%}">
                         <input name="role" type="hidden" value="{%role%}">

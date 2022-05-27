@@ -2,13 +2,11 @@
 require_once './view/UserView.php';
 require_once './repository/UserRepository.php';
 require_once './repository/BasketRepository.php';
+require_once './repository/OrderRepository.php';
 require_once './model/class/User.php';
 require_once './service/Authentificator.php';
 
 class UserController {
-    
-    /*private $view; interet???*/
-    
     
     public function __construct()
     {
@@ -16,18 +14,20 @@ class UserController {
         $this->view = new UserView();
         $this->repository = new UserRepository();
         $this->basket = new BasketRepository();
+        $this->order = new OrderRepository();
         $this->authentificator = new Authentificator();
        
     }
     
-    public function login(){
+    public function login(): void
+    {
         
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         echo $this->view->displayLogin();
     }
     
-    public function loginSecurity(): void 
+    public function loginSecurity():void
     {
         
         if(!isset($_POST['email'], $_POST['password'])){
@@ -42,8 +42,8 @@ class UserController {
         $password = htmlspecialchars($_POST['password']);
         
         $data = $this->repository->fetchLogin($email); 
-        
-        if($data['error']){
+       
+        if(isset($data['error'])){
             header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
             exit();
         }
@@ -54,6 +54,7 @@ class UserController {
             exit();
           }
         
+       
         if(!password_verify($password, $data['password'])){
             $_SESSION ['error'] = "Mauvais mot de passe";
             header('location:./index.php?url=login');
@@ -138,7 +139,7 @@ class UserController {
             
         if($data !== false){    
             $_SESSION['error'] = "Email existe déja";
-            header('location:./index.php?url=login');
+            header('location:./index.php?url=register');
             exit();
             
         }
@@ -183,17 +184,7 @@ class UserController {
         echo $this->view->displayRegisterAccepted();
     }
     
-    public function confirmationOrNot()
-    {
-        if(isset($_GET['message'])){
-            $_SESSION['message'] = $_GET['message'];
-        }else{
-            $_SESSION['message'] = 'erreur';
-        }
-        
-        
-        echo $this->view->displayConfirmationOrNot();
-    }
+   
     
     
     public function formModifyUser():void
@@ -388,6 +379,79 @@ class UserController {
         header('location: ./index.php?url=confirmationOrNot&message=article non supprimé du panier');
         exit();
     }
+    
+    public function deleteBasket() : void
+    {
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+        
+       
+       if($this->basket->deleteBasket($userAuth->getId())){
+    
+            header('location: ./index.php?url=confirmationOrNot&message=panier supprimé');
+            exit();
+        }
+    
+        header('location: ./index.php?url=confirmationOrNot&message=panier non supprimé');
+        exit();
+        
+    }
+    
+    public function createOrder(): void 
+    {
+        
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+       
+       if(!isset($_POST['amount_after_buy']) || $_POST['amount_after_buy']<0){
+            header('location: ./index.php?url=confirmationOrNot&message= Fonds insufisants');
+            exit();
+       }
+       
+        $userAuth->setWallet($_POST['amount_after_buy']);
+        
+       
+        if(!$this->repository->addMoney($userAuth->getId(),$userAuth->getWallet())){
+            header('location: ./index.php?url=confirmationOrNot&message= Commande non créée');
+            exit();
+        }
+        
+        $_SESSION['user'] = serialize($userAuth);
+        
+        if($datas = $this->basket->findById($userAuth->getId())){
+         
+            foreach($datas as $data){
+                 
+                $this->order->createOrder($userAuth->getId(),$data['product_id']);
+    
+                $this->basket->deleteBasket($userAuth->getId());
+            }
+          
+         
+           header('location: ./index.php?url=confirmationOrNot&message=Votre commande à été créée');
+           exit();
+       }   
+       
+       header('location: ./index.php?url=confirmationOrNot&message=Commande non créée');
+       exit();
+    }
+    
+    
+    public function deleteOrder(): void
+    {
+        $this->authentificator->csrfTokenChecker();
+        $userAuth = $this->authentificator->checkUser();
+       
+        
+       if($this->order->deleteOrder($userAuth->getId())){
+        
+            header('location: ./index.php?url=confirmationOrNot&message=commande supprimée');
+            exit();
+            
+       }
+        header('location: ./index.php?url=confirmationOrNot&message=commande non supprimée');
+        exit();
+   }
 }
 
 

@@ -1,4 +1,5 @@
-<article class="instrument"> <!-- classe provisoire a retravailler-->
+<!--produit dans panier du user-->
+<article class="instrument"> 
     <div class="productimage">
         <img src="{%urlImage%}" alt="image de produit"/>
     </div>   
@@ -9,6 +10,7 @@
             <li class="productquantity"><strong>quantité:    {%quantity%}.</strong></li>
             <li class="productprice">Prix: {%price%} euros.</li>
         </ul>
+        <!--formulaire pour supprimer l'article du panier du user-->
         <form class="formdeletearticlefrombasket form_checker" action="./index.php?url=deleteArticleFromBasket" method="post">
             <input type="hidden"  name="id" value="{%id%}" required>
             <input name="csrf_token" type="hidden" value="{%$token%}">

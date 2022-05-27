@@ -17,12 +17,22 @@ class HomeView {
        
     }
     
-    public function displayShop($categories): string
+    public function displayShop(array $categories): string
     {
         
         $page = new ShopPage();
         $page->setCategories($categories);
         $page->constructShop();
+        return $page->getPage();
+       
+    }
+    
+    public function displayConfirmationOrNot(): string
+    {
+        $page = new DefaultPage('confirmationOrNot');
+        $message = $_SESSION['message'];
+        $page->setErrors($message);
+        $page->assemblerPage();
         return $page->getPage();
        
     }

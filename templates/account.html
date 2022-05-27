@@ -1,65 +1,71 @@
-                <main>
-                    <nav class="menuaccount"><!--dhizdhizhdiz-->
-                        <ul >
-                            <li id="userprofil"><h2>Profil</h2></li>
-                            <li id="userwallet"><h2>portefeuille</h2></li>
-                        </ul>
-                    </nav>
-                    <div class="showandhide">
-                        <section id="displayuserprofil" class="displayprofil">
-                            <div class="showprofil">
-                                <h2>Votre compte</h2>
-                                <div class="userprofilecontent">
-                                    <div class="usercontent">
-                                        <h3>Nom :</h3>
-                                        <h3>{%nom%}</h3>
-                                    </div>    
-                                    <div class="usercontent">
-                                        <h3>Prénom :</h3>
-                                        <h3>{%prenom%}</h3>
-                                    </div> 
-                                    <div class="usercontent">
-                                        <h3>Email :</h3>
-                                        <h3>{%email%}</h3>
-                                    </div> 
-                                     <div class="usercontent">
-                                        <h3>Adresse :</h3>
-                                        <h3>{%adresse%}</h3>
-                                    </div> 
-                                </div>
-                                <div class="userbuttons">
-                                <a href="index.php?url=formModifyUser">
-                                    <button type="submit">Modifier profil</button>
-                                </a>
-                                    </form>
-                                    <form   class="form_checker" action="index.php?url=deleteUser" method="post">
-                                        <input type="hidden"  name="id" value="{%id%}" required>
-                                        <input name="csrf_token" type="hidden" value="{%$token%}">
-                                        <button  type="submit">Supprimer votre compte</button>
-                                    </form>
-                                     <form  class="form_checker" action="index.php?url=logout" method="post">
-                                        <input name="csrf_token" type="hidden" value="{%$token%}">
-                                        <button  type="submit">Se déconnecter</button>
-                                    </form>
-                                </div>
-                            </div>    
-                        </section>
-                         <section id="displayuserwallet" class="showwallet">
-                            <article>
-                                <h2>Votre solde est de {%solde%} €</h2>
-                                <form class="form_checker" action="index.php?url=addMoney" method="post">
-                                    <input type="hidden"  name="id" value="{%id%}" required>
-                                    <div class="money">
-                                        <label for="amount"><b>Somme à entrer</b></label>
-                                        <input type="number" step="any" placeholder="somme" name="amount" required>
-                                    </div>
-                                    <input name="csrf_token" type="hidden" value="{%$token%}">
-                                    <div class="addmoneybutton">
-                                        <button onclick="return confirm_delete()" class="checkbutton" type="submit">ajouter argent</button>
-                                    </div>
-                                </form>
-                            </article>
-                        </section>
+<main>
+    <!-- menu du user client -->
+    <nav class="menuaccount">
+        <ul >
+            <li id="userprofil">
+                <h2>Profil</h2>
+            </li>
+            <li id="userwallet">
+                <h2>portefeuille</h2>
+            </li>
+        </ul>
+    </nav>
+    <div class="showandhide">
+        <section id="displayuserprofil" class="displayprofil">
+            <!--montre les infos du user-->
+            <div class="showprofil">
+                <h2>Votre compte</h2>
+                <div class="userprofilecontent">
+                    <div class="usercontent">
+                        <h3>Nom :</h3>
+                        <h3>{%nom%}</h3>
+                    </div>    
+                    <div class="usercontent">
+                        <h3>Prénom :</h3>
+                        <h3>{%prenom%}</h3>
+                    </div> 
+                    <div class="usercontent">
+                        <h3>Email :</h3>
+                        <h3>{%email%}</h3>
+                    </div> 
+                     <div class="usercontent">
+                        <h3>Adresse :</h3>
+                        <h3>{%adresse%}</h3>
+                    </div> 
+                </div>
+                <div class="userbuttons">
+                <a href="index.php?url=formModifyUser" title="formulaire de modification du User">
+                    <button type="submit">Modifier profil</button>
+                </a>
+                    </form>
+                    <form   class="form_checker" action="index.php?url=deleteUser" method="post">
+                        <input type="hidden"  name="id" value="{%id%}" required>
+                        <input name="csrf_token" type="hidden" value="{%$token%}">
+                        <button  type="submit">Supprimer votre compte</button>
+                    </form>
+                     <form  class="form_checker" action="index.php?url=logout" method="post">
+                        <input name="csrf_token" type="hidden" value="{%$token%}">
+                        <button  type="submit">Se déconnecter</button>
+                    </form>
+                </div>
+            </div>    
+        </section>
+         <section id="displayuserwallet" class="showwallet">
+             <!--montre le solde du user et peu modifier le montant-->
+            <article>
+                <h2>Votre solde est de {%solde%} €</h2>
+                <form class="form_checker" action="index.php?url=addMoney" method="post">
+                    <input type="hidden"  name="id" value="{%id%}" required>
+                    <div class="money">
+                        <label for="amount"><b>Somme à entrer</b></label>
+                        <input type="number" step="any" placeholder="somme" name="amount" required>
                     </div>
-                </main>
-               
+                    <input name="csrf_token" type="hidden" value="{%$token%}">
+                    <div class="addmoneybutton">
+                        <button onclick="return confirm_delete()" class="checkbutton" type="submit">ajouter argent</button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </div>
+</main>

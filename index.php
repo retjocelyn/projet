@@ -16,7 +16,7 @@ switch($url){
         $homeController->home();
         break;
         
-     case "login":
+    case "login":
         $userController = new UserController();
         $userController->login();
         break;
@@ -44,8 +44,8 @@ switch($url){
         
         
     case "confirmationOrNot":
-        $userController = new UserController();
-        $userController->confirmationOrNot() ;
+        $homeController = new homeController();
+        $homeController->confirmationOrNot() ;
         break;
         
     case "account":
@@ -97,12 +97,11 @@ switch($url){
         
      
     case "deleteBasket":
-        $productController = new ProductController();
-        $productController->deleteBasket();
-        break;
+        $userController = new UserController();
+        $userController->deleteBasket();
+        break; 
         
     case "adminAccount":
-        
         $adminController = new AdminController();
         $adminController->adminAccount();
         break; 
@@ -162,23 +161,24 @@ switch($url){
    
     case "deleteArticleFromBasket":
         $userController = new UserController();
-        $userController-> deleteArticleFromBasket();
+        $userController->deleteArticleFromBasket();
         break;
         
     case "createOrder":
-        $productController = new ProductController();
-        $productController->createOrder();
-        break;   
-    
+        $userController = new UserController();
+        $userController->createOrder();
+        break;
+         
     case "orders":
         $productController = new ProductController();
         $productController->showOrders();
         break;   
         
     case "deleteOrder":
-        $productController = new ProductController();
-        $productController->deleteOrder();
-        break;    
+        $userController = new UserController();
+        $userController->deleteOrder();
+        break;
+         
         
     case "adminDeleteOrder":
         $adminController = new AdminController();

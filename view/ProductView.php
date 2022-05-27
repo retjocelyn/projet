@@ -10,7 +10,7 @@ class ProductView {
      */ 
     
     
-    public function dislplayInstruments($products): string
+    public function dislplayInstruments($products):string
     {
         $page = new ProductPage();
         $page->setProducts($products);
@@ -18,7 +18,7 @@ class ProductView {
         return $page->getPage();
     }
     
-    public function displayadminAccount($products,$categories,$commandes,$users)
+    public function displayadminAccount(array $products,array $categories,array $commandes, array $users):string
     {
         $page = new ProductPage();
         $page->setProducts($products);
@@ -37,14 +37,14 @@ class ProductView {
         return $page->getPage();   
     }
     
-     public function displayFormModifyCategory($category)
+    public function displayFormModifyCategory(Category $category)
     {
         $page = new ProductPage();
         $page->CreateFormModifyCategory($category);
         return $page->getPage();   
     }
     
-    public function displayFormModifyOrder($order)
+    public function displayFormModifyOrder($order):string
     {
         $page = new ProductPage();
         $page->CreateFormModifyOrder($order);
@@ -52,14 +52,14 @@ class ProductView {
     }
     
     
-    public function displayOneProduct($product)
+    public function displayOneProduct(Product $product)
     {
         $page = new ProductPage();
         $page->displayOneProduct($product);
         return $page->getPage();  
     }
     
-    public function displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy)
+    public function displayBasket(array $products,float $totalPrice, User $userAuth,float $amountAfterBuy)
     {
         $page = new ProductPage();
         $page->setProducts($products);
@@ -76,7 +76,7 @@ class ProductView {
         return $page->getPage();   
     }
     
-    public function displayOrder($orders)
+    public function displayOrder(array $orders):string
     {
         $page = new ProductPage();
         $page->setOrders($orders);
@@ -84,7 +84,7 @@ class ProductView {
         return $page->getPage();   
     }
     
-     public function displayEmptyOrders()
+    public function displayEmptyOrders():string
     {
         $page = new ProductPage();
         $page->emptyOrdersPage();

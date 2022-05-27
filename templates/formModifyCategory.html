@@ -1,15 +1,16 @@
                 <main>
-                <section class="showregisterform">    
+                <section class="showregisterform">  
+                <!--formulaire pour modifier une categorie par l'admin-->
                     <form class="categoryregister" action="index.php?url=modifyCategory" method="post" enctype="multipart/form-data">
                         <h2>Modifier  une catégorie</h2>
                             <input type="hidden" id="productId" name="id" value="{%id%}" required>
                         <div class="field">
-                            <label for="categoryName">Nom</label> 
-                            <input type="text" id="categoryName" name="name" value="{%name%}" required>
+                            <label for="newCategoryName">Nom</label> 
+                            <input type="text" id="newCategoryName" name="name" value="{%name%}" required>
                         </div>    
                         <div class="addimage">
-                            <label for="file">Image</label>
-                            <input type="file" name="file" required>
+                            <label for="newCategoryfile">Image</label>
+                            <input id="newCategoryfile" type="file" name="file" required>
                         </div>
                             <input name="csrf_token" type="hidden" value="{%$token%}">
                         <div class="registerbutton">

@@ -11,9 +11,9 @@ require_once './repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
-    public function findAll()
+    public function findAll() 
     {
-         $data = null;
+        $data = null;
         try {
             $query = $this->connexion->prepare('SELECT * FROM products ');
             if ($query) {
@@ -40,13 +40,13 @@ require_once './repository/AbstractRepository.php';
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
             }
         } catch (Exception $e) {
-            die($e);
+            $data = ['error' => $e->getMessage()];
         }
         
         return $data;
     }
     
-    public function findById($produit)
+    public function findById(int $produit)
     {
          $data = null;
         try {
@@ -58,13 +58,13 @@ require_once './repository/AbstractRepository.php';
                 $data = $query->fetch(PDO::FETCH_ASSOC);
             }
         } catch (Exception $e) {
-            die($e);
+            $data = ['error' => $e->getMessage()];
         }
         
         return $data;
     }
     
-    public function createProduct(Product $product):bool
+    public function createProduct(Product $product): bool
     {    
         
         try{
@@ -91,7 +91,7 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function modifyProduct( Product $product) :bool
+    public function modifyProduct(Product $product): bool
     {    
        
          
@@ -122,7 +122,7 @@ require_once './repository/AbstractRepository.php';
         
     
     
-    public function deleteProduct(int $productId) :bool
+    public function deleteProduct(int $productId): bool
     {
          
          try{
@@ -153,14 +153,14 @@ require_once './repository/AbstractRepository.php';
                 $data = $query->fetch(PDO::FETCH_ASSOC);
             }
         } catch (Exception $e) {
-            die($e);
+            $data = ['error' => $e->getMessage()];
         }
         
         return $data;
     }
     
      
-    public function fetchQuery($product): array
+    public function fetchQuery($product)
     {
         $request = '%'.$product.'%';
         $data = [];

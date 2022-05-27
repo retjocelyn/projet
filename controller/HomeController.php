@@ -33,4 +33,18 @@ class HomeController {
          }
        echo $this->view->displayShop($categories);
     }
+    
+    /*Affiche message de confirmation ou une erreur*/
+    
+    public function confirmationOrNot():void
+    {
+        if(isset($_GET['message'])){
+            $_SESSION['message'] = $_GET['message'];
+        }else{
+            $_SESSION['message'] = 'erreur';
+        }
+        
+        
+        echo $this->view->displayConfirmationOrNot();
+    }
 }

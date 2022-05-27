@@ -22,7 +22,7 @@ class UserView {
        
     }
     
-    public function displayAccount($user): string
+    public function displayAccount(User $user): string
     {
         $page = new DefaultPage('account');
         $page->displayAccount($user);
@@ -57,15 +57,7 @@ class UserView {
        
     }
     
-    public function displayConfirmationOrNot(): string
-    {
-        $page = new DefaultPage('confirmationOrNot');
-        $message = $_SESSION['message'];
-        $page->setErrors($message);
-        $page->assemblerPage();
-        return $page->getPage();
-       
-    }
+    
     
     public function displayBasket(): string
     {
@@ -75,7 +67,7 @@ class UserView {
        
     }
     
-    public function displayFormModifyUser($user):string
+    public function displayFormModifyUser(User $user):string
     {
         $page = new DefaultPage('formModifyUser');
         if(isset($_SESSION['error'])){

@@ -19,7 +19,7 @@ class ShopPage extends AbstractPage {
     
     
     /**
-     * @return string
+     * @return string $article
      */
     public function getArticle(): string
     {
@@ -29,13 +29,13 @@ class ShopPage extends AbstractPage {
     /**
      * @param string $article
      */
-    public function setArticle(string $article)
+    public function setArticle(string $article): void
     {
         $this->article = $article;
     }
     
     /**
-     * @return array
+     * @return array $categories
      */
     public function getCategories(): array
     {
@@ -45,7 +45,7 @@ class ShopPage extends AbstractPage {
     /**
      * @param array $categories
      */
-    public function setCategories(array $categories)
+    public function setCategories(array $categories): void
     {
         $this->categories = $categories;
     }
@@ -59,14 +59,10 @@ class ShopPage extends AbstractPage {
             $content = str_replace('{%id%}',$category->getId(), $content);
             $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
             
-            
             $this->article .= $content;
         }
         
         $this->body = str_replace('{%article%}', $this->article, $this->body);
-        
-        
-        
         $this->constructPage();
     }
 }

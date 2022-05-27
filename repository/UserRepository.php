@@ -11,7 +11,7 @@ require_once './repository/AbstractRepository.php';
         parent::__construct(self::TABLE);
     }
     
-    public function fetchAllCostumers()
+    public function fetchAllCostumers(): array
     {
         $data = null;
         
@@ -29,7 +29,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function fetchLogin($email)
+    public function fetchLogin(string $email)
     {
         $data = null;
         try {
@@ -41,13 +41,14 @@ require_once './repository/AbstractRepository.php';
                 $data = $query->fetch(PDO::FETCH_ASSOC);
             }
         } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
+             $data = ['error' => $e->getMessage()];
+
         }
         
         return $data;
     }
     
-    public function findById($userId)
+    public function findById(int $userId): array
     {
         $data = null;
         try {
@@ -66,7 +67,7 @@ require_once './repository/AbstractRepository.php';
     }
     
     
-    public function createUser($user): bool
+    public function createUser(User $user): bool
     {
         
         try {
@@ -90,7 +91,7 @@ require_once './repository/AbstractRepository.php';
     }
        
     
-    public function modifyUser(User $user):bool
+    public function modifyUser(User $user): bool
     {
         try{
              $query = $this->connexion->prepare('UPDATE users
@@ -115,7 +116,7 @@ require_once './repository/AbstractRepository.php';
     }
        
        
-    public function deleteUser(?int $userId):bool
+    public function deleteUser(?int $userId): bool
     {
         
       try{
@@ -132,7 +133,7 @@ require_once './repository/AbstractRepository.php';
     }
          
     
-    public function addMoney(int $userId, float $newAmount)
+    public function addMoney(int $userId, float $newAmount): bool
     {
      
         try {

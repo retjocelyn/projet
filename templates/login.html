@@ -1,14 +1,15 @@
             <main>
                 <section class="showlogin">
+                       <!--formulaire pour se connecter-->
                     <form class="login" action="index.php?url=loginSecurity" method="post">
                         <h2>VOUS CONNECTER</h2>
                         <p class="erreur">{%error%}</p>
                         <input name="csrf_token" type="hidden" value="{%$token%}">
-                        <div class="email">
+                        <div class="field">
                             <label for="email"><b>email</b></label>
                             <input id="email" type="text" placeholder="Enter email" name="email" required>
                         </div>
-                        <div class="password">
+                        <div class="field">
                             <label for="password"><b>password</b></label>
                             <input id="password" type="password" placeholder="Enter password" name="password" required>
                         </div>

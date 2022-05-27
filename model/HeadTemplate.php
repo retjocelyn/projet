@@ -31,7 +31,7 @@ class HeadTemplate {
     /**
      * @param string $content
      */
-    public function setContent(string $content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
         $this->constructHead();
@@ -40,7 +40,7 @@ class HeadTemplate {
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -48,14 +48,14 @@ class HeadTemplate {
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
         $this->constructHead();
     }
     
     /**
-     * @return string
+     * @return string $description
      */
     public function getDescription(): string
     {
@@ -65,7 +65,7 @@ class HeadTemplate {
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
         $this->constructHead();

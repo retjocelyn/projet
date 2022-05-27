@@ -1,4 +1,5 @@
-<article class="instrument"> <!-- classe provisoire a retravailler-->
+<!--produit choisi par sa catégorie-->
+<article class="instrument"> 
     <div class="productimage">
         <img src="{%urlImage%}" alt="image de produit"/>
     </div>   
@@ -10,9 +11,9 @@
             <li class="productprice"><strong>Prix:</strong> {%price%} euros.</li>
         </ul>
         <form class="icon_form" action="./index.php?url=addArticleToBasket" method="post" >
-                <input type="hidden"  name="id" value="{%id%}" required>
-                <input name="csrf_token" type="hidden" value="{%$token%}">
-                <button class="form_icon_button" type="submit"><i class="fa-solid fa-cart-arrow-down"></i></button>
+            <input type="hidden"  name="id" value="{%id%}" required>
+            <input name="csrf_token" type="hidden" value="{%$token%}">
+            <button class="form_icon_button" type="submit"><i class="fa-solid fa-cart-arrow-down"></i></button>
         </form>
     </div>
 </article>

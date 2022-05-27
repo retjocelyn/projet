@@ -5,14 +5,7 @@ require_once './repository/AbstractRepository.php';
  class OrderRepository extends AbstractRepository
 {
     
-    private const TABLE = "orders";
-    
-    public function __construct(){
-        parent::__construct(self::TABLE);
-    }
-    
-    
-    public function findAll() /*doute si utile???*/
+    public function findAll(): array
     {
         $data = null;
         
@@ -31,7 +24,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function findAllOrders()
+    public function findAllOrders():array
     {  
         $data = null;
         try {
@@ -51,7 +44,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function createOrder($userId,$productId)
+    public function createOrder(int $userId, int$productId):bool
     {  
         
             try {
@@ -74,7 +67,7 @@ require_once './repository/AbstractRepository.php';
         
     }
     
-    public function findById($userid)
+    public function findById(int $userid):array
     {
         $data = null;
         
@@ -98,7 +91,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function deleteOrder($userId)
+    public function deleteOrder(int $userId):bool
     {  
         
          try {
@@ -116,7 +109,8 @@ require_once './repository/AbstractRepository.php';
         
     }
     
-     public function adminModifyOrder($orderId,$statusId){
+     public function adminModifyOrder(int $orderId, int $statusId):bool
+     {
         try{
              $query = $this->connexion->prepare('UPDATE orders
                 SET status_id = :statusId
@@ -135,7 +129,7 @@ require_once './repository/AbstractRepository.php';
     }
       
     
-    public function adminDeleteOrder($orderId):bool
+    public function adminDeleteOrder(int $orderId):bool
     {  
        
         try {

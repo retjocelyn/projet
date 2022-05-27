@@ -5,15 +5,7 @@ require_once './repository/AbstractRepository.php';
  class CategoryRepository extends AbstractRepository
 {
     
-    private const TABLE = "category";
-    
-    public function __construct(){
-        parent::__construct(self::TABLE);
-    }
-    
-   
-    
-    public function findAll()
+    public function findAll(): array
     {
         $data = null; 
         
@@ -30,7 +22,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function findById(int $categoryId)
+    public function findById(int $categoryId):array
     {
         $data = null; 
         
@@ -49,7 +41,7 @@ require_once './repository/AbstractRepository.php';
         return $data;
     }
     
-    public function fetchImage(int $categoryId)
+    public function fetchImage(int $categoryId):array
     {
         $data = null;
         
