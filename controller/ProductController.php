@@ -2,8 +2,6 @@
 
 require_once './repository/ProductRepository.php';
 require_once './repository/CategoryRepository.php';
-require_once './repository/BasketRepository.php';
-require_once './repository/OrderRepository.php';
 require_once './model/class/Product.php';
 require_once './model/class/Category.php';
 require_once './view/ProductView.php';
@@ -19,7 +17,6 @@ class ProductController {
         $this->UserRepository = new UserRepository();
         $this->categoryRepository = new CategoryRepository();
         $this->basketRepository = new BasketRepository();
-        $this->orderRepository = new OrderRepository();
         $this->authentificator = new Authentificator();
         $product = new Product();
         $this->category = new Category();
@@ -464,82 +461,6 @@ class ProductController {
         exit();
     }
     
-    
-    public function basket() : void
-    {
-        
-        $userAuth = $this->authentificator->checkUser();
-        
-        $_SESSION['csrf'] = bin2hex(random_bytes(32));
-        
-        $datas = $this->basketRepository->findById($userAuth->getId());
-       
-        if(empty($datas)){
-           echo $this->view->displayEmptyBasket();
-           exit();
-        }
-        
-        $prices = [];
-        $products = [];
-            
-        foreach($datas as $data){
-            $product = new Product();
-            $product->setInsideBasketId($data['id']);
-            $product->setName($data['name']);
-            $product->setQuantity($data['quantity']);
-            $product->setPrice($data['price']);
-            $product->setImage($data['url_picture']);
-            $product->setDescription($data['description']);
-            $product->setCategory($data['category_id']);
-            
-            
-            $products[] = $product;
-            $prices[] = $product->getPrice();
-        }
-       
-        $totalPrice = array_sum($prices);
-        
-        $amountAfterBuy = ($userAuth->getWallet()-$totalPrice);
-        
-        echo $this->view->displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy);
-   }
-   
-   
-    
-   
-    
-    public function showOrders() : void
-    {
-        $userAuth = $this->authentificator->checkUser();
-       
-        $datas = $this->orderRepository->findById($userAuth->getId());
-      
-        if(empty($datas)){
-            
-           echo $this->view->displayEmptyOrders();
-           exit();
-           
-        }
-        
-        $orders = [];
-           
-        foreach($datas as $data){
-            $order = new Order();
-            $order->setCommandProductId($data['product_id']);
-            $order->setCommandProductName($data['name']);
-            $order->setCommandProductQuantity($data['quantity']);
-            $order->setCommandProductPrice($data['price']);
-            $order->setCommandProductImage($data['url_picture']);
-            $order->setCommandProductDescription($data['description']);
-            $order->setStatus($data['order_status']);
-            
-            $orders[] = $order;
-           
-        }
-       
-        echo $this->view->displayOrder($orders);
-   }
-   
     public function formModifyOrder()
     {
        

@@ -59,36 +59,6 @@ class ProductView {
         return $page->getPage();  
     }
     
-    public function displayBasket(array $products,float $totalPrice, User $userAuth,float $amountAfterBuy)
-    {
-        $page = new ProductPage();
-        $page->setProducts($products);
-        $page->setTotalPrice($totalPrice);
-        $page->setUserWallet($userAuth->getWallet());
-        $page->setAmountAfterBuy($amountAfterBuy);
-        $page->basketPage();
-        return $page->getPage();   
-    }
-    public function displayEmptyBasket()
-    {
-        $page = new ProductPage();
-        $page->emptyBasketPage();
-        return $page->getPage();   
-    }
-    
-    public function displayOrder(array $orders):string
-    {
-        $page = new ProductPage();
-        $page->setOrders($orders);
-        $page->orderPage();
-        return $page->getPage();   
-    }
-    
-    public function displayEmptyOrders():string
-    {
-        $page = new ProductPage();
-        $page->emptyOrdersPage();
-        return $page->getPage();   
-    }
+   
     
 }

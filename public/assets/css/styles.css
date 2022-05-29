@@ -856,6 +856,179 @@ margin-right: 5%;
     font-size:2em;
 }
 
+/*emptybasket*/
+
+
+.displayemptypanier{
+   display:flex;
+   flex-direction:column;
+}
+
+.paniercontent{
+   display:flex; 
+   background-color:white;
+   border-radius:2em;
+   width:52%;
+}
+
+.emptybasketimage{
+    padding:2%;
+}
+.emptybasketimage>img{
+    width:12em;
+}
+
+
+.emptymessage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+/*basket*/
+
+.panier{
+    display:flex;
+    justify-content:center;
+}
+
+.possiblecommande{
+    width:70%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:white;
+    border-radius:2em;
+}
+
+.possiblecommande>h2{
+    font-size:2em;
+}
+
+.possiblecommande>article{
+    width:90%;
+    border:none;
+}
+
+.formdeletearticlefrombasket>button{
+    height:2em;
+    font-size:1.5em;
+    margin:0.5em 0;
+    border:none;
+    background-color:white;
+    cursor: pointer;
+}
+
+.possiblecommande>h2:nth-child(3){
+    width:70%;
+}
+
+.possiblecommande>form>button{
+    height:2em;
+    border-radius:2em;
+    background: linear-gradient(-135deg,#000000,#6e7181);
+    color:white;
+    border:none;
+    font-family: 'Fredoka', sans-serif;
+    font-size:1.5em;
+    margin:1em 0;
+    cursor: pointer;
+}
+
+.formcreateorder>button{
+    width:10em;
+}
+
+.formdeletebasket>button{
+    width:10em;
+}
+
+
+/*orders*/
+
+.displayorders{
+    display:flex;
+    justify-content:center;
+}
+
+.commandes{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:white;
+    border-radius:2em;
+}
+
+.commandes>article{
+    width:90%;
+    border:none;
+}
+
+.formdeleteorder>button{
+    height:2em;
+    font-size:1.5em;
+    margin:0.5em 0;
+    border:none;
+    background-color:white;
+    cursor: pointer;
+}
+
+.commandes>h2{
+    font-size:2em;
+}
+
+.commandes>form>button{
+    height:2em;
+    border-radius:2em;
+    background: linear-gradient(-135deg,#000000,#6e7181);
+    color:white;
+    border:none;
+    font-family: 'Fredoka', sans-serif;
+    font-size:1.5em;
+    margin:0.7em 0;
+    cursor: pointer;
+}
+
+
+/*empty order*/
+
+
+.displayemptyorders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 22em;
+}
+
+.order{
+   display:flex; 
+   background-color:white;
+   border-radius:2em;
+   width:44%;
+}
+
+.orderscontent{
+    display:flex;
+    
+}
+.emptyorderimage{
+    padding:2%;
+}
+
+.emptyorderimage>img{
+    width:12em;
+}
+
+.emptymessage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50%;
+}
+
 
 /*footer*/
 
@@ -914,178 +1087,6 @@ footer>section>ul>li{
     margin:0;
     list-style-type: none;
 }
-
-.panier{
-    display:flex;
-    justify-content:center;
-}
-
-.possiblecommande{
-    width:70%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    background-color:white;
-    border-radius:2em;
-}
-
-.possiblecommande>h2{
-    font-size:2em;
-}
-
-.possiblecommande>article{
-    width:90%;
-    border:none;
-}
-
-.formdeletearticlefrombasket>button{
-    height:2em;
-    font-size:1.5em;
-    margin:0.5em 0;
-    border:none;
-    background-color:white;
-    cursor: pointer;
-}
-
-.possiblecommande>h2:nth-child(3){
-    width:70%;
-}
-
-.possiblecommande>form>button{
-    height:2em;
-    border-radius:2em;
-    background: linear-gradient(-135deg,#000000,#6e7181);
-    color:white;
-    border:none;
-    font-family: 'Fredoka', sans-serif;
-    font-size:1.5em;
-    margin:1em 0;
-    cursor: pointer;
-}
-
-.formcreateorder>button{
-    width:10em;
-}
-
-.formdeletebasket>button{
-    width:10em;
-}
-
-/*emptybasket*/
-
-
-.displayemptypanier{
-   display:flex;
-   flex-direction:column;
-}
-
-.paniercontent{
-   display:flex; 
-   background-color:white;
-   border-radius:2em;
-   width:52%;
-}
-
-.emptybasketimage{
-    padding:2%;
-}
-.emptybasketimage>img{
-    width:12em;
-}
-
-
-.emptymessage{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/*orders*/
-
-.displayorders{
-    display:flex;
-    justify-content:center;
-}
-
-.commandes{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    background-color:white;
-    border-radius:2em;
-}
-
-.commandes>article{
-    width:90%;
-    border:none;
-}
-
-.formdeleteorder>button{
-    height:2em;
-    font-size:1.5em;
-    margin:0.5em 0;
-    border:none;
-    background-color:white;
-    cursor: pointer;
-}
-
-.commandes>h2{
-    font-size:2em;
-}
-
-.commandes>form>button{
-    height:2em;
-    border-radius:2em;
-    background: linear-gradient(-135deg,#000000,#6e7181);
-    color:white;
-    border:none;
-    font-family: 'Fredoka', sans-serif;
-    font-size:1.5em;
-    margin:0.7em 0;
-    cursor: pointer;
-}
-
-
-
-/*empty order*/
-
-
-.displayemptyorders{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 22em;
-}
-
-.order{
-   display:flex; 
-   background-color:white;
-   border-radius:2em;
-   width:44%;
-}
-
-.orderscontent{
-    display:flex;
-    
-}
-.emptyorderimage{
-    padding:2%;
-}
-
-.emptyorderimage>img{
-    width:12em;
-}
-
-.emptymessage{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:50%;
-}
-
-
-
 
 /*** queryyyyyy time*****/
 @media screen and (max-width: 1000px) {

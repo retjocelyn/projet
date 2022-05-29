@@ -1,6 +1,9 @@
 <?php 
 
 require_once './model/DefaultPage.php';
+require_once './model/BasketPage.php';
+require_once './model/OrderPage.php';
+
 
 
 class UserView {
@@ -22,6 +25,10 @@ class UserView {
        
     }
     
+     /**
+     * @param User $user
+     * @return string
+     */ 
     public function displayAccount(User $user): string
     {
         $page = new DefaultPage('account');
@@ -31,6 +38,24 @@ class UserView {
        
     }
     
+     /**
+     * @param User $user
+     * @return string
+     */ 
+    public function displayFormModifyUser(User $user):string
+    {
+        $page = new DefaultPage('formModifyUser');
+        if(isset($_SESSION['error'])){
+            $page->setErrors($_SESSION['error']);
+            unset($_SESSION['error']);
+        }
+        $page->createFormModifyUser($user);
+        return $page->getPage();
+    }  
+    
+    /**
+    * @return string
+    */ 
     public function displayRegister(): string
     {
     
@@ -47,7 +72,9 @@ class UserView {
        
     }
     
-    
+    /**
+    * @return string
+    */ 
     public function displayRegisterAccepted(): string
     {
         $page = new DefaultPage('registerAccepted');
@@ -57,26 +84,53 @@ class UserView {
        
     }
     
-    
-    
-    public function displayBasket(): string
+     /**
+     * @param array $products
+     * @param float $totalPrice
+     * @param User $userAuth
+     * @param float $amountAfterBuy
+     * @return string
+     */ 
+    public function displayBasket(array $products,float $totalPrice,User $userAuth,float $amountAfterBuy): string
     {
-        $page = new DefaultPage('basket');
-        $page->assemblerPage();
-        return $page->getPage();
-       
+        $page = new BasketPage();
+        $page->setProducts($products);
+        $page->setTotalPrice($totalPrice);
+        $page->setUserWallet($userAuth->getWallet());
+        $page->setAmountAfterBuy($amountAfterBuy);
+        $page->basketPage();
+        return $page->getPage();   
     }
     
-    public function displayFormModifyUser(User $user):string
+    /**
+    * @return string
+    */ 
+    public function displayEmptyBasket()
     {
-        $page = new DefaultPage('formModifyUser');
-        if(isset($_SESSION['error'])){
-            $page->setErrors($_SESSION['error']);
-            unset($_SESSION['error']);
-        }
-        $page->createFormModifyUser($user);
-        return $page->getPage();
+        $page = new BasketPage();
+        $page->emptyBasketPage();
+        return $page->getPage();   
     }
     
+    /**
+     * @param array $orders
+     * @return string
+     */ 
+    public function displayOrder(array $orders):string
+    {
+        $page = new orderPage();
+        $page->setOrders($orders);
+        $page->orderPage();
+        return $page->getPage();   
+    }
     
+    /**
+    * @return string
+    */ 
+    public function displayEmptyOrders():string
+    {
+        $page = new orderPage();
+        $page->emptyOrdersPage();
+        return $page->getPage();   
+    }
 }

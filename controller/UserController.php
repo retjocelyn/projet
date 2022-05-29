@@ -333,10 +333,54 @@ class UserController {
         exit();
     }
     
+    
+    public function basket() : void
+    {
+        
+        $userAuth = $this->authentificator->checkUser();
+        
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        
+        $datas = $this->basket->findById($userAuth->getId());
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
+        if(empty($datas)){
+           echo $this->view->displayEmptyBasket();
+           exit();
+        }
+        
+        $prices = [];
+        $products = [];
+            
+        foreach($datas as $data){
+            $product = new Product();
+            $product->setInsideBasketId($data['id']);
+            $product->setName($data['name']);
+            $product->setQuantity($data['quantity']);
+            $product->setPrice($data['price']);
+            $product->setImage($data['url_picture']);
+            $product->setDescription($data['description']);
+            $product->setCategory($data['category_id']);
+            
+            
+            $products[] = $product;
+            $prices[] = $product->getPrice();
+        }
+       
+        $totalPrice = array_sum($prices);
+        
+        $amountAfterBuy = ($userAuth->getWallet()-$totalPrice);
+        
+        echo $this->view->displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy);
+    }
+   
     public function addArticleToBasket()
     {
-       
-        
+      
         $userAuth = $this->authentificator->checkUser();
         $this->authentificator->csrfTokenChecker();
             
@@ -396,6 +440,37 @@ class UserController {
         exit();
         
     }
+    
+    public function showOrders() : void
+    {
+        
+        $userAuth = $this->authentificator->checkUser();
+       
+        $datas = $this->order->findById($userAuth->getId());
+      
+        if(empty($datas)){
+           echo $this->view->displayEmptyOrders();
+           exit();
+        }
+        
+        $orders = [];
+           
+        foreach($datas as $data){
+            $order = new Order();
+            $order->setCommandProductId($data['product_id']);
+            $order->setCommandProductName($data['name']);
+            $order->setCommandProductQuantity($data['quantity']);
+            $order->setCommandProductPrice($data['price']);
+            $order->setCommandProductImage($data['url_picture']);
+            $order->setCommandProductDescription($data['description']);
+            $order->setStatus($data['order_status']);
+            
+            $orders[] = $order;
+           
+        }
+       
+        echo $this->view->displayOrder($orders);
+   }
     
     public function createOrder(): void 
     {

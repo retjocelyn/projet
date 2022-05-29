@@ -2,7 +2,7 @@
 require_once "./service/Utils.php";
 require_once "./service/AbstractPage.php";
 
-class ProductPage extends AbstractPage {
+class OrderPage extends AbstractPage {
     
     private string $article;
     
@@ -164,139 +164,6 @@ class ProductPage extends AbstractPage {
         $this->amountAfterBuy = $amountAfterBuy;
     }
     
-   
-    
-    public function constructProducts(): void
-    {
-     
-        $this->head->setTitle('symphonie: page instruments');
-        $this->head->setDescription('montre instruments par categorie');  
-        
-        foreach($this->products as $product){
-            $content = $this->utils->searchInc('produit');
-            $content = str_replace('{%name%}', $product->getName(), $content);
-            $content = str_replace('{%id%}',$product->getId(), $content);
-            $content = str_replace('{%price%}',$product->getPrice(), $content);
-            $content = str_replace('{%description%}',$product->getDescription(), $content);
-            $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
-            $content = str_replace('{%urlImage%}',$product->getImage(), $content);
-            $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
-          
-            $this->article .= $content;
-        }
-        
-        $this->body = str_replace('{%article%}', $this->article, $this->body);
-        
-        $this->constructPage();
-    }
-    
-    public function adminAccountPage(): void
-    {
-            $this->head->setTitle('symphonie: page admin');
-            $this->head->setDescription('admin');
-            $this->body = $this->utils->searchHtml('adminAccount');
-            $categoryarticle = '';
-            
-            foreach($this->products as $product){
-                $content = $this->utils->searchInc('adminProduct');
-                $content = str_replace('{%name%}', $product->getName(),$content);
-                $content = str_replace('{%id%}',$product->getId(),$content);
-                $content = str_replace('{%quantity%}',$product->getQuantity(),$content);
-                $content = str_replace('{%price%}',$product->getPrice(), $content);
-                $content = str_replace('{%description%}',$product->getDescription(),$content);
-                $content = str_replace('{%urlImage%}',$product->getImage(),$content);
-                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
-              
-                $this->article .= $content;
-            }
-            
-            foreach($this->categories as $category){
-                $content = $this->utils->searchInc('adminCategory');
-                $content = str_replace('{%name%}', $category->getName(), $content);
-                $content = str_replace('{%id%}',$category->getId(), $content);
-                $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
-                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
-              
-                $categoryarticle .= $content;
-            }
-            
-            $allCategories = '';
-            foreach($this->categories as $category){
-                $content = $this->utils->searchInc('category');
-                $content = str_replace('{%name%}', $category->getName(), $content);
-                $content = str_replace('{%id%}',$category->getId(), $content);
-                $content = str_replace('{%urlImage%}',$category->getUrlImage(), $content);
-                
-              
-                $allCategories .= $content;
-            }
-            
-            $commandArticle = '';
-            foreach($this->orders as $order){
-                $content = $this->utils->searchInc('adminCommandes');
-                $content = str_replace('{%status%}',$order->getStatus(),$content);
-                $content = str_replace('{%numerodelacommande%}',$order->getId(),$content);
-                $content = str_replace('{%id%}',$order->getId(),$content);
-                $content = str_replace('{%datedelacommande%}',$order->getDate(),$content);
-                $content = str_replace('{%clientfamilyname%}',$order->getCommandUserFamilyName(),$content);
-                $content = str_replace('{%clientname%}',$order->getCommandUserName(),$content);
-                $content = str_replace('{%clientadresse%}',$order->getCommandUserAdress(),$content);
-                $content = str_replace('{%urlImage%}',$order->getCommandProductImage(),$content);
-                $content = str_replace('{%nameproduit%}',$order->getCommandProductName(),$content);
-                $content = str_replace('{%quantity%}',$order->getCommandProductQuantity(),$content);
-                $content = str_replace('{%price%}',$order->getCommandProductPrice(),$content);
-                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
-            
-                $commandArticle .=  $content;
-            }
-            
-            $adminUsers = '';
-            foreach($this->users as $user){
-                $content = $this->utils->searchInc('adminUsers');
-                $content = str_replace('{%name%}',$user->getFirstName(),$content);
-                $content = str_replace('{%familyname%}',$user->getlastName(),$content);
-                $content = str_replace('{%id%}',$user->getId(),$content);
-                $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
-            
-                $adminUsers .= $content;
-            }
-            
-           
-            $this->body = str_replace('{%$token%}', $_SESSION['csrf'],$this->body);
-            
-            $this->body = str_replace('{%article%}', $this->article,$this->body);
-            
-            $this->body = str_replace('{%commandes%}', $commandArticle,$this->body);
-            
-            $this->body = str_replace('{%option%}', $allCategories,$this->body);
-            
-            $this->body = str_replace('{%users%}', $adminUsers,$this->body);
-            
-            $this->body = str_replace('{%categories%}',$categoryarticle,$this->body);
-
-            $this->constructPage();
-     }
-     
-    public function displayOneProduct(Product $product): void
-    {
-        $this->head->setTitle("symphonie: page d'un produit");
-        $this->head->setDescription('affiche un produit');
-        $this->body = $this->utils->searchHtml('oneProduct');
-        
-        $content = $this->utils->searchInc('produit');
-        $content = str_replace('{%name%}', $product->getName(), $content);
-        $content = str_replace('{%id%}',$product->getId(), $content);
-        $content = str_replace('{%price%}',$product->getPrice(), $content);
-        $content = str_replace('{%description%}',$product->getDescription(), $content);
-        $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
-        $content = str_replace('{%urlImage%}',$product->getImage(), $content);
-        $content = str_replace('{%$token%}',$_SESSION["csrf"], $content);
-        
-        $this->body = str_replace('{%article%}',$content,$this->body);
-        
-        $this->constructPage();
-    }
-     
     public function CreateFormModifyProduct(Product $product): void 
     {
             
@@ -347,6 +214,43 @@ class ProductPage extends AbstractPage {
         $this->constructPage();
     }
      
+    public function basketPage(): void
+    {
+        $this->head->setTitle('symphonie: panier');
+        $this->head->setDescription('votre panier');
+        $this->body = $this->utils->searchHtml('basket');
+        $this->body = str_replace('{%$token%}', $_SESSION['csrf'], $this->body);
+       
+        foreach($this->products as $product){
+            $content = $this->utils->searchInc('produitBasket');
+            $content = str_replace('{%name%}', $product->getName(), $content);
+            $content = str_replace('{%id%}',$product->getId(), $content);
+            $content = str_replace('{%price%}',$product->getPrice(), $content);
+            $content = str_replace('{%quantity%}',$product->getQuantity(), $content);
+            $content = str_replace('{%description%}',$product->getDescription(), $content);
+            $content = str_replace('{%urlImage%}',$product->getImage(), $content);
+            $content = str_replace('{%$token%}', $_SESSION['csrf'], $content);
+            
+            $this->article .= $content;
+        }
+        
+       
+        $this->body = str_replace('{%prixtotal%}',$this->getTotalPrice(),$this->body);
+        $this->body = str_replace('{%solde%}',$this->getUserWallet(), $this->body);
+        $this->body = str_replace('{%message%}','', $this->body);
+        $this->body = str_replace('{%article%}',$this->article, $this->body);
+        $this->body = str_replace('{%amount_after_buy%}',$this->getAmountAfterBuy(), $this->body); 
+        
+        $this->constructPage();
+    }
+     
+    public function emptyBasketPage(): void
+    {
+        $this->head->setTitle('symphonie: panier');
+        $this->head->setDescription('votre panier');
+        $this->body = $this->utils->searchHtml('emptyBasket');
+        $this->constructPage();
+     }
      
     public function orderPage(): void
     {

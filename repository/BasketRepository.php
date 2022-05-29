@@ -2,10 +2,25 @@
 
 require_once './repository/AbstractRepository.php';
 
- class BasketRepository extends AbstractRepository
+class BasketRepository extends AbstractRepository
 {
+    public function findById(int $userId) 
+    {
+        $data = null;
+        try {
+            $query = $this->connexion->prepare('SELECT * FROM products as p INNER JOIN panier as pa ON p.id = pa.product_id WHERE pa.user_id = :id');
+            if ($query) {
+                $query->bindParam(':id', $userId);
+                $query->execute();
+                
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $e) {
+            $data = ['error' => $e->getMessage()];
+        }
+        return $data;
+    }
     
-
     public function addArticleToBasket(int $userId,int $productId): bool
     {
        
@@ -23,27 +38,6 @@ require_once './repository/AbstractRepository.php';
         }
         
     }
-       
-    
-    public function findById(int $userId) 
-    {
-         $data = null;
-        try {
-            $query = $this->connexion->prepare('SELECT * FROM products as p INNER JOIN panier as pa ON p.id = pa.product_id WHERE pa.user_id = :id');
-            if ($query) {
-                $query->bindParam(':id', $userId);
-                $query->execute();
-                
-                $data = $query->fetchAll(PDO::FETCH_ASSOC);
-            }
-        } catch (Exception $e) {
-            $data = ['error' => $e->getMessage()];
-        }
-        
-        return $data;
-    }
-    
-   
     
     public function deleteArticleFromBasket(int $ArticleBasketId): bool
     {
