@@ -336,18 +336,22 @@ class UserController {
     
     public function basket() : void
     {
-        
+        /*verifie si user est connecté*/
         $userAuth = $this->authentificator->checkUser();
         
+        /*creer la valeur du token de sécurité de la page*/
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
+        /*va chercher les information liées au panier du user*/
         $datas = $this->basket->findById($userAuth->getId());
         
+        /*si erreur base de donnée ou table*/
         if(isset($datas['error'])){
             header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
             exit();
         }
         
+        /*si user a un panier vide*/
         if(empty($datas)){
            echo $this->view->displayEmptyBasket();
            exit();
@@ -356,6 +360,7 @@ class UserController {
         $prices = [];
         $products = [];
             
+        /*pour chaque produit dans panier du user */    
         foreach($datas as $data){
             $product = new Product();
             $product->setInsideBasketId($data['id']);
@@ -366,15 +371,18 @@ class UserController {
             $product->setDescription($data['description']);
             $product->setCategory($data['category_id']);
             
-            
+            /* ensemble des produit dans panier choisis par le user*/
             $products[] = $product;
+            /*récupere le prix de chaque article*/
             $prices[] = $product->getPrice();
         }
-       
+       /*recupère le total de la somme du panier*/
         $totalPrice = array_sum($prices);
         
+        /*argent qui reste au user apès la transaction*/
         $amountAfterBuy = ($userAuth->getWallet()-$totalPrice);
         
+        /*affiche panier du user et le produits choisis*/
         echo $this->view->displayBasket($products,$totalPrice,$userAuth,$amountAfterBuy);
     }
    

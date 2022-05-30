@@ -18,14 +18,14 @@ if(input){
           for(let i = 0; i < res.length; i++){
               let li = document.createElement('li');
               search.appendChild(li);
-              li.innerHTML =`<a href="https://jocelynretiere.sites.3wa.io/projet-symfonie/index.php?url=showOneProduct&id=${res[i].id}">${res[i].name}</a>`
+              li.innerHTML =`<a href="https://jocelynretiere.sites.3wa.io/projet-symphonie/index.php?url=showOneProduct&id=${res[i].id}">${res[i].name}</a>`
           }
       }
     })
 }
 
 const query = async (value) => {
-    return await fetch(`https://jocelynretiere.sites.3wa.io/projet-symfonie/index.php?url=search&q=${value}`);
+    return await fetch(`https://jocelynretiere.sites.3wa.io/projet-symphonie/index.php?url=search&q=${value}`);
 }
 
 function removeOldList() {

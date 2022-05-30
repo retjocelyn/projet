@@ -129,9 +129,7 @@ require_once './repository/AbstractRepository.php';
              $query = $this->connexion->prepare('DELETE FROM products WHERE id = :id');
             
             if ($query) {
-               
                 $query->bindValue(':id',$productId);
-                
                 return $query->execute();
             }
         }catch (Exception $e) {
