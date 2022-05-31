@@ -29,7 +29,7 @@ class DefaultPage extends AbstractPage {
     }
     
     /**
-     * @return string $error
+     * @return string $errors
      */
     public function getErrors(): string
     {
@@ -37,7 +37,7 @@ class DefaultPage extends AbstractPage {
     }
     
      /**
-     * @param string $error
+     * @param string $errors
      */
     public function setErrors($errors):void
     {
