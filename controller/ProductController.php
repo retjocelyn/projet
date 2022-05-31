@@ -31,6 +31,12 @@ class ProductController {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $datas = $this->repository->findByCategory($categoryId);
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         $products = [];
         
         foreach($datas as $data){
@@ -125,6 +131,11 @@ class ProductController {
          
         $data = $this->repository->findById($productId);
         
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         $product = new Product();
         $product->setId($data['id']);
         $product->setName($data['name']);
@@ -154,6 +165,12 @@ class ProductController {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $datas = $this->categoryRepository->findAll();
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         $categories = [];
         
         foreach($datas as $data){
@@ -166,6 +183,11 @@ class ProductController {
         
         $produitId = $_POST['id'];
         $data = $this->repository->findById($produitId);
+        
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
         
         $product = new Product();
         $product->setId($data['id']);
@@ -234,6 +256,11 @@ class ProductController {
                 exit();
             }
             
+            if(isset($data['error'])){
+                header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+                exit();
+            }
+            
             unlink($data['url_picture']);
             
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$fileName)){
@@ -272,6 +299,11 @@ class ProductController {
         $productId = htmlspecialchars($_POST['id']);
         
         $data = $this->repository->fetchImage($productId);
+        
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
        
         if(!unlink($data['url_picture'])){
             header('location: ./index.php?url=confirmationOrNot&message=Article non effacé');
@@ -357,6 +389,12 @@ class ProductController {
         
         $categoryId = htmlspecialchars($_POST['id']);
         $data = $this->categoryRepository->findById($categoryId);
+        
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         $this->category->setId($data['id']);
         $this->category->setName($data['name']);
         $this->category->setUrlImage($data['url_picture']);
@@ -413,6 +451,11 @@ class ProductController {
                 exit();
             }
             
+            if(isset($data['error'])){
+                header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+                exit();
+            }
+            
             unlink($data['url_picture']);
         
             if(!move_uploaded_file($tmpName,'./public/assets/img/'.$newFileName)){
@@ -447,6 +490,11 @@ class ProductController {
         $categoryId = $_POST['id'];
         
         $data = $this->categoryRepository->fetchImage($categoryId);
+        
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
        
         unlink($data['url_picture']);
         

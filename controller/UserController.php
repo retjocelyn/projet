@@ -101,7 +101,12 @@ class UserController {
        
        
         $data = $this->repository->findById($userAuth->getId());
-         
+        
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         $user = new User();
         $user->setId($data['id']);
         $user->setlastName($data['last_name']);
@@ -137,6 +142,11 @@ class UserController {
         
         $data = $this->repository->fetchLogin($email);
             
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         if($data !== false){    
             $_SESSION['error'] = "Email existe déja";
             header('location:./index.php?url=register');
@@ -185,8 +195,6 @@ class UserController {
     }
     
    
-    
-    
     public function formModifyUser():void
     {
        
@@ -197,6 +205,11 @@ class UserController {
         $userId = $userAuth->getId();
         
         $data = $this->repository->findById($userId);
+        
+        if(isset($data['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
         
         $user = new User();
         $user->setId($data['id']);
@@ -249,6 +262,11 @@ class UserController {
             
             $data = $this->repository->fetchLogin($user->getEmail());
             
+            if(isset($data['error'])){
+                header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+                exit();
+            }
+            
             if($user->getEmail() !== $userAuth->getEmail() && $data !== false){    
                 $_SESSION['error'] = "Email deja utilisé";
                 header('location:./index.php?url=formModifyUser');
@@ -285,12 +303,16 @@ class UserController {
             
             $datas = $this->repository->findById($userAuth->getId());
             
+            if(isset($datas['error'])){
+                header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+                exit();
+            }
+            
             $userWallet = (float)$datas['wallet'];
             
             $newAmount = $userWallet + $amount;
            
             if($this->repository->addMoney($userAuth->getId(),$newAmount)){
-                
                 
                 $userAuth->setWallet($newAmount);
                 $_SESSION['user'] = serialize($userAuth);
@@ -455,6 +477,11 @@ class UserController {
         $userAuth = $this->authentificator->checkUser();
        
         $datas = $this->order->findById($userAuth->getId());
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
       
         if(empty($datas)){
            echo $this->view->displayEmptyOrders();
@@ -502,6 +529,11 @@ class UserController {
         $_SESSION['user'] = serialize($userAuth);
         
         if($datas = $this->basket->findById($userAuth->getId())){
+            
+            if(isset($datas['error'])){
+                header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+                exit();
+            }
          
             foreach($datas as $data){
                  

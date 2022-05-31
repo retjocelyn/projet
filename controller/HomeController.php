@@ -21,6 +21,12 @@ class HomeController {
      {
          $repository = new CategoryRepository();
          $datas = $repository->findAll();
+         
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
          $categories = [];
         
          foreach($datas as $data){

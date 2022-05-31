@@ -7,7 +7,7 @@ require_once './controller/UserController.php';
 require_once './controller/ProductController.php';
 require_once './controller/AdminController.php';
 
-/*definit la valeur de l'url si aucune valeur donnée récupérée 
+/*definit la valeur de l'url si aucune valeur  récupérée 
 alors url prend la valeure de home*/
 $url = isset($_GET['url']) ? $_GET['url'] : "home"; 
 

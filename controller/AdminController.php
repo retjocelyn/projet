@@ -33,10 +33,14 @@ class AdminController {
     {
         $this->authentificator->checkAdmin();
         
-       
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         
         $datas = $this->productRepository->findAll();
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
         
         $products = [];
         
@@ -56,6 +60,11 @@ class AdminController {
         
         $datas = $this->categoryRepository-> findAll();
         
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
+        
         $categories = [];
         
         foreach($datas as $data){
@@ -67,7 +76,13 @@ class AdminController {
             $categories[] = $category;
            
         }
+        
         $datas = $this->orderRepository->findAllOrders();
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
         
         $commandes = [];
    
@@ -88,6 +103,11 @@ class AdminController {
          }
          
         $datas = $this->repository->fetchAllCostumers();
+        
+        if(isset($datas['error'])){
+            header('location:./index.php?url=confirmationOrNot&message=Une erreur est survenue');
+            exit();
+        }
         
         $users = [];
         

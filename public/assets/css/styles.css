@@ -213,14 +213,16 @@ main{
     display:flex;
     justify-content:center;
 }
+
 .categories{
-    width:100%;
+    width:87%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
     margin: 20px 0;
 }
+
 .categories>article{
     width: 25em;
     height:25em;
@@ -264,6 +266,7 @@ main{
 .ensembleinstruments{
     text-align: -webkit-center;
     width:100%;
+    min-height: 11em;
 } 
 .instrument{
     display: flex;
@@ -341,6 +344,7 @@ main{
     margin: 0px 20px;
     padding:12px;
     transition:transform 1s;
+    cursor: pointer;
 }
 
 .menuaccount>ul>li:hover{
@@ -475,8 +479,6 @@ main{
     font-family: 'Fredoka', sans-serif;
 }
 
-
-
 .addmoneybutton>button{
     height:2.5em;
     border-radius:2em;
@@ -485,6 +487,7 @@ main{
     border:none;
     font-family: 'Fredoka', sans-serif;
     font-size:1.5em;
+    cursor:pointer;
 }
 
 .money,
@@ -662,7 +665,7 @@ main{
 }
 
 .client{
-margin-right: 5%;
+    margin-right: 5%;
 }
 
 .orderproduct{
@@ -681,21 +684,6 @@ margin-right: 5%;
     flex-direction: column;
     align-items: center;
 }
-
-.orderproductimage{
-    width: 35%;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.orderproductimage>img{
-    height: 81%;
-    width: 67%;
-}
-
 
 .showOrders>article{
     width:285px;
@@ -1088,8 +1076,8 @@ footer>section>ul>li{
     list-style-type: none;
 }
 
-/*** queryyyyyy time*****/
-@media screen and (max-width: 1000px) {
+/*** query*****/
+@media screen and (max-width: 768px) {
     
 /**header query max-width: 768px**/    
 .displayheader{
@@ -1107,17 +1095,11 @@ footer>section>ul>li{
     align-items:center;
 }
 
-/**footer query max-width: 768px***/
-footer{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
 
-.infos,
-.reseaux,
-.fournisseurs{
-    margin:15px 0;
+
+/****main de shop query max-width: 768px****/
+.categories>article {
+    margin: 3% 0;
 }
 
 /****main de login basket query max-width: 768px****/
@@ -1143,13 +1125,25 @@ footer{
 /****main de home query max-width: 768px****/
 .presentation,
 .vendeur{
-    flex-direction:column;
+    flex-direction: column;
+    margin-bottom: 7%;
 }
 
 /****main de account query max-width: 768px****/
 .menuaccount>ul{
     width:84%;
     justify-content:center;
+  
+}
+
+.menuaccount>ul>li:hover{
+    
+    
+    transform: none;
+}
+
+.showandhide{
+    min-height: 36vh;    
 }
 
 .showandhide>section{
@@ -1184,7 +1178,8 @@ footer{
 }
 
 #displayuserwallet>article>h2{
-    background:none;
+    background: none;
+    text-align: center;
 }
 
 /****main de addmin account query max-width: 768px****/
@@ -1225,6 +1220,7 @@ footer{
 
 .orders{
     width:100%;
+    height:none;
 }
 
 .users{
@@ -1332,6 +1328,19 @@ footer{
 
 .confirmed{
 padding: 2%;
+}
+
+/**footer query max-width: 768px***/
+footer{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.infos,
+.reseaux,
+.fournisseurs{
+    margin:15px 0;
 }
 
 }
