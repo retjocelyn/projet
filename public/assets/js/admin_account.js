@@ -1,4 +1,4 @@
-
+/*les selecteurs*/
 let addProduct = document.getElementById("addarticle");
 let allProducts = document.getElementById("products");
 let addCategory = document.getElementById("addcategory");
@@ -6,7 +6,7 @@ let categories = document.getElementById("categories");
 let orders = document.getElementById("orders");                          
 let users = document.getElementById("users");         
 
-
+/*les sections*/
 let sectionAdminAddProduct = document.getElementById("adminaddproduct");
 let sectionAdminAllProduct = document.getElementById("showallproducts");
 let sectionAdminAddCategory = document.getElementById("adminaddcategory");

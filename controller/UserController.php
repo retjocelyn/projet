@@ -99,7 +99,7 @@ class UserController {
       
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
        
-       
+       /* utilisation du CRUD plutot que $userauth pour montrer que je sais recuprer de la data*/
         $data = $this->repository->findById($userAuth->getId());
         
         if(isset($data['error'])){

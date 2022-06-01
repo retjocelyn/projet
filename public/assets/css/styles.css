@@ -8,8 +8,12 @@ body{
     padding:0;
 }
 
+h1{
+    font-size:2em;
+}
+h1,
 h2{
-    font-family: 'Fredoka', sans-serif;
+    font-family:'Fredoka',sans-serif;
     color: rgb(64 ,51 ,97,1);
 }
 
@@ -21,7 +25,6 @@ h3{
 a{
     font-family: 'Fredoka', sans-serif;
 }
-
 
 label{
     font-weight: bold;
@@ -64,7 +67,7 @@ header{
 .menu>li>a{
     font-family: 'Fredoka', sans-serif;
     text-decoration:none;
-    color: rgb(64 ,51 ,97,1);
+    color: rgba(64 ,51 ,97,1);
     font-size:1.5em;
 }
 
@@ -130,6 +133,7 @@ main{
 
 .notremagasin>p{
     text-align:justify;
+    font-family: 'Merienda', cursive;
 }
 
 .vendeur{
@@ -144,6 +148,7 @@ main{
 
 .vendeur>article>p{
     text-align:justify;
+    font-family: 'Merienda', cursive;
 }
 
       /*main de login*/
@@ -315,7 +320,7 @@ main{
     font-family: 'Fredoka', sans-serif;
     font-size:1.5em;
     text-decoration: none;
-    color: rgb(64 ,51 ,97,1);
+    color: rgba(64 ,51 ,97,1);
 }
 
 
@@ -361,7 +366,7 @@ main{
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: rgb(250 245 245 / 88%);
+    background-color:rgba(250,245,245,0.8);
     margin: 40px 0;
     border-radius: 2em;
 }
@@ -371,7 +376,6 @@ main{
     background-color: white;
     border-radius: 2em;
     width: 8em;
-    
     padding: 0.2em
 }
 
@@ -444,7 +448,7 @@ main{
     flex-direction:column;
     width:30em;
     height:22em;
-    background-color:rgb(250 245 245 / 88%);
+    background-color:rgba(250,245,245,0.8);
     margin:40px 0;
     border-radius:10%;
 }
@@ -525,6 +529,7 @@ main{
     list-style-type: none;
     margin: 0px 20px;
     transition:transform 1s;
+    cursor:pointer;
 }
 
 
@@ -1081,7 +1086,7 @@ footer>section>ul>li{
 /*** query*****/
 @media screen and (max-width: 767px) {
     
-/**header query max-width: 768px**/    
+/**header query max-width: 767px**/    
 .displayheader{
     flex-direction:column;
     align-items:center;
@@ -1099,31 +1104,31 @@ footer>section>ul>li{
 
 
 
-/****main de shop query max-width: 768px****/
+/****main de shop query max-width: 767px****/
 .categories>article {
     margin: 3% 0;
 }
 
-/****main de login basket query max-width: 768px****/
+/****main de login  query max-width: 767px****/
 
 .login>a{
     font-size: 1.2em;
 }
 
-/****main de  register query max-width: 768px****/
+/****main de  register query max-width: 767px****/
 
 .register>a{
     font-size:1.1em;
 }
 
 
-/****main de  registeraccepted query max-width: 768px****/
+/****main de  registeraccepted query max-width: 767px****/
 
 .confirmed>a{
     font-size:2em;
 }
 
-/****main de home query max-width: 768px****/
+/****main de home query max-width: 767px****/
 
 .presentation,
 .vendeur{
@@ -1135,7 +1140,7 @@ footer>section>ul>li{
     margin-top:6em;
 }
 
-/****main de account query max-width: 768px****/
+/****main de account query max-width: 767px****/
 .menuaccount>ul{
     width:84%;
     justify-content:center;
@@ -1188,7 +1193,7 @@ footer>section>ul>li{
     text-align: center;
 }
 
-/****main de addmin account query max-width: 768px****/
+/****main de addmin account query max-width: 767px****/
 
 .menuadminaccount{
     flex-direction: column;
@@ -1232,7 +1237,7 @@ footer>section>ul>li{
 .users{
     width:100%;
 }
-/****main de  instruments query max-width: 768px****/
+/****main de  instruments query max-width: 767px****/
 
 .ensembleinstruments>article{
     margin: 10% 0;
@@ -1247,13 +1252,13 @@ footer>section>ul>li{
     text-align:center;
 }
 
-/****main de  basket query max-width: 768px****/
+/****main de  basket query max-width: 767px****/
 
 .possiblecommande{
     width:100%;    
 }
 
-.possiblecommande>h2{
+.possiblecommande>h2:nth-child(3){
     font-size:1em;
 }
 
@@ -1268,7 +1273,7 @@ footer>section>ul>li{
 .instrument{
     margin:1em 0;
 }
-/****main de empty basket query max-width: 768px****/
+/****main de empty basket query max-width: 767px****/
 
 .paniercontent{
     width:22em;    
@@ -1295,7 +1300,7 @@ footer>section>ul>li{
     width:100%;
 }
 
-/****main de order query max-width: 768px****/
+/****main de order query max-width: 767px****/
 .instrument{
     flex-direction:column;
     align-items:center;
@@ -1317,7 +1322,7 @@ footer>section>ul>li{
     margin:13% 0;
 }
 
-/****main de empty order query max-width: 768px****/
+/****main de empty order query max-width: 767px****/
 .order{
     width: 72%;
 }
@@ -1327,7 +1332,7 @@ footer>section>ul>li{
 
 
 
-/****main de confirmedOrNot query max-width: 768px****/
+/****main de confirmedOrNot query max-width: 767px****/
 .confirmed>h2 {
     font-size: 2.3em;
 }
@@ -1336,7 +1341,7 @@ footer>section>ul>li{
 padding: 2%;
 }
 
-/**footer query max-width: 768px***/
+/**footer query max-width: 767px***/
 footer{
     display:flex;
     flex-direction:column;
@@ -1351,7 +1356,7 @@ footer{
 
 }
 
-@media (min-device-width : 768px) and (max-device-width : 1024px){
+@media (min-device-width : 768px) and (max-device-width : 1180px){
     
 /**header query (min-device-width : 768px) and (max-device-width : 1024px)**/    
 .displayheader{
@@ -1408,8 +1413,6 @@ footer{
 }
 
 .menuaccount>ul>li:hover{
-    
-    
     transform: none;
 }
 
@@ -1515,14 +1518,6 @@ admininstrument{
 
 .possiblecommande{
     width:100%;    
-}
-
-.possiblecommande>h2{
-    font-size:1em;
-}
-
-.possiblecommande>p{
-    font-size:0.7em;
 }
 
 .possiblecommande>form>button {
