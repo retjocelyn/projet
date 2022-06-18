@@ -11,7 +11,7 @@ require_once './controller/AdminController.php';
 alors url prend la valeure de home*/
 $url = isset($_GET['url']) ? $_GET['url'] : "home"; 
 
-/*lololo*/
+
 switch($url){
     // Route index.php?url=home
     case "home": 
